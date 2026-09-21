@@ -4,14 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Portfolio Dashboard</title>
-    <!-- Czcionka Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Arkusz stylów CSS -->
     <link rel="stylesheet" href="style.css">
-    <!-- Chart.js do wykresów -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+
+    <!-- EKRAN BLOKADY (DOSTĘP NA HASŁO / TOKEN) -->
+    <div id="auth-overlay" class="auth-overlay">
+        <div class="auth-card">
+            <h2>🔒 Dostęp Zabezpieczony</h2>
+            <p>Wprowadź swój token dostępu, aby odblokować podgląd portfolio.</p>
+            <input type="password" id="token-input" placeholder="Wpisz token (GitHub Token)...">
+            <button id="auth-btn">Odblokuj</button>
+            <div id="auth-error" class="auth-error"></div>
+        </div>
+    </div>
 
     <!-- Boczny pasek nawigacji -->
     <aside>
@@ -33,7 +41,6 @@
         </header>
 
         <div class="dashboard-grid">
-            <!-- Lewa kolumna: Wykres i Analiza -->
             <div class="card">
                 <div class="card-title">Portfolio Performance</div>
                 <div class="card-value" id="total-portfolio-value">$0.00</div>
@@ -42,7 +49,6 @@
                 </div>
             </div>
 
-            <!-- Prawa kolumna: Podsumowanie bogactwa -->
             <div class="card">
                 <div class="card-title">Total Wealth</div>
                 <div class="card-value" id="total-wealth">$0.00</div>
@@ -50,7 +56,6 @@
             </div>
         </div>
 
-        <!-- Dolna sekcja: Skład portfela -->
         <div class="card">
             <div class="card-title">Skład Portfela (Assets)</div>
             <table>
@@ -64,14 +69,13 @@
                 </thead>
                 <tbody id="assets-table-body">
                     <tr>
-                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane z backendu...</td>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
 
-    <!-- Skrypt JS -->
     <script src="app.js"></script>
 </body>
 </html>
