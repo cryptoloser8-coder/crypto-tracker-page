@@ -59,7 +59,22 @@
         </div>
 
         <div class="card">
-            <div class="card-title">Skład Portfela (Assets)</div>
+            <div class="card-title-row">
+                <div class="card-title">Skład Portfela (Assets)</div>
+                <button id="add-manual-btn" class="secondary-button">+ Dodaj pozycję ręcznie</button>
+            </div>
+
+            <div id="add-manual-form" class="add-manual-form" style="display: none;">
+                <input type="text" id="manual-symbol" placeholder="Symbol (np. BTC)">
+                <input type="text" id="manual-wallet" placeholder="Portfel (np. Hyperliquid)">
+                <input type="text" id="manual-network" placeholder="Sieć (np. manual)">
+                <input type="number" id="manual-balance" placeholder="Ilość" step="any">
+                <input type="number" id="manual-value" placeholder="Wartość USD" step="any">
+                <button id="manual-submit-btn" class="refresh-button">Dodaj</button>
+                <button id="manual-cancel-btn" class="secondary-button">Anuluj</button>
+                <div id="manual-form-error" class="auth-error"></div>
+            </div>
+
             <table>
                 <thead>
                     <tr>
@@ -67,14 +82,20 @@
                         <th>Portfel</th>
                         <th>Ilość</th>
                         <th>Wartość USD</th>
+                        <th>Akcje</th>
                     </tr>
                 </thead>
                 <tbody id="assets-table-body">
                     <tr>
-                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td>
+                        <td colspan="5" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td>
                     </tr>
                 </tbody>
             </table>
+
+            <div class="hidden-panel">
+                <button id="toggle-hidden-btn" class="secondary-button">Ukryte pozycje (<span id="hidden-count">0</span>)</button>
+                <div id="hidden-assets-list" class="hidden-assets-list" style="display: none;"></div>
+            </div>
         </div>
     </main>
 
