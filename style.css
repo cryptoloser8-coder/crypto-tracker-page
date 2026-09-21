@@ -228,3 +228,8 @@ td {
 .refresh-button:hover {
     opacity: 0.8;
 }
+
+.refresh-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
