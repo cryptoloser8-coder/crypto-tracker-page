@@ -352,7 +352,30 @@ function renderHiddenPanel() {
 }
 
 // --- ZAPIS NADPISAŃ (overrides.json) PRZEZ GITHUB CONTENTS API ---
-async function saveOverrides() {
+// Zapisy są KOLEJKOWANE: jeśli kilka akcji (np. szybkie klikanie "Ukryj") zdarzy się
+// zanim poprzedni zapis się skończy, nie lecą równoległe requesty (co powodowało 409
+// Conflict — każdy brał ten sam "stary" sha pliku). Zamiast tego czekają w kolejce,
+// a każda kolejna iteracja i tak zapisuje AKTUALNY stan currentOverrides, więc żadna
+// zmiana nie ginie, tylko liczba realnych zapisów do repo jest mniejsza.
+let saveQueued = false;
+let saveInFlight = false;
+
+function scheduleSave() {
+    saveQueued = true;
+    processSaveQueue();
+}
+
+async function processSaveQueue() {
+    if (saveInFlight) return; // zapis już trwa — ten call doczeka się przez flagę saveQueued
+    saveInFlight = true;
+    while (saveQueued) {
+        saveQueued = false;
+        await saveOverridesOnce();
+    }
+    saveInFlight = false;
+}
+
+async function saveOverridesOnce(retriesLeft = 2) {
     const token = localStorage.getItem('portfolio_auth_token');
     if (!token) {
         setFetchStatus('Brak tokena — zaloguj się ponownie, żeby zapisać zmiany.', true);
@@ -362,7 +385,7 @@ async function saveOverrides() {
     setFetchStatus('Zapisuję zmiany...');
 
     try {
-        // 1) Pobieramy aktualny sha pliku (potrzebny do nadpisania istniejącego pliku)
+        // 1) Pobieramy AKTUALNY sha pliku tuż przed zapisem (nie z cache, nie sprzed chwili)
         let sha;
         const getRes = await fetch(
             `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${OVERRIDES_PATH}?ref=${OVERRIDES_BRANCH}`,
@@ -376,7 +399,8 @@ async function saveOverrides() {
             return false;
         }
 
-        // 2) Zapisujemy nową wersję
+        // 2) Zapisujemy nową wersję (currentOverrides bierzemy w momencie zapisu,
+        // więc zawsze leci najświeższy stan, nawet jeśli kolejka czekała chwilę)
         const contentStr = JSON.stringify(currentOverrides, null, 2);
         const putRes = await fetch(
             `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${OVERRIDES_PATH}`,
@@ -391,6 +415,12 @@ async function saveOverrides() {
                 })
             }
         );
+
+        if (putRes.status === 409 && retriesLeft > 0) {
+            // Ktoś (albo inna karta/urządzenie) zmienił plik dosłownie w tej samej chwili —
+            // pobieramy świeży sha i próbujemy jeszcze raz, zamiast od razu zgłaszać błąd
+            return saveOverridesOnce(retriesLeft - 1);
+        }
 
         if (!putRes.ok) {
             setFetchStatus(`Nie udało się zapisać zmian: ${explainGithubError(putRes.status)}`, true);
@@ -411,19 +441,19 @@ async function saveOverrides() {
 async function hideAsset(key) {
     if (!currentOverrides.hidden.includes(key)) currentOverrides.hidden.push(key);
     renderDashboard();
-    await saveOverrides();
+    scheduleSave();
 }
 
 async function restoreAsset(key) {
     currentOverrides.hidden = currentOverrides.hidden.filter(k => k !== key);
     renderDashboard();
-    await saveOverrides();
+    scheduleSave();
 }
 
 async function removeManualAsset(id) {
     currentOverrides.manual = currentOverrides.manual.filter(m => m.id !== id);
     renderDashboard();
-    await saveOverrides();
+    scheduleSave();
 }
 
 async function addManualAsset({ symbol, walletName, network, balance, valueUsd }) {
@@ -436,7 +466,7 @@ async function addManualAsset({ symbol, walletName, network, balance, valueUsd }
         valueUsd: Number(valueUsd) || 0
     });
     renderDashboard();
-    await saveOverrides();
+    scheduleSave();
 }
 
 // Obsługa kliknięć w tabeli assetów (przyciski "Ukryj" / "Usuń") — delegacja zdarzeń,
