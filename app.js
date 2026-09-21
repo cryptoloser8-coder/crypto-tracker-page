@@ -67,7 +67,8 @@ document.getElementById('auth-btn').addEventListener('click', async () => {
 async function validateToken(token) {
     try {
         const res = await fetch(`https://api.github.com/repos/${BACKEND_REPO}`, {
-            headers: githubHeaders(token)
+            headers: githubHeaders(token),
+            cache: 'no-store'
         });
         if (res.status === 200) return { ok: true };
         if (res.status === 401) return { ok: false, message: 'Token nieprawidłowy lub wygasł.' };
@@ -162,7 +163,7 @@ async function triggerBackendRefresh() {
         try {
             const runsRes = await fetch(
                 `https://api.github.com/repos/${BACKEND_REPO}/actions/workflows/${BACKEND_WORKFLOW_FILE}/runs?event=workflow_dispatch&per_page=5`,
-                { headers: githubHeaders(token) }
+                { headers: githubHeaders(token), cache: 'no-store' }
             );
             if (runsRes.ok) {
                 const runsData = await runsRes.json();
@@ -186,7 +187,7 @@ async function triggerBackendRefresh() {
         setFetchStatus(`Backend pracuje (${run.status})...`);
         await sleep(POLL_INTERVAL_MS);
         try {
-            const runRes = await fetch(run.url, { headers: githubHeaders(token) });
+            const runRes = await fetch(run.url, { headers: githubHeaders(token), cache: 'no-store' });
             if (runRes.ok) {
                 run = await runRes.json();
             }
@@ -385,11 +386,13 @@ async function saveOverridesOnce(retriesLeft = 2) {
     setFetchStatus('Zapisuję zmiany...');
 
     try {
-        // 1) Pobieramy AKTUALNY sha pliku tuż przed zapisem (nie z cache, nie sprzed chwili)
+        // 1) Pobieramy AKTUALNY sha pliku tuż przed zapisem (cache: 'no-store' wymusza
+        // pominięcie cache przeglądarki — bez tego GET potrafił oddać zcache'owaną
+        // odpowiedź 404 sprzed utworzenia pliku, co prowadziło do PUT bez sha i 409 Conflict)
         let sha;
         const getRes = await fetch(
             `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${OVERRIDES_PATH}?ref=${OVERRIDES_BRANCH}`,
-            { headers: githubHeaders(token) }
+            { headers: githubHeaders(token), cache: 'no-store' }
         );
         if (getRes.status === 200) {
             sha = (await getRes.json()).sha;
@@ -407,6 +410,7 @@ async function saveOverridesOnce(retriesLeft = 2) {
             {
                 method: 'PUT',
                 headers: { ...githubHeaders(token), 'Content-Type': 'application/json' },
+                cache: 'no-store',
                 body: JSON.stringify({
                     message: 'Aktualizacja overrides.json (ukryte/ręczne pozycje)',
                     content: utf8ToBase64(contentStr),
