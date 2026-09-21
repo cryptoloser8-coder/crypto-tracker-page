@@ -64,7 +64,7 @@ async function loadPortfolioData(token) {
         // Jeśli plik portfolio-data.json trzymasz w publicznym repozytorium, ale chcesz dodatkowo 
         // zabezpieczyć go przed botami, możesz go też pobierać przez API z nagłówkiem autoryzacji 
         // lub po prostu odczytywać bezpośrednio, skoro overlay chroni widok przed użytkownikiem.
-        const response = await fetch('portfolio-data.json');
+        const response = await fetch('./portfolio-data.json');
         if (!response.ok) throw new Error('Brak pliku danych');
         
         const data = await response.json();
