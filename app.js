@@ -19,6 +19,18 @@ function unlockDashboard(token) {
     localStorage.setItem('portfolio_auth_token', token);
     document.getElementById('auth-overlay').style.display = 'none';
     loadPortfolioData();
+    startAutoRefresh();
+}
+
+// --- AUTO-ODŚWIEŻANIE ---
+// Co ile automatycznie sprawdzamy portfolio-data.json (w milisekundach)
+const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // 60 sekund
+let autoRefreshTimer = null;
+let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami
+
+function startAutoRefresh() {
+    if (autoRefreshTimer) return; // już działa, nie duplikujemy
+    autoRefreshTimer = setInterval(loadPortfolioData, AUTO_REFRESH_INTERVAL_MS);
 }
 
 function showError(msg) {
@@ -57,22 +69,39 @@ const performanceChart = new Chart(ctx, {
     }
 });
 
+// Pomocnicza funkcja do formatowania aktualnego czasu (HH:MM:SS)
+function formatNow() {
+    return new Date().toLocaleTimeString('pl-PL');
+}
+
+function setFetchStatus(text, isError = false) {
+    const el = document.getElementById('fetch-status');
+    if (!el) return;
+    el.innerText = text;
+    el.style.color = isError ? '#ef4444' : 'var(--text-muted)';
+}
+
 // Główna funkcja pobierająca i renderująca dane portfela
 async function loadPortfolioData() {
+    // Nie odpalamy drugiego fetcha, jeśli poprzedni jeszcze trwa
+    // (może się zdarzyć gdy auto-refresh nałoży się na ręczne kliknięcie)
+    if (isRefreshing) return;
+    isRefreshing = true;
+
     try {
         // Dodajemy parametr czasu (?t=...), aby przeglądarka nie pobierała starej wersji z pamięci podręcznej (cache)
         const response = await fetch(`portfolio-data.json?t=${new Date().getTime()}`);
-        if (!response.ok) throw new Error('Brak pliku danych');
-        
+        if (!response.ok) throw new Error(`Brak pliku danych (HTTP ${response.status})`);
+
         const data = await response.json();
-        
+
         document.getElementById('total-portfolio-value').innerText = `$${data.totalUsd.toLocaleString()}`;
         document.getElementById('total-wealth').innerText = `$${data.totalUsd.toLocaleString()}`;
-        document.getElementById('last-update').innerText = `Ostatnia aktualizacja: ${data.timestamp}`;
+        document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${data.timestamp}`;
 
         const tbody = document.getElementById('assets-table-body');
         tbody.innerHTML = '';
-        
+
         if (data.assets && data.assets.length > 0) {
             data.assets.forEach(asset => {
                 const row = document.createElement('tr');
@@ -88,8 +117,16 @@ async function loadPortfolioData() {
             tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów</td></tr>`;
         }
 
+        // Sukces — pokazujemy kiedy strona faktycznie sprawdziła plik
+        // (to jest INNA informacja niż "Ostatnia aktualizacja danych" powyżej —
+        // ta pokazuje kiedy backend wygenerował dane, ta poniżej kiedy strona to sprawdziła)
+        setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓`);
+
     } catch (error) {
-        console.log("Czekam na wygenerowanie pliku portfolio-data.json...");
+        console.log("Błąd podczas ładowania portfolio-data.json:", error);
+        setFetchStatus(`Błąd odświeżania (${formatNow()}): ${error.message}. Poprzednie dane wciąż widoczne.`, true);
+    } finally {
+        isRefreshing = false;
     }
 }
 
@@ -98,8 +135,11 @@ async function loadPortfolioData() {
 const refreshBtn = document.getElementById('refresh-btn');
 if (refreshBtn) {
     refreshBtn.addEventListener('click', async () => {
+        if (isRefreshing) return; // klik ignorowany, gdy refresh już trwa (np. z auto-odświeżania)
+        refreshBtn.disabled = true;
         refreshBtn.innerText = 'Odświeżanie...';
         await loadPortfolioData();
+        refreshBtn.disabled = false;
         refreshBtn.innerText = 'Odśwież dane';
     });
 }
