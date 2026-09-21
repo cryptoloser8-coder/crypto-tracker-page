@@ -233,3 +233,117 @@ td {
     opacity: 0.5;
     cursor: not-allowed;
 }
+
+/* --- NOWE ELEMENTY: akcje na assetach, formularz ręczny, panel ukrytych --- */
+
+.card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.secondary-button {
+    background: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.secondary-button:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.add-manual-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    background: rgba(15, 18, 24, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.add-manual-form input {
+    flex: 1 1 140px;
+    padding: 10px;
+    background: rgba(15, 18, 24, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 13px;
+    outline: none;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+.add-manual-form input:focus {
+    border-color: var(--accent-gold);
+}
+
+.add-manual-form .auth-error {
+    flex-basis: 100%;
+    margin-top: 0;
+}
+
+.row-action-btn {
+    background: transparent;
+    color: var(--text-muted);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.row-action-btn:hover {
+    color: #ef4444;
+    border-color: #ef4444;
+}
+
+.manual-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    color: #0b0c10;
+    background: var(--accent-gold);
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+.hidden-panel {
+    margin-top: 16px;
+}
+
+.hidden-assets-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.hidden-item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(15, 18, 24, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+.muted-note {
+    color: var(--text-muted);
+    font-size: 13px;
+}
