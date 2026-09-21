@@ -20,6 +20,18 @@ const POLL_INTERVAL_MS = 4000; // co ile sprawdzamy status runa w Actions
 const MAX_WAIT_FOR_RUN_MS = 30 * 1000; // ile czekamy aż run w ogóle pojawi się na liście
 const MAX_WAIT_FOR_COMPLETION_MS = 3 * 60 * 1000; // maksymalny czas czekania na zakończenie runa
 
+// --- KONFIGURACJA PLIKU Z NADPISANIAMI (ukryte pozycje + ręcznie dodane) ---
+// Trzymamy to w publicznym repo frontendu, obok portfolio-data.json — ten sam
+// token (Contents: Read and write) który uruchamia backend, zapisuje też ten plik.
+const OVERRIDES_REPO = 'cryptoloser8-coder/crypto-tracker-page';
+const OVERRIDES_PATH = 'overrides.json';
+const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęzi
+
+// Dane ostatnio wczytane z plików — trzymane w pamięci, żeby renderDashboard()
+// mogło przeliczać widok bez ponownego pobierania portfolio-data.json za każdym razem
+let currentPortfolioData = null;
+let currentOverrides = { hidden: [], manual: [] };
+
 // Sprawdzamy, czy token jest już zapamiętany w przeglądarce
 const savedToken = localStorage.getItem('portfolio_auth_token');
 if (savedToken) {
@@ -242,7 +254,250 @@ function setFetchStatus(text, isError = false) {
     el.style.color = isError ? '#ef4444' : 'var(--text-muted)';
 }
 
-// Główna funkcja pobierająca i renderująca dane portfela
+// --- POMOCNICZE: bezpieczne wstawianie tekstu do innerHTML ---
+function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = String(str ?? '');
+    return div.innerHTML;
+}
+
+// --- KODOWANIE UTF-8 <-> BASE64 (wymagane przez GitHub Contents API) ---
+function utf8ToBase64(str) {
+    return btoa(String.fromCharCode(...new TextEncoder().encode(str)));
+}
+function base64ToUtf8(b64) {
+    return new TextDecoder().decode(Uint8Array.from(atob(b64), c => c.charCodeAt(0)));
+}
+
+// Unikalny klucz identyfikujący konkretny wiersz w tabeli (token + portfel + sieć)
+function assetKey(asset) {
+    return `${asset.symbol}::${asset.walletName}::${asset.network}`;
+}
+
+// Łączy surowe dane z backendu z nadpisaniami użytkownika (ukryte + ręcznie dodane)
+function getVisibleAssets() {
+    const hiddenSet = new Set(currentOverrides.hidden || []);
+    const real = (currentPortfolioData?.assets || []).filter(a => !hiddenSet.has(assetKey(a)));
+    const manual = (currentOverrides.manual || []).map(m => ({ ...m, isManual: true }));
+    return [...real, ...manual];
+}
+
+// Renderuje karty sum, tabelę assetów i panel ukrytych pozycji na podstawie
+// currentPortfolioData + currentOverrides. Wywoływane po każdym załadowaniu
+// danych ORAZ po każdej zmianie (ukrycie/przywrócenie/dodanie ręczne).
+function renderDashboard() {
+    const visible = getVisibleAssets();
+
+    // Suma liczona TYLKO z widocznych pozycji — jeśli coś ukryjesz (np. spam token
+    // z absurdalną wyceną), jego wartość znika też z sumy portfela, nie tylko z tabeli
+    const total = visible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
+    const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    document.getElementById('total-portfolio-value').innerText = totalFormatted;
+    document.getElementById('total-wealth').innerText = totalFormatted;
+
+    const tbody = document.getElementById('assets-table-body');
+    tbody.innerHTML = '';
+
+    if (visible.length > 0) {
+        visible.forEach(asset => {
+            const row = document.createElement('tr');
+            const balance = Number(asset.balance) || 0;
+            const valueUsd = Number(asset.valueUsd) || 0;
+
+            const actionCell = asset.isManual
+                ? `<button class="row-action-btn" data-action="remove-manual" data-id="${escapeHtml(asset.id)}">Usuń</button>`
+                : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(assetKey(asset))}">Ukryj</button>`;
+
+            row.innerHTML = `
+                <td><strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
+                <td>${escapeHtml(asset.walletName)} (${escapeHtml(asset.network)})</td>
+                <td>${balance.toFixed(4)}</td>
+                <td>$${valueUsd.toFixed(2)}</td>
+                <td>${actionCell}</td>
+            `;
+            tbody.appendChild(row);
+        });
+    } else {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów</td></tr>`;
+    }
+
+    renderHiddenPanel();
+}
+
+// Renderuje listę ukrytych pozycji z przyciskiem "Przywróć" przy każdej
+function renderHiddenPanel() {
+    const hidden = currentOverrides.hidden || [];
+    const countEl = document.getElementById('hidden-count');
+    if (countEl) countEl.innerText = hidden.length;
+
+    const listEl = document.getElementById('hidden-assets-list');
+    if (!listEl) return;
+    listEl.innerHTML = '';
+
+    if (hidden.length === 0) {
+        listEl.innerHTML = `<div class="muted-note">Brak ukrytych pozycji.</div>`;
+        return;
+    }
+
+    hidden.forEach(key => {
+        const [symbol, walletName, network] = key.split('::');
+        const div = document.createElement('div');
+        div.className = 'hidden-item-row';
+        div.innerHTML = `
+            <span>${escapeHtml(symbol)} — ${escapeHtml(walletName)} (${escapeHtml(network)})</span>
+            <button class="row-action-btn" data-action="restore" data-key="${escapeHtml(key)}">Przywróć</button>
+        `;
+        listEl.appendChild(div);
+    });
+}
+
+// --- ZAPIS NADPISAŃ (overrides.json) PRZEZ GITHUB CONTENTS API ---
+async function saveOverrides() {
+    const token = localStorage.getItem('portfolio_auth_token');
+    if (!token) {
+        setFetchStatus('Brak tokena — zaloguj się ponownie, żeby zapisać zmiany.', true);
+        return false;
+    }
+
+    setFetchStatus('Zapisuję zmiany...');
+
+    try {
+        // 1) Pobieramy aktualny sha pliku (potrzebny do nadpisania istniejącego pliku)
+        let sha;
+        const getRes = await fetch(
+            `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${OVERRIDES_PATH}?ref=${OVERRIDES_BRANCH}`,
+            { headers: githubHeaders(token) }
+        );
+        if (getRes.status === 200) {
+            sha = (await getRes.json()).sha;
+        } else if (getRes.status !== 404) {
+            // 404 = plik jeszcze nie istnieje, tworzymy go od zera — to nie błąd
+            setFetchStatus(`Nie udało się odczytać overrides.json: ${explainGithubError(getRes.status)}`, true);
+            return false;
+        }
+
+        // 2) Zapisujemy nową wersję
+        const contentStr = JSON.stringify(currentOverrides, null, 2);
+        const putRes = await fetch(
+            `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${OVERRIDES_PATH}`,
+            {
+                method: 'PUT',
+                headers: { ...githubHeaders(token), 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    message: 'Aktualizacja overrides.json (ukryte/ręczne pozycje)',
+                    content: utf8ToBase64(contentStr),
+                    branch: OVERRIDES_BRANCH,
+                    ...(sha ? { sha } : {})
+                })
+            }
+        );
+
+        if (!putRes.ok) {
+            setFetchStatus(`Nie udało się zapisać zmian: ${explainGithubError(putRes.status)}`, true);
+            return false;
+        }
+
+        setFetchStatus(`Zapisano zmiany: ${formatNow()} ✓`);
+        return true;
+    } catch (e) {
+        setFetchStatus(`Błąd sieci przy zapisie zmian: ${e.message}`, true);
+        return false;
+    }
+}
+
+// --- AKCJE UŻYTKOWNIKA: ukryj / przywróć / dodaj ręcznie / usuń ręczny wpis ---
+// Każda akcja od razu odświeża widok (optymistycznie), a potem zapisuje w tle do repo
+
+async function hideAsset(key) {
+    if (!currentOverrides.hidden.includes(key)) currentOverrides.hidden.push(key);
+    renderDashboard();
+    await saveOverrides();
+}
+
+async function restoreAsset(key) {
+    currentOverrides.hidden = currentOverrides.hidden.filter(k => k !== key);
+    renderDashboard();
+    await saveOverrides();
+}
+
+async function removeManualAsset(id) {
+    currentOverrides.manual = currentOverrides.manual.filter(m => m.id !== id);
+    renderDashboard();
+    await saveOverrides();
+}
+
+async function addManualAsset({ symbol, walletName, network, balance, valueUsd }) {
+    currentOverrides.manual.push({
+        id: `manual-${Date.now()}`,
+        symbol: symbol || '???',
+        walletName: walletName || 'Ręcznie',
+        network: network || 'manual',
+        balance: Number(balance) || 0,
+        valueUsd: Number(valueUsd) || 0
+    });
+    renderDashboard();
+    await saveOverrides();
+}
+
+// Obsługa kliknięć w tabeli assetów (przyciski "Ukryj" / "Usuń") — delegacja zdarzeń,
+// żeby nie podpinać osobnego listenera do każdego wiersza przy każdym renderze
+document.getElementById('assets-table-body').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    if (btn.dataset.action === 'hide') hideAsset(btn.dataset.key);
+    if (btn.dataset.action === 'remove-manual') removeManualAsset(btn.dataset.id);
+});
+
+// Obsługa kliknięć w panelu ukrytych pozycji (przycisk "Przywróć")
+document.getElementById('hidden-assets-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action="restore"]');
+    if (!btn) return;
+    restoreAsset(btn.dataset.key);
+});
+
+// Rozwijanie/zwijanie panelu ukrytych pozycji
+document.getElementById('toggle-hidden-btn').addEventListener('click', () => {
+    const list = document.getElementById('hidden-assets-list');
+    list.style.display = list.style.display === 'none' ? 'flex' : 'none';
+});
+
+// Pokazywanie/ukrywanie formularza ręcznego dodawania
+document.getElementById('add-manual-btn').addEventListener('click', () => {
+    const form = document.getElementById('add-manual-form');
+    form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+});
+
+document.getElementById('manual-cancel-btn').addEventListener('click', () => {
+    document.getElementById('add-manual-form').style.display = 'none';
+    document.getElementById('manual-form-error').innerText = '';
+});
+
+document.getElementById('manual-submit-btn').addEventListener('click', async () => {
+    const symbol = document.getElementById('manual-symbol').value.trim();
+    const walletName = document.getElementById('manual-wallet').value.trim();
+    const network = document.getElementById('manual-network').value.trim();
+    const balance = document.getElementById('manual-balance').value.trim();
+    const valueUsd = document.getElementById('manual-value').value.trim();
+    const errorEl = document.getElementById('manual-form-error');
+
+    if (!symbol || !valueUsd) {
+        errorEl.innerText = 'Podaj przynajmniej Symbol i Wartość USD.';
+        return;
+    }
+    errorEl.innerText = '';
+
+    await addManualAsset({ symbol, walletName, network, balance, valueUsd });
+
+    // Czyścimy i chowamy formularz po udanym dodaniu
+    document.getElementById('manual-symbol').value = '';
+    document.getElementById('manual-wallet').value = '';
+    document.getElementById('manual-network').value = '';
+    document.getElementById('manual-balance').value = '';
+    document.getElementById('manual-value').value = '';
+    document.getElementById('add-manual-form').style.display = 'none';
+});
+
+// Główna funkcja pobierająca dane i zlecająca ich wyrenderowanie
 async function loadPortfolioData() {
     // Nie odpalamy drugiego fetcha, jeśli poprzedni jeszcze trwa
     // (może się zdarzyć gdy auto-refresh nałoży się na ręczne kliknięcie)
@@ -251,32 +506,24 @@ async function loadPortfolioData() {
 
     try {
         // Dodajemy parametr czasu (?t=...), aby przeglądarka nie pobierała starej wersji z pamięci podręcznej (cache)
-        const response = await fetch(`portfolio-data.json?t=${new Date().getTime()}`);
+        const response = await fetch(`portfolio-data.json?t=${Date.now()}`);
         if (!response.ok) throw new Error(`Brak pliku danych (HTTP ${response.status})`);
+        currentPortfolioData = await response.json();
 
-        const data = await response.json();
-
-        document.getElementById('total-portfolio-value').innerText = `$${data.totalUsd.toLocaleString()}`;
-        document.getElementById('total-wealth').innerText = `$${data.totalUsd.toLocaleString()}`;
-        document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${data.timestamp}`;
-
-        const tbody = document.getElementById('assets-table-body');
-        tbody.innerHTML = '';
-
-        if (data.assets && data.assets.length > 0) {
-            data.assets.forEach(asset => {
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td><strong>${asset.symbol}</strong></td>
-                    <td>${asset.walletName} (${asset.network})</td>
-                    <td>${asset.balance.toFixed(4)}</td>
-                    <td>$${asset.valueUsd.toFixed(2)}</td>
-                `;
-                tbody.appendChild(row);
-            });
-        } else {
-            tbody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów</td></tr>`;
+        // overrides.json może jeszcze nie istnieć (zanim cokolwiek ukryjesz/dodasz ręcznie)
+        // — brak tego pliku to normalny stan, nie błąd
+        try {
+            const overridesRes = await fetch(`overrides.json?t=${Date.now()}`);
+            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [] };
+        } catch (e) {
+            currentOverrides = { hidden: [], manual: [] };
         }
+        if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
+        if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
+
+        document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${currentPortfolioData.timestamp}`;
+
+        renderDashboard();
 
         // Sukces — pokazujemy kiedy strona faktycznie sprawdziła plik
         // (to jest INNA informacja niż "Ostatnia aktualizacja danych" powyżej —
@@ -284,7 +531,7 @@ async function loadPortfolioData() {
         setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓`);
 
     } catch (error) {
-        console.log("Błąd podczas ładowania portfolio-data.json:", error);
+        console.log("Błąd podczas ładowania danych:", error);
         setFetchStatus(`Błąd odświeżania (${formatNow()}): ${error.message}. Poprzednie dane wciąż widoczne.`, true);
     } finally {
         isRefreshing = false;
