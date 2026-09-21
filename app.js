@@ -1,5 +1,14 @@
 // app.js
 
+// --- STAN GLOBALNY (musi być zadeklarowany na samej górze) ---
+// Uwaga: te zmienne MUSZĄ być zadeklarowane przed jakimkolwiek wywołaniem
+// unlockDashboard()/loadPortfolioData() poniżej — inaczej JS rzuci
+// "ReferenceError: Cannot access ... before initialization" (TDZ dla let/const),
+// bo kod niżej (savedToken -> unlockDashboard) wykonuje się już przy starcie skryptu.
+const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // co ile automatycznie sprawdzamy dane (ms)
+let autoRefreshTimer = null;
+let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami
+
 // Sprawdzamy, czy token jest już zapamiętany w przeglądarce
 const savedToken = localStorage.getItem('portfolio_auth_token');
 if (savedToken) {
@@ -23,11 +32,6 @@ function unlockDashboard(token) {
 }
 
 // --- AUTO-ODŚWIEŻANIE ---
-// Co ile automatycznie sprawdzamy portfolio-data.json (w milisekundach)
-const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // 60 sekund
-let autoRefreshTimer = null;
-let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami
-
 function startAutoRefresh() {
     if (autoRefreshTimer) return; // już działa, nie duplikujemy
     autoRefreshTimer = setInterval(loadPortfolioData, AUTO_REFRESH_INTERVAL_MS);
