@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Portfolio Dashboard</title>
+    <!-- Czcionka Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Arkusz stylów CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js do wykresów -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <!-- Boczny pasek nawigacji -->
+    <aside>
+        <div class="logo">⚡</div>
+        <div class="nav-item active" title="Dashboard">📊</div>
+        <div class="nav-item" title="Portfele">💼</div>
+        <div class="nav-item" title="Inwestycje">📈</div>
+        <div class="nav-item" title="Ustawienia">⚙️</div>
+    </aside>
+
+    <!-- Główny obszar -->
+    <main>
+        <header>
+            <div class="welcome">
+                <p>Welcome back,</p>
+                <h1>Crypto Investor</h1>
+            </div>
+            <div id="last-update" style="font-size: 12px; color: var(--text-muted);">Ładowanie danych...</div>
+        </header>
+
+        <div class="dashboard-grid">
+            <!-- Lewa kolumna: Wykres i Analiza -->
+            <div class="card">
+                <div class="card-title">Portfolio Performance</div>
+                <div class="card-value" id="total-portfolio-value">$0.00</div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Prawa kolumna: Podsumowanie bogactwa -->
+            <div class="card">
+                <div class="card-title">Total Wealth</div>
+                <div class="card-value" id="total-wealth">$0.00</div>
+                <div class="growth" id="portfolio-growth">↑ 0.0% w stosunku do poprzedniego pomiaru</div>
+            </div>
+        </div>
+
+        <!-- Dolna sekcja: Skład portfela -->
+        <div class="card">
+            <div class="card-title">Skład Portfela (Assets)</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Token / Sieć</th>
+                        <th>Portfel</th>
+                        <th>Ilość</th>
+                        <th>Wartość USD</th>
+                    </tr>
+                </thead>
+                <tbody id="assets-table-body">
+                    <tr>
+                        <td colspan="4" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane z backendu...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Skrypt JS -->
+    <script src="app.js"></script>
+</body>
+</html>
