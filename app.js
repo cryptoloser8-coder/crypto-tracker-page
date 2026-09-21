@@ -16,10 +16,9 @@ document.getElementById('auth-btn').addEventListener('click', () => {
 });
 
 function unlockDashboard(token) {
-    // Prosty test tokena lub od razu ukrycie okna i zapisanie w pamięci
     localStorage.setItem('portfolio_auth_token', token);
     document.getElementById('auth-overlay').style.display = 'none';
-    loadPortfolioData(token);
+    loadPortfolioData();
 }
 
 function showError(msg) {
@@ -58,13 +57,11 @@ const performanceChart = new Chart(ctx, {
     }
 });
 
-// Pobieranie danych (zabezpieczone tokenem)
-async function loadPortfolioData(token) {
+// Główna funkcja pobierająca i renderująca dane portfela
+async function loadPortfolioData() {
     try {
-        // Jeśli plik portfolio-data.json trzymasz w publicznym repozytorium, ale chcesz dodatkowo 
-        // zabezpieczyć go przed botami, możesz go też pobierać przez API z nagłówkiem autoryzacji 
-        // lub po prostu odczytywać bezpośrednio, skoro overlay chroni widok przed użytkownikiem.
-        const response = await fetch('https://cryptoloser8-coder.github.io/crypto-tracker-page/portfolio-data.json');
+        // Dodajemy parametr czasu (?t=...), aby przeglądarka nie pobierała starej wersji z pamięci podręcznej (cache)
+        const response = await fetch(`portfolio-data.json?t=${new Date().getTime()}`);
         if (!response.ok) throw new Error('Brak pliku danych');
         
         const data = await response.json();
@@ -94,4 +91,15 @@ async function loadPortfolioData(token) {
     } catch (error) {
         console.log("Czekam na wygenerowanie pliku portfolio-data.json...");
     }
+}
+
+// OBSŁUGA PRZYCISKU ODŚWIEŻANIA NA STRONIE
+// (Upewnij się, że w HTML masz przycisk z ID "refresh-btn")
+const refreshBtn = document.getElementById('refresh-btn');
+if (refreshBtn) {
+    refreshBtn.addEventListener('click', async () => {
+        refreshBtn.innerText = 'Odświeżanie...';
+        await loadPortfolioData();
+        refreshBtn.innerText = 'Odśwież dane';
+    });
 }
