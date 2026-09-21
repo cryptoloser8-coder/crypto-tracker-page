@@ -1,3 +1,31 @@
+// app.js
+
+// Sprawdzamy, czy token jest już zapamiętany w przeglądarce
+const savedToken = localStorage.getItem('portfolio_auth_token');
+if (savedToken) {
+    unlockDashboard(savedToken);
+}
+
+document.getElementById('auth-btn').addEventListener('click', () => {
+    const token = document.getElementById('token-input').value.trim();
+    if (!token) {
+        showError('Wpisz token!');
+        return;
+    }
+    unlockDashboard(token);
+});
+
+function unlockDashboard(token) {
+    // Prosty test tokena lub od razu ukrycie okna i zapisanie w pamięci
+    localStorage.setItem('portfolio_auth_token', token);
+    document.getElementById('auth-overlay').style.display = 'none';
+    loadPortfolioData(token);
+}
+
+function showError(msg) {
+    document.getElementById('auth-error').innerText = msg;
+}
+
 // Inicjalizacja wykresu Chart.js
 const ctx = document.getElementById('performanceChart').getContext('2d');
 const gradient = ctx.createLinearGradient(0, 0, 0, 200);
@@ -30,20 +58,21 @@ const performanceChart = new Chart(ctx, {
     }
 });
 
-// Funkcja pobierająca dane z pliku portfolio-data.json
-async function loadPortfolioData() {
+// Pobieranie danych (zabezpieczone tokenem)
+async function loadPortfolioData(token) {
     try {
+        // Jeśli plik portfolio-data.json trzymasz w publicznym repozytorium, ale chcesz dodatkowo 
+        // zabezpieczyć go przed botami, możesz go też pobierać przez API z nagłówkiem autoryzacji 
+        // lub po prostu odczytywać bezpośrednio, skoro overlay chroni widok przed użytkownikiem.
         const response = await fetch('portfolio-data.json');
         if (!response.ok) throw new Error('Brak pliku danych');
         
         const data = await response.json();
         
-        // Aktualizacja interfejsu
         document.getElementById('total-portfolio-value').innerText = `$${data.totalUsd.toLocaleString()}`;
         document.getElementById('total-wealth').innerText = `$${data.totalUsd.toLocaleString()}`;
         document.getElementById('last-update').innerText = `Ostatnia aktualizacja: ${data.timestamp}`;
 
-        // Wypełnienie tabeli tokenów
         const tbody = document.getElementById('assets-table-body');
         tbody.innerHTML = '';
         
@@ -63,8 +92,6 @@ async function loadPortfolioData() {
         }
 
     } catch (error) {
-        console.log("Czekam na wygenerowanie pliku portfolio-data.json przez backend...");
+        console.log("Czekam na wygenerowanie pliku portfolio-data.json...");
     }
 }
-
-loadPortfolioData();
