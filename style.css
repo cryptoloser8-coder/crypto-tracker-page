@@ -4,7 +4,7 @@
     --card-bg: #1f2833;
     --text-main: #c5c6c7;
     --text-muted: #8892b0;
-    --accent-gold: #66fcf1;
+    --accent-teal: #66fcf1;
     --border-color: #2c3542;
 }
 
@@ -190,13 +190,13 @@ td {
 }
 
 .auth-card input:focus {
-    border-color: var(--accent-gold);
+    border-color: var(--accent-teal);
 }
 
 .auth-card button {
     width: 100%;
     padding: 12px;
-    background: var(--accent-gold);
+    background: var(--accent-teal);
     color: #0b0c10;
     font-weight: 600;
     border: none;
@@ -216,7 +216,7 @@ td {
 }
 
 .refresh-button {
-    background: var(--accent-gold, #66fcf1);
+    background: var(--accent-teal, #66fcf1);
     color: #0b0c10;
     border: none;
     padding: 8px 16px;
@@ -255,8 +255,8 @@ td {
 }
 
 .secondary-button:hover {
-    border-color: var(--accent-gold);
-    color: var(--accent-gold);
+    border-color: var(--accent-teal);
+    color: var(--accent-teal);
 }
 
 .add-manual-form {
@@ -285,7 +285,7 @@ td {
 }
 
 .add-manual-form input:focus {
-    border-color: var(--accent-gold);
+    border-color: var(--accent-teal);
 }
 
 .add-manual-form .auth-error {
@@ -314,7 +314,7 @@ td {
     font-size: 10px;
     font-weight: 600;
     color: #0b0c10;
-    background: var(--accent-gold);
+    background: var(--accent-teal);
     padding: 2px 6px;
     border-radius: 6px;
     margin-left: 6px;
