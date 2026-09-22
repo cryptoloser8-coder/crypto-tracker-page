@@ -105,6 +105,20 @@
                 <div id="cost-basis-error" class="auth-error"></div>
             </div>
 
+            <!-- Formularz "Ustaw parę ręcznie" - nadpisuje automatyczne wyszukiwanie pary
+                 Dexscreener dla tego kontraktu (przydatne gdy auto-wykrywanie trafi na
+                 złą/za płytką parę). Zapisuje się w overrides.json pod priceOverrides,
+                 klucz = adres kontraktu. Backend (na Orange Pi) czyta to przy każdym
+                 przeliczeniu i używa WSKAZANEJ pary zamiast auto-wyszukiwania. -->
+            <div id="pair-override-form" class="add-manual-form" style="display: none;">
+                <span id="pair-override-target-label" style="align-self: center; font-weight: 600;"></span>
+                <input type="text" id="pair-override-url" placeholder="https://dexscreener.com/siec/0xadrespary" style="flex: 1 1 320px;">
+                <button id="pair-override-save-btn" class="refresh-button">Zapisz</button>
+                <button id="pair-override-clear-btn" class="secondary-button">Usuń override</button>
+                <button id="pair-override-cancel-btn" class="secondary-button">Anuluj</button>
+                <div id="pair-override-error" class="auth-error"></div>
+            </div>
+
             <table>
                 <thead>
                     <tr>
