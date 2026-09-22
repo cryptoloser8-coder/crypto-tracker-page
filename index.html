@@ -7,6 +7,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Dopisane lokalnie, żeby nie ruszać style.css - grupowanie/sortowanie/PnL/szukajka */
+        .muted-note { color: var(--text-muted); font-size: 13px; }
+        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
+        .sort-arrow { font-size: 10px; margin-left: 4px; display: inline-block; width: 10px; }
+        tr.group-header-row td { background: rgba(255, 255, 255, 0.04); font-size: 13px; padding-top: 16px; padding-bottom: 8px; }
+        .pnl-pos { color: #3fb950; }
+        .pnl-neg { color: #f85149; }
+        .search-input { background: var(--input-bg, #0d1117); border: 1px solid var(--border, #30363d); color: var(--text, inherit); border-radius: 6px; padding: 6px 10px; font-size: 13px; }
+    </style>
 </head>
 <body>
 
@@ -61,7 +71,10 @@
         <div class="card">
             <div class="card-title-row">
                 <div class="card-title">Skład Portfela (Assets)</div>
-                <button id="add-manual-btn" class="secondary-button">+ Dodaj pozycję ręcznie</button>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <input type="text" id="asset-search" class="search-input" placeholder="Szukaj (symbol / portfel / sieć)...">
+                    <button id="add-manual-btn" class="secondary-button">+ Dodaj pozycję ręcznie</button>
+                </div>
             </div>
 
             <div id="add-manual-form" class="add-manual-form" style="display: none;">
@@ -75,19 +88,34 @@
                 <div id="manual-form-error" class="auth-error"></div>
             </div>
 
+            <!-- Formularz "Cena zakupu" - wspólny dla wszystkich pozycji, otwierany przyciskiem
+                 "Cena zakupu" w wierszu. Cena + data zapisują się w overrides.json (costBasis,
+                 klucz = assetKey), a Zysk/Strata i Dni liczą się z tego automatycznie. -->
+            <div id="cost-basis-form" class="add-manual-form" style="display: none;">
+                <span id="cost-basis-target-label" style="align-self: center; font-weight: 600;"></span>
+                <input type="number" id="cost-basis-price" placeholder="Cena zakupu (USD/szt.)" step="any">
+                <input type="date" id="cost-basis-date">
+                <button id="cost-basis-save-btn" class="refresh-button">Zapisz</button>
+                <button id="cost-basis-clear-btn" class="secondary-button">Usuń cenę</button>
+                <button id="cost-basis-cancel-btn" class="secondary-button">Anuluj</button>
+                <div id="cost-basis-error" class="auth-error"></div>
+            </div>
+
             <table>
                 <thead>
                     <tr>
-                        <th>Token / Sieć</th>
-                        <th>Portfel</th>
-                        <th>Ilość</th>
-                        <th>Wartość USD</th>
+                        <th class="sortable" data-sort="symbol">Token <span class="sort-arrow" data-arrow="symbol"></span></th>
+                        <th>Sieć</th>
+                        <th class="sortable" data-sort="balance">Ilość <span class="sort-arrow" data-arrow="balance"></span></th>
+                        <th class="sortable" data-sort="valueUsd">Wartość USD <span class="sort-arrow" data-arrow="valueUsd"></span></th>
+                        <th class="sortable" data-sort="pnlPct">Zysk/Strata <span class="sort-arrow" data-arrow="pnlPct"></span></th>
+                        <th class="sortable" data-sort="daysHeld">Dni <span class="sort-arrow" data-arrow="daysHeld"></span></th>
                         <th>Akcje</th>
                     </tr>
                 </thead>
                 <tbody id="assets-table-body">
                     <tr>
-                        <td colspan="5" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td>
+                        <td colspan="7" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td>
                     </tr>
                 </tbody>
             </table>
