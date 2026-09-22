@@ -22,7 +22,7 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 // Dane ostatnio wczytane z plików — trzymane w pamięci, żeby renderDashboard()
 // mogło przeliczać widok bez ponownego pobierania portfolio-data.json za każdym razem
 let currentPortfolioData = null;
-let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {} };
+let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
 
 // Historia wartości portfela (dopisywana przez backend co 15 min - patrz
 // src/storage/appendHistory.js). Surowa suma z backendu (assets), BEZ ręcznych
@@ -385,6 +385,96 @@ function computePnl(asset) {
     return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'auto' };
 }
 
+// --- ROZWIJANA HISTORIA ZAKUPÓW ---
+// Które wiersze są aktualnie rozwinięte (klucz = assetKey) - trzymane osobno od
+// currentOverrides, bo to tylko stan UI tej sesji przeglądarki, nie zapisujemy tego.
+let expandedAssetKeys = new Set();
+
+// Rozwijalne są tylko pozycje z adresem kontraktu (zwykłe tokeny ERC-20) - tam ma sens
+// i historia zakupów, i ręczne wskazanie pary Dexscreener. Natywne ETH, HL-PERP, saldo
+// FOMO czy pozycje dodane ręcznie nie mają kontraktu, więc nie ma czego pokazywać.
+function hasExpandableDetail(asset) {
+    return !!asset.contract;
+}
+
+function toggleAssetExpand(key) {
+    if (expandedAssetKeys.has(key)) expandedAssetKeys.delete(key);
+    else expandedAssetKeys.add(key);
+    renderDashboard();
+}
+
+// Buduje wiersz szczegółów (link Dexscreener + przycisk ręcznej pary + tabela
+// pojedynczych zakupów z per-transakcyjnym zyskiem/stratą liczonym względem
+// AKTUALNEJ ceny jednostkowej tej pozycji - to samo uproszczenie co reszta
+// dashboardu: nie mamy cen historycznych, więc każda transakcja jest wyceniana
+// dzisiejszą ceną, nie ceną z dnia sprzedaży.
+function renderPurchaseDetailRow(asset, key) {
+    const purchases = (asset.costBasis && Array.isArray(asset.costBasis.purchases)) ? asset.costBasis.purchases : [];
+    const balance = Number(asset.balance) || 0;
+    const currentUnitPrice = balance > 0 ? (Number(asset.valueUsd) || 0) / balance : null;
+
+    const dexLinkHtml = asset.dexscreenerUrl
+        ? `<a href="${escapeHtml(asset.dexscreenerUrl)}" target="_blank" rel="noopener" class="row-action-btn">Zobacz na Dexscreener ↗</a>`
+        : '<span class="muted-note">Brak linku do Dexscreener</span>';
+
+    const pairOverrideBtn = `<button class="row-action-btn" data-action="set-pair-override" data-contract="${escapeHtml(asset.contract)}" data-key="${escapeHtml(key)}">Ustaw parę ręcznie</button>`;
+
+    let bodyHtml;
+    if (purchases.length === 0) {
+        bodyHtml = `<div class="muted-note" style="margin-top: 10px;">Brak automatycznie wykrytej historii zakupów dla tej pozycji.</div>`;
+    } else {
+        const rows = purchases.map(p => {
+            const receivedAmount = Number(p.receivedAmount) || 0;
+            const costUsd = Number(p.costUsd) || 0;
+            const avgPriceUsd = Number(p.avgPriceUsd) || 0;
+            const currentValue = currentUnitPrice !== null ? currentUnitPrice * receivedAmount : null;
+            const pnlUsd = currentValue !== null ? currentValue - costUsd : null;
+            const pnlPct = (pnlUsd !== null && costUsd > 0) ? (pnlUsd / costUsd) * 100 : null;
+
+            const pnlHtml = pnlPct !== null
+                ? `<span class="${pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg'}">${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(1)}% (${pnlUsd >= 0 ? '+' : ''}$${pnlUsd.toFixed(2)})</span>`
+                : '<span class="muted-note">—</span>';
+
+            const sourceLabel = p.source === 'fomo' ? 'FOMO' : (p.source === 'swap' ? 'Swap' : (p.source || '—'));
+            const txShort = p.txHash ? `${p.txHash.slice(0, 10)}...` : '—';
+            const txCell = p.explorerUrl
+                ? `<a href="${escapeHtml(p.explorerUrl)}" target="_blank" rel="noopener">${escapeHtml(txShort)}</a>`
+                : escapeHtml(txShort);
+
+            return `
+                <tr>
+                    <td>${escapeHtml(p.date || '—')}</td>
+                    <td>${receivedAmount.toFixed(4)}</td>
+                    <td>$${avgPriceUsd.toFixed(6)}</td>
+                    <td>$${costUsd.toFixed(2)}</td>
+                    <td>${pnlHtml}</td>
+                    <td><span class="muted-note">${escapeHtml(sourceLabel)}</span></td>
+                    <td>${txCell}</td>
+                </tr>
+            `;
+        }).join('');
+
+        bodyHtml = `
+            <table class="purchase-history-table">
+                <thead>
+                    <tr><th>Data</th><th>Ilość</th><th>Cena/szt.</th><th>Koszt</th><th>Zysk/Strata</th><th>Źródło</th><th>Tx</th></tr>
+                </thead>
+                <tbody>${rows}</tbody>
+            </table>
+        `;
+    }
+
+    return `
+        <tr class="purchase-detail-row">
+            <td colspan="7">
+                <div class="purchase-detail-header">${dexLinkHtml}${pairOverrideBtn}</div>
+                ${bodyHtml}
+            </td>
+        </tr>
+    `;
+}
+    if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
+    if (column === 'balance') return Number(asset.balance) || 0;
 // --- SORTOWANIE I SZUKAJKA ---
 function sortValueFor(asset, column) {
     if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
@@ -629,6 +719,8 @@ function renderDashboard() {
                 const valueUsd = Number(asset.valueUsd) || 0;
                 const pnl = computePnl(asset);
                 const key = assetKey(asset);
+                const expandable = hasExpandableDetail(asset);
+                const isExpanded = expandable && expandedAssetKeys.has(key);
 
                 let pnlCell = '<span class="muted-note">—</span>';
                 if (pnl && pnl.pnlPct !== null) {
@@ -646,8 +738,13 @@ function renderDashboard() {
                         : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(key)}">Ukryj</button>`}
                 `;
 
+                const chevron = expandable ? `<span class="expand-chevron">${isExpanded ? '▾' : '▸'}</span> ` : '';
+
+                row.className = 'asset-row' + (expandable ? ' asset-row-expandable' : '');
+                if (expandable) row.dataset.key = key;
+
                 row.innerHTML = `
-                    <td><strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
+                    <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
                     <td>${balance.toFixed(4)}</td>
                     <td>$${valueUsd.toFixed(2)}</td>
@@ -656,6 +753,10 @@ function renderDashboard() {
                     <td>${actionCell}</td>
                 `;
                 tbody.appendChild(row);
+
+                if (isExpanded) {
+                    tbody.insertAdjacentHTML('beforeend', renderPurchaseDetailRow(asset, key));
+                }
             });
         });
     }
@@ -817,10 +918,20 @@ async function addManualAsset({ symbol, walletName, network, balance, valueUsd }
 // delegacja zdarzeń, żeby nie podpinać osobnego listenera do każdego wiersza przy każdym renderze
 document.getElementById('assets-table-body').addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
-    if (!btn) return;
-    if (btn.dataset.action === 'hide') hideAsset(btn.dataset.key);
-    if (btn.dataset.action === 'remove-manual') removeManualAsset(btn.dataset.id);
-    if (btn.dataset.action === 'set-cost-basis') openCostBasisForm(btn.dataset.key);
+    if (btn) {
+        if (btn.dataset.action === 'hide') hideAsset(btn.dataset.key);
+        if (btn.dataset.action === 'remove-manual') removeManualAsset(btn.dataset.id);
+        if (btn.dataset.action === 'set-cost-basis') openCostBasisForm(btn.dataset.key);
+        if (btn.dataset.action === 'set-pair-override') openPairOverrideForm(btn.dataset.contract, btn.dataset.key);
+        return;
+    }
+
+    // Klik gdziekolwiek indziej w wierszu (nie w przycisk, nie w link wewnątrz
+    // rozwiniętych szczegółów) rozwija/zwija historię zakupów tej pozycji
+    const row = e.target.closest('tr.asset-row-expandable');
+    if (row && row.dataset.key) {
+        toggleAssetExpand(row.dataset.key);
+    }
 });
 
 // Sortowanie klikiem w nagłówek kolumny - ponowny klik w tę samą kolumnę odwraca kierunek
@@ -897,6 +1008,62 @@ document.getElementById('cost-basis-clear-btn').addEventListener('click', async 
     delete currentOverrides.costBasis[costBasisTargetKey];
     document.getElementById('cost-basis-form').style.display = 'none';
     costBasisTargetKey = null;
+    renderDashboard();
+    scheduleSave();
+});
+
+// --- FORMULARZ "Ustaw parę ręcznie" (priceOverrides) ---
+// Pozwala ręcznie wkleić link do konkretnej pary na Dexscreener, żeby nadpisać
+// automatyczne wyszukiwanie (przydatne gdy auto-wykrywanie trafia na złą/za płytką
+// parę). Klucz w overrides.json to adres KONTRAKTU (nie assetKey), bo cena dotyczy
+// tokena jako takiego, niezależnie od tego w którym portfelu go trzymasz.
+let pairOverrideTargetContract = null;
+
+function openPairOverrideForm(contract, key) {
+    pairOverrideTargetContract = contract;
+    const asset = getVisibleAssets().find(a => assetKey(a) === key);
+    document.getElementById('pair-override-target-label').innerText = asset ? `${asset.symbol} (${asset.walletName})` : contract;
+
+    const existing = currentOverrides.priceOverrides ? currentOverrides.priceOverrides[contract] : null;
+    document.getElementById('pair-override-url').value = existing || '';
+    document.getElementById('pair-override-error').innerText = '';
+
+    document.getElementById('pair-override-form').style.display = 'flex';
+}
+
+document.getElementById('pair-override-cancel-btn').addEventListener('click', () => {
+    document.getElementById('pair-override-form').style.display = 'none';
+    pairOverrideTargetContract = null;
+});
+
+document.getElementById('pair-override-save-btn').addEventListener('click', async () => {
+    const errorEl = document.getElementById('pair-override-error');
+    const url = document.getElementById('pair-override-url').value.trim();
+
+    if (!url) {
+        errorEl.innerText = 'Wklej link do pary na Dexscreener.';
+        return;
+    }
+    if (!/^https:\/\/dexscreener\.com\/[^/]+\/0x[a-fA-F0-9]+/.test(url)) {
+        errorEl.innerText = 'To nie wygląda na link do pary Dexscreener (oczekiwany format: https://dexscreener.com/siec/0xadrespary).';
+        return;
+    }
+    if (!pairOverrideTargetContract) return;
+
+    if (!currentOverrides.priceOverrides) currentOverrides.priceOverrides = {};
+    currentOverrides.priceOverrides[pairOverrideTargetContract] = url;
+
+    document.getElementById('pair-override-form').style.display = 'none';
+    pairOverrideTargetContract = null;
+    renderDashboard();
+    scheduleSave();
+});
+
+document.getElementById('pair-override-clear-btn').addEventListener('click', async () => {
+    if (!pairOverrideTargetContract) return;
+    if (currentOverrides.priceOverrides) delete currentOverrides.priceOverrides[pairOverrideTargetContract];
+    document.getElementById('pair-override-form').style.display = 'none';
+    pairOverrideTargetContract = null;
     renderDashboard();
     scheduleSave();
 });
@@ -1101,14 +1268,15 @@ async function loadPortfolioData() {
         // — brak tego pliku to normalny stan, nie błąd
         try {
             const overridesRes = await fetch(`overrides.json?t=${Date.now()}`);
-            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {}, costBasis: {} };
+            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
         } catch (e) {
-            currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {} };
+            currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
         if (!currentOverrides.ledgers || typeof currentOverrides.ledgers !== 'object') currentOverrides.ledgers = {};
         if (!currentOverrides.costBasis || typeof currentOverrides.costBasis !== 'object') currentOverrides.costBasis = {};
+        if (!currentOverrides.priceOverrides || typeof currentOverrides.priceOverrides !== 'object') currentOverrides.priceOverrides = {};
 
         // portfolio-history.json może jeszcze nie istnieć (przed pierwszym uruchomieniem
         // workflow po wgraniu tej zmiany) — brak pliku to normalny stan, nie błąd
