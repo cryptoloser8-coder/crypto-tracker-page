@@ -1337,7 +1337,14 @@ async function loadPortfolioData() {
             currentPortfolioHistory = [];
         }
 
-        document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${currentPortfolioData.timestamp}`;
+        // Backend zapisuje timestamp w UTC ("YYYY-MM-DD HH:MM:SS", bez strefy) -
+        // przeliczamy go na czas lokalny przeglądarki (tak samo jak wykres), zamiast
+        // wyświetlać surowy UTC. 'sv-SE' daje format RRRR-MM-DD GG:MM:SS.
+        const updatedMs = parseHistoryTimestamp(currentPortfolioData.timestamp);
+        const updatedLabel = isNaN(updatedMs)
+            ? currentPortfolioData.timestamp
+            : new Date(updatedMs).toLocaleString('sv-SE');
+        document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${updatedLabel}`;
 
         renderDashboard();
         updatePerformanceChart(currentPortfolioHistory);
