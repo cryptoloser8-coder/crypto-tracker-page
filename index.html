@@ -97,6 +97,36 @@
                 <div id="hidden-assets-list" class="hidden-assets-list" style="display: none;"></div>
             </div>
         </div>
+
+        <!-- RĘCZNE SALDA (LEDGERY) — ogólny mechanizm do rzeczy, których nie da się (albo nie
+             do końca da się) wyliczyć automatycznie z chaina (np. saldo "w drodze" w FOMO).
+             Każdy ledger to nazwana lista transakcji (wpłata/wypłata/zakup/korekta), a jego
+             saldo dolicza się do sumy portfela obok zwykłych assetów. -->
+        <div class="card">
+            <div class="card-title-row">
+                <div class="card-title">Ręczne salda (Ledgery)</div>
+                <button id="add-ledger-tx-btn" class="secondary-button">+ Dodaj transakcję</button>
+            </div>
+
+            <div id="add-ledger-form" class="add-manual-form" style="display: none;">
+                <select id="ledger-select"></select>
+                <input type="text" id="ledger-new-label" placeholder="Nazwa nowego ledgera (np. FOMO)" style="display: none;">
+                <select id="ledger-tx-type">
+                    <option value="deposit">Wpłata (+)</option>
+                    <option value="withdrawal">Wypłata (−)</option>
+                    <option value="purchase">Zakup (−)</option>
+                    <option value="correction">Korekta (+/−)</option>
+                </select>
+                <input type="number" id="ledger-tx-amount" placeholder="Kwota USD" step="any">
+                <input type="date" id="ledger-tx-date">
+                <input type="text" id="ledger-tx-note" placeholder="Notatka (opcjonalnie)">
+                <button id="ledger-tx-submit-btn" class="refresh-button">Dodaj</button>
+                <button id="ledger-tx-cancel-btn" class="secondary-button">Anuluj</button>
+                <div id="ledger-form-error" class="auth-error"></div>
+            </div>
+
+            <div id="ledgers-list" class="hidden-assets-list" style="display: flex;"></div>
+        </div>
     </main>
 
     <script src="./app.js"></script>
