@@ -30,7 +30,11 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 // Dane ostatnio wczytane z plików — trzymane w pamięci, żeby renderDashboard()
 // mogło przeliczać widok bez ponownego pobierania portfolio-data.json za każdym razem
 let currentPortfolioData = null;
-let currentOverrides = { hidden: [], manual: [], ledgers: {} };
+let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {} };
+
+// --- SORTOWANIE I SZUKAJKA (tabela assetów) ---
+let sortColumn = 'valueUsd';
+let sortDirection = 'desc';
 
 // Sprawdzamy, czy token jest już zapamiętany w przeglądarce
 const savedToken = localStorage.getItem('portfolio_auth_token');
@@ -283,6 +287,95 @@ function getVisibleAssets() {
     return [...real, ...manual];
 }
 
+// --- CENA ZAKUPU / ZYSK-STRATA ---
+// Blockchain sam z siebie nie mówi po jakiej cenie coś kupiłeś (transfer na wallet to
+// nie zawsze zakup - bywa swapem, airdropem, przelewem), więc cenę wpisuje się ręcznie,
+// per pozycja (klucz = assetKey, tak samo jak przy "Ukryj"). Trzymane w overrides.json
+// pod costBasis: { [assetKey]: { avgPriceUsd, dateAcquired } }.
+function computePnl(asset) {
+    const cb = currentOverrides.costBasis[assetKey(asset)];
+    if (!cb || !cb.avgPriceUsd) return null;
+
+    const balance = Number(asset.balance) || 0;
+    const valueUsd = Number(asset.valueUsd) || 0;
+    const costUsd = cb.avgPriceUsd * balance;
+    const pnlUsd = valueUsd - costUsd;
+    const pnlPct = costUsd > 0 ? (pnlUsd / costUsd) * 100 : null;
+    const daysHeld = cb.dateAcquired
+        ? Math.max(0, Math.floor((Date.now() - new Date(cb.dateAcquired + 'T00:00:00Z').getTime()) / 86400000))
+        : null;
+
+    return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd };
+}
+
+// --- SORTOWANIE I SZUKAJKA ---
+function sortValueFor(asset, column) {
+    if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
+    if (column === 'balance') return Number(asset.balance) || 0;
+    if (column === 'valueUsd') return Number(asset.valueUsd) || 0;
+    if (column === 'pnlPct') {
+        const pnl = computePnl(asset);
+        return pnl && pnl.pnlPct !== null ? pnl.pnlPct : -Infinity;
+    }
+    if (column === 'daysHeld') {
+        const pnl = computePnl(asset);
+        return pnl && pnl.daysHeld !== null ? pnl.daysHeld : -Infinity;
+    }
+    return 0;
+}
+
+function sortAssets(list) {
+    const dir = sortDirection === 'asc' ? 1 : -1;
+    return list.slice().sort((a, b) => {
+        const va = sortValueFor(a, sortColumn);
+        const vb = sortValueFor(b, sortColumn);
+        if (va < vb) return -1 * dir;
+        if (va > vb) return 1 * dir;
+        return 0;
+    });
+}
+
+function getSearchQuery() {
+    const el = document.getElementById('asset-search');
+    return el ? el.value.trim().toLowerCase() : '';
+}
+
+function matchesSearch(asset, query) {
+    if (!query) return true;
+    return (
+        String(asset.symbol || '').toLowerCase().includes(query) ||
+        String(asset.walletName || '').toLowerCase().includes(query) ||
+        String(asset.network || '').toLowerCase().includes(query)
+    );
+}
+
+// --- GRUPOWANIE PO PORTFELU ---
+// Grupy posortowane od największej sumy do najmniejszej; pozycje WEWNĄTRZ każdej grupy
+// sortowane wg aktualnie wybranej kolumny (sortColumn/sortDirection).
+function groupAssetsByWallet(list) {
+    const groups = {};
+    list.forEach(asset => {
+        const key = asset.walletName || 'Inne';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(asset);
+    });
+
+    return Object.entries(groups)
+        .map(([walletName, assets]) => ({
+            walletName,
+            assets: sortAssets(assets),
+            subtotal: assets.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0)
+        }))
+        .sort((a, b) => b.subtotal - a.subtotal);
+}
+
+function updateSortArrows() {
+    document.querySelectorAll('.sort-arrow').forEach(el => {
+        const col = el.dataset.arrow;
+        el.innerText = col === sortColumn ? (sortDirection === 'asc' ? '▲' : '▼') : '';
+    });
+}
+
 // --- LEDGERY (ręczne, nazwane listy transakcji - wpłata/wypłata/zakup/korekta) ---
 // Ogólny mechanizm do salda, którego nie da się (albo nie do końca da się) policzyć
 // automatycznie z chaina - np. saldo "w drodze" w FOMO. Struktura w overrides.json:
@@ -417,45 +510,73 @@ function renderLedgersPanel() {
     });
 }
 
-// Renderuje karty sum, tabelę assetów i panel ukrytych pozycji na podstawie
-// currentPortfolioData + currentOverrides. Wywoływane po każdym załadowaniu
-// danych ORAZ po każdej zmianie (ukrycie/przywrócenie/dodanie ręczne/zmiana ledgera).
+// Renderuje karty sum, tabelę assetów (pogrupowaną po portfelu, sortowalną) i panele
+// (ukryte pozycje, ledgery) na podstawie currentPortfolioData + currentOverrides.
+// Wywoływane po każdym załadowaniu danych ORAZ po każdej zmianie (ukrycie/przywrócenie/
+// dodanie ręczne/zmiana ledgera/zmiana sortowania/wpisanie w szukajkę/ustawienie ceny).
 function renderDashboard() {
-    const visible = getVisibleAssets();
-
-    // Suma liczona z widocznych assetów + sald wszystkich ledgerów (np. FOMO "w drodze")
-    const assetsTotal = visible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
+    // Suma liczona z WSZYSTKICH widocznych assetów (bez filtra szukajki - suma portfela
+    // nie powinna skakać, kiedy tylko coś wpisujesz w polu wyszukiwania) + sald ledgerów
+    const allVisible = getVisibleAssets();
+    const assetsTotal = allVisible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
     const total = assetsTotal + getLedgersTotal();
     const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     document.getElementById('total-portfolio-value').innerText = totalFormatted;
     document.getElementById('total-wealth').innerText = totalFormatted;
 
+    const query = getSearchQuery();
+    const filtered = allVisible.filter(a => matchesSearch(a, query));
+    const groups = groupAssetsByWallet(filtered);
+
     const tbody = document.getElementById('assets-table-body');
     tbody.innerHTML = '';
 
-    if (visible.length > 0) {
-        visible.forEach(asset => {
-            const row = document.createElement('tr');
-            const balance = Number(asset.balance) || 0;
-            const valueUsd = Number(asset.valueUsd) || 0;
-
-            const actionCell = asset.isManual
-                ? `<button class="row-action-btn" data-action="remove-manual" data-id="${escapeHtml(asset.id)}">Usuń</button>`
-                : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(assetKey(asset))}">Ukryj</button>`;
-
-            row.innerHTML = `
-                <td><strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
-                <td>${escapeHtml(asset.walletName)} (${escapeHtml(asset.network)})</td>
-                <td>${balance.toFixed(4)}</td>
-                <td>$${valueUsd.toFixed(2)}</td>
-                <td>${actionCell}</td>
-            `;
-            tbody.appendChild(row);
-        });
+    if (groups.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów${query ? ' pasujących do szukania' : ''}</td></tr>`;
     } else {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów</td></tr>`;
+        groups.forEach(group => {
+            const headerRow = document.createElement('tr');
+            headerRow.className = 'group-header-row';
+            headerRow.innerHTML = `<td colspan="7"><strong>${escapeHtml(group.walletName)}</strong> — $${group.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>`;
+            tbody.appendChild(headerRow);
+
+            group.assets.forEach(asset => {
+                const row = document.createElement('tr');
+                const balance = Number(asset.balance) || 0;
+                const valueUsd = Number(asset.valueUsd) || 0;
+                const pnl = computePnl(asset);
+                const key = assetKey(asset);
+
+                let pnlCell = '<span class="muted-note">—</span>';
+                if (pnl && pnl.pnlPct !== null) {
+                    const cls = pnl.pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg';
+                    const sign = pnl.pnlUsd >= 0 ? '+' : '';
+                    pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}% (${sign}$${pnl.pnlUsd.toFixed(2)})</span>`;
+                }
+                const daysCell = pnl && pnl.daysHeld !== null ? pnl.daysHeld : '<span class="muted-note">—</span>';
+
+                const actionCell = `
+                    <button class="row-action-btn" data-action="set-cost-basis" data-key="${escapeHtml(key)}">Cena zakupu</button>
+                    ${asset.isManual
+                        ? `<button class="row-action-btn" data-action="remove-manual" data-id="${escapeHtml(asset.id)}">Usuń</button>`
+                        : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(key)}">Ukryj</button>`}
+                `;
+
+                row.innerHTML = `
+                    <td><strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
+                    <td>${escapeHtml(asset.network)}</td>
+                    <td>${balance.toFixed(4)}</td>
+                    <td>$${valueUsd.toFixed(2)}</td>
+                    <td>${pnlCell}</td>
+                    <td>${daysCell}</td>
+                    <td>${actionCell}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        });
     }
 
+    updateSortArrows();
     renderHiddenPanel();
     renderLedgersPanel();
 }
@@ -608,13 +729,86 @@ async function addManualAsset({ symbol, walletName, network, balance, valueUsd }
     scheduleSave();
 }
 
-// Obsługa kliknięć w tabeli assetów (przyciski "Ukryj" / "Usuń") — delegacja zdarzeń,
-// żeby nie podpinać osobnego listenera do każdego wiersza przy każdym renderze
+// Obsługa kliknięć w tabeli assetów (przyciski "Ukryj" / "Usuń" / "Cena zakupu") —
+// delegacja zdarzeń, żeby nie podpinać osobnego listenera do każdego wiersza przy każdym renderze
 document.getElementById('assets-table-body').addEventListener('click', (e) => {
     const btn = e.target.closest('button[data-action]');
     if (!btn) return;
     if (btn.dataset.action === 'hide') hideAsset(btn.dataset.key);
     if (btn.dataset.action === 'remove-manual') removeManualAsset(btn.dataset.id);
+    if (btn.dataset.action === 'set-cost-basis') openCostBasisForm(btn.dataset.key);
+});
+
+// Sortowanie klikiem w nagłówek kolumny - ponowny klik w tę samą kolumnę odwraca kierunek
+document.querySelectorAll('th.sortable').forEach(th => {
+    th.addEventListener('click', () => {
+        const col = th.dataset.sort;
+        if (sortColumn === col) {
+            sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            sortColumn = col;
+            sortDirection = 'desc';
+        }
+        renderDashboard();
+    });
+});
+
+// Szukajka - filtruje tabelę na bieżąco, nie wpływa na sumę portfela (patrz renderDashboard)
+const assetSearchInput = document.getElementById('asset-search');
+if (assetSearchInput) {
+    assetSearchInput.addEventListener('input', () => renderDashboard());
+}
+
+// --- FORMULARZ "Cena zakupu" ---
+let costBasisTargetKey = null;
+
+function openCostBasisForm(key) {
+    costBasisTargetKey = key;
+    const [symbol, walletName] = key.split('::');
+    document.getElementById('cost-basis-target-label').innerText = `${symbol} (${walletName})`;
+
+    const existing = currentOverrides.costBasis[key];
+    document.getElementById('cost-basis-price').value = existing ? existing.avgPriceUsd : '';
+    document.getElementById('cost-basis-date').value = existing ? existing.dateAcquired : '';
+    document.getElementById('cost-basis-error').innerText = '';
+
+    document.getElementById('cost-basis-form').style.display = 'flex';
+}
+
+document.getElementById('cost-basis-cancel-btn').addEventListener('click', () => {
+    document.getElementById('cost-basis-form').style.display = 'none';
+    costBasisTargetKey = null;
+});
+
+document.getElementById('cost-basis-save-btn').addEventListener('click', async () => {
+    const errorEl = document.getElementById('cost-basis-error');
+    const priceRaw = document.getElementById('cost-basis-price').value.trim();
+    const date = document.getElementById('cost-basis-date').value;
+
+    if (!priceRaw || isNaN(Number(priceRaw)) || Number(priceRaw) <= 0) {
+        errorEl.innerText = 'Podaj poprawną cenę (> 0).';
+        return;
+    }
+    if (!costBasisTargetKey) return;
+
+    currentOverrides.costBasis[costBasisTargetKey] = {
+        avgPriceUsd: Number(priceRaw),
+        dateAcquired: date || new Date().toISOString().substring(0, 10)
+    };
+
+    document.getElementById('cost-basis-form').style.display = 'none';
+    costBasisTargetKey = null;
+    renderDashboard();
+    scheduleSave();
+});
+
+document.getElementById('cost-basis-clear-btn').addEventListener('click', async () => {
+    if (!costBasisTargetKey) return;
+    delete currentOverrides.costBasis[costBasisTargetKey];
+    document.getElementById('cost-basis-form').style.display = 'none';
+    costBasisTargetKey = null;
+    renderDashboard();
+    scheduleSave();
 });
 
 // Obsługa kliknięć w panelu ukrytych pozycji (przycisk "Przywróć")
@@ -817,13 +1011,14 @@ async function loadPortfolioData() {
         // — brak tego pliku to normalny stan, nie błąd
         try {
             const overridesRes = await fetch(`overrides.json?t=${Date.now()}`);
-            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {} };
+            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {}, costBasis: {} };
         } catch (e) {
-            currentOverrides = { hidden: [], manual: [], ledgers: {} };
+            currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {} };
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
         if (!currentOverrides.ledgers || typeof currentOverrides.ledgers !== 'object') currentOverrides.ledgers = {};
+        if (!currentOverrides.costBasis || typeof currentOverrides.costBasis !== 'object') currentOverrides.costBasis = {};
 
         document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${currentPortfolioData.timestamp}`;
 
