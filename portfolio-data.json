@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-22 19:45:32",
-  "totalUsd": 50215.75,
+  "timestamp": "2026-09-22 19:50:29",
+  "totalUsd": 50315.72,
   "assets": [
     {
       "symbol": "USDT",
@@ -51,11 +51,11 @@
     },
     {
       "symbol": "USDC",
-      "name": "FOMO - saldo w aplikacji (auto, 6 transakcji)",
+      "name": "FOMO - saldo w aplikacji (auto, 7 transakcji)",
       "walletName": "FOMO APP",
       "network": "fomo",
-      "balance": 2616.9962410000003,
-      "valueUsd": 2616.9962410000003
+      "balance": 2119.9089580000004,
+      "valueUsd": 2119.9089580000004
     },
     {
       "symbol": "WTH",
@@ -63,7 +63,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 87.04993797281796,
-      "valueUsd": 1403.2450001218256,
+      "valueUsd": 1395.4975556422446,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -95,12 +95,49 @@
       }
     },
     {
+      "symbol": "Pyre",
+      "name": "Pyre",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 3869603.8037235457,
+      "valueUsd": 883.4305483900855,
+      "contract": "0xc8488be2e4f430420a364e64f4d8af428b74d903",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x46d3902d85b818e03901676f3898177936e08b4c30de4d1c2dd6fea80bb0fe32",
+      "costBasis": {
+        "avgPriceUsd": 0.0002569306974123053,
+        "dateAcquired": "2026-09-22",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-22",
+            "receivedAmount": 1534239.833602449,
+            "costUsd": 497.132721,
+            "avgPriceUsd": 0.00032402542947455285,
+            "source": "fomo",
+            "txHash": "0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42"
+          },
+          {
+            "date": "2026-09-22",
+            "receivedAmount": 2335363.970121097,
+            "costUsd": 497.087283,
+            "avgPriceUsd": 0.00021285216752497225,
+            "source": "fomo",
+            "txHash": "0x841502f80a843bb83fb60d35a7996ae3174e96deea92b30bf5a2e9a1a1fd7f3d",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x841502f80a843bb83fb60d35a7996ae3174e96deea92b30bf5a2e9a1a1fd7f3d"
+          }
+        ]
+      }
+    },
+    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 96714.5556693868,
-      "valueUsd": 492.6639465798563,
+      "valueUsd": 491.8902301345013,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdabbd019c0174bdae6354f32b158d42e4a0e7489",
       "costBasis": {
@@ -117,33 +154,6 @@
             "txHash": "0x6a5d6d88d154199268fbfefd7b9e0726cdcd9d70ac3e7ae95a9466d7f34bdeff",
             "network": "bsc",
             "explorerUrl": "https://bscscan.com/tx/0x6a5d6d88d154199268fbfefd7b9e0726cdcd9d70ac3e7ae95a9466d7f34bdeff"
-          }
-        ]
-      }
-    },
-    {
-      "symbol": "Pyre",
-      "name": "Pyre",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1534239.833602449,
-      "valueUsd": 277.8508338654035,
-      "contract": "0xc8488be2e4f430420a364e64f4d8af428b74d903",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x46d3902d85b818e03901676f3898177936e08b4c30de4d1c2dd6fea80bb0fe32",
-      "costBasis": {
-        "avgPriceUsd": 0.00032402542947455285,
-        "dateAcquired": "2026-09-22",
-        "source": "auto",
-        "purchases": [
-          {
-            "date": "2026-09-22",
-            "receivedAmount": 1534239.833602449,
-            "costUsd": 497.132721,
-            "avgPriceUsd": 0.00032402542947455285,
-            "source": "fomo",
-            "txHash": "0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42",
-            "network": "robinhood",
-            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42"
           }
         ]
       }
@@ -198,7 +208,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 213.5624975915403,
-      "valueUsd": 0.0381422620698491,
+      "valueUsd": 0.03809954957033079,
       "contract": "0x3b401114112479aff47874b155454827a131faad",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xd25a31c7993c6ebb63520448ea32f0be0de3237c4181968def2ab432a1b480f6"
     },
