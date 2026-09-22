@@ -20,7 +20,7 @@ const POLL_INTERVAL_MS = 4000; // co ile sprawdzamy status runa w Actions
 const MAX_WAIT_FOR_RUN_MS = 30 * 1000; // ile czekamy aż run w ogóle pojawi się na liście
 const MAX_WAIT_FOR_COMPLETION_MS = 3 * 60 * 1000; // maksymalny czas czekania na zakończenie runa
 
-// --- KONFIGURACJA PLIKU Z NADPISANIAMI (ukryte pozycje + ręcznie dodane) ---
+// --- KONFIGURACJA PLIKU Z NADPISANIAMI (ukryte pozycje + ręcznie dodane + ledgery) ---
 // Trzymamy to w publicznym repo frontendu, obok portfolio-data.json — ten sam
 // token (Contents: Read and write) który uruchamia backend, zapisuje też ten plik.
 const OVERRIDES_REPO = 'cryptoloser8-coder/crypto-tracker-page';
@@ -30,7 +30,7 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 // Dane ostatnio wczytane z plików — trzymane w pamięci, żeby renderDashboard()
 // mogło przeliczać widok bez ponownego pobierania portfolio-data.json za każdym razem
 let currentPortfolioData = null;
-let currentOverrides = { hidden: [], manual: [] };
+let currentOverrides = { hidden: [], manual: [], ledgers: {} };
 
 // Sprawdzamy, czy token jest już zapamiętany w przeglądarce
 const savedToken = localStorage.getItem('portfolio_auth_token');
@@ -283,15 +283,149 @@ function getVisibleAssets() {
     return [...real, ...manual];
 }
 
+// --- LEDGERY (ręczne, nazwane listy transakcji - wpłata/wypłata/zakup/korekta) ---
+// Ogólny mechanizm do salda, którego nie da się (albo nie do końca da się) policzyć
+// automatycznie z chaina - np. saldo "w drodze" w FOMO. Struktura w overrides.json:
+// { ledgers: { "<klucz>": { label: "FOMO", transactions: [{id, type, amountUsd, date, note}] } } }
+
+function txTypeLabel(type) {
+    switch (type) {
+        case 'deposit': return 'Wpłata';
+        case 'withdrawal': return 'Wypłata';
+        case 'purchase': return 'Zakup';
+        case 'correction': return 'Korekta';
+        default: return type;
+    }
+}
+
+// Saldo jednego ledgera: deposit (+), withdrawal/purchase (-), correction (znak wpisany przez użytkownika)
+function getLedgerBalance(ledger) {
+    return (ledger.transactions || []).reduce((sum, t) => {
+        const amt = Number(t.amountUsd) || 0;
+        if (t.type === 'deposit') return sum + amt;
+        if (t.type === 'withdrawal' || t.type === 'purchase') return sum - amt;
+        if (t.type === 'correction') return sum + amt;
+        return sum;
+    }, 0);
+}
+
+// Suma sald wszystkich ledgerów naraz - dolicza się do sumy portfela
+function getLedgersTotal() {
+    return Object.values(currentOverrides.ledgers || {}).reduce((sum, l) => sum + getLedgerBalance(l), 0);
+}
+
+function slugifyLedgerLabel(label) {
+    const slug = label.trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+    return slug || `ledger-${Date.now()}`;
+}
+
+async function addLedgerTransaction(ledgerKey, label, tx) {
+    if (!currentOverrides.ledgers[ledgerKey]) {
+        currentOverrides.ledgers[ledgerKey] = { label: label || ledgerKey, transactions: [] };
+    }
+    currentOverrides.ledgers[ledgerKey].transactions.push({
+        id: `tx-${Date.now()}`,
+        type: tx.type,
+        amountUsd: Number(tx.amountUsd) || 0,
+        date: tx.date || new Date().toISOString().substring(0, 10),
+        note: tx.note || ''
+    });
+    renderDashboard();
+    scheduleSave();
+}
+
+async function updateLedgerTransaction(ledgerKey, txId, fields) {
+    const ledger = currentOverrides.ledgers[ledgerKey];
+    if (!ledger) return;
+    const tx = (ledger.transactions || []).find(t => t.id === txId);
+    if (!tx) return;
+
+    tx.type = fields.type;
+    tx.amountUsd = Number(fields.amountUsd) || 0;
+    tx.date = fields.date || tx.date;
+    tx.note = fields.note ?? tx.note;
+
+    renderDashboard();
+    scheduleSave();
+}
+
+async function removeLedgerTransaction(ledgerKey, txId) {
+    const ledger = currentOverrides.ledgers[ledgerKey];
+    if (!ledger) return;
+    ledger.transactions = (ledger.transactions || []).filter(t => t.id !== txId);
+    // Zostawiamy pusty ledger (nie kasujemy etykiety), na wypadek gdyby zaraz doszła kolejna transakcja
+    renderDashboard();
+    scheduleSave();
+}
+
+// Renderuje panel ledgerów: każdy jako blok z etykietą+saldem, i listą transakcji pod spodem
+function renderLedgersPanel() {
+    const container = document.getElementById('ledgers-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const ledgers = currentOverrides.ledgers || {};
+    const keys = Object.keys(ledgers);
+
+    if (keys.length === 0) {
+        container.innerHTML = `<div class="muted-note">Brak ledgerów - dodaj transakcję, żeby utworzyć pierwszy.</div>`;
+        return;
+    }
+
+    keys.forEach(key => {
+        const ledger = ledgers[key];
+        const balance = getLedgerBalance(ledger);
+
+        const block = document.createElement('div');
+        block.className = 'hidden-item-row';
+        block.style.flexDirection = 'column';
+        block.style.alignItems = 'stretch';
+        block.style.gap = '6px';
+
+        const header = document.createElement('div');
+        header.style.display = 'flex';
+        header.style.justifyContent = 'space-between';
+        header.innerHTML = `<strong>${escapeHtml(ledger.label || key)}</strong><span>$${balance.toFixed(2)}</span>`;
+        block.appendChild(header);
+
+        const sortedTxs = (ledger.transactions || [])
+            .slice()
+            .sort((a, b) => String(b.date || '').localeCompare(String(a.date || '')));
+
+        if (sortedTxs.length === 0) {
+            const empty = document.createElement('div');
+            empty.className = 'muted-note';
+            empty.innerText = 'Brak transakcji w tym ledgerze.';
+            block.appendChild(empty);
+        }
+
+        sortedTxs.forEach(tx => {
+            const sign = tx.type === 'deposit' ? '+' : (tx.type === 'correction' ? (Number(tx.amountUsd) >= 0 ? '+' : '−') : '−');
+            const row = document.createElement('div');
+            row.className = 'hidden-item-row';
+            row.innerHTML = `
+                <span>${escapeHtml(tx.date || '')} — ${escapeHtml(txTypeLabel(tx.type))} — ${sign}$${Math.abs(Number(tx.amountUsd) || 0).toFixed(2)}${tx.note ? ' — ' + escapeHtml(tx.note) : ''}</span>
+                <span>
+                    <button class="row-action-btn" data-action="edit-ledger-tx" data-ledger="${escapeHtml(key)}" data-id="${escapeHtml(tx.id)}">Edytuj</button>
+                    <button class="row-action-btn" data-action="remove-ledger-tx" data-ledger="${escapeHtml(key)}" data-id="${escapeHtml(tx.id)}">Usuń</button>
+                </span>
+            `;
+            block.appendChild(row);
+        });
+
+        container.appendChild(block);
+    });
+}
+
 // Renderuje karty sum, tabelę assetów i panel ukrytych pozycji na podstawie
 // currentPortfolioData + currentOverrides. Wywoływane po każdym załadowaniu
-// danych ORAZ po każdej zmianie (ukrycie/przywrócenie/dodanie ręczne).
+// danych ORAZ po każdej zmianie (ukrycie/przywrócenie/dodanie ręczne/zmiana ledgera).
 function renderDashboard() {
     const visible = getVisibleAssets();
 
-    // Suma liczona TYLKO z widocznych pozycji — jeśli coś ukryjesz (np. spam token
-    // z absurdalną wyceną), jego wartość znika też z sumy portfela, nie tylko z tabeli
-    const total = visible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
+    // Suma liczona z widocznych assetów + sald wszystkich ledgerów (np. FOMO "w drodze")
+    const assetsTotal = visible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
+    const total = assetsTotal + getLedgersTotal();
     const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     document.getElementById('total-portfolio-value').innerText = totalFormatted;
     document.getElementById('total-wealth').innerText = totalFormatted;
@@ -323,6 +457,7 @@ function renderDashboard() {
     }
 
     renderHiddenPanel();
+    renderLedgersPanel();
 }
 
 // Renderuje listę ukrytych pozycji z przyciskiem "Przywróć" przy każdej
@@ -412,7 +547,7 @@ async function saveOverridesOnce(retriesLeft = 2) {
                 headers: { ...githubHeaders(token), 'Content-Type': 'application/json' },
                 cache: 'no-store',
                 body: JSON.stringify({
-                    message: 'Aktualizacja overrides.json (ukryte/ręczne pozycje)',
+                    message: 'Aktualizacja overrides.json (ukryte/ręczne pozycje/ledgery)',
                     content: utf8ToBase64(contentStr),
                     branch: OVERRIDES_BRANCH,
                     ...(sha ? { sha } : {})
@@ -531,6 +666,140 @@ document.getElementById('manual-submit-btn').addEventListener('click', async () 
     document.getElementById('add-manual-form').style.display = 'none';
 });
 
+// --- FORMULARZ "+ Dodaj transakcję" (ledgery) ---
+// Ten sam formularz służy do dodawania NOWEJ transakcji i do edycji ISTNIEJĄCEJ
+// (klik "Edytuj" w panelu ledgerów wypełnia pola i przełącza tryb - patrz niżej).
+let editingLedgerKey = null;
+let editingTxId = null;
+
+function toggleNewLedgerLabelVisibility() {
+    const isNew = document.getElementById('ledger-select').value === '__new__';
+    document.getElementById('ledger-new-label').style.display = isNew ? 'block' : 'none';
+}
+
+// Wypełnia dropdown ledgerów aktualną listą + opcją "+ Nowy ledger..."
+function populateLedgerSelect(preselectKey) {
+    const select = document.getElementById('ledger-select');
+    const keys = Object.keys(currentOverrides.ledgers || {});
+
+    select.innerHTML = '';
+    keys.forEach(key => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        opt.textContent = currentOverrides.ledgers[key].label || key;
+        select.appendChild(opt);
+    });
+    const newOpt = document.createElement('option');
+    newOpt.value = '__new__';
+    newOpt.textContent = '+ Nowy ledger...';
+    select.appendChild(newOpt);
+
+    select.value = (preselectKey && keys.includes(preselectKey)) ? preselectKey : (keys[0] || '__new__');
+    toggleNewLedgerLabelVisibility();
+}
+
+function resetLedgerForm() {
+    document.getElementById('ledger-tx-type').value = 'deposit';
+    document.getElementById('ledger-tx-amount').value = '';
+    document.getElementById('ledger-tx-date').value = '';
+    document.getElementById('ledger-tx-note').value = '';
+    document.getElementById('ledger-new-label').value = '';
+    document.getElementById('ledger-form-error').innerText = '';
+    document.getElementById('ledger-select').disabled = false;
+    document.getElementById('ledger-tx-submit-btn').innerText = 'Dodaj';
+    editingLedgerKey = null;
+    editingTxId = null;
+}
+
+document.getElementById('add-ledger-tx-btn').addEventListener('click', () => {
+    const form = document.getElementById('add-ledger-form');
+    const opening = form.style.display === 'none';
+    if (opening) {
+        resetLedgerForm();
+        populateLedgerSelect();
+    }
+    form.style.display = opening ? 'flex' : 'none';
+});
+
+document.getElementById('ledger-select').addEventListener('change', toggleNewLedgerLabelVisibility);
+
+document.getElementById('ledger-tx-cancel-btn').addEventListener('click', () => {
+    document.getElementById('add-ledger-form').style.display = 'none';
+    resetLedgerForm();
+});
+
+document.getElementById('ledger-tx-submit-btn').addEventListener('click', async () => {
+    const errorEl = document.getElementById('ledger-form-error');
+    const type = document.getElementById('ledger-tx-type').value;
+    const amountUsdRaw = document.getElementById('ledger-tx-amount').value.trim();
+    const date = document.getElementById('ledger-tx-date').value;
+    const note = document.getElementById('ledger-tx-note').value.trim();
+
+    if (!amountUsdRaw || isNaN(Number(amountUsdRaw))) {
+        errorEl.innerText = 'Podaj poprawną kwotę USD.';
+        return;
+    }
+    errorEl.innerText = '';
+
+    if (editingLedgerKey && editingTxId) {
+        await updateLedgerTransaction(editingLedgerKey, editingTxId, { type, amountUsd: amountUsdRaw, date, note });
+    } else {
+        const select = document.getElementById('ledger-select');
+        let ledgerKey = select.value;
+        let label = ledgerKey;
+
+        if (ledgerKey === '__new__') {
+            label = document.getElementById('ledger-new-label').value.trim();
+            if (!label) {
+                errorEl.innerText = 'Podaj nazwę nowego ledgera.';
+                return;
+            }
+            ledgerKey = slugifyLedgerLabel(label);
+        } else {
+            label = currentOverrides.ledgers[ledgerKey]?.label || ledgerKey;
+        }
+
+        await addLedgerTransaction(ledgerKey, label, { type, amountUsd: amountUsdRaw, date, note });
+    }
+
+    document.getElementById('add-ledger-form').style.display = 'none';
+    resetLedgerForm();
+});
+
+// Delegacja kliknięć w panelu ledgerów (przyciski "Edytuj" / "Usuń" przy każdej transakcji)
+document.getElementById('ledgers-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const ledgerKey = btn.dataset.ledger;
+    const txId = btn.dataset.id;
+
+    if (btn.dataset.action === 'remove-ledger-tx') {
+        removeLedgerTransaction(ledgerKey, txId);
+        return;
+    }
+
+    if (btn.dataset.action === 'edit-ledger-tx') {
+        const ledger = currentOverrides.ledgers[ledgerKey];
+        const tx = ledger && (ledger.transactions || []).find(t => t.id === txId);
+        if (!tx) return;
+
+        editingLedgerKey = ledgerKey;
+        editingTxId = txId;
+
+        populateLedgerSelect(ledgerKey);
+        document.getElementById('ledger-select').disabled = true; // przy edycji nie przenosimy transakcji między ledgerami
+
+        document.getElementById('ledger-tx-type').value = tx.type;
+        document.getElementById('ledger-tx-amount').value = tx.amountUsd;
+        document.getElementById('ledger-tx-date').value = tx.date || '';
+        document.getElementById('ledger-tx-note').value = tx.note || '';
+        document.getElementById('ledger-tx-submit-btn').innerText = 'Zapisz zmiany';
+        document.getElementById('ledger-form-error').innerText = '';
+
+        document.getElementById('add-ledger-form').style.display = 'flex';
+    }
+});
+
 // Główna funkcja pobierająca dane i zlecająca ich wyrenderowanie
 async function loadPortfolioData() {
     // Nie odpalamy drugiego fetcha, jeśli poprzedni jeszcze trwa
@@ -548,12 +817,13 @@ async function loadPortfolioData() {
         // — brak tego pliku to normalny stan, nie błąd
         try {
             const overridesRes = await fetch(`overrides.json?t=${Date.now()}`);
-            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [] };
+            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {} };
         } catch (e) {
-            currentOverrides = { hidden: [], manual: [] };
+            currentOverrides = { hidden: [], manual: [], ledgers: {} };
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
+        if (!currentOverrides.ledgers || typeof currentOverrides.ledgers !== 'object') currentOverrides.ledgers = {};
 
         document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${currentPortfolioData.timestamp}`;
 
