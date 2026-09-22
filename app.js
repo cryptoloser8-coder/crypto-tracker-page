@@ -256,6 +256,77 @@ const performanceChart = new Chart(ctx, {
     }
 });
 
+// --- ASSET ALLOCATION (donut) --- wartość portfela podzielona per portfel (wallet).
+// Kolory cyklicznie z tej palety (odcienie złota/grafitu, spójne z resztą motywu),
+// gdyby portfeli było więcej niż kolorów w palecie.
+const ALLOCATION_PALETTE = ['#d4af37', '#8892b0', '#e8d9b5', '#5b6472', '#b08d57', '#3a3f4b'];
+
+const allocationCtx = document.getElementById('allocationChart').getContext('2d');
+const allocationChart = new Chart(allocationCtx, {
+    type: 'doughnut',
+    data: {
+        labels: [],
+        datasets: [{
+            data: [],
+            backgroundColor: [],
+            borderColor: '#07070a',
+            borderWidth: 2
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '72%',
+        plugins: {
+            legend: { display: false }, // własny legend renderujemy obok (#allocation-legend)
+            tooltip: {
+                callbacks: {
+                    label: (item) => `${item.label}: $${Number(item.raw).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                }
+            }
+        }
+    }
+});
+
+// Podmienia dane wykresu donut + renderuje legendę obok niego (kropka + nazwa + %)
+// na podstawie grup portfeli (walletName -> subtotal), niezależnie od filtra szukajki -
+// alokacja ma pokazywać cały widoczny portfel, nie tylko przefiltrowany wycinek.
+function updateAllocationChart(groups) {
+    const legendEl = document.getElementById('allocation-legend');
+    const total = groups.reduce((sum, g) => sum + g.subtotal, 0);
+
+    if (!groups.length || total <= 0) {
+        allocationChart.data.labels = [];
+        allocationChart.data.datasets[0].data = [];
+        allocationChart.data.datasets[0].backgroundColor = [];
+        allocationChart.update();
+        if (legendEl) legendEl.innerHTML = `<div class="muted-note">Brak danych do alokacji.</div>`;
+        return;
+    }
+
+    const colors = groups.map((_, i) => ALLOCATION_PALETTE[i % ALLOCATION_PALETTE.length]);
+
+    allocationChart.data.labels = groups.map(g => g.walletName);
+    allocationChart.data.datasets[0].data = groups.map(g => g.subtotal);
+    allocationChart.data.datasets[0].backgroundColor = colors;
+    allocationChart.update();
+
+    if (legendEl) {
+        legendEl.innerHTML = groups.map((g, i) => {
+            const pct = (g.subtotal / total) * 100;
+            return `
+                <div class="allocation-legend-row">
+                    <span class="allocation-legend-label">
+                        <span class="allocation-legend-dot" style="background:${colors[i]}"></span>
+                        <span class="allocation-legend-name">${escapeHtml(g.walletName)}</span>
+                    </span>
+                    <span class="allocation-legend-pct">${pct.toFixed(1)}%</span>
+                </div>
+            `;
+        }).join('');
+    }
+}
+
 // Pomocnicza funkcja do formatowania aktualnego czasu (HH:MM:SS)
 function formatNow() {
     return new Date().toLocaleTimeString('pl-PL');
@@ -621,6 +692,11 @@ function renderDashboard() {
     const query = getSearchQuery();
     const filtered = allVisible.filter(a => matchesSearch(a, query));
     const groups = groupAssetsByWallet(filtered);
+
+    // Alokacja per portfel liczona z WSZYSTKICH widocznych assetów (bez filtra szukajki,
+    // z tego samego powodu co suma portfela wyżej) - osobne grupowanie, bo `groups` powyżej
+    // jest już przefiltrowane i służy tylko do rysowania tabeli.
+    updateAllocationChart(groupAssetsByWallet(allVisible));
 
     const tbody = document.getElementById('assets-table-body');
     tbody.innerHTML = '';
