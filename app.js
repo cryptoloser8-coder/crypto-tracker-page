@@ -161,7 +161,21 @@ const performanceChart = new Chart(ctx, {
     options: {
         responsive: true,
         maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
+        plugins: {
+            legend: { display: false },
+            // Przybliżanie kółkiem myszy/gestem pinch + przesuwanie przeciągnięciem
+            // (chartjs-plugin-zoom, patrz <script> w index.html) - działa niezależnie
+            // od przełącznika zakresu czasu, każda zmiana zakresu resetuje zoom.
+            zoom: {
+                pan: { enabled: true, mode: 'x' },
+                zoom: {
+                    wheel: { enabled: true },
+                    pinch: { enabled: true },
+                    mode: 'x'
+                },
+                limits: { x: { minRange: 2 } }
+            }
+        },
         scales: {
             x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } },
             y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
@@ -249,14 +263,28 @@ function formatNow() {
 // portfolio-history.json to tablica punktów {t: "YYYY-MM-DD HH:MM:SS" (UTC), v: totalUsd},
 // dopisywana przez backend przy każdym uruchomieniu workflow (co ~15 min).
 
-const HISTORY_CHART_MAX_POINTS = 60; // downsampling, żeby wykres nie rysował tysięcy punktów
+const HISTORY_CHART_MAX_POINTS = 150; // downsampling, żeby wykres nie rysował tysięcy punktów (zoom i tak pozwala dojrzeć szczegóły)
 const GROWTH_LOOKBACK_MS = 24 * 60 * 60 * 1000; // "wzrost w stosunku do..." liczony względem ~24h wstecz
+
+// Aktualnie wybrany zakres czasu na wykresie Performance (dni wstecz; 0 = całość) -
+// zmieniany przyciskami 24H/7D/30D/90D/Całość nad wykresem
+let currentTimeframeDays = 30;
 
 // Backend zapisuje czas jako "YYYY-MM-DD HH:MM:SS" w UTC, bez litery T/strefy -
 // doklejamy je, żeby Date sparsował to jako UTC, a nie lokalny czas przeglądarki.
 function parseHistoryTimestamp(t) {
     const iso = String(t).includes('T') ? t : String(t).replace(' ', 'T') + 'Z';
     return new Date(iso).getTime();
+}
+
+// Ogranicza historię do punktów nie starszych niż `days` dni wstecz (0 = bez ograniczenia)
+function filterHistoryByTimeframe(history, days) {
+    if (!days || days <= 0) return history;
+    const cutoff = Date.now() - days * 24 * 60 * 60 * 1000;
+    return history.filter(p => {
+        const t = parseHistoryTimestamp(p.t);
+        return isNaN(t) || t >= cutoff;
+    });
 }
 
 // Ogranicza historię do maxPoints punktów (bierze co N-ty, zawsze zachowuje ostatni,
@@ -270,11 +298,13 @@ function downsampleHistory(history, maxPoints) {
     return sampled;
 }
 
-// Podmienia dane wykresu Chart.js na prawdziwą historię (zamiast statycznego [0, 0])
+// Podmienia dane wykresu Chart.js na prawdziwą historię (zamiast statycznego [0, 0]) -
+// najpierw przycina do wybranego zakresu czasu (currentTimeframeDays), potem downsampluje
 function updatePerformanceChart(history) {
     if (!Array.isArray(history) || history.length === 0) return; // brak historii jeszcze - zostawiamy stan początkowy
 
-    const sampled = downsampleHistory(history, HISTORY_CHART_MAX_POINTS);
+    const inRange = filterHistoryByTimeframe(history, currentTimeframeDays);
+    const sampled = downsampleHistory(inRange.length > 0 ? inRange : history, HISTORY_CHART_MAX_POINTS);
     const labels = sampled.map(p => {
         const ms = parseHistoryTimestamp(p.t);
         const d = isNaN(ms) ? null : new Date(ms);
@@ -284,7 +314,27 @@ function updatePerformanceChart(history) {
 
     performanceChart.data.labels = labels;
     performanceChart.data.datasets[0].data = values;
+    // Nowy zakres = nowy zoom - reset, żeby nie zostać "zoomniętym" w pusty fragment
+    // po przełączeniu np. z 90D na 24H
+    if (typeof performanceChart.resetZoom === 'function') performanceChart.resetZoom();
     performanceChart.update();
+}
+
+// --- PRZEŁĄCZNIK ZAKRESU CZASU (24H/7D/30D/90D/Całość) + RESET ZOOMU ---
+document.querySelectorAll('.timeframe-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentTimeframeDays = Number(btn.dataset.days) || 0;
+        updatePerformanceChart(currentPortfolioHistory);
+    });
+});
+
+const resetZoomBtn = document.getElementById('reset-zoom-btn');
+if (resetZoomBtn) {
+    resetZoomBtn.addEventListener('click', () => {
+        if (typeof performanceChart.resetZoom === 'function') performanceChart.resetZoom();
+    });
 }
 
 // Liczy % zmiany aktualnej sumy portfela względem punktu z historii sprzed ~24h
