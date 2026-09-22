@@ -6,7 +6,9 @@
     <title>Crypto Portfolio Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2"></script>
 </head>
 <body>
 
@@ -45,11 +47,24 @@
 
         <div class="dashboard-grid">
             <div class="card">
-                <div class="card-title">Portfolio Performance</div>
+                <div class="card-title-row">
+                    <div class="card-title">Portfolio Performance</div>
+                    <div class="chart-toolbar">
+                        <div id="timeframe-selector" class="timeframe-selector">
+                            <button class="timeframe-btn" data-days="1">24H</button>
+                            <button class="timeframe-btn" data-days="7">7D</button>
+                            <button class="timeframe-btn active" data-days="30">30D</button>
+                            <button class="timeframe-btn" data-days="90">90D</button>
+                            <button class="timeframe-btn" data-days="0">Całość</button>
+                        </div>
+                        <button id="reset-zoom-btn" class="secondary-button" title="Zresetuj przybliżenie">Reset</button>
+                    </div>
+                </div>
                 <div class="card-value" id="total-portfolio-value">$0.00</div>
                 <div class="chart-container">
                     <canvas id="performanceChart"></canvas>
                 </div>
+                <div class="muted-note chart-hint">Scroll/kółko myszy = przybliż, przeciągnij = przesuń</div>
             </div>
 
             <div class="card">
