@@ -303,6 +303,67 @@ tr.group-header-row td {
     font-size: 13px;
 }
 
+/* --- ROZWIJANA HISTORIA ZAKUPÓW --- */
+.asset-row-expandable {
+    cursor: pointer;
+}
+
+.asset-row-expandable:hover td {
+    background: rgba(212, 175, 55, 0.04);
+}
+
+.expand-chevron {
+    display: inline-block;
+    width: 12px;
+    color: var(--accent-gold);
+    font-size: 11px;
+}
+
+tr.purchase-detail-row td {
+    background: rgba(255, 255, 255, 0.015);
+    border-bottom: 1px solid var(--border-color);
+    padding: 16px 20px;
+}
+
+.purchase-detail-header {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.purchase-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.purchase-history-table th {
+    color: var(--text-muted);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.purchase-history-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 12px;
+}
+
+.purchase-history-table a {
+    color: var(--accent-gold-soft);
+    text-decoration: none;
+}
+
+.purchase-history-table a:hover {
+    text-decoration: underline;
+}
+
 .search-input {
     background: var(--input-bg);
     border: 1px solid var(--border-color);
