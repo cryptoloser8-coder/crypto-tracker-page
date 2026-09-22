@@ -8,7 +8,6 @@
 const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // co ile automatycznie sprawdzamy dane (ms)
 let autoRefreshTimer = null;
 let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami do portfolio-data.json
-let isTriggering = false; // zabezpieczenie przed dwukrotnym "ręcznym sprawdzeniem" naraz
 
 // --- KONFIGURACJA REPO FRONTENDU ---
 // Backend (liczenie portfolio) żyje teraz WYŁĄCZNIE na Orange Pi (cron co 5 min,
@@ -112,7 +111,7 @@ function showError(msg) {
     document.getElementById('auth-error').innerText = msg;
 }
 
-// --- WYZWALANIE BACKENDU PRZEZ GITHUB ACTIONS API ---
+// --- GITHUB API (nagłówki + opis błędów) ---
 
 function githubHeaders(token) {
     return {
@@ -131,11 +130,8 @@ function explainGithubError(status) {
 }
 
 // Backend liczy portfolio samodzielnie co 5 min na Orange Pi (cron, patrz
-// run-portfolio-update.sh) - strona już niczego nie wyzwala. Kliknięcie
-// "Odśwież dane" to teraz zwykłe, natychmiastowe ponowne pobranie plików
-// (portfolio-data.json/portfolio-history.json/overrides.json) z repo -
-// przydatne np. gdy wiesz że Pi właśnie skończyło liczyć, a auto-refresh
-// (co 60s) jeszcze nie zdążył sam sprawdzić.
+// run-portfolio-update.sh) - strona niczego nie wyzwala, tylko co 60s sama
+// pobiera aktualne pliki (auto-refresh, patrz startAutoRefresh()).
 
 // Inicjalizacja wykresu Chart.js
 const ctx = document.getElementById('performanceChart').getContext('2d');
@@ -1303,7 +1299,7 @@ document.getElementById('ledgers-list').addEventListener('click', (e) => {
 // Główna funkcja pobierająca dane i zlecająca ich wyrenderowanie
 async function loadPortfolioData() {
     // Nie odpalamy drugiego fetcha, jeśli poprzedni jeszcze trwa
-    // (może się zdarzyć gdy auto-refresh nałoży się na ręczne kliknięcie)
+    // (np. gdy poprzednie pobranie jeszcze trwa przy wolnym łączu)
     if (isRefreshing) return;
     isRefreshing = true;
 
@@ -1361,24 +1357,4 @@ async function loadPortfolioData() {
     } finally {
         isRefreshing = false;
     }
-}
-
-// OBSŁUGA PRZYCISKU ODŚWIEŻANIA NA STRONIE
-// Backend liczy portfolio samodzielnie na Orange Pi (cron co 5 min) - kliknięcie
-// tylko ponownie pobiera aktualne pliki, nie wyzwala żadnego zdalnego liczenia.
-const refreshBtn = document.getElementById('refresh-btn');
-if (refreshBtn) {
-    refreshBtn.addEventListener('click', async () => {
-        if (isTriggering) return; // ignorujemy klik, gdy odświeżanie już trwa
-        isTriggering = true;
-        refreshBtn.disabled = true;
-        refreshBtn.innerText = 'Sprawdzam...';
-        try {
-            await loadPortfolioData();
-        } finally {
-            isTriggering = false;
-            refreshBtn.disabled = false;
-            refreshBtn.innerText = 'Odśwież dane';
-        }
-    });
 }
