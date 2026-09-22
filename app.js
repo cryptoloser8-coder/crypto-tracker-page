@@ -293,7 +293,8 @@ function getVisibleAssets() {
 // per pozycja (klucz = assetKey, tak samo jak przy "Ukryj"). Trzymane w overrides.json
 // pod costBasis: { [assetKey]: { avgPriceUsd, dateAcquired } }.
 function computePnl(asset) {
-    const cb = currentOverrides.costBasis[assetKey(asset)];
+    const manual = currentOverrides.costBasis[assetKey(asset)];
+    const cb = manual || asset.costBasis; // ręcznie wpisana cena zawsze wygrywa z auto-wykrytą
     if (!cb || !cb.avgPriceUsd) return null;
 
     const balance = Number(asset.balance) || 0;
@@ -305,7 +306,7 @@ function computePnl(asset) {
         ? Math.max(0, Math.floor((Date.now() - new Date(cb.dateAcquired + 'T00:00:00Z').getTime()) / 86400000))
         : null;
 
-    return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd };
+    return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'fomo' };
 }
 
 // --- SORTOWANIE I SZUKAJKA ---
@@ -551,7 +552,8 @@ function renderDashboard() {
                 if (pnl && pnl.pnlPct !== null) {
                     const cls = pnl.pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg';
                     const sign = pnl.pnlUsd >= 0 ? '+' : '';
-                    pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}% (${sign}$${pnl.pnlUsd.toFixed(2)})</span>`;
+                    const autoTag = pnl.isAuto ? ' <span class="muted-note">(auto)</span>' : '';
+                    pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}% (${sign}$${pnl.pnlUsd.toFixed(2)})</span>${autoTag}`;
                 }
                 const daysCell = pnl && pnl.daysHeld !== null ? pnl.daysHeld : '<span class="muted-note">—</span>';
 
@@ -767,10 +769,16 @@ function openCostBasisForm(key) {
     const [symbol, walletName] = key.split('::');
     document.getElementById('cost-basis-target-label').innerText = `${symbol} (${walletName})`;
 
-    const existing = currentOverrides.costBasis[key];
+    const manual = currentOverrides.costBasis[key];
+    const asset = getVisibleAssets().find(a => assetKey(a) === key);
+    const auto = asset ? asset.costBasis : null;
+    const existing = manual || auto;
+
     document.getElementById('cost-basis-price').value = existing ? existing.avgPriceUsd : '';
     document.getElementById('cost-basis-date').value = existing ? existing.dateAcquired : '';
-    document.getElementById('cost-basis-error').innerText = '';
+    document.getElementById('cost-basis-error').innerText = manual
+        ? ''
+        : (auto ? 'Cena wykryta automatycznie z zakupu FOMO - zmień i zapisz, żeby nadpisać ręcznie.' : '');
 
     document.getElementById('cost-basis-form').style.display = 'flex';
 }
