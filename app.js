@@ -473,8 +473,7 @@ function renderPurchaseDetailRow(asset, key) {
         </tr>
     `;
 }
-    if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
-    if (column === 'balance') return Number(asset.balance) || 0;
+
 // --- SORTOWANIE I SZUKAJKA ---
 function sortValueFor(asset, column) {
     if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
