@@ -1,79 +1,117 @@
-/* --- ZMIENNE I GŁÓWNE STYLE --- */
+/* --- ZMIENNE I GŁÓWNE STYLE ---
+   Paleta wzorowana na czarno-złotym "private banking" designie (glassmorphism:
+   przezroczyste, rozmyte karty na ciemnym tle). Złoto jest teraz NAPRAWDĘ złote
+   (poprzednio --accent-gold było turkusem #66fcf1 - nazwa myliła, teraz kolor
+   faktycznie odpowiada nazwie). */
 :root {
-    --bg-color: #0b0c10;
-    --card-bg: #1f2833;
-    --text-main: #c5c6c7;
-    --text-muted: #8892b0;
-    --accent-teal: #66fcf1;
-    --border-color: #2c3542;
+    --bg-color: #07070a;
+    --card-bg-top: rgba(255, 255, 255, 0.055);
+    --card-bg-bottom: rgba(255, 255, 255, 0.02);
+    --card-border: rgba(255, 255, 255, 0.09);
+    --text-main: #f2f0ea;
+    --text-muted: #93939c;
+    --accent-gold: #d4af37;
+    --accent-gold-soft: #e8d9b5;
+    --border-color: rgba(255, 255, 255, 0.09);
+    --pnl-pos: #3fb950;
+    --pnl-neg: #f85149;
+    --input-bg: rgba(10, 10, 13, 0.7);
+}
+
+* {
+    box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg-color);
+    background:
+        radial-gradient(1100px 550px at 12% -8%, rgba(212, 175, 55, 0.14), transparent 60%),
+        radial-gradient(900px 500px at 92% 4%, rgba(147, 147, 156, 0.08), transparent 55%),
+        var(--bg-color);
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
     margin: 0;
-    display: flex;
     min-height: 100vh;
 }
 
-/* --- BOCZNY PASEK NAWIGACJI --- */
-aside {
-    width: 80px;
-    background-color: #12141c;
-    border-right: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    position: fixed;
-    height: 100vh;
-    box-sizing: border-box;
-}
-
-.logo {
-    font-size: 24px;
-    margin-bottom: 40px;
-}
-
-.nav-item {
-    font-size: 20px;
-    margin-bottom: 30px;
-    cursor: pointer;
-    opacity: 0.6;
-    transition: 0.2s;
-}
-
-.nav-item.active, .nav-item:hover {
-    opacity: 1;
-}
-
-/* --- GŁÓWNY OBSZAR TREŚCI --- */
+/* --- GŁÓWNY OBSZAR TREŚCI (bez sidebara - pełna szerokość, wyśrodkowane) --- */
 main {
-    margin-left: 80px;
-    padding: 40px;
-    flex: 1;
-    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 40px 40px 60px;
     max-width: 1400px;
 }
 
-header {
+/* --- NAGŁÓWEK --- */
+.topbar {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 30px;
+    align-items: flex-start;
+    margin-bottom: 28px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--accent-gold);
+    background: linear-gradient(160deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.02));
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    flex-shrink: 0;
 }
 
 .welcome p {
     margin: 0;
     color: var(--text-muted);
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .welcome h1 {
-    margin: 5px 0 0 0;
-    font-size: 28px;
+    margin: 2px 0 0 0;
+    font-size: 24px;
+    font-weight: 700;
     color: var(--text-main);
+    letter-spacing: -0.01em;
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.topbar-status {
+    text-align: right;
+}
+
+#last-update {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+#fetch-status {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+.section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 14px;
 }
 
 /* --- SIATKA DASHBOARDU I KARTY --- */
@@ -84,36 +122,116 @@ header {
     margin-bottom: 20px;
 }
 
+.dashboard-grid-alloc {
+    grid-template-columns: 1fr;
+}
+
 .card {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
+    background: linear-gradient(180deg, var(--card-bg-top), var(--card-bg-bottom));
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
     padding: 24px;
-    box-sizing: border-box;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 60px -28px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .card-title {
-    font-size: 14px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--text-muted);
     margin-bottom: 10px;
 }
 
+.card-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: -6px;
+    margin-bottom: 16px;
+}
+
 .card-value {
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 700;
     color: var(--text-main);
-    margin-bottom: 15px;
+    letter-spacing: -0.02em;
+    margin-bottom: 14px;
 }
 
 .growth {
+    display: inline-flex;
+    align-items: center;
     font-size: 13px;
-    color: #4ade80;
+    font-weight: 500;
+    color: var(--pnl-pos);
+    background: rgba(63, 185, 80, 0.12);
+    padding: 6px 12px;
+    border-radius: 999px;
 }
 
 .chart-container {
     position: relative;
     height: 220px;
     width: 100%;
+}
+
+/* --- ASSET ALLOCATION (donut) --- */
+.allocation-row {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.allocation-chart-container {
+    height: 200px;
+    width: 200px;
+    flex-shrink: 0;
+}
+
+.allocation-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1 1 200px;
+    min-width: 180px;
+}
+
+.allocation-legend-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    gap: 12px;
+}
+
+.allocation-legend-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+    min-width: 0;
+}
+
+.allocation-legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.allocation-legend-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.allocation-legend-pct {
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
 }
 
 /* --- TABELA AKTYWÓW --- */
@@ -131,12 +249,72 @@ th, td {
 
 th {
     color: var(--text-muted);
-    font-size: 13px;
-    font-weight: 500;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+}
+
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+th.sortable:hover {
+    color: var(--accent-gold-soft);
+}
+
+.sort-arrow {
+    font-size: 10px;
+    margin-left: 4px;
+    display: inline-block;
+    width: 10px;
+    color: var(--accent-gold);
 }
 
 td {
     font-size: 14px;
+}
+
+tbody tr:not(.group-header-row):hover td {
+    background: rgba(255, 255, 255, 0.025);
+}
+
+tr.group-header-row td {
+    background: rgba(212, 175, 55, 0.06);
+    font-size: 13px;
+    padding-top: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pnl-pos {
+    color: var(--pnl-pos);
+}
+
+.pnl-neg {
+    color: var(--pnl-neg);
+}
+
+.muted-note {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.search-input {
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    outline: none;
+}
+
+.search-input:focus {
+    border-color: var(--accent-gold);
 }
 
 /* --- EKRAN BLOKADY (AUTH OVERLAY) --- */
@@ -146,7 +324,9 @@ td {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(11, 12, 16, 0.95);
+    background:
+        radial-gradient(1100px 550px at 20% 0%, rgba(212, 175, 55, 0.16), transparent 60%),
+        rgba(7, 7, 10, 0.92);
     z-index: 9999;
     display: flex;
     align-items: center;
@@ -154,14 +334,19 @@ td {
 }
 
 .auth-card {
-    background: rgba(31, 40, 51, 0.95);
-    border: 1px solid var(--border-color);
-    padding: 30px;
-    border-radius: 16px;
-    width: 350px;
+    background: linear-gradient(180deg, var(--card-bg-top), var(--card-bg-bottom));
+    border: 1px solid var(--card-border);
+    padding: 32px;
+    border-radius: 20px;
+    width: 360px;
     text-align: center;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.7);
+}
+
+.auth-card .brand-mark {
+    margin: 0 auto 16px;
 }
 
 .auth-card h2 {
@@ -179,7 +364,7 @@ td {
 .auth-card input {
     width: 100%;
     padding: 12px;
-    background: rgba(15, 18, 24, 0.8);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-main);
@@ -190,14 +375,14 @@ td {
 }
 
 .auth-card input:focus {
-    border-color: var(--accent-teal);
+    border-color: var(--accent-gold);
 }
 
 .auth-card button {
     width: 100%;
     padding: 12px;
-    background: var(--accent-teal);
-    color: #0b0c10;
+    background: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold));
+    color: #1a1608;
     font-weight: 600;
     border: none;
     border-radius: 8px;
@@ -210,23 +395,25 @@ td {
 }
 
 .auth-error {
-    color: #ef4444;
+    color: var(--pnl-neg);
     font-size: 12px;
     margin-top: 10px;
 }
 
 .refresh-button {
-    background: var(--accent-teal, #66fcf1);
-    color: #0b0c10;
+    background: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold));
+    color: #1a1608;
     border: none;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 8px;
     font-weight: 600;
+    font-size: 13px;
     cursor: pointer;
     transition: 0.2s;
+    white-space: nowrap;
 }
 .refresh-button:hover {
-    opacity: 0.8;
+    opacity: 0.85;
 }
 
 .refresh-button:disabled {
@@ -234,29 +421,32 @@ td {
     cursor: not-allowed;
 }
 
-/* --- NOWE ELEMENTY: akcje na assetach, formularz ręczny, panel ukrytych --- */
+/* --- ELEMENTY: akcje na assetach, formularz ręczny, panel ukrytych --- */
 
 .card-title-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .secondary-button {
     background: transparent;
     color: var(--text-main);
     border: 1px solid var(--border-color);
-    padding: 6px 12px;
+    padding: 7px 14px;
     border-radius: 8px;
     font-size: 13px;
     cursor: pointer;
     transition: 0.2s;
+    white-space: nowrap;
 }
 
 .secondary-button:hover {
-    border-color: var(--accent-teal);
-    color: var(--accent-teal);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold-soft);
 }
 
 .add-manual-form {
@@ -264,17 +454,18 @@ td {
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
-    background: rgba(15, 18, 24, 0.5);
+    background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 16px;
     margin-bottom: 16px;
 }
 
-.add-manual-form input {
+.add-manual-form input,
+.add-manual-form select {
     flex: 1 1 140px;
     padding: 10px;
-    background: rgba(15, 18, 24, 0.8);
+    background: var(--input-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
     color: var(--text-main);
@@ -284,8 +475,9 @@ td {
     min-width: 0;
 }
 
-.add-manual-form input:focus {
-    border-color: var(--accent-teal);
+.add-manual-form input:focus,
+.add-manual-form select:focus {
+    border-color: var(--accent-gold);
 }
 
 .add-manual-form .auth-error {
@@ -305,16 +497,16 @@ td {
 }
 
 .row-action-btn:hover {
-    color: #ef4444;
-    border-color: #ef4444;
+    color: var(--pnl-neg);
+    border-color: var(--pnl-neg);
 }
 
 .manual-badge {
     display: inline-block;
     font-size: 10px;
     font-weight: 600;
-    color: #0b0c10;
-    background: var(--accent-teal);
+    color: #1a1608;
+    background: linear-gradient(135deg, var(--accent-gold-soft), var(--accent-gold));
     padding: 2px 6px;
     border-radius: 6px;
     margin-left: 6px;
@@ -337,13 +529,29 @@ td {
     justify-content: space-between;
     align-items: center;
     padding: 10px 12px;
-    background: rgba(15, 18, 24, 0.5);
+    background: rgba(255, 255, 255, 0.025);
     border: 1px solid var(--border-color);
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 13px;
 }
 
-.muted-note {
-    color: var(--text-muted);
-    font-size: 13px;
+/* --- RESPONSYWNOŚĆ --- */
+@media (max-width: 900px) {
+    main {
+        padding: 24px 16px 40px;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    .allocation-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .allocation-chart-container {
+        margin: 0 auto;
+    }
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }
