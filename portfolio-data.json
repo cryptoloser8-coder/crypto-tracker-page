@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-22 16:30:27",
-  "totalUsd": 50214.09,
+  "timestamp": "2026-09-22 16:35:26",
+  "totalUsd": 50228.65,
   "assets": [
     {
       "symbol": "USDT",
@@ -9,7 +9,8 @@
       "network": "ethereum",
       "balance": 27823.750924,
       "valueUsd": 27823.750924,
-      "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7"
+      "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "WTAO",
@@ -19,10 +20,23 @@
       "balance": 39.396063095,
       "valueUsd": 12156.049228593201,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
         "avgPriceUsd": 253.8324699065974,
         "dateAcquired": "2026-09-20",
-        "source": "auto"
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-20",
+            "receivedAmount": 39.396063095,
+            "costUsd": 10000,
+            "avgPriceUsd": 253.8324699065974,
+            "source": "swap",
+            "txHash": "0xc6c0a55e8df28d357cc71e83a161a23df8e847e00f88460f05874238703972f0",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0xc6c0a55e8df28d357cc71e83a161a23df8e847e00f88460f05874238703972f0"
+          }
+        ]
       }
     },
     {
@@ -32,7 +46,8 @@
       "network": "ethereum",
       "balance": 4952.334897,
       "valueUsd": 4952.334897,
-      "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+      "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "USDC",
@@ -50,10 +65,33 @@
       "balance": 87.04993797281796,
       "valueUsd": 1437.1944759312246,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
         "avgPriceUsd": 17.133814712949388,
         "dateAcquired": "2026-09-19",
-        "source": "auto"
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-19",
+            "receivedAmount": 58.03221267223642,
+            "costUsd": 994.308642,
+            "avgPriceUsd": 17.133736526915058,
+            "source": "fomo",
+            "txHash": "0xe25a8c838c01ede8937fa4c996c3d507106f9f9f5074c44eea6fdd886b93c062",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xe25a8c838c01ede8937fa4c996c3d507106f9f9f5074c44eea6fdd886b93c062"
+          },
+          {
+            "date": "2026-09-22",
+            "receivedAmount": 29.01772530058153,
+            "costUsd": 497.188866,
+            "avgPriceUsd": 17.133971076293705,
+            "source": "fomo",
+            "txHash": "0x35ef5d67c029bbf6e7141bae2e60fddc711e6fde3c11fbbfbecab47519134486",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x35ef5d67c029bbf6e7141bae2e60fddc711e6fde3c11fbbfbecab47519134486"
+          }
+        ]
       }
     },
     {
@@ -62,12 +100,25 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1534239.833602449,
-      "valueUsd": 342.28890687670633,
+      "valueUsd": 357.01760927928984,
       "contract": "0xc8488be2e4f430420a364e64f4d8af428b74d903",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x46d3902d85b818e03901676f3898177936e08b4c30de4d1c2dd6fea80bb0fe32",
       "costBasis": {
         "avgPriceUsd": 0.00032402542947455285,
         "dateAcquired": "2026-09-22",
-        "source": "auto"
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-22",
+            "receivedAmount": 1534239.833602449,
+            "costUsd": 497.132721,
+            "avgPriceUsd": 0.00032402542947455285,
+            "source": "fomo",
+            "txHash": "0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42"
+          }
+        ]
       }
     },
     {
@@ -95,22 +146,14 @@
       "valueUsd": 53.09352930593385
     },
     {
-      "symbol": "COPCAT",
-      "name": "Copper Cat",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1105.284504252084,
-      "valueUsd": 0.23763616841419805,
-      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d"
-    },
-    {
       "symbol": "musebook",
       "name": "musebook",
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 677.8741285029477,
       "valueUsd": 0.13801517256320014,
-      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6"
+      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6737e61b7a63ee3ed1cf6cf6deada34de890e46483df6f19079a054c01a2a423"
     },
     {
       "symbol": "HEIR",
@@ -119,7 +162,18 @@
       "network": "robinhood",
       "balance": 484.311906199967,
       "valueUsd": 0.08877437240645396,
-      "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506"
+      "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xef432af604a36eab9d1b6b7ab39be10e8166569a75cc5ac7b517419511257108"
+    },
+    {
+      "symbol": "COPCAT",
+      "name": "Copper Cat",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1105.284504252084,
+      "valueUsd": 0.0676765701953551,
+      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
     },
     {
       "symbol": "Nautilo",
@@ -127,8 +181,9 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 213.5624975915403,
-      "valueUsd": 0.033187612125725366,
-      "contract": "0x3b401114112479aff47874b155454827a131faad"
+      "valueUsd": 0.033251680875002826,
+      "contract": "0x3b401114112479aff47874b155454827a131faad",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xd25a31c7993c6ebb63520448ea32f0be0de3237c4181968def2ab432a1b480f6"
     },
     {
       "symbol": "YFTE",
@@ -137,7 +192,8 @@
       "network": "ethereum",
       "balance": 0.01,
       "valueUsd": 0.021,
-      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f"
+      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x2dc9136ace4077d5060131c0eccd1635897c75dd"
     },
     {
       "symbol": "USDG",
@@ -146,7 +202,8 @@
       "network": "robinhood",
       "balance": 25,
       "valueUsd": 0.016765000000000002,
-      "contract": "0xc2378f126167c55b42ba4f49e012d0d9dcdf52e0"
+      "contract": "0xc2378f126167c55b42ba4f49e012d0d9dcdf52e0",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6c458eebb3782e5a64a286cbdb2be45a194bade994026db3dcd973e7d356df8f"
     },
     {
       "symbol": "GPM",
@@ -155,7 +212,8 @@
       "network": "base",
       "balance": 28,
       "valueUsd": 0.0068096,
-      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697"
+      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
     },
     {
       "symbol": "CAT",
@@ -163,8 +221,9 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.0007384,
-      "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff"
+      "valueUsd": 0.0007367,
+      "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
     {
       "symbol": "YRISE",
@@ -173,7 +232,8 @@
       "network": "ethereum",
       "balance": 0.00009,
       "valueUsd": 0,
-      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8"
+      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "DOG",
@@ -182,7 +242,8 @@
       "network": "ethereum",
       "balance": 1,
       "valueUsd": 0,
-      "contract": "0x16613999219f9b56bededbf3722e44c4c2045300"
+      "contract": "0x16613999219f9b56bededbf3722e44c4c2045300",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "DOG",
@@ -191,7 +252,8 @@
       "network": "ethereum",
       "balance": 1,
       "valueUsd": 0,
-      "contract": "0x379b526f2ff7b3f50c0b4f48ef6ddd224adfbb90"
+      "contract": "0x379b526f2ff7b3f50c0b4f48ef6ddd224adfbb90",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "PVC",
@@ -200,7 +262,8 @@
       "network": "ethereum",
       "balance": 1000000,
       "valueUsd": 0,
-      "contract": "0x514b9e5467b9eb811519e316263c9099eae546ca"
+      "contract": "0x514b9e5467b9eb811519e316263c9099eae546ca",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "YRISE",
@@ -209,7 +272,8 @@
       "network": "ethereum",
       "balance": 0.00009,
       "valueUsd": 0,
-      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8"
+      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "AICC",
@@ -218,7 +282,8 @@
       "network": "ethereum",
       "balance": 17500,
       "valueUsd": 0,
-      "contract": "0x66a3c2fa3e467aa586e90912f977e648589cabaf"
+      "contract": "0x66a3c2fa3e467aa586e90912f977e648589cabaf",
+      "dexscreenerUrl": null
     },
     {
       "symbol": "Hound",
@@ -227,7 +292,8 @@
       "network": "robinhood",
       "balance": 259.67633408306966,
       "valueUsd": 0,
-      "contract": "0xf78f5864809a9373bdeea1d564ddb1c69004c23c"
+      "contract": "0xf78f5864809a9373bdeea1d564ddb1c69004c23c",
+      "dexscreenerUrl": null
     }
   ]
 }
