@@ -32,6 +32,15 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 let currentPortfolioData = null;
 let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {} };
 
+// Historia wartości portfela (dopisywana przez backend co 15 min - patrz
+// src/storage/appendHistory.js). Surowa suma z backendu (assets), BEZ ręcznych
+// nadpisań z overrides.json (ukryte/dodane pozycje, ledgery) - może się więc
+// nieznacznie różnić od aktualnie wyświetlanej sumy portfela na dashboardzie.
+let currentPortfolioHistory = [];
+// Suma faktycznie wyświetlona na dashboardzie (assets widoczne + ledgery) -
+// ustawiana w renderDashboard(), używana do liczenia % wzrostu względem historii.
+let lastComputedTotal = 0;
+
 // --- SORTOWANIE I SZUKAJKA (tabela assetów) ---
 let sortColumn = 'valueUsd';
 let sortDirection = 'desc';
@@ -250,6 +259,89 @@ const performanceChart = new Chart(ctx, {
 // Pomocnicza funkcja do formatowania aktualnego czasu (HH:MM:SS)
 function formatNow() {
     return new Date().toLocaleTimeString('pl-PL');
+}
+
+// --- HISTORIA WARTOŚCI PORTFELA (wykres "Portfolio Performance" + "% wzrostu") ---
+// portfolio-history.json to tablica punktów {t: "YYYY-MM-DD HH:MM:SS" (UTC), v: totalUsd},
+// dopisywana przez backend przy każdym uruchomieniu workflow (co ~15 min).
+
+const HISTORY_CHART_MAX_POINTS = 60; // downsampling, żeby wykres nie rysował tysięcy punktów
+const GROWTH_LOOKBACK_MS = 24 * 60 * 60 * 1000; // "wzrost w stosunku do..." liczony względem ~24h wstecz
+
+// Backend zapisuje czas jako "YYYY-MM-DD HH:MM:SS" w UTC, bez litery T/strefy -
+// doklejamy je, żeby Date sparsował to jako UTC, a nie lokalny czas przeglądarki.
+function parseHistoryTimestamp(t) {
+    const iso = String(t).includes('T') ? t : String(t).replace(' ', 'T') + 'Z';
+    return new Date(iso).getTime();
+}
+
+// Ogranicza historię do maxPoints punktów (bierze co N-ty, zawsze zachowuje ostatni,
+// żeby wykres zawsze kończył się na najświeższym odczycie)
+function downsampleHistory(history, maxPoints) {
+    if (history.length <= maxPoints) return history;
+    const step = Math.ceil(history.length / maxPoints);
+    const sampled = history.filter((_, i) => i % step === 0);
+    const last = history[history.length - 1];
+    if (sampled[sampled.length - 1] !== last) sampled.push(last);
+    return sampled;
+}
+
+// Podmienia dane wykresu Chart.js na prawdziwą historię (zamiast statycznego [0, 0])
+function updatePerformanceChart(history) {
+    if (!Array.isArray(history) || history.length === 0) return; // brak historii jeszcze - zostawiamy stan początkowy
+
+    const sampled = downsampleHistory(history, HISTORY_CHART_MAX_POINTS);
+    const labels = sampled.map(p => {
+        const ms = parseHistoryTimestamp(p.t);
+        const d = isNaN(ms) ? null : new Date(ms);
+        return d ? d.toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+    });
+    const values = sampled.map(p => Number(p.v) || 0);
+
+    performanceChart.data.labels = labels;
+    performanceChart.data.datasets[0].data = values;
+    performanceChart.update();
+}
+
+// Liczy % zmiany aktualnej sumy portfela względem punktu z historii sprzed ~24h
+// i podmienia tekst/kolor w #portfolio-growth (zamiast statycznego "↑ 0.0%")
+function updatePortfolioGrowth(history, currentTotal) {
+    const el = document.getElementById('portfolio-growth');
+    if (!el) return;
+
+    if (!Array.isArray(history) || history.length === 0) {
+        el.innerText = 'Brak jeszcze historii do wyliczenia wzrostu.';
+        el.style.color = 'var(--text-muted)';
+        return;
+    }
+
+    // Szukamy ostatniego punktu, który jest starszy lub równy granicy "24h temu"
+    // (czyli najbliższego jej od dołu) - jeśli cała historia jest krótsza niż 24h,
+    // zostajemy przy najstarszym dostępnym punkcie i mówimy o tym wprost w tekście.
+    const targetTime = Date.now() - GROWTH_LOOKBACK_MS;
+    let reference = history[0];
+    for (const point of history) {
+        const t = parseHistoryTimestamp(point.t);
+        if (isNaN(t)) continue;
+        if (t <= targetTime) reference = point;
+        else break;
+    }
+
+    const refValue = Number(reference.v) || 0;
+    if (refValue <= 0) {
+        el.innerText = 'Brak jeszcze historii do wyliczenia wzrostu.';
+        el.style.color = 'var(--text-muted)';
+        return;
+    }
+
+    const pct = ((currentTotal - refValue) / refValue) * 100;
+    const arrow = pct >= 0 ? '↑' : '↓';
+    const sign = pct >= 0 ? '+' : '';
+    const oldestMs = parseHistoryTimestamp(history[0].t);
+    const has24h = !isNaN(oldestMs) && (Date.now() - oldestMs) >= GROWTH_LOOKBACK_MS;
+
+    el.innerText = `${arrow} ${sign}${pct.toFixed(1)}% w stosunku do ${has24h ? 'ostatnich 24h' : 'najstarszego dostępnego pomiaru'}`;
+    el.style.color = pct >= 0 ? '#4ade80' : '#f85149';
 }
 
 function setFetchStatus(text, isError = false) {
@@ -521,6 +613,7 @@ function renderDashboard() {
     const allVisible = getVisibleAssets();
     const assetsTotal = allVisible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
     const total = assetsTotal + getLedgersTotal();
+    lastComputedTotal = total;
     const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     document.getElementById('total-portfolio-value').innerText = totalFormatted;
     document.getElementById('total-wealth').innerText = totalFormatted;
@@ -1028,9 +1121,21 @@ async function loadPortfolioData() {
         if (!currentOverrides.ledgers || typeof currentOverrides.ledgers !== 'object') currentOverrides.ledgers = {};
         if (!currentOverrides.costBasis || typeof currentOverrides.costBasis !== 'object') currentOverrides.costBasis = {};
 
+        // portfolio-history.json może jeszcze nie istnieć (przed pierwszym uruchomieniem
+        // workflow po wgraniu tej zmiany) — brak pliku to normalny stan, nie błąd
+        try {
+            const historyRes = await fetch(`portfolio-history.json?t=${Date.now()}`);
+            currentPortfolioHistory = historyRes.ok ? await historyRes.json() : [];
+            if (!Array.isArray(currentPortfolioHistory)) currentPortfolioHistory = [];
+        } catch (e) {
+            currentPortfolioHistory = [];
+        }
+
         document.getElementById('last-update').innerText = `Ostatnia aktualizacja danych: ${currentPortfolioData.timestamp}`;
 
         renderDashboard();
+        updatePerformanceChart(currentPortfolioHistory);
+        updatePortfolioGrowth(currentPortfolioHistory, lastComputedTotal);
 
         // Sukces — pokazujemy kiedy strona faktycznie sprawdziła plik
         // (to jest INNA informacja niż "Ostatnia aktualizacja danych" powyżej —
