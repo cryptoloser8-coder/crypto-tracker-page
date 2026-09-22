@@ -512,7 +512,7 @@ function renderPurchaseDetailRow(asset, key) {
 
     return `
         <tr class="purchase-detail-row">
-            <td colspan="7">
+            <td colspan="8">
                 <div class="purchase-detail-header">${dexLinkHtml}${pairOverrideBtn}</div>
                 ${bodyHtml}
             </td>
@@ -520,11 +520,34 @@ function renderPurchaseDetailRow(asset, key) {
     `;
 }
 
+// --- CENA JEDNOSTKOWA ---
+// Liczona z tego, co już mamy: wartość USD / ilość (backend nie zapisuje ceny osobno).
+function getUnitPrice(asset) {
+    const balance = Number(asset.balance) || 0;
+    const valueUsd = Number(asset.valueUsd) || 0;
+    return balance > 0 ? valueUsd / balance : null;
+}
+
+// Formatowanie z liczbą miejsc dopasowaną do wielkości ceny - memecoiny kosztują
+// ułamki centa, więc stałe 2 miejsca po przecinku pokazywałyby "$0.00".
+function formatUnitPrice(price) {
+    if (price === null || !isFinite(price)) return '<span class="muted-note">—</span>';
+    if (price >= 1) return '$' + price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    if (price >= 0.01) return '$' + price.toFixed(4);
+    if (price === 0) return '$0';
+    const decimals = Math.min(18, -Math.floor(Math.log10(price)) + 3); // 4 cyfry znaczace, bez notacji 1e-7
+    return '$' + price.toFixed(decimals);
+}
+
 // --- SORTOWANIE I SZUKAJKA ---
 function sortValueFor(asset, column) {
     if (column === 'symbol') return String(asset.symbol || '').toLowerCase();
     if (column === 'balance') return Number(asset.balance) || 0;
     if (column === 'valueUsd') return Number(asset.valueUsd) || 0;
+    if (column === 'unitPrice') {
+        const p = getUnitPrice(asset);
+        return p !== null ? p : -Infinity;
+    }
     if (column === 'pnlPct') {
         const pnl = computePnl(asset);
         return pnl && pnl.pnlPct !== null ? pnl.pnlPct : -Infinity;
@@ -750,12 +773,12 @@ function renderDashboard() {
     tbody.innerHTML = '';
 
     if (groups.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="7" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów${query ? ' pasujących do szukania' : ''}</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; color: var(--text-muted);">Brak aktywnych aktywów${query ? ' pasujących do szukania' : ''}</td></tr>`;
     } else {
         groups.forEach(group => {
             const headerRow = document.createElement('tr');
             headerRow.className = 'group-header-row';
-            headerRow.innerHTML = `<td colspan="7"><strong>${escapeHtml(group.walletName)}</strong> — $${group.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>`;
+            headerRow.innerHTML = `<td colspan="8"><strong>${escapeHtml(group.walletName)}</strong> — $${group.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>`;
             tbody.appendChild(headerRow);
 
             group.assets.forEach(asset => {
@@ -792,6 +815,7 @@ function renderDashboard() {
                     <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
                     <td>${balance.toFixed(4)}</td>
+                    <td>${formatUnitPrice(getUnitPrice(asset))}</td>
                     <td>$${valueUsd.toFixed(2)}</td>
                     <td>${pnlCell}</td>
                     <td>${daysCell}</td>
