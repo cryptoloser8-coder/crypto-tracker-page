@@ -4,26 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crypto Portfolio Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Dopisane lokalnie, żeby nie ruszać style.css - grupowanie/sortowanie/PnL/szukajka */
-        .muted-note { color: var(--text-muted); font-size: 13px; }
-        th.sortable { cursor: pointer; user-select: none; white-space: nowrap; }
-        .sort-arrow { font-size: 10px; margin-left: 4px; display: inline-block; width: 10px; }
-        tr.group-header-row td { background: rgba(255, 255, 255, 0.04); font-size: 13px; padding-top: 16px; padding-bottom: 8px; }
-        .pnl-pos { color: #3fb950; }
-        .pnl-neg { color: #f85149; }
-        .search-input { background: var(--input-bg, #0d1117); border: 1px solid var(--border, #30363d); color: var(--text, inherit); border-radius: 6px; padding: 6px 10px; font-size: 13px; }
-    </style>
 </head>
 <body>
 
     <!-- EKRAN BLOKADY (DOSTĘP NA HASŁO / TOKEN) -->
     <div id="auth-overlay" class="auth-overlay">
         <div class="auth-card">
-            <h2>🔒 Dostęp Zabezpieczony</h2>
+            <div class="brand-mark">◆</div>
+            <h2>Dostęp zabezpieczony</h2>
             <p>Wprowadź swój token dostępu, aby odblokować podgląd portfolio.</p>
             <input type="password" id="token-input" placeholder="Wpisz token (GitHub Token)...">
             <button id="auth-btn">Odblokuj</button>
@@ -31,26 +22,26 @@
         </div>
     </div>
 
-    <!-- Boczny pasek nawigacji -->
-    <aside>
-        <div class="logo">⚡</div>
-        <div class="nav-item active" title="Dashboard">📊</div>
-        <div class="nav-item" title="Portfele">💼</div>
-        <div class="nav-item" title="Inwestycje">📈</div>
-        <div class="nav-item" title="Ustawienia">⚙️</div>
-    </aside>
-
     <!-- Główny obszar -->
     <main>
-        <header>
-            <div class="welcome">
-                <p>Welcome back,</p>
-                <h1>Crypto Investor</h1>
-                <button id="refresh-btn" class="refresh-button">Odśwież dane</button>
+        <header class="topbar">
+            <div class="topbar-left">
+                <div class="brand-mark">◆</div>
+                <div class="welcome">
+                    <p>Welcome back,</p>
+                    <h1>Crypto Investor</h1>
+                </div>
             </div>
-            <div id="last-update" style="font-size: 12px; color: var(--text-muted);">Ładowanie danych...</div>
-            <div id="fetch-status" style="font-size: 11px; color: var(--text-muted); margin-top: 4px;"></div>
+            <div class="topbar-right">
+                <button id="refresh-btn" class="refresh-button">Odśwież dane</button>
+                <div class="topbar-status">
+                    <div id="last-update">Ładowanie danych...</div>
+                    <div id="fetch-status"></div>
+                </div>
+            </div>
         </header>
+
+        <div class="section-label">Dashboard</div>
 
         <div class="dashboard-grid">
             <div class="card">
@@ -65,6 +56,19 @@
                 <div class="card-title">Total Wealth</div>
                 <div class="card-value" id="total-wealth">$0.00</div>
                 <div class="growth" id="portfolio-growth">↑ 0.0% w stosunku do poprzedniego pomiaru</div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid dashboard-grid-alloc">
+            <div class="card">
+                <div class="card-title">Asset Allocation</div>
+                <div class="card-subtitle">Podział wartości portfela per portfel</div>
+                <div class="allocation-row">
+                    <div class="chart-container allocation-chart-container">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <div id="allocation-legend" class="allocation-legend"></div>
+                </div>
             </div>
         </div>
 
