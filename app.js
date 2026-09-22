@@ -8,21 +8,13 @@
 const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // co ile automatycznie sprawdzamy dane (ms)
 let autoRefreshTimer = null;
 let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami do portfolio-data.json
-let isTriggering = false; // zabezpieczenie przed dwukrotnym uruchomieniem backendu naraz
+let isTriggering = false; // zabezpieczenie przed dwukrotnym "ręcznym sprawdzeniem" naraz
 
-// --- KONFIGURACJA WYZWALANIA BACKENDU (GitHub Actions workflow_dispatch) ---
-// Token wpisywany na ekranie logowania MUSI być prawdziwym GitHub Personal Access
-// Tokenem ze scope'ami "repo" + "workflow" (classic) — inaczej wywołania niżej się nie powiodą.
-const BACKEND_REPO = 'cryptoloser8-coder/crypto-tracker'; // owner/repo prywatnego backendu
-const BACKEND_WORKFLOW_FILE = 'update-portfolio.yml';
-const BACKEND_BRANCH = 'main'; // zmień na 'master' (lub inną), jeśli backend używa innej domyślnej gałęzi
-const POLL_INTERVAL_MS = 4000; // co ile sprawdzamy status runa w Actions
-const MAX_WAIT_FOR_RUN_MS = 30 * 1000; // ile czekamy aż run w ogóle pojawi się na liście
-const MAX_WAIT_FOR_COMPLETION_MS = 3 * 60 * 1000; // maksymalny czas czekania na zakończenie runa
-
-// --- KONFIGURACJA PLIKU Z NADPISANIAMI (ukryte pozycje + ręcznie dodane + ledgery) ---
-// Trzymamy to w publicznym repo frontendu, obok portfolio-data.json — ten sam
-// token (Contents: Read and write) który uruchamia backend, zapisuje też ten plik.
+// --- KONFIGURACJA REPO FRONTENDU ---
+// Backend (liczenie portfolio) żyje teraz WYŁĄCZNIE na Orange Pi (cron co 5 min,
+// patrz run-portfolio-update.sh) - nie ma już żadnego repo GitHub Actions do
+// wyzwalania stąd. Jedyne repo, z którym łączy się teraz strona, to to poniżej:
+// publiczne repo frontendu, źródło plików danych i cel zapisu nadpisań.
 const OVERRIDES_REPO = 'cryptoloser8-coder/crypto-tracker-page';
 const OVERRIDES_PATH = 'overrides.json';
 const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęzi
@@ -76,17 +68,27 @@ document.getElementById('auth-btn').addEventListener('click', async () => {
     unlockDashboard(token);
 });
 
-// Sprawdza czy token faktycznie ma dostęp do repo backendu, zanim wpuścimy na dashboard
+// Sprawdza czy token faktycznie ma dostęp DO ZAPISU w repo frontendu (potrzebny
+// do zapisywania overrides.json), zanim wpuścimy na dashboard
 async function validateToken(token) {
     try {
-        const res = await fetch(`https://api.github.com/repos/${BACKEND_REPO}`, {
+        const res = await fetch(`https://api.github.com/repos/${OVERRIDES_REPO}`, {
             headers: githubHeaders(token),
             cache: 'no-store'
         });
-        if (res.status === 200) return { ok: true };
+        if (res.status === 200) {
+            const data = await res.json();
+            // GitHub zwraca permissions.push=false jeśli token widzi repo, ale nie
+            // może do niego zapisywać (np. tylko uprawnienie Contents: Read) -
+            // złapiemy to tutaj zamiast dopiero przy pierwszej próbie zapisu
+            if (data.permissions && data.permissions.push === false) {
+                return { ok: false, message: 'Token ma tylko dostęp do odczytu tego repo - potrzebne uprawnienie "Contents: Read and write".' };
+            }
+            return { ok: true };
+        }
         if (res.status === 401) return { ok: false, message: 'Token nieprawidłowy lub wygasł.' };
-        if (res.status === 403) return { ok: false, message: 'Token nie ma uprawnień do repo backendu (sprawdź scope "repo" + "workflow") albo przekroczono limit zapytań GitHub API.' };
-        if (res.status === 404) return { ok: false, message: `Token nie ma dostępu do repo ${BACKEND_REPO} (albo zła nazwa repo).` };
+        if (res.status === 403) return { ok: false, message: 'Token nie ma uprawnień do repo (sprawdź scope "Contents: Read and write") albo przekroczono limit zapytań GitHub API.' };
+        if (res.status === 404) return { ok: false, message: `Token nie ma dostępu do repo ${OVERRIDES_REPO} (albo zła nazwa repo).` };
         return { ok: false, message: `Nieoczekiwany błąd przy sprawdzaniu tokena (HTTP ${res.status}).` };
     } catch (e) {
         return { ok: false, message: `Błąd sieci przy sprawdzaniu tokena: ${e.message}` };
@@ -120,109 +122,20 @@ function githubHeaders(token) {
     };
 }
 
-function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 function explainGithubError(status) {
     if (status === 401) return 'token nieprawidłowy lub wygasł.';
-    if (status === 403) return 'brak uprawnień (sprawdź scope "repo" + "workflow") albo limit zapytań GitHub API.';
-    if (status === 404) return 'nie znaleziono repo/workflow — sprawdź nazwę repo i plik workflow.';
-    if (status === 422) return 'niepoprawna gałąź (ref) albo workflow ma wyłączony workflow_dispatch.';
+    if (status === 403) return 'brak uprawnień (sprawdź scope "Contents: Read and write") albo limit zapytań GitHub API.';
+    if (status === 404) return 'nie znaleziono repo — sprawdź nazwę repo.';
+    if (status === 422) return 'niepoprawna gałąź (ref).';
     return `nieoczekiwany błąd (HTTP ${status}).`;
 }
 
-// Wyzwala workflow_dispatch w backendzie, czeka aż run się skończy, i dopiero wtedy
-// odświeża dane na dashboardzie. To jest to, co robi kliknięcie "Odśwież dane".
-async function triggerBackendRefresh() {
-    const token = localStorage.getItem('portfolio_auth_token');
-    if (!token) {
-        setFetchStatus('Brak tokena — zaloguj się ponownie.', true);
-        return;
-    }
-
-    const dispatchTimeMs = Date.now();
-
-    // 1) Wywołujemy workflow_dispatch
-    setFetchStatus('Uruchamiam backend...');
-    let dispatchRes;
-    try {
-        dispatchRes = await fetch(
-            `https://api.github.com/repos/${BACKEND_REPO}/actions/workflows/${BACKEND_WORKFLOW_FILE}/dispatches`,
-            {
-                method: 'POST',
-                headers: { ...githubHeaders(token), 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ref: BACKEND_BRANCH })
-            }
-        );
-    } catch (e) {
-        setFetchStatus(`Błąd sieci przy uruchamianiu backendu: ${e.message}`, true);
-        return;
-    }
-
-    // Sukces workflow_dispatch to zawsze HTTP 204 (bez treści) — GitHub nie zwraca run_id,
-    // więc żeby śledzić status, musimy dopiero poniżej znaleźć nowo utworzony run na liście.
-    if (dispatchRes.status !== 204) {
-        setFetchStatus(`Nie udało się uruchomić backendu: ${explainGithubError(dispatchRes.status)}`, true);
-        return;
-    }
-
-    // 2) Szukamy nowo utworzonego runa na liście (może się pojawić z kilkusekundowym opóźnieniem)
-    setFetchStatus('Backend uruchomiony, czekam na start...');
-    let run = null;
-    const findDeadline = Date.now() + MAX_WAIT_FOR_RUN_MS;
-    while (Date.now() < findDeadline && !run) {
-        await sleep(POLL_INTERVAL_MS);
-        try {
-            const runsRes = await fetch(
-                `https://api.github.com/repos/${BACKEND_REPO}/actions/workflows/${BACKEND_WORKFLOW_FILE}/runs?event=workflow_dispatch&per_page=5`,
-                { headers: githubHeaders(token), cache: 'no-store' }
-            );
-            if (runsRes.ok) {
-                const runsData = await runsRes.json();
-                run = (runsData.workflow_runs || []).find(
-                    r => new Date(r.created_at).getTime() >= dispatchTimeMs - 5000
-                ) || null;
-            }
-        } catch (e) {
-            // Pojedynczy błąd sieci podczas szukania runa — próbujemy dalej aż do deadline'u
-        }
-    }
-
-    if (!run) {
-        setFetchStatus('Backend uruchomiony, ale nie mogę potwierdzić statusu — sprawdź zakładkę Actions ręcznie.', true);
-        return;
-    }
-
-    // 3) Czekamy aż run się skończy (status przechodzi queued -> in_progress -> completed)
-    const waitDeadline = Date.now() + MAX_WAIT_FOR_COMPLETION_MS;
-    while (run.status !== 'completed' && Date.now() < waitDeadline) {
-        setFetchStatus(`Backend pracuje (${run.status})...`);
-        await sleep(POLL_INTERVAL_MS);
-        try {
-            const runRes = await fetch(run.url, { headers: githubHeaders(token), cache: 'no-store' });
-            if (runRes.ok) {
-                run = await runRes.json();
-            }
-        } catch (e) {
-            // Pojedynczy błąd sieci podczas odpytywania statusu — próbujemy dalej aż do deadline'u
-        }
-    }
-
-    if (run.status !== 'completed') {
-        setFetchStatus('Backend wciąż pracuje po przekroczeniu limitu czasu oczekiwania — sprawdź zakładkę Actions.', true);
-        return;
-    }
-
-    if (run.conclusion !== 'success') {
-        setFetchStatus(`Backend zakończył pracę z błędem (${run.conclusion}) — sprawdź logi w zakładce Actions.`, true);
-        return;
-    }
-
-    // 4) Sukces — backend skończył liczyć i wypchnął nowy portfolio-data.json, pobieramy świeże dane
-    setFetchStatus('Backend skończył, pobieram nowe dane...');
-    await loadPortfolioData();
-}
+// Backend liczy portfolio samodzielnie co 5 min na Orange Pi (cron, patrz
+// run-portfolio-update.sh) - strona już niczego nie wyzwala. Kliknięcie
+// "Odśwież dane" to teraz zwykłe, natychmiastowe ponowne pobranie plików
+// (portfolio-data.json/portfolio-history.json/overrides.json) z repo -
+// przydatne np. gdy wiesz że Pi właśnie skończyło liczyć, a auto-refresh
+// (co 60s) jeszcze nie zdążył sam sprawdzić.
 
 // Inicjalizacja wykresu Chart.js
 const ctx = document.getElementById('performanceChart').getContext('2d');
@@ -1227,17 +1140,17 @@ async function loadPortfolioData() {
 }
 
 // OBSŁUGA PRZYCISKU ODŚWIEŻANIA NA STRONIE
-// Kliknięcie realnie uruchamia backend (workflow_dispatch) i czeka na wynik —
-// to nie jest tylko ponowne odczytanie tego samego pliku.
+// Backend liczy portfolio samodzielnie na Orange Pi (cron co 5 min) - kliknięcie
+// tylko ponownie pobiera aktualne pliki, nie wyzwala żadnego zdalnego liczenia.
 const refreshBtn = document.getElementById('refresh-btn');
 if (refreshBtn) {
     refreshBtn.addEventListener('click', async () => {
-        if (isTriggering) return; // ignorujemy klik, gdy backend już się uruchamia/pracuje
+        if (isTriggering) return; // ignorujemy klik, gdy odświeżanie już trwa
         isTriggering = true;
         refreshBtn.disabled = true;
-        refreshBtn.innerText = 'Odświeżanie...';
+        refreshBtn.innerText = 'Sprawdzam...';
         try {
-            await triggerBackendRefresh();
+            await loadPortfolioData();
         } finally {
             isTriggering = false;
             refreshBtn.disabled = false;
