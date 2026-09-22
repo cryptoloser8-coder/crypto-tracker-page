@@ -306,7 +306,7 @@ function computePnl(asset) {
         ? Math.max(0, Math.floor((Date.now() - new Date(cb.dateAcquired + 'T00:00:00Z').getTime()) / 86400000))
         : null;
 
-    return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'fomo' };
+    return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'auto' };
 }
 
 // --- SORTOWANIE I SZUKAJKA ---
@@ -778,7 +778,7 @@ function openCostBasisForm(key) {
     document.getElementById('cost-basis-date').value = existing ? existing.dateAcquired : '';
     document.getElementById('cost-basis-error').innerText = manual
         ? ''
-        : (auto ? 'Cena wykryta automatycznie z zakupu FOMO - zmień i zapisz, żeby nadpisać ręcznie.' : '');
+        : (auto ? 'Cena wykryta automatycznie (z zakupu na chainie) - zmień i zapisz, żeby nadpisać ręcznie.' : '');
 
     document.getElementById('cost-basis-form').style.display = 'flex';
 }
