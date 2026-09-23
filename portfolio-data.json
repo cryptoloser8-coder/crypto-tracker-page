@@ -1,7 +1,15 @@
 {
-  "timestamp": "2026-09-23 09:55:32",
-  "totalUsd": 50918.11,
+  "timestamp": "2026-09-23 10:00:33",
+  "totalUsd": 3919449.76,
   "assets": [
+    {
+      "symbol": "USDC",
+      "name": "FOMO - saldo w aplikacji (auto, 8 transakcji)",
+      "walletName": "FOMO APP",
+      "network": "fomo",
+      "balance": 3871723.712681546,
+      "valueUsd": 3871723.712681546
+    },
     {
       "symbol": "USDT",
       "name": "Tether USDt",
@@ -77,20 +85,12 @@
       "dexscreenerUrl": null
     },
     {
-      "symbol": "USDC",
-      "name": "FOMO - saldo w aplikacji (auto, 7 transakcji)",
-      "walletName": "FOMO APP",
-      "network": "fomo",
-      "balance": 2119.9089580000004,
-      "valueUsd": 2119.9089580000004
-    },
-    {
       "symbol": "WTH",
       "name": "what the hook?",
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 87.04993797281796,
-      "valueUsd": 1645.2438276862592,
+      "valueUsd": 1646.1143270659875,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -122,49 +122,12 @@
       }
     },
     {
-      "symbol": "Pyre",
-      "name": "Pyre",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 3869603.8037235457,
-      "valueUsd": 1063.7540856436028,
-      "contract": "0xc8488be2e4f430420a364e64f4d8af428b74d903",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x46d3902d85b818e03901676f3898177936e08b4c30de4d1c2dd6fea80bb0fe32",
-      "costBasis": {
-        "avgPriceUsd": 0.0002569306974123053,
-        "dateAcquired": "2026-09-22",
-        "source": "auto",
-        "purchases": [
-          {
-            "date": "2026-09-22",
-            "receivedAmount": 1534239.833602449,
-            "costUsd": 497.132721,
-            "avgPriceUsd": 0.00032402542947455285,
-            "source": "fomo",
-            "txHash": "0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42",
-            "network": "robinhood",
-            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xac1f7d172188554a0873fd4620a1165d4a8bdcdfd2b3e5fc0d088a3826265b42"
-          },
-          {
-            "date": "2026-09-22",
-            "receivedAmount": 2335363.970121097,
-            "costUsd": 497.087283,
-            "avgPriceUsd": 0.00021285216752497225,
-            "source": "fomo",
-            "txHash": "0x841502f80a843bb83fb60d35a7996ae3174e96deea92b30bf5a2e9a1a1fd7f3d",
-            "network": "robinhood",
-            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x841502f80a843bb83fb60d35a7996ae3174e96deea92b30bf5a2e9a1a1fd7f3d"
-          }
-        ]
-      }
-    },
-    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 96714.5556693868,
-      "valueUsd": 608.2378406047736,
+      "valueUsd": 608.1411260491042,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdabbd019c0174bdae6354f32b158d42e4a0e7489",
       "costBasis": {
@@ -190,8 +153,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 220.465405,
-      "valueUsd": 220.465405
+      "balance": 215.868056,
+      "valueUsd": 215.868056
     },
     {
       "symbol": "ETH",
@@ -206,8 +169,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 64.577655,
-      "valueUsd": 64.577655
+      "balance": 59.980306,
+      "valueUsd": 59.980306
     },
     {
       "symbol": "ETH",
@@ -243,7 +206,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 213.5624975915403,
-      "valueUsd": 0.05917816808261582,
+      "valueUsd": 0.059519868078762285,
       "contract": "0x3b401114112479aff47874b155454827a131faad",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xd25a31c7993c6ebb63520448ea32f0be0de3237c4181968def2ab432a1b480f6"
     },
@@ -266,6 +229,16 @@
       "valueUsd": 0.02085,
       "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x2dc9136ace4077d5060131c0eccd1635897c75dd"
+    },
+    {
+      "symbol": "WAFFLE",
+      "name": "WAFFLE",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 561.1684300000001,
+      "valueUsd": 0.018473664715600004,
+      "contract": "0xb6a6e5c1aff980841c7a6c2c164be5031735909a",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xccfa430eb4cb6fd7371563ae6c2fe21e8e7fa807"
     },
     {
       "symbol": "USDG",
