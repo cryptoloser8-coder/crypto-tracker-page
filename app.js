@@ -1000,42 +1000,44 @@ function renderDashboard() {
 
 // --- PODSUMOWANIE ZYSKU/STRATY (karta Total Wealth) ---
 // Niezrealizowany = suma kolumny Zysk/Strata po widocznych pozycjach, które mają cenę
-// zakupu (auto albo ręczną). Zrealizowany = suma zamkniętych pozycji. Procent liczony
-// względem kosztu tych pozycji, nie całego portfela.
+// zakupu (auto albo ręczną). Zrealizowany = suma zamkniętych pozycji.
+// Procenty są liczone względem CAŁEGO portfela (ta sama suma co Total Wealth), a nie
+// kosztu pojedynczych pozycji - dzięki temu wiersze się sumują: niezrealizowany %
+// + zrealizowany % = łącznie %. Procent od kosztu konkretnej pozycji jest w tabelach.
 const FRONT_STABLES = new Set(['USDC', 'USDT', 'USDT0', 'USDG', 'DAI', 'USDE', 'FDUSD', 'TUSD', 'BUSD', 'PYUSD', 'USDS']);
 
 function renderPnlSummary(allVisible) {
     const el = document.getElementById('pnl-summary');
     if (!el) return;
 
-    let openPnl = 0, openCost = 0, withBasis = 0, withoutBasis = 0;
+    let openPnl = 0, withBasis = 0, withoutBasis = 0;
     allVisible.forEach(a => {
         const pnl = computePnl(a);
         if (pnl && pnl.pnlPct !== null) {
             openPnl += pnl.pnlUsd;
-            openCost += (Number(a.valueUsd) || 0) - pnl.pnlUsd;
             withBasis++;
         } else if (a.contract && !FRONT_STABLES.has(String(a.symbol || '').toUpperCase())) {
             withoutBasis++;
         }
     });
 
-    const closed = (currentPortfolioData?.closedPositions || []).filter(c => typeof c.pnlUsd === 'number');
-    const realizedPnl = closed.reduce((s, c) => s + c.pnlUsd, 0);
-    const realizedCost = closed.reduce((s, c) => s + (Number(c.costUsd) || 0), 0);
+    const closedGroups = groupClosedPositions(Array.isArray(currentPortfolioData?.closedPositions) ? currentPortfolioData.closedPositions : [])
+        .filter(g => g.hasPnl);
+    const realizedPnl = closedGroups.reduce((s, g) => s + g.pnlUsd, 0);
 
     const totalPnl = openPnl + realizedPnl;
-    const totalCost = openCost + realizedCost;
-    const pct = (v, cost) => cost > 0 ? (v / cost) * 100 : null;
+    const portfolio = lastComputedTotal;
+    const pct = v => portfolio > 0 ? (v / portfolio) * 100 : null;
 
     const coverage = withoutBasis > 0
         ? `<span class="muted-note" title="Tokeny z kontraktem, dla których nie ma ceny zakupu - nie są wliczone">bez ceny zakupu: ${withoutBasis}</span>`
         : '';
 
     el.innerHTML = `
-        <div class="pnl-summary-row"><span class="label">Niezrealizowany (${withBasis} poz.)</span><span>${formatSignedPnl(openPnl, pct(openPnl, openCost))}</span></div>
-        <div class="pnl-summary-row"><span class="label">Zrealizowany (${closed.length} poz.)</span><span>${formatSignedPnl(realizedPnl, pct(realizedPnl, realizedCost))}</span></div>
-        <div class="pnl-summary-row"><span class="label"><strong>Łącznie</strong></span><span><strong>${formatSignedPnl(totalPnl, pct(totalPnl, totalCost))}</strong></span></div>
+        <div class="pnl-summary-row"><span class="label">Niezrealizowany (${withBasis} poz.)</span><span>${formatSignedPnl(openPnl, pct(openPnl), 2)}</span></div>
+        <div class="pnl-summary-row"><span class="label">Zrealizowany (${closedGroups.length} poz.)</span><span>${formatSignedPnl(realizedPnl, pct(realizedPnl), 2)}</span></div>
+        <div class="pnl-summary-row"><span class="label"><strong>Łącznie</strong></span><span><strong>${formatSignedPnl(totalPnl, pct(totalPnl), 2)}</strong></span></div>
+        <span class="muted-note">Procenty względem wartości całego portfela.</span>
         ${coverage}
     `;
 }
@@ -1183,13 +1185,75 @@ function formatUsd(value) {
     return `$${Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-function formatSignedPnl(pnlUsd, pnlPct) {
+function formatSignedPnl(pnlUsd, pnlPct, pctDecimals = 1) {
     if (pnlUsd === null || pnlUsd === undefined) return '<span class="muted-note">—</span>';
     const cls = pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg';
     const sign = pnlUsd >= 0 ? '+' : '−';
-    const pctText = pnlPct !== null && pnlPct !== undefined ? `${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(1)}%` : '';
+    const pctText = pnlPct !== null && pnlPct !== undefined ? `${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(pctDecimals)}%` : '';
     const usdText = privacyMode ? '' : `${pctText ? ' (' : ''}${sign}${formatUsd(Math.abs(pnlUsd))}${pctText ? ')' : ''}`;
     return `<span class="${cls}">${pctText}${usdText}</span>`;
+}
+
+// Sprzedaże tego samego tokena (ten sam kontrakt, portfel i sieć) łączymy w JEDNĄ pozycję:
+// koszt, przychód i wynik to sumy wszystkich sprzedaży. Wcześniej każda sprzedaż była
+// osobnym wierszem - przy sprzedaży w dwóch ratach jedna mogła wyjść na plus, druga na
+// minus, choć cała pozycja była na plusie. Pojedyncze sprzedaże widać po rozwinięciu.
+let expandedClosedKeys = new Set();
+
+function closedGroupKey(c) {
+    return `${(c.contract || c.symbol || '?').toLowerCase()}::${c.walletName || ''}::${c.network || ''}`;
+}
+
+function groupClosedPositions(list) {
+    const groups = new Map();
+    list.forEach(c => {
+        const key = closedGroupKey(c);
+        if (!groups.has(key)) {
+            groups.set(key, {
+                key, symbol: c.symbol, contract: c.contract, walletName: c.walletName, network: c.network,
+                buyDate: null, sellDate: null, daysHeld: null,
+                amountSold: 0, costUsd: 0, proceedsUsd: 0, pnlUsd: 0,
+                hasPnl: false, partial: false, sales: []
+            });
+        }
+        const g = groups.get(key);
+        g.sales.push(c);
+        g.amountSold += Number(c.amountSold) || 0;
+        if (c.buyDate && (!g.buyDate || c.buyDate < g.buyDate)) g.buyDate = c.buyDate;
+        if (c.sellDate && (!g.sellDate || c.sellDate > g.sellDate)) g.sellDate = c.sellDate;
+        if (typeof c.daysHeld === 'number') g.daysHeld = Math.max(g.daysHeld ?? 0, c.daysHeld);
+        if (typeof c.pnlUsd === 'number') {
+            g.hasPnl = true;
+            g.pnlUsd += c.pnlUsd;
+            g.costUsd += Number(c.costUsd) || 0;
+        }
+        g.proceedsUsd += Number(c.proceedsUsd) || 0;
+        if (typeof c.costCoverage === 'number' && c.costCoverage < 0.999) g.partial = true;
+    });
+
+    // Czy część tego tokena nadal jest w portfelu (pozycja zamknięta tylko częściowo)
+    const openContracts = new Set(getVisibleAssets()
+        .filter(a => a.contract && (Number(a.balance) || 0) > 0 && (Number(a.valueUsd) || 0) >= 0.01)
+        .map(a => `${a.contract.toLowerCase()}::${a.walletName || ''}::${a.network || ''}`));
+
+    return [...groups.values()].map(g => ({
+        ...g,
+        pnlPct: g.hasPnl && g.costUsd > 0 ? (g.pnlUsd / g.costUsd) * 100 : null,
+        stillOpen: openContracts.has(g.key),
+        sales: g.sales.slice().sort((a, b) => String(a.sellDate || '').localeCompare(String(b.sellDate || '')))
+    })).sort((a, b) => String(b.sellDate || '').localeCompare(String(a.sellDate || '')));
+}
+
+function closedTxCell(c) {
+    const txShort = c.txHash ? `${c.txHash.slice(0, 10)}...` : '—';
+    return c.explorerUrl
+        ? `<a href="${escapeHtml(c.explorerUrl)}" target="_blank" rel="noopener">${escapeHtml(txShort)}</a>`
+        : escapeHtml(txShort);
+}
+
+function partialNoteHtml(coverage) {
+    const pct = typeof coverage === 'number' ? ` dla ${(coverage * 100).toFixed(0)}%` : ' tylko dla części';
+    return ` <span class="muted-note" title="Backend zna koszt zakupu${pct} sprzedanej ilości (reszta pochodzi z niewykrytego zakupu lub airdropu) - wynik dotyczy tej części.">*</span>`;
 }
 
 function renderClosedPositions() {
@@ -1205,10 +1269,11 @@ function renderClosedPositions() {
         return;
     }
 
-    const withPnl = list.filter(c => typeof c.pnlUsd === 'number');
-    const totalPnl = withPnl.reduce((sum, c) => sum + c.pnlUsd, 0);
-    const totalCost = withPnl.reduce((sum, c) => sum + (Number(c.costUsd) || 0), 0);
-    const wins = withPnl.filter(c => c.pnlUsd >= 0).length;
+    const groups = groupClosedPositions(list);
+    const withPnl = groups.filter(g => g.hasPnl);
+    const totalPnl = withPnl.reduce((sum, g) => sum + g.pnlUsd, 0);
+    const totalCost = withPnl.reduce((sum, g) => sum + g.costUsd, 0);
+    const wins = withPnl.filter(g => g.pnlUsd >= 0).length;
     const losses = withPnl.length - wins;
 
     if (summaryEl) {
@@ -1218,30 +1283,57 @@ function renderClosedPositions() {
         `;
     }
 
-    tbody.innerHTML = list.map(c => {
-        const partial = typeof c.costCoverage === 'number' && c.costCoverage < 0.999;
-        const partialNote = partial
-            ? ` <span class="muted-note" title="Backend zna koszt zakupu tylko dla ${(c.costCoverage * 100).toFixed(0)}% sprzedanej ilości (reszta pochodzi z niewykrytego zakupu lub airdropu) - wynik dotyczy tej części.">*</span>`
-            : '';
-        const txShort = c.txHash ? `${c.txHash.slice(0, 10)}...` : '—';
-        const txCell = c.explorerUrl
-            ? `<a href="${escapeHtml(c.explorerUrl)}" target="_blank" rel="noopener">${escapeHtml(txShort)}</a>`
-            : escapeHtml(txShort);
-        return `
-            <tr>
-                <td><strong>${escapeHtml(c.symbol || '?')}</strong><div class="muted-note">${escapeHtml(c.walletName || '')} · ${escapeHtml(c.network || '')}</div></td>
-                <td>${escapeHtml(c.buyDate || '—')}</td>
-                <td>${escapeHtml(c.sellDate || '—')}</td>
-                <td>${c.daysHeld ?? '—'}</td>
-                <td>${money(Number(c.amountSold || 0).toFixed(4))}</td>
-                <td>${c.costUsd !== null && c.costUsd !== undefined ? money(formatUsd(c.costUsd)) : '<span class="muted-note">—</span>'}</td>
-                <td>${c.proceedsUsd !== null && c.proceedsUsd !== undefined ? money(formatUsd(c.proceedsUsd)) : '<span class="muted-note">—</span>'}</td>
-                <td>${formatSignedPnl(c.pnlUsd, c.pnlPct)}${partialNote}</td>
+    tbody.innerHTML = groups.map(g => {
+        const multi = g.sales.length > 1;
+        const expanded = multi && expandedClosedKeys.has(g.key);
+        const chevron = multi ? `<span class="expand-chevron">${expanded ? '▾' : '▸'}</span> ` : '';
+        const openNote = g.stillOpen ? ' <span class="manual-badge" title="Część tego tokena nadal jest w portfelu - wynik dotyczy tylko sprzedanej części">część otwarta</span>' : '';
+        const txCell = multi
+            ? `<span class="muted-note">${g.sales.length} sprzedaże</span>`
+            : closedTxCell(g.sales[0]);
+
+        let html = `
+            <tr class="${multi ? 'asset-row-expandable closed-group-row' : ''}" ${multi ? `data-closed-key="${escapeHtml(g.key)}"` : ''}>
+                <td>${chevron}<strong>${escapeHtml(g.symbol || '?')}</strong>${openNote}<div class="muted-note">${escapeHtml(g.walletName || '')} · ${escapeHtml(g.network || '')}</div></td>
+                <td>${escapeHtml(g.buyDate || '—')}</td>
+                <td>${escapeHtml(g.sellDate || '—')}</td>
+                <td>${g.daysHeld ?? '—'}</td>
+                <td>${money(g.amountSold.toFixed(4))}</td>
+                <td>${g.hasPnl ? money(formatUsd(g.costUsd)) : '<span class="muted-note">—</span>'}</td>
+                <td>${money(formatUsd(g.proceedsUsd))}</td>
+                <td>${g.hasPnl ? formatSignedPnl(g.pnlUsd, g.pnlPct) : '<span class="muted-note">—</span>'}${g.partial ? partialNoteHtml(null) : ''}</td>
                 <td>${txCell}</td>
             </tr>
         `;
+
+        if (expanded) {
+            html += g.sales.map((c, i) => `
+                <tr class="closed-sale-row">
+                    <td><span class="muted-note">Sprzedaż ${i + 1}</span></td>
+                    <td><span class="muted-note">${escapeHtml(c.buyDate || '—')}</span></td>
+                    <td><span class="muted-note">${escapeHtml(c.sellDate || '—')}</span></td>
+                    <td><span class="muted-note">${c.daysHeld ?? '—'}</span></td>
+                    <td><span class="muted-note">${money(Number(c.amountSold || 0).toFixed(4))}</span></td>
+                    <td><span class="muted-note">${c.costUsd !== null && c.costUsd !== undefined ? money(formatUsd(c.costUsd)) : '—'}</span></td>
+                    <td><span class="muted-note">${c.proceedsUsd !== null && c.proceedsUsd !== undefined ? money(formatUsd(c.proceedsUsd)) : '—'}</span></td>
+                    <td>${formatSignedPnl(c.pnlUsd, c.pnlPct)}${typeof c.costCoverage === 'number' && c.costCoverage < 0.999 ? partialNoteHtml(c.costCoverage) : ''}</td>
+                    <td>${closedTxCell(c)}</td>
+                </tr>
+            `).join('');
+        }
+        return html;
     }).join('');
 }
+
+document.getElementById('closed-table-body').addEventListener('click', (e) => {
+    if (e.target.closest('a')) return; // klik w link do eksploratora nie zwija/rozwija
+    const row = e.target.closest('tr.closed-group-row');
+    if (!row) return;
+    const key = row.dataset.closedKey;
+    if (expandedClosedKeys.has(key)) expandedClosedKeys.delete(key);
+    else expandedClosedKeys.add(key);
+    renderClosedPositions();
+});
 
 // Renderuje listę ukrytych pozycji z przyciskiem "Przywróć" przy każdej
 function renderHiddenPanel() {
