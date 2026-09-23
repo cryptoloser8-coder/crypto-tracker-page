@@ -39,13 +39,18 @@
                 </div>
             </div>
             <div class="topbar-right">
+                <button id="rescan-btn" class="secondary-button" title="Backend przy najbliższym runie przejrzy całą historię transakcji od zera (normalnie robi to sam co 4h)">Pełny rescan</button>
                 <button id="privacy-toggle-btn" class="secondary-button" title="Ukryj/pokaż kwoty (procenty zostają widoczne)">Ukryj kwoty</button>
                 <div class="topbar-status">
                     <div id="last-update">Ładowanie danych...</div>
                     <div id="fetch-status"></div>
+                    <div id="scan-status"></div>
                 </div>
             </div>
         </header>
+
+        <!-- Alerty: nieaktualne dane (backend nie publikuje) i pozycje HL blisko likwidacji -->
+        <div id="alerts" class="alerts"></div>
 
         <div class="section-label">Dashboard</div>
 
@@ -84,6 +89,8 @@
                 <div class="card-title">Total Wealth</div>
                 <div class="card-value" id="total-wealth">$0.00</div>
                 <div class="growth" id="portfolio-growth">↑ 0.0% w stosunku do poprzedniego pomiaru</div>
+                <!-- Podsumowanie zysku/straty: otwarte pozycje (z ceną zakupu) + zamknięte -->
+                <div id="pnl-summary" class="pnl-summary"></div>
             </div>
         </div>
 
@@ -170,6 +177,33 @@
             <div class="hidden-panel">
                 <button id="toggle-hidden-btn" class="secondary-button">Ukryte pozycje (<span id="hidden-count">0</span>)</button>
                 <div id="hidden-assets-list" class="hidden-assets-list" style="display: none;"></div>
+            </div>
+        </div>
+
+        <!-- HYPERLIQUID - otwarte pozycje perp (backend: hyperliquid.js -> portfolio-data.json
+             pod hyperliquid.positions). Karta ukryta, dopóki nie ma żadnej pozycji. -->
+        <div class="card" id="hl-positions-card" style="display: none;">
+            <div class="card-title-row">
+                <div class="card-title">Hyperliquid: otwarte pozycje</div>
+                <div id="hl-summary" class="muted-note"></div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Coin</th>
+                            <th>Strona</th>
+                            <th>Wielkość</th>
+                            <th>Wejście</th>
+                            <th>Cena</th>
+                            <th>Wartość</th>
+                            <th>Zysk/Strata</th>
+                            <th>Dźwignia</th>
+                            <th>Likwidacja</th>
+                        </tr>
+                    </thead>
+                    <tbody id="hl-positions-body"></tbody>
+                </table>
             </div>
         </div>
 
