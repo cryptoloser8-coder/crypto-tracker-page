@@ -235,19 +235,88 @@ function updateAllocationChart(groups) {
     allocationChart.update();
 
     if (legendEl) {
-        legendEl.innerHTML = groups.map((g, i) => {
+        const cols = 'grid-template-columns: minmax(130px, 1.4fr) 70px 110px 100px 100px 110px; gap: 12px; align-items: center;';
+        const header = `
+            <div class="allocation-legend-row muted-note" style="display: grid; ${cols} font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">
+                <span>Portfel</span><span>Udział</span><span>Wartość</span><span>24h</span><span>7D</span><span>Trend 24h</span>
+            </div>`;
+        const rows = groups.map((g, i) => {
             const pct = (g.subtotal / total) * 100;
+            const series = getWalletSeries(g.walletName);
             return `
-                <div class="allocation-legend-row">
+                <div class="allocation-legend-row" style="display: grid; ${cols}">
                     <span class="allocation-legend-label">
                         <span class="allocation-legend-dot" style="background:${colors[i]}"></span>
                         <span class="allocation-legend-name">${escapeHtml(g.walletName)}</span>
                     </span>
                     <span class="allocation-legend-pct">${pct.toFixed(1)}%</span>
-                </div>
-            `;
+                    <span>$${g.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span>${formatWalletChange(walletChange(series, 24 * 60 * 60 * 1000))}</span>
+                    <span>${formatWalletChange(walletChange(series, 7 * 24 * 60 * 60 * 1000))}</span>
+                    <span>${walletSparkline(series)}</span>
+                </div>`;
         }).join('');
+        legendEl.innerHTML = `<div style="overflow-x: auto;"><div style="min-width: 640px; display: flex; flex-direction: column; gap: 6px;">${header}${rows}</div></div>`;
     }
+}
+
+// --- WYNIKI POSZCZEGOLNYCH PORTFELI (kolumny 24h / 7D / trend w legendzie alokacji) ---
+// Liczone z historii per portfel (pole "w" w punktach portfolio-history.json, zapisywane
+// przez backend od momentu wgrania nowego appendHistory.js - starsze punkty go nie maja,
+// wiec kolumny zapelnia sie same, gdy zbierze sie 24h / 7 dni danych). Zmiana liczona
+// z surowych sum backendu (bez ukrytych/recznych pozycji), zeby porownywac to samo z tym samym.
+function getWalletSeries(walletName) {
+    return (currentPortfolioHistory || [])
+        .filter(p => p.w && typeof p.w[walletName] === 'number')
+        .map(p => ({ ms: parseHistoryTimestamp(p.t), v: p.w[walletName] }))
+        .filter(pt => !isNaN(pt.ms))
+        .sort((a, b) => a.ms - b.ms);
+}
+
+// Zmiana wzgledem ostatniego punktu starszego niz `lookbackMs` od najnowszego odczytu
+function walletChange(series, lookbackMs) {
+    if (series.length < 2) return null;
+    const latest = series[series.length - 1];
+    const target = latest.ms - lookbackMs;
+    let ref = null;
+    for (const pt of series) {
+        if (pt.ms <= target) ref = pt;
+        else break;
+    }
+    if (!ref || ref.v <= 0) return null;
+    const usd = latest.v - ref.v;
+    return { usd, pct: (usd / ref.v) * 100 };
+}
+
+function formatWalletChange(change) {
+    if (!change) return '<span class="muted-note" title="Za mało historii dla tego portfela">—</span>';
+    const sign = change.usd >= 0 ? '+' : '';
+    const cls = change.usd >= 0 ? 'pnl-pos' : 'pnl-neg';
+    return `<span class="${cls}" title="${sign}$${change.usd.toFixed(2)}">${sign}${change.pct.toFixed(1)}%</span>`;
+}
+
+// Mini-wykres ostatnich 24h (1 punkt na godzine) jako inline SVG
+function walletSparkline(series) {
+    if (series.length < 2) return '<span class="muted-note">—</span>';
+    const latestMs = series[series.length - 1].ms;
+    const hourly = new Map();
+    series.filter(pt => pt.ms >= latestMs - 24 * 60 * 60 * 1000)
+        .forEach(pt => hourly.set(Math.floor(pt.ms / 3600000), pt.v));
+    hourly.set('last', series[series.length - 1].v); // zawsze konczymy na najswiezszym odczycie
+    const values = Array.from(hourly.values());
+    if (values.length < 2) return '<span class="muted-note">—</span>';
+
+    const w = 100, h = 26, pad = 2;
+    const min = Math.min(...values), max = Math.max(...values);
+    const range = max - min || 1;
+    const points = values.map((v, i) => {
+        const x = pad + (i / (values.length - 1)) * (w - 2 * pad);
+        const y = h - pad - ((v - min) / range) * (h - 2 * pad);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    const first = values[0], last = values[values.length - 1];
+    const color = last > first ? '#4ade80' : (last < first ? '#f85149' : '#d4af37');
+    return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display: block;"><polyline points="${points}" fill="none" stroke="${color}" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>`;
 }
 
 // Pomocnicza funkcja do formatowania aktualnego czasu (HH:MM:SS)
