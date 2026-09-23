@@ -659,3 +659,63 @@ tr.purchase-detail-row td {
         overflow-x: auto;
     }
 }
+
+/* --- ALERTY (nieaktualne dane, likwidacja HL) --- */
+.alerts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+.alerts:empty {
+    display: none;
+}
+.alert {
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border: 1px solid;
+}
+.alert-danger {
+    background: rgba(248, 81, 73, 0.1);
+    border-color: rgba(248, 81, 73, 0.45);
+    color: #ffb3ae;
+}
+.alert-warn {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.45);
+    color: var(--accent-gold-soft);
+}
+
+#scan-status {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 3px;
+}
+
+/* --- PODSUMOWANIE ZYSKU/STRATY (karta Total Wealth) --- */
+.pnl-summary {
+    margin-top: 18px;
+    display: grid;
+    gap: 8px;
+    font-size: 13px;
+}
+.pnl-summary-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+}
+.pnl-summary-row .label {
+    color: var(--text-muted);
+}
+
+/* --- HYPERLIQUID: odległość od likwidacji --- */
+.liq-safe { color: var(--text-muted); }
+.liq-warn { color: var(--accent-gold); font-weight: 600; }
+.liq-danger { color: var(--pnl-neg); font-weight: 700; }
+.secondary-button:disabled {
+    opacity: 0.45;
+    cursor: default;
+}
