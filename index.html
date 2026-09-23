@@ -169,6 +169,35 @@
             </div>
         </div>
 
+        <!-- ZAMKNIĘTE POZYCJE - sprzedane tokeny ze zrealizowanym zyskiem/stratą
+             (liczone przez backend, src/modules/closedPositions.js). -->
+        <div class="card">
+            <div class="card-title-row">
+                <div class="card-title">Zamknięte pozycje</div>
+                <div id="closed-summary" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;"></div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Token</th>
+                            <th>Kupiono</th>
+                            <th>Sprzedano</th>
+                            <th>Dni</th>
+                            <th>Ilość</th>
+                            <th>Koszt</th>
+                            <th>Przychód</th>
+                            <th>Zysk/Strata</th>
+                            <th>Tx</th>
+                        </tr>
+                    </thead>
+                    <tbody id="closed-table-body">
+                        <tr><td colspan="9" style="text-align: center; color: var(--text-muted);">Oczekiwanie na dane...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
         <!-- RĘCZNE SALDA (LEDGERY) — ogólny mechanizm do rzeczy, których nie da się (albo nie
              do końca da się) wyliczyć automatycznie z chaina (np. saldo "w drodze" w FOMO).
              Każdy ledger to nazwana lista transakcji (wpłata/wypłata/zakup/korekta), a jego
