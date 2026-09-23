@@ -235,10 +235,11 @@ function updateAllocationChart(groups) {
     allocationChart.update();
 
     if (legendEl) {
-        const cols = 'grid-template-columns: minmax(130px, 1.4fr) 70px 110px 100px 100px 110px; gap: 12px; align-items: center;';
+        const DAY_MS = 24 * 60 * 60 * 1000;
+        const cols = 'grid-template-columns: minmax(130px, 1.4fr) 60px 110px repeat(5, 72px) 110px; gap: 12px; align-items: center;';
         const header = `
             <div class="allocation-legend-row muted-note" style="display: grid; ${cols} font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em;">
-                <span>Portfel</span><span>Udział</span><span>Wartość</span><span>24h</span><span>7D</span><span>Trend 24h</span>
+                <span>Portfel</span><span>Udział</span><span>Wartość</span><span>24h</span><span>7D</span><span>30D</span><span>90D</span><span>Całość</span><span>Trend 24h</span>
             </div>`;
         const rows = groups.map((g, i) => {
             const pct = (g.subtotal / total) * 100;
@@ -251,12 +252,15 @@ function updateAllocationChart(groups) {
                     </span>
                     <span class="allocation-legend-pct">${pct.toFixed(1)}%</span>
                     <span>$${g.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                    <span>${formatWalletChange(walletChange(series, 24 * 60 * 60 * 1000))}</span>
-                    <span>${formatWalletChange(walletChange(series, 7 * 24 * 60 * 60 * 1000))}</span>
+                    <span>${formatWalletChange(walletChange(series, DAY_MS))}</span>
+                    <span>${formatWalletChange(walletChange(series, 7 * DAY_MS))}</span>
+                    <span>${formatWalletChange(walletChange(series, 30 * DAY_MS))}</span>
+                    <span>${formatWalletChange(walletChange(series, 90 * DAY_MS))}</span>
+                    <span>${formatWalletChange(walletChange(series, Infinity))}</span>
                     <span>${walletSparkline(series)}</span>
                 </div>`;
         }).join('');
-        legendEl.innerHTML = `<div style="overflow-x: auto;"><div style="min-width: 640px; display: flex; flex-direction: column; gap: 6px;">${header}${rows}</div></div>`;
+        legendEl.innerHTML = `<div style="overflow-x: auto;"><div style="min-width: 860px; display: flex; flex-direction: column; gap: 6px;">${header}${rows}</div></div>`;
     }
 }
 
@@ -278,7 +282,8 @@ function walletChange(series, lookbackMs) {
     if (series.length < 2) return null;
     const latest = series[series.length - 1];
     const target = latest.ms - lookbackMs;
-    let ref = null;
+    // lookbackMs = Infinity -> "Całość": liczymy od najstarszego dostępnego punktu
+    let ref = lookbackMs === Infinity ? series[0] : null;
     for (const pt of series) {
         if (pt.ms <= target) ref = pt;
         else break;
