@@ -719,3 +719,9 @@ tr.purchase-detail-row td {
     opacity: 0.45;
     cursor: default;
 }
+
+/* Pojedyncze sprzedaże pod rozwiniętą zamkniętą pozycją */
+tr.closed-sale-row td {
+    background: rgba(255, 255, 255, 0.015);
+    font-size: 12px;
+}
