@@ -980,6 +980,76 @@ function renderDashboard() {
     updateSortArrows();
     renderHiddenPanel();
     renderLedgersPanel();
+    renderClosedPositions();
+}
+
+// --- ZAMKNIĘTE POZYCJE (zrealizowany zysk/strata) ---
+// Dane liczy backend (src/modules/closedPositions.js) i zapisuje w portfolio-data.json
+// pod closedPositions. Metoda średniego kosztu - ta sama co w kolumnie Zysk/Strata.
+// Jeśli sprzedano więcej, niż backend wie że kupiono (niewykryty zakup, airdrop),
+// zysk liczony jest tylko dla części o znanym koszcie (costCoverage < 1) - oznaczamy to.
+function formatUsd(value) {
+    return `$${Number(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function formatSignedPnl(pnlUsd, pnlPct) {
+    if (pnlUsd === null || pnlUsd === undefined) return '<span class="muted-note">—</span>';
+    const cls = pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg';
+    const sign = pnlUsd >= 0 ? '+' : '−';
+    const pctText = pnlPct !== null && pnlPct !== undefined ? `${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(1)}%` : '';
+    const usdText = privacyMode ? '' : `${pctText ? ' (' : ''}${sign}${formatUsd(Math.abs(pnlUsd))}${pctText ? ')' : ''}`;
+    return `<span class="${cls}">${pctText}${usdText}</span>`;
+}
+
+function renderClosedPositions() {
+    const summaryEl = document.getElementById('closed-summary');
+    const tbody = document.getElementById('closed-table-body');
+    if (!tbody) return;
+
+    const list = Array.isArray(currentPortfolioData?.closedPositions) ? currentPortfolioData.closedPositions : [];
+
+    if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align: center; color: var(--text-muted);">Brak zamkniętych pozycji.</td></tr>`;
+        if (summaryEl) summaryEl.innerHTML = '';
+        return;
+    }
+
+    const withPnl = list.filter(c => typeof c.pnlUsd === 'number');
+    const totalPnl = withPnl.reduce((sum, c) => sum + c.pnlUsd, 0);
+    const totalCost = withPnl.reduce((sum, c) => sum + (Number(c.costUsd) || 0), 0);
+    const wins = withPnl.filter(c => c.pnlUsd >= 0).length;
+    const losses = withPnl.length - wins;
+
+    if (summaryEl) {
+        summaryEl.innerHTML = `
+            <span>Zrealizowany wynik: ${formatSignedPnl(totalPnl, totalCost > 0 ? (totalPnl / totalCost) * 100 : null)}</span>
+            <span class="muted-note">Na plusie: <span class="pnl-pos">${wins}</span> · na minusie: <span class="pnl-neg">${losses}</span></span>
+        `;
+    }
+
+    tbody.innerHTML = list.map(c => {
+        const partial = typeof c.costCoverage === 'number' && c.costCoverage < 0.999;
+        const partialNote = partial
+            ? ` <span class="muted-note" title="Backend zna koszt zakupu tylko dla ${(c.costCoverage * 100).toFixed(0)}% sprzedanej ilości (reszta pochodzi z niewykrytego zakupu lub airdropu) - wynik dotyczy tej części.">*</span>`
+            : '';
+        const txShort = c.txHash ? `${c.txHash.slice(0, 10)}...` : '—';
+        const txCell = c.explorerUrl
+            ? `<a href="${escapeHtml(c.explorerUrl)}" target="_blank" rel="noopener">${escapeHtml(txShort)}</a>`
+            : escapeHtml(txShort);
+        return `
+            <tr>
+                <td><strong>${escapeHtml(c.symbol || '?')}</strong><div class="muted-note">${escapeHtml(c.walletName || '')} · ${escapeHtml(c.network || '')}</div></td>
+                <td>${escapeHtml(c.buyDate || '—')}</td>
+                <td>${escapeHtml(c.sellDate || '—')}</td>
+                <td>${c.daysHeld ?? '—'}</td>
+                <td>${money(Number(c.amountSold || 0).toFixed(4))}</td>
+                <td>${c.costUsd !== null && c.costUsd !== undefined ? money(formatUsd(c.costUsd)) : '<span class="muted-note">—</span>'}</td>
+                <td>${c.proceedsUsd !== null && c.proceedsUsd !== undefined ? money(formatUsd(c.proceedsUsd)) : '<span class="muted-note">—</span>'}</td>
+                <td>${formatSignedPnl(c.pnlUsd, c.pnlPct)}${partialNote}</td>
+                <td>${txCell}</td>
+            </tr>
+        `;
+    }).join('');
 }
 
 // Renderuje listę ukrytych pozycji z przyciskiem "Przywróć" przy każdej
