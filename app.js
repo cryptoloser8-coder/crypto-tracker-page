@@ -173,7 +173,7 @@ const performanceChart = new Chart(ctx, {
             }
         },
         scales: {
-            x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } },
+            x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', autoSkip: true, maxTicksLimit: 10, maxRotation: 0 } },
             y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
         }
     }
@@ -266,6 +266,36 @@ const GROWTH_LOOKBACK_MS = 24 * 60 * 60 * 1000; // "wzrost w stosunku do..." lic
 // zmieniany przyciskami 24H/7D/30D/90D/Całość nad wykresem
 let currentTimeframeDays = 30;
 
+// Interwal punktow na wykresie w minutach (0 = "Auto" - dobierany do zakresu czasu).
+// Backend dopisuje punkt co 5 min; przy wiekszym interwale punkty sa grupowane
+// w przedzialy (np. co 1h) i z kazdego przedzialu bierzemy OSTATNI odczyt -
+// tak jak "cena zamkniecia" na wykresach gieldowych. Wybor pamietany w przegladarce.
+let currentIntervalMinutes = Number(localStorage.getItem('chart_interval_minutes')) || 0;
+
+// Interwal dla trybu "Auto", zalezny od wybranego zakresu czasu
+function autoIntervalFor(days) {
+    if (days === 1) return 5;        // 24H -> co 5 min (wszystkie punkty)
+    if (days === 7) return 60;       // 7D  -> co 1h
+    if (days === 30) return 240;     // 30D -> co 4h
+    return 1440;                     // 90D / Calosc -> co 1 dzien
+}
+
+// Grupuje punkty historii w przedzialy po `minutes` minut i z kazdego bierze ostatni.
+// Przedzialy sa wyrownane do czasu LOKALNEGO (np. "co 1 dzien" = od polnocy u Ciebie,
+// a nie od polnocy UTC).
+function bucketHistory(history, minutes) {
+    if (!minutes || minutes <= 5) return history;
+    const size = minutes * 60 * 1000;
+    const buckets = new Map();
+    for (const point of history) {
+        const ms = parseHistoryTimestamp(point.t);
+        if (isNaN(ms)) continue;
+        const localMs = ms - new Date(ms).getTimezoneOffset() * 60 * 1000;
+        buckets.set(Math.floor(localMs / size), point); // pozniejszy punkt nadpisuje wczesniejszy
+    }
+    return Array.from(buckets.values());
+}
+
 // Backend zapisuje czas jako "YYYY-MM-DD HH:MM:SS" w UTC, bez litery T/strefy -
 // doklejamy je, żeby Date sparsował to jako UTC, a nie lokalny czas przeglądarki.
 function parseHistoryTimestamp(t) {
@@ -300,11 +330,16 @@ function updatePerformanceChart(history) {
     if (!Array.isArray(history) || history.length === 0) return; // brak historii jeszcze - zostawiamy stan początkowy
 
     const inRange = filterHistoryByTimeframe(history, currentTimeframeDays);
-    const sampled = downsampleHistory(inRange.length > 0 ? inRange : history, HISTORY_CHART_MAX_POINTS);
+    const interval = currentIntervalMinutes || autoIntervalFor(currentTimeframeDays);
+    const bucketed = bucketHistory(inRange.length > 0 ? inRange : history, interval);
+    const sampled = downsampleHistory(bucketed, HISTORY_CHART_MAX_POINTS);
+    const labelFormat = interval >= 1440
+        ? { day: '2-digit', month: '2-digit' }
+        : { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' };
     const labels = sampled.map(p => {
         const ms = parseHistoryTimestamp(p.t);
         const d = isNaN(ms) ? null : new Date(ms);
-        return d ? d.toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }) : '';
+        return d ? d.toLocaleString('pl-PL', labelFormat) : '';
     });
     const values = sampled.map(p => Number(p.v) || 0);
 
@@ -317,11 +352,25 @@ function updatePerformanceChart(history) {
 }
 
 // --- PRZEŁĄCZNIK ZAKRESU CZASU (24H/7D/30D/90D/Całość) + RESET ZOOMU ---
-document.querySelectorAll('.timeframe-btn').forEach(btn => {
+document.querySelectorAll('#timeframe-selector .timeframe-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-        document.querySelectorAll('.timeframe-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#timeframe-selector .timeframe-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentTimeframeDays = Number(btn.dataset.days) || 0;
+        updatePerformanceChart(currentPortfolioHistory);
+    });
+});
+
+// --- PRZELACZNIK INTERWALU (Auto/5m/15m/30m/1h/4h/1D) ---
+const intervalButtons = document.querySelectorAll('#interval-selector .timeframe-btn');
+intervalButtons.forEach(btn => {
+    // zaznaczamy przycisk zapamietany z poprzedniej wizyty
+    btn.classList.toggle('active', (Number(btn.dataset.minutes) || 0) === currentIntervalMinutes);
+    btn.addEventListener('click', () => {
+        intervalButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentIntervalMinutes = Number(btn.dataset.minutes) || 0;
+        localStorage.setItem('chart_interval_minutes', String(currentIntervalMinutes));
         updatePerformanceChart(currentPortfolioHistory);
     });
 });
