@@ -32,6 +32,18 @@ let currentPortfolioHistory = [];
 // ustawiana w renderDashboard(), używana do liczenia % wzrostu względem historii.
 let lastComputedTotal = 0;
 
+// --- TRYB PRYWATNY (ukrycie kwot, procenty zostają) ---
+// Pamiętany w przeglądarce. Ukrywa wszystko, co zdradza wielkość portfela: sumy,
+// wartości USD, ilości tokenów, kwoty zysku/straty, salda ledgerów i oś Y wykresu.
+// Procenty, ceny jednostkowe i daty zostają widoczne.
+let privacyMode = localStorage.getItem('privacy_mode') === '1';
+const PRIVACY_MASK = '••••';
+
+// Zwraca podany (już sformatowany) tekst albo maskę, jeśli tryb prywatny jest włączony
+function money(formatted) {
+    return privacyMode ? PRIVACY_MASK : formatted;
+}
+
 // --- SORTOWANIE I SZUKAJKA (tabela assetów) ---
 let sortColumn = 'valueUsd';
 let sortDirection = 'desc';
@@ -159,6 +171,11 @@ const performanceChart = new Chart(ctx, {
         maintainAspectRatio: false,
         plugins: {
             legend: { display: false },
+            tooltip: {
+                callbacks: {
+                    label: (item) => money(`$${Number(item.raw).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`)
+                }
+            },
             // Przybliżanie kółkiem myszy/gestem pinch + przesuwanie przeciągnięciem
             // (chartjs-plugin-zoom, patrz <script> w index.html) - działa niezależnie
             // od przełącznika zakresu czasu, każda zmiana zakresu resetuje zoom.
@@ -174,7 +191,13 @@ const performanceChart = new Chart(ctx, {
         },
         scales: {
             x: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af', autoSkip: true, maxTicksLimit: 10, maxRotation: 0 } },
-            y: { grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#9ca3af' } }
+            y: {
+                grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                ticks: {
+                    color: '#9ca3af',
+                    callback: (value) => money(Number(value).toLocaleString('en-US'))
+                }
+            }
         }
     }
 });
@@ -204,7 +227,7 @@ const allocationChart = new Chart(allocationCtx, {
             legend: { display: false }, // własny legend renderujemy obok (#allocation-legend)
             tooltip: {
                 callbacks: {
-                    label: (item) => `${item.label}: $${Number(item.raw).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
+                    label: (item) => `${item.label}: ${money(`$${Number(item.raw).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`)}`
                 }
             }
         }
@@ -251,7 +274,7 @@ function updateAllocationChart(groups) {
                         <span class="allocation-legend-name">${escapeHtml(g.walletName)}</span>
                     </span>
                     <span class="allocation-legend-pct">${pct.toFixed(1)}%</span>
-                    <span>$${g.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                    <span>${money(`$${g.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`)}</span>
                     <span>${formatWalletChange(walletChange(series, DAY_MS))}</span>
                     <span>${formatWalletChange(walletChange(series, 7 * DAY_MS))}</span>
                     <span>${formatWalletChange(walletChange(series, 30 * DAY_MS))}</span>
@@ -297,7 +320,8 @@ function formatWalletChange(change) {
     if (!change) return '<span class="muted-note" title="Za mało historii dla tego portfela">—</span>';
     const sign = change.usd >= 0 ? '+' : '';
     const cls = change.usd >= 0 ? 'pnl-pos' : 'pnl-neg';
-    return `<span class="${cls}" title="${sign}$${change.usd.toFixed(2)}">${sign}${change.pct.toFixed(1)}%</span>`;
+    const title = privacyMode ? '' : ` title="${sign}$${change.usd.toFixed(2)}"`;
+    return `<span class="${cls}"${title}>${sign}${change.pct.toFixed(1)}%</span>`;
 }
 
 // Mini-wykres ostatnich 24h (1 punkt na godzine) jako inline SVG
@@ -601,7 +625,7 @@ function renderPurchaseDetailRow(asset, key) {
             const pnlPct = (pnlUsd !== null && costUsd > 0) ? (pnlUsd / costUsd) * 100 : null;
 
             const pnlHtml = pnlPct !== null
-                ? `<span class="${pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg'}">${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(1)}% (${pnlUsd >= 0 ? '+' : ''}$${pnlUsd.toFixed(2)})</span>`
+                ? `<span class="${pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg'}">${pnlUsd >= 0 ? '+' : ''}${pnlPct.toFixed(1)}%${privacyMode ? '' : ` (${pnlUsd >= 0 ? '+' : ''}$${pnlUsd.toFixed(2)})`}</span>`
                 : '<span class="muted-note">—</span>';
 
             const sourceLabel = p.source === 'fomo' ? 'FOMO' : (p.source === 'swap' ? 'Swap' : (p.source || '—'));
@@ -613,9 +637,9 @@ function renderPurchaseDetailRow(asset, key) {
             return `
                 <tr>
                     <td>${escapeHtml(p.date || '—')}</td>
-                    <td>${receivedAmount.toFixed(4)}</td>
+                    <td>${money(receivedAmount.toFixed(4))}</td>
                     <td>$${avgPriceUsd.toFixed(6)}</td>
-                    <td>$${costUsd.toFixed(2)}</td>
+                    <td>${money(`$${costUsd.toFixed(2)}`)}</td>
                     <td>${pnlHtml}</td>
                     <td><span class="muted-note">${escapeHtml(sourceLabel)}</span></td>
                     <td>${txCell}</td>
@@ -836,7 +860,7 @@ function renderLedgersPanel() {
         const header = document.createElement('div');
         header.style.display = 'flex';
         header.style.justifyContent = 'space-between';
-        header.innerHTML = `<strong>${escapeHtml(ledger.label || key)}</strong><span>$${balance.toFixed(2)}</span>`;
+        header.innerHTML = `<strong>${escapeHtml(ledger.label || key)}</strong><span>${money(`$${balance.toFixed(2)}`)}</span>`;
         block.appendChild(header);
 
         const sortedTxs = (ledger.transactions || [])
@@ -855,7 +879,7 @@ function renderLedgersPanel() {
             const row = document.createElement('div');
             row.className = 'hidden-item-row';
             row.innerHTML = `
-                <span>${escapeHtml(tx.date || '')} — ${escapeHtml(txTypeLabel(tx.type))} — ${sign}$${Math.abs(Number(tx.amountUsd) || 0).toFixed(2)}${tx.note ? ' — ' + escapeHtml(tx.note) : ''}</span>
+                <span>${escapeHtml(tx.date || '')} — ${escapeHtml(txTypeLabel(tx.type))} — ${money(`${sign}$${Math.abs(Number(tx.amountUsd) || 0).toFixed(2)}`)}${tx.note ? ' — ' + escapeHtml(tx.note) : ''}</span>
                 <span>
                     <button class="row-action-btn" data-action="edit-ledger-tx" data-ledger="${escapeHtml(key)}" data-id="${escapeHtml(tx.id)}">Edytuj</button>
                     <button class="row-action-btn" data-action="remove-ledger-tx" data-ledger="${escapeHtml(key)}" data-id="${escapeHtml(tx.id)}">Usuń</button>
@@ -879,7 +903,7 @@ function renderDashboard() {
     const assetsTotal = allVisible.reduce((sum, a) => sum + (Number(a.valueUsd) || 0), 0);
     const total = assetsTotal + getLedgersTotal();
     lastComputedTotal = total;
-    const totalFormatted = `$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    const totalFormatted = money(`$${total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`);
     document.getElementById('total-portfolio-value').innerText = totalFormatted;
     document.getElementById('total-wealth').innerText = totalFormatted;
 
@@ -901,7 +925,7 @@ function renderDashboard() {
         groups.forEach(group => {
             const headerRow = document.createElement('tr');
             headerRow.className = 'group-header-row';
-            headerRow.innerHTML = `<td colspan="8"><strong>${escapeHtml(group.walletName)}</strong> — $${group.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>`;
+            headerRow.innerHTML = `<td colspan="8"><strong>${escapeHtml(group.walletName)}</strong> — ${money(`$${group.subtotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`)}</td>`;
             tbody.appendChild(headerRow);
 
             group.assets.forEach(asset => {
@@ -918,7 +942,7 @@ function renderDashboard() {
                     const cls = pnl.pnlUsd >= 0 ? 'pnl-pos' : 'pnl-neg';
                     const sign = pnl.pnlUsd >= 0 ? '+' : '';
                     const autoTag = pnl.isAuto ? ' <span class="muted-note">(auto)</span>' : '';
-                    pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}% (${sign}$${pnl.pnlUsd.toFixed(2)})</span>${autoTag}`;
+                    pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}%${privacyMode ? '' : ` (${sign}$${pnl.pnlUsd.toFixed(2)})`}</span>${autoTag}`;
                 }
                 const daysCell = pnl && pnl.daysHeld !== null ? pnl.daysHeld : '<span class="muted-note">—</span>';
 
@@ -937,9 +961,9 @@ function renderDashboard() {
                 row.innerHTML = `
                     <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
-                    <td>${balance.toFixed(4)}</td>
+                    <td>${money(balance.toFixed(4))}</td>
                     <td>${formatUnitPrice(getUnitPrice(asset))}</td>
-                    <td>$${valueUsd.toFixed(2)}</td>
+                    <td>${money(`$${valueUsd.toFixed(2)}`)}</td>
                     <td>${pnlCell}</td>
                     <td>${daysCell}</td>
                     <td>${actionCell}</td>
@@ -1504,4 +1528,22 @@ async function loadPortfolioData() {
     } finally {
         isRefreshing = false;
     }
+}
+
+// --- PRZYCISK TRYBU PRYWATNEGO ---
+const privacyBtn = document.getElementById('privacy-toggle-btn');
+function updatePrivacyButton() {
+    if (!privacyBtn) return;
+    privacyBtn.innerText = privacyMode ? 'Pokaż kwoty' : 'Ukryj kwoty';
+    privacyBtn.classList.toggle('active', privacyMode);
+}
+if (privacyBtn) {
+    updatePrivacyButton();
+    privacyBtn.addEventListener('click', () => {
+        privacyMode = !privacyMode;
+        localStorage.setItem('privacy_mode', privacyMode ? '1' : '0');
+        updatePrivacyButton();
+        if (currentPortfolioData) renderDashboard();
+        performanceChart.update(); // przerysowanie osi Y
+    });
 }
