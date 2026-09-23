@@ -23,7 +23,7 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 let currentPortfolioData = null;
 let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
 
-// Historia wartości portfela (dopisywana przez backend co 15 min - patrz
+// Historia wartości portfela (dopisywana przez backend co 5 min - patrz
 // src/storage/appendHistory.js). Surowa suma z backendu (assets), BEZ ręcznych
 // nadpisań z overrides.json (ukryte/dodane pozycje, ledgery) - może się więc
 // nieznacznie różnić od aktualnie wyświetlanej sumy portfela na dashboardzie.
@@ -355,7 +355,7 @@ function formatNow() {
 
 // --- HISTORIA WARTOŚCI PORTFELA (wykres "Portfolio Performance" + "% wzrostu") ---
 // portfolio-history.json to tablica punktów {t: "YYYY-MM-DD HH:MM:SS" (UTC), v: totalUsd},
-// dopisywana przez backend przy każdym uruchomieniu workflow (co ~15 min).
+// dopisywana przez backend przy każdym runie na Orange Pi (co 5 min).
 
 const HISTORY_CHART_MAX_POINTS = 150; // downsampling, żeby wykres nie rysował tysięcy punktów (zoom i tak pozwala dojrzeć szczegóły)
 const GROWTH_LOOKBACK_MS = 24 * 60 * 60 * 1000; // "wzrost w stosunku do..." liczony względem ~24h wstecz
@@ -629,6 +629,17 @@ function renderPurchaseDetailRow(asset, key) {
                 : '<span class="muted-note">—</span>';
 
             const sourceLabel = p.source === 'fomo' ? 'FOMO' : (p.source === 'swap' ? 'Swap' : (p.source || '—'));
+            // Czym zapłacono i skąd cena USD (backend: swapDetector.js + historicalPrices.js)
+            const paidText = p.paidSymbol && p.paidSymbol !== 'USD' && p.paidAmount
+                ? `${money(Number(p.paidAmount).toLocaleString('en-US', { maximumFractionDigits: 6 }))} ${p.paidSymbol}`
+                : '';
+            const priceSourceText = {
+                historical: 'cena z dnia tx',
+                'current-approx': '≈ dzisiejsza cena, poprawi się przy pełnym rescanie',
+                stable: '',
+                fomo: ''
+            }[p.priceSource] || '';
+            const sourceDetail = [paidText, priceSourceText].filter(Boolean).join(', ');
             const txShort = p.txHash ? `${p.txHash.slice(0, 10)}...` : '—';
             const txCell = p.explorerUrl
                 ? `<a href="${escapeHtml(p.explorerUrl)}" target="_blank" rel="noopener">${escapeHtml(txShort)}</a>`
@@ -641,7 +652,7 @@ function renderPurchaseDetailRow(asset, key) {
                     <td>$${avgPriceUsd.toFixed(6)}</td>
                     <td>${money(`$${costUsd.toFixed(2)}`)}</td>
                     <td>${pnlHtml}</td>
-                    <td><span class="muted-note">${escapeHtml(sourceLabel)}</span></td>
+                    <td><span class="muted-note">${escapeHtml(sourceLabel)}${sourceDetail ? `: ${escapeHtml(sourceDetail)}` : ''}</span></td>
                     <td>${txCell}</td>
                 </tr>
             `;
@@ -981,6 +992,186 @@ function renderDashboard() {
     renderHiddenPanel();
     renderLedgersPanel();
     renderClosedPositions();
+    renderPnlSummary(allVisible);
+    renderHyperliquidPositions();
+    renderScanStatus();
+    renderAlerts();
+}
+
+// --- PODSUMOWANIE ZYSKU/STRATY (karta Total Wealth) ---
+// Niezrealizowany = suma kolumny Zysk/Strata po widocznych pozycjach, które mają cenę
+// zakupu (auto albo ręczną). Zrealizowany = suma zamkniętych pozycji. Procent liczony
+// względem kosztu tych pozycji, nie całego portfela.
+const FRONT_STABLES = new Set(['USDC', 'USDT', 'USDT0', 'USDG', 'DAI', 'USDE', 'FDUSD', 'TUSD', 'BUSD', 'PYUSD', 'USDS']);
+
+function renderPnlSummary(allVisible) {
+    const el = document.getElementById('pnl-summary');
+    if (!el) return;
+
+    let openPnl = 0, openCost = 0, withBasis = 0, withoutBasis = 0;
+    allVisible.forEach(a => {
+        const pnl = computePnl(a);
+        if (pnl && pnl.pnlPct !== null) {
+            openPnl += pnl.pnlUsd;
+            openCost += (Number(a.valueUsd) || 0) - pnl.pnlUsd;
+            withBasis++;
+        } else if (a.contract && !FRONT_STABLES.has(String(a.symbol || '').toUpperCase())) {
+            withoutBasis++;
+        }
+    });
+
+    const closed = (currentPortfolioData?.closedPositions || []).filter(c => typeof c.pnlUsd === 'number');
+    const realizedPnl = closed.reduce((s, c) => s + c.pnlUsd, 0);
+    const realizedCost = closed.reduce((s, c) => s + (Number(c.costUsd) || 0), 0);
+
+    const totalPnl = openPnl + realizedPnl;
+    const totalCost = openCost + realizedCost;
+    const pct = (v, cost) => cost > 0 ? (v / cost) * 100 : null;
+
+    const coverage = withoutBasis > 0
+        ? `<span class="muted-note" title="Tokeny z kontraktem, dla których nie ma ceny zakupu - nie są wliczone">bez ceny zakupu: ${withoutBasis}</span>`
+        : '';
+
+    el.innerHTML = `
+        <div class="pnl-summary-row"><span class="label">Niezrealizowany (${withBasis} poz.)</span><span>${formatSignedPnl(openPnl, pct(openPnl, openCost))}</span></div>
+        <div class="pnl-summary-row"><span class="label">Zrealizowany (${closed.length} poz.)</span><span>${formatSignedPnl(realizedPnl, pct(realizedPnl, realizedCost))}</span></div>
+        <div class="pnl-summary-row"><span class="label"><strong>Łącznie</strong></span><span><strong>${formatSignedPnl(totalPnl, pct(totalPnl, totalCost))}</strong></span></div>
+        ${coverage}
+    `;
+}
+
+// --- HYPERLIQUID: OTWARTE POZYCJE ---
+// Backend zapisuje w portfolio-data.json:
+//   hyperliquid: { accountValue, totalMarginUsed, positions: [{ coin, side, size, entryPx,
+//     markPx, positionValueUsd, unrealizedPnlUsd, roePct, leverage, leverageType,
+//     liquidationPx, marginUsedUsd }] }
+// Dopóki backend tego nie zapisuje (albo nie ma pozycji), karta jest ukryta.
+const LIQ_DANGER_PCT = 10; // czerwony alarm, gdy cena jest bliżej niż 10% od likwidacji
+const LIQ_WARN_PCT = 20;   // złote ostrzeżenie poniżej 20%
+
+function liquidationDistancePct(p) {
+    const mark = Number(p.markPx), liq = Number(p.liquidationPx);
+    if (!mark || !liq) return null;
+    return Math.abs(mark - liq) / mark * 100;
+}
+
+function formatPx(v) {
+    const n = Number(v);
+    if (!n) return '—';
+    return '$' + n.toLocaleString('en-US', { maximumFractionDigits: n >= 100 ? 2 : n >= 1 ? 4 : 6 });
+}
+
+function renderHyperliquidPositions() {
+    const card = document.getElementById('hl-positions-card');
+    const tbody = document.getElementById('hl-positions-body');
+    const summary = document.getElementById('hl-summary');
+    if (!card || !tbody) return;
+
+    const hl = currentPortfolioData?.hyperliquid;
+    const positions = Array.isArray(hl?.positions) ? hl.positions : [];
+    if (positions.length === 0) {
+        card.style.display = 'none';
+        return;
+    }
+    card.style.display = '';
+
+    const totalUpnl = positions.reduce((s, p) => s + (Number(p.unrealizedPnlUsd) || 0), 0);
+    if (summary) {
+        summary.innerHTML = `Konto: ${money(formatUsd(Number(hl.accountValue) || 0))} · margin: ${money(formatUsd(Number(hl.totalMarginUsed) || 0))} · uPnL: ${formatSignedPnl(totalUpnl, null)}`;
+    }
+
+    tbody.innerHTML = positions.map(p => {
+        const isLong = p.side === 'long';
+        const dist = liquidationDistancePct(p);
+        let liqCell = '<span class="muted-note">brak</span>';
+        if (Number(p.liquidationPx)) {
+            const cls = dist === null ? 'liq-safe' : dist < LIQ_DANGER_PCT ? 'liq-danger' : dist < LIQ_WARN_PCT ? 'liq-warn' : 'liq-safe';
+            liqCell = `${formatPx(p.liquidationPx)} <span class="${cls}">${dist !== null ? `(${dist.toFixed(1)}%)` : ''}</span>`;
+        }
+        const roe = typeof p.roePct === 'number' ? p.roePct : null;
+        return `
+            <tr>
+                <td><strong>${escapeHtml(p.coin)}</strong></td>
+                <td class="${isLong ? 'pnl-pos' : 'pnl-neg'}">${isLong ? 'Long' : 'Short'}</td>
+                <td>${money(Math.abs(Number(p.size) || 0).toLocaleString('en-US', { maximumFractionDigits: 6 }))}</td>
+                <td>${formatPx(p.entryPx)}</td>
+                <td>${formatPx(p.markPx)}</td>
+                <td>${money(formatUsd(Number(p.positionValueUsd) || 0))}</td>
+                <td>${formatSignedPnl(Number(p.unrealizedPnlUsd) || 0, roe)}</td>
+                <td>${p.leverage ? `${escapeHtml(p.leverage)}x` : '—'}<div class="muted-note">${p.leverageType === 'isolated' ? 'isolated' : 'cross'}</div></td>
+                <td>${liqCell}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+// --- ALERTY ---
+// 1) Dane nieaktualne: backend przy niepełnych danych nic nie publikuje (celowo), więc
+//    dłuższa awaria wyglądałaby jak normalny stan. Po STALE_AFTER_MIN minutach bez nowego
+//    runu pokazujemy czerwony pasek. Sprawdzane przy każdym auto-odświeżeniu (co 60 s),
+//    także gdy samo pobieranie pliku się nie udało.
+// 2) Pozycja na Hyperliquid bliżej niż LIQ_DANGER_PCT od ceny likwidacji.
+const STALE_AFTER_MIN = 15;
+
+function renderAlerts() {
+    const el = document.getElementById('alerts');
+    if (!el) return;
+    const alerts = [];
+
+    const updatedMs = currentPortfolioData ? parseHistoryTimestamp(currentPortfolioData.timestamp) : NaN;
+    if (!isNaN(updatedMs)) {
+        const ageMin = Math.floor((Date.now() - updatedMs) / 60000);
+        if (ageMin >= STALE_AFTER_MIN) {
+            const ageText = ageMin >= 120 ? `${Math.floor(ageMin / 60)} h ${ageMin % 60} min` : `${ageMin} min`;
+            alerts.push(`<div class="alert alert-danger"><strong>Dane nieaktualne.</strong> Ostatni udany run backendu był ${ageText} temu. Sprawdź log na Orange Pi: <code>tail -n 60 ~/crypto-tracker/logs/portfolio.log</code></div>`);
+        }
+    }
+
+    const positions = Array.isArray(currentPortfolioData?.hyperliquid?.positions) ? currentPortfolioData.hyperliquid.positions : [];
+    positions.forEach(p => {
+        const dist = liquidationDistancePct(p);
+        if (dist !== null && dist < LIQ_DANGER_PCT) {
+            alerts.push(`<div class="alert alert-danger"><strong>Hyperliquid: ${escapeHtml(p.coin)} ${p.side === 'long' ? 'long' : 'short'}</strong> jest ${dist.toFixed(1)}% od likwidacji (cena ${formatPx(p.markPx)}, likwidacja ${formatPx(p.liquidationPx)}).</div>`);
+        }
+    });
+
+    el.innerHTML = alerts.join('');
+}
+
+// --- PEŁNY RESCAN ---
+// Backend normalnie przegląda tylko nowe bloki (cache), a pełny rescan od bloku 0 robi
+// sam co 4h. Przycisk zapisuje w overrides.json rescanRequestedAt; backend czyta to przy
+// najbliższym runie i jeśli prośba jest nowsza niż ostatni pełny rescan, robi go od razu.
+// Stan rescanu backend zapisuje w portfolio-data.json pod scan:
+//   { mode: 'full'|'incremental', lastFullRescanAt, reason }
+function renderScanStatus() {
+    const el = document.getElementById('scan-status');
+    const btn = document.getElementById('rescan-btn');
+    if (!el) return;
+
+    const scan = currentPortfolioData?.scan;
+    const lastFullMs = scan?.lastFullRescanAt ? Date.parse(scan.lastFullRescanAt) : NaN;
+    const requestedMs = currentOverrides.rescanRequestedAt ? Date.parse(currentOverrides.rescanRequestedAt) : NaN;
+    const pending = !isNaN(requestedMs) && (isNaN(lastFullMs) || requestedMs > lastFullMs);
+
+    if (pending) {
+        el.innerText = 'Pełny rescan zlecony, wykona się przy najbliższym runie (do ~5 min)';
+    } else if (!isNaN(lastFullMs)) {
+        el.innerText = `Ostatni pełny rescan: ${new Date(lastFullMs).toLocaleString('sv-SE')}`;
+    } else {
+        el.innerText = '';
+    }
+    if (btn) btn.disabled = pending;
+}
+
+const rescanBtn = document.getElementById('rescan-btn');
+if (rescanBtn) {
+    rescanBtn.addEventListener('click', () => {
+        if (!confirm('Zlecić pełny rescan historii transakcji? Najbliższy run potrwa dłużej niż zwykle.')) return;
+        currentOverrides.rescanRequestedAt = new Date().toISOString();
+        renderScanStatus();
+        scheduleSave();
+    });
 }
 
 // --- ZAMKNIĘTE POZYCJE (zrealizowany zysk/strata) ---
@@ -1597,6 +1788,7 @@ async function loadPortfolioData() {
         setFetchStatus(`Błąd odświeżania (${formatNow()}): ${error.message}. Poprzednie dane wciąż widoczne.`, true);
     } finally {
         isRefreshing = false;
+        renderAlerts(); // alert "dane nieaktualne" ma się pokazać także, gdy samo pobieranie padło
     }
 }
 
