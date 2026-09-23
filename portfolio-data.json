@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-23 17:45:34",
-  "totalUsd": 49071,
+  "timestamp": "2026-09-23 17:50:34",
+  "totalUsd": 49067.73,
   "assets": [
     {
       "symbol": "USDT",
@@ -84,11 +84,11 @@
     },
     {
       "symbol": "USDC",
-      "name": "FOMO - saldo w aplikacji (auto, 10 transakcji)",
+      "name": "FOMO - saldo w aplikacji (auto, 11 transakcji)",
       "walletName": "FOMO APP",
       "network": "fomo",
-      "balance": 3058.807027,
-      "valueUsd": 3058.807027
+      "balance": 3009.324008,
+      "valueUsd": 3009.324008
     },
     {
       "symbol": "WTH",
@@ -96,7 +96,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 87.04993797281796,
-      "valueUsd": 1547.7478971567034,
+      "valueUsd": 1552.100394055344,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -169,7 +169,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 183.6946255009385
+      "valueUsd": 183.80073607272294
     },
     {
       "symbol": "USDC",
@@ -185,7 +185,37 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.018516338843516077,
-      "valueUsd": 49.36437419342542
+      "valueUsd": 49.39288935524444
+    },
+    {
+      "symbol": "ROADSTER",
+      "name": "ROADSTER",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1351392.2779627326,
+      "valueUsd": 49.37987383675825,
+      "contract": "0x9bd126ba6a853877d8637e53627fa237798ad09e",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xda51ee3ff37d8437922c69cf9ec5d7e1f6f076bb9fcfdcd25cfd0dee32e9713a",
+      "costBasis": {
+        "avgPriceUsd": 0.00003661632510924011,
+        "dateAcquired": "2026-09-23",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-23",
+            "receivedAmount": 1351392.2779627326,
+            "costUsd": 49.483019,
+            "avgPriceUsd": 0.00003661632510924011,
+            "source": "fomo",
+            "txHash": "0x2dd80a672c32c8c77a4b641bfe1f5b4b233d2bde3f54819440b3e0c1f26566d2",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x2dd80a672c32c8c77a4b641bfe1f5b4b233d2bde3f54819440b3e0c1f26566d2",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo"
+          }
+        ]
+      }
     },
     {
       "symbol": "FATCAT",
@@ -193,7 +223,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1460773.8487194595,
-      "valueUsd": 47.387503652459266,
+      "valueUsd": 39.689225469707715,
       "contract": "0x3b1c852c8091e64dabca231b097ecf3f1416d09e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x0247a7704b2d3d09280f359e3f6f87a396f34b424660652e966429b19f1d4edc",
       "costBasis": {
@@ -223,9 +253,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1664.8599668151644,
-      "valueUsd": 0.3359687413033002,
+      "valueUsd": 0.34046386321370115,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xacbc5392c34f942ee67cb7fccb8e28a0b3baea8fee63b5ca6b0a090b5b44e61e"
+    },
+    {
+      "symbol": "Nautilo",
+      "name": "Nautilo",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 346.9698124676274,
+      "valueUsd": 0.11991276718881203,
+      "contract": "0x3b401114112479aff47874b155454827a131faad",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xd25a31c7993c6ebb63520448ea32f0be0de3237c4181968def2ab432a1b480f6"
     },
     {
       "symbol": "COPCAT",
@@ -238,22 +278,12 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
     },
     {
-      "symbol": "Nautilo",
-      "name": "Nautilo",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 213.5624975915403,
-      "valueUsd": 0.07323058042413917,
-      "contract": "0x3b401114112479aff47874b155454827a131faad",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xd25a31c7993c6ebb63520448ea32f0be0de3237c4181968def2ab432a1b480f6"
-    },
-    {
       "symbol": "SI",
       "name": "Super Inu",
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 286.85814226704053,
-      "valueUsd": 0.059838608476904656,
+      "valueUsd": 0.05871986172206319,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x286d656e60f80d10e409a38280902e0959e870d801215ee9a7422a0668b2b6f3"
     },
@@ -273,7 +303,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 106.44977571362492,
-      "valueUsd": 0.037491611006338695,
+      "valueUsd": 0.037214841589483266,
       "contract": "0xa6b2bc6e9de767c7734eb9e15cda1ae371a079e7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x49c6ae33881b4ccd1fb1bac41deffc3fe19b93bd806ccfb28a6b636f681bb524"
     },
@@ -283,7 +313,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 451.16541,
-      "valueUsd": 0.0234290197413,
+      "valueUsd": 0.024281722366200003,
       "contract": "0xba1bb4d7e360c066cb1c7fab49790cc9c1717128",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d3f965e9b3a2eb4af7606928f861f2ed554f0cb"
     },
