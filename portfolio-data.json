@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-24 23:05:37",
-  "totalUsd": 49568.88,
+  "timestamp": "2026-09-24 23:10:39",
+  "totalUsd": 49569.83,
   "assets": [
     {
       "symbol": "WTAO",
@@ -202,16 +202,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 106.866724,
-      "valueUsd": 106.866724
+      "balance": 107.31250500000002,
+      "valueUsd": 107.31250500000002
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 53.789393,
-      "valueUsd": 53.789393
+      "balance": 54.284706,
+      "valueUsd": 54.284706
     },
     {
       "symbol": "ETH",
@@ -267,7 +267,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 286.85814226704053,
-      "valueUsd": 0.1416218648372379,
+      "valueUsd": 0.14239638182135894,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x286d656e60f80d10e409a38280902e0959e870d801215ee9a7422a0668b2b6f3"
     },
@@ -526,22 +526,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 53.789393,
-    "totalMarginUsed": 52.17442,
+    "accountValue": 54.284706,
+    "totalMarginUsed": 52.223952,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5443,
         "entryPx": 0.095537,
-        "markPx": 0.095856,
-        "positionValueUsd": 521.744208,
-        "unrealizedPnlUsd": 1.736317,
-        "roePct": 3.3390204800000003,
+        "markPx": 0.09594699999999999,
+        "positionValueUsd": 522.239521,
+        "unrealizedPnlUsd": 2.23163,
+        "roePct": 4.29153103,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0701437992,
-        "marginUsedUsd": 52.17442
+        "marginUsedUsd": 52.223952
       }
     ]
   },
@@ -549,6 +549,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-24T22:55:02.876Z",
-    "durationSec": 34
+    "durationSec": 36
   }
 }
