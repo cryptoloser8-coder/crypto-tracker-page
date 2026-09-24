@@ -5,7 +5,10 @@
 // unlockDashboard()/loadPortfolioData() poniżej — inaczej JS rzuci
 // "ReferenceError: Cannot access ... before initialization" (TDZ dla let/const),
 // bo kod niżej (savedToken -> unlockDashboard) wykonuje się już przy starcie skryptu.
-const AUTO_REFRESH_INTERVAL_MS = 60 * 1000; // co ile automatycznie sprawdzamy dane (ms)
+// Co ile strona sprawdza, czy są nowe dane. Dane czytane są przez GitHub API z nagłówkiem
+// If-None-Match - odpowiedź "bez zmian" (304) nie zużywa limitu API, więc częste
+// sprawdzanie jest praktycznie darmowe.
+const AUTO_REFRESH_INTERVAL_MS = 30 * 1000;
 let autoRefreshTimer = null;
 let isRefreshing = false; // zabezpieczenie przed nakładającymi się requestami do portfolio-data.json
 
@@ -28,6 +31,11 @@ let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, pri
 // nadpisań z overrides.json (ukryte/dodane pozycje, ledgery) - może się więc
 // nieznacznie różnić od aktualnie wyświetlanej sumy portfela na dashboardzie.
 let currentPortfolioHistory = [];
+
+// Ostatnio pobrana treść plików danych + ich ETag (GitHub API) - przy odpowiedzi
+// 304 "bez zmian" używamy zapamiętanej treści zamiast pobierać plik drugi raz.
+const repoFileCache = {};
+let lastDataSource = null; // 'api' albo 'pages' - pokazywane w "Ostatnie sprawdzenie"
 // Suma faktycznie wyświetlona na dashboardzie (assets widoczne + ledgery) -
 // ustawiana w renderDashboard(), używana do liczenia % wzrostu względem historii.
 let lastComputedTotal = 0;
@@ -1820,6 +1828,54 @@ document.getElementById('ledgers-list').addEventListener('click', (e) => {
     }
 });
 
+// --- POBIERANIE PLIKÓW DANYCH ---
+// Pliki czytamy prosto z repo przez GitHub API (tokenem z logowania), a nie z GitHub
+// Pages. Pages publikuje zmiany dopiero po przebudowaniu strony (zwykle 30 s - 2 min po
+// pushu z Pi, przy limicie ok. 10 buildów/h), a API widzi nowy commit od razu.
+// Jeśli API zawiedzie (brak tokena, limit, błąd sieci), wracamy do starej ścieżki przez Pages.
+// Zwraca sparsowany JSON albo null, gdy pliku nie ma (404).
+async function fetchRepoJson(path) {
+    const token = localStorage.getItem('portfolio_auth_token');
+
+    if (token) {
+        try {
+            const headers = { ...githubHeaders(token), 'Accept': 'application/vnd.github.raw+json' };
+            const cached = repoFileCache[path];
+            if (cached && cached.etag) headers['If-None-Match'] = cached.etag;
+
+            const res = await fetch(
+                `https://api.github.com/repos/${OVERRIDES_REPO}/contents/${path}?ref=${OVERRIDES_BRANCH}`,
+                { headers, cache: 'no-store' }
+            );
+
+            if (res.status === 304 && cached) {
+                lastDataSource = 'api';
+                return JSON.parse(cached.text); // świeża kopia - edycje na stronie nie psują cache
+            }
+            if (res.status === 404) {
+                lastDataSource = 'api';
+                return null;
+            }
+            if (res.ok) {
+                const text = await res.text();
+                repoFileCache[path] = { etag: res.headers.get('ETag'), text };
+                lastDataSource = 'api';
+                return JSON.parse(text);
+            }
+            console.warn(`GitHub API (${path}): HTTP ${res.status} - wracam do GitHub Pages.`);
+        } catch (e) {
+            console.warn(`GitHub API (${path}) niedostępne (${e.message}) - wracam do GitHub Pages.`);
+        }
+    }
+
+    // Zapasowo: GitHub Pages (parametr ?t= omija cache przeglądarki)
+    const res = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
+    lastDataSource = 'pages';
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`Brak pliku ${path} (HTTP ${res.status})`);
+    return res.json();
+}
+
 // Główna funkcja pobierająca dane i zlecająca ich wyrenderowanie
 async function loadPortfolioData() {
     // Nie odpalamy drugiego fetcha, jeśli poprzedni jeszcze trwa
@@ -1828,18 +1884,21 @@ async function loadPortfolioData() {
     isRefreshing = true;
 
     try {
-        // Dodajemy parametr czasu (?t=...), aby przeglądarka nie pobierała starej wersji z pamięci podręcznej (cache)
-        const response = await fetch(`portfolio-data.json?t=${Date.now()}`);
-        if (!response.ok) throw new Error(`Brak pliku danych (HTTP ${response.status})`);
-        currentPortfolioData = await response.json();
+        // Wszystkie trzy pliki równolegle (przez GitHub API, zapasowo przez Pages)
+        const [portfolioData, overridesData, historyData] = await Promise.all([
+            fetchRepoJson('portfolio-data.json'),
+            fetchRepoJson(OVERRIDES_PATH).catch(() => null),
+            fetchRepoJson('portfolio-history.json').catch(() => null)
+        ]);
+        if (!portfolioData) throw new Error('Brak pliku portfolio-data.json');
+        currentPortfolioData = portfolioData;
 
         // overrides.json może jeszcze nie istnieć (zanim cokolwiek ukryjesz/dodasz ręcznie)
-        // — brak tego pliku to normalny stan, nie błąd
-        try {
-            const overridesRes = await fetch(`overrides.json?t=${Date.now()}`);
-            currentOverrides = overridesRes.ok ? await overridesRes.json() : { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
-        } catch (e) {
-            currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
+        // — brak tego pliku to normalny stan, nie błąd.
+        // Jeśli zmiana z tej strony czeka na zapis albo właśnie się zapisuje, NIE nadpisujemy
+        // lokalnego stanu wersją z repo - inaczej odświeżenie mogłoby cofnąć świeżą zmianę.
+        if (!saveQueued && !saveInFlight) {
+            currentOverrides = overridesData || { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
@@ -1847,15 +1906,8 @@ async function loadPortfolioData() {
         if (!currentOverrides.costBasis || typeof currentOverrides.costBasis !== 'object') currentOverrides.costBasis = {};
         if (!currentOverrides.priceOverrides || typeof currentOverrides.priceOverrides !== 'object') currentOverrides.priceOverrides = {};
 
-        // portfolio-history.json może jeszcze nie istnieć (przed pierwszym uruchomieniem
-        // workflow po wgraniu tej zmiany) — brak pliku to normalny stan, nie błąd
-        try {
-            const historyRes = await fetch(`portfolio-history.json?t=${Date.now()}`);
-            currentPortfolioHistory = historyRes.ok ? await historyRes.json() : [];
-            if (!Array.isArray(currentPortfolioHistory)) currentPortfolioHistory = [];
-        } catch (e) {
-            currentPortfolioHistory = [];
-        }
+        // portfolio-history.json może jeszcze nie istnieć — brak pliku to normalny stan, nie błąd
+        currentPortfolioHistory = Array.isArray(historyData) ? historyData : [];
 
         // Backend zapisuje timestamp w UTC ("YYYY-MM-DD HH:MM:SS", bez strefy) -
         // przeliczamy go na czas lokalny przeglądarki (tak samo jak wykres), zamiast
@@ -1873,7 +1925,7 @@ async function loadPortfolioData() {
         // Sukces — pokazujemy kiedy strona faktycznie sprawdziła plik
         // (to jest INNA informacja niż "Ostatnia aktualizacja danych" powyżej —
         // ta pokazuje kiedy backend wygenerował dane, ta poniżej kiedy strona to sprawdziła)
-        setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓`);
+        setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓${lastDataSource === 'pages' ? ' (zapasowo przez Pages)' : ''}`);
 
     } catch (error) {
         console.log("Błąd podczas ładowania danych:", error);
