@@ -645,7 +645,8 @@ function renderPurchaseDetailRow(asset, key) {
                 historical: 'cena z dnia tx',
                 'current-approx': '≈ dzisiejsza cena, poprawi się przy pełnym rescanie',
                 stable: '',
-                fomo: ''
+                fomo: '',
+                'fomo-cash': 'kwota pobrana z gotówki, z opłatami'
             }[p.priceSource] || '';
             const sourceDetail = [paidText, priceSourceText].filter(Boolean).join(', ');
             const txShort = p.txHash ? `${p.txHash.slice(0, 10)}...` : '—';
