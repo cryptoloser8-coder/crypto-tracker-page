@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-24 19:00:37",
-  "totalUsd": 49271.59,
+  "timestamp": "2026-09-24 19:05:38",
+  "totalUsd": 49205.48,
   "assets": [
     {
       "symbol": "USDT",
@@ -48,7 +48,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 98968.32599475344,
-      "valueUsd": 9587.061739111765,
+      "valueUsd": 9541.536309154179,
       "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xc3d7aa944105d3fafe07fc1822102449c916a8d0",
       "costBasis": {
@@ -84,11 +84,11 @@
     },
     {
       "symbol": "USDC",
-      "name": "FOMO - saldo w aplikacji (auto, 13 transakcji)",
+      "name": "FOMO - gotowka w aplikacji (USDC na Solanie)",
       "walletName": "FOMO APP",
       "network": "fomo",
-      "balance": 2933.712967,
-      "valueUsd": 2933.712967
+      "balance": 2907.320281,
+      "valueUsd": 2907.320281
     },
     {
       "symbol": "WTH",
@@ -96,39 +96,39 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 87.04993797281796,
-      "valueUsd": 1528.5969108026832,
+      "valueUsd": 1538.1724039796934,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
-        "avgPriceUsd": 17.133814712949388,
+        "avgPriceUsd": 17.231488441363243,
         "dateAcquired": "2026-09-19",
         "source": "auto",
         "purchases": [
           {
             "date": "2026-09-19",
             "receivedAmount": 58.03221267223642,
-            "costUsd": 994.308642,
-            "avgPriceUsd": 17.133736526915058,
+            "costUsd": 1000,
+            "avgPriceUsd": 17.23180892046904,
             "source": "fomo",
             "txHash": "0xe25a8c838c01ede8937fa4c996c3d507106f9f9f5074c44eea6fdd886b93c062",
             "network": "robinhood",
             "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xe25a8c838c01ede8937fa4c996c3d507106f9f9f5074c44eea6fdd886b93c062",
             "paidAmount": null,
             "paidSymbol": "USD",
-            "priceSource": "fomo"
+            "priceSource": "fomo-cash"
           },
           {
             "date": "2026-09-22",
             "receivedAmount": 29.01772530058153,
-            "costUsd": 497.188866,
-            "avgPriceUsd": 17.133971076293705,
+            "costUsd": 500,
+            "avgPriceUsd": 17.230847518912164,
             "source": "fomo",
             "txHash": "0x35ef5d67c029bbf6e7141bae2e60fddc711e6fde3c11fbbfbecab47519134486",
             "network": "robinhood",
             "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x35ef5d67c029bbf6e7141bae2e60fddc711e6fde3c11fbbfbecab47519134486",
             "paidAmount": null,
             "paidSymbol": "USD",
-            "priceSource": "fomo"
+            "priceSource": "fomo-cash"
           }
         ]
       }
@@ -139,26 +139,26 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 96714.5556693868,
-      "valueUsd": 435.40892962357935,
+      "valueUsd": 431.6370619524733,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
-        "avgPriceUsd": 0.005111676588682139,
+        "avgPriceUsd": 0.0051698526301379236,
         "dateAcquired": "2026-09-22",
         "source": "auto",
         "purchases": [
           {
             "date": "2026-09-22",
             "receivedAmount": 96714.55566938681,
-            "costUsd": 494.37353,
-            "avgPriceUsd": 0.005111676588682139,
+            "costUsd": 500,
+            "avgPriceUsd": 0.0051698526301379236,
             "source": "fomo",
             "txHash": "0x6a5d6d88d154199268fbfefd7b9e0726cdcd9d70ac3e7ae95a9466d7f34bdeff",
             "network": "bsc",
             "explorerUrl": "https://bscscan.com/tx/0x6a5d6d88d154199268fbfefd7b9e0726cdcd9d70ac3e7ae95a9466d7f34bdeff",
             "paidAmount": null,
             "paidSymbol": "USD",
-            "priceSource": "fomo"
+            "priceSource": "fomo-cash"
           }
         ]
       }
@@ -197,22 +197,22 @@
       "contract": "0x9bd126ba6a853877d8637e53627fa237798ad09e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xda51ee3ff37d8437922c69cf9ec5d7e1f6f076bb9fcfdcd25cfd0dee32e9713a",
       "costBasis": {
-        "avgPriceUsd": 0.00003661632510924011,
+        "avgPriceUsd": 0.00003699887946331661,
         "dateAcquired": "2026-09-23",
         "source": "auto",
         "purchases": [
           {
             "date": "2026-09-23",
             "receivedAmount": 1351392.2779627326,
-            "costUsd": 49.483019,
-            "avgPriceUsd": 0.00003661632510924011,
+            "costUsd": 50,
+            "avgPriceUsd": 0.00003699887946331661,
             "source": "fomo",
             "txHash": "0x2dd80a672c32c8c77a4b641bfe1f5b4b233d2bde3f54819440b3e0c1f26566d2",
             "network": "robinhood",
             "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x2dd80a672c32c8c77a4b641bfe1f5b4b233d2bde3f54819440b3e0c1f26566d2",
             "paidAmount": null,
             "paidSymbol": "USD",
-            "priceSource": "fomo"
+            "priceSource": "fomo-cash"
           }
         ]
       }
@@ -233,7 +233,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 286.85814226704053,
-      "valueUsd": 0.13003279588964947,
+      "valueUsd": 0.1314670866009847,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x286d656e60f80d10e409a38280902e0959e870d801215ee9a7422a0668b2b6f3"
     },
@@ -243,7 +243,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 106.44977571362492,
-      "valueUsd": 0.1136883604621514,
+      "valueUsd": 0.11475285821928766,
       "contract": "0xa6b2bc6e9de767c7734eb9e15cda1ae371a079e7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x49c6ae33881b4ccd1fb1bac41deffc3fe19b93bd806ccfb28a6b636f681bb524"
     },
@@ -448,10 +448,10 @@
       "sellDate": "2026-09-23",
       "daysHeld": 1,
       "amountSold": 3869603.8037235457,
-      "costUsd": 994.220004,
-      "proceedsUsd": 927.022115,
-      "pnlUsd": -67.19788900000003,
-      "pnlPct": -6.758855055183544,
+      "costUsd": 1000,
+      "proceedsUsd": 922.29279,
+      "pnlUsd": -77.70721000000003,
+      "pnlPct": -7.770721000000003,
       "costCoverage": 1,
       "txHash": "0xa1c1873b4da29c4043b03125f589db79ab4c09a4b0b64820b92c2bdf8fe716a7",
       "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xa1c1873b4da29c4043b03125f589db79ab4c09a4b0b64820b92c2bdf8fe716a7"
@@ -465,10 +465,10 @@
       "sellDate": "2026-09-23",
       "daysHeld": 0,
       "amountSold": 1460773.8487194595,
-      "costUsd": 24.80090450000001,
-      "proceedsUsd": 61.477763,
-      "pnlUsd": 36.676858499999994,
-      "pnlPct": 147.88516483340348,
+      "costUsd": 25.000000000000007,
+      "proceedsUsd": 61.126865,
+      "pnlUsd": 36.126864999999995,
+      "pnlPct": 144.50745999999995,
       "costCoverage": 1,
       "txHash": "0x465b7e3844b6a4265320014f19835d37078137174f220b95d05114222ad4dc59",
       "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0x465b7e3844b6a4265320014f19835d37078137174f220b95d05114222ad4dc59"
@@ -482,10 +482,10 @@
       "sellDate": "2026-09-23",
       "daysHeld": 0,
       "amountSold": 1460773.8487194595,
-      "costUsd": 24.800904499999994,
-      "proceedsUsd": 24.33853,
-      "pnlUsd": -0.4623745000000028,
-      "pnlPct": -1.8643453104704424,
+      "costUsd": 24.999999999999993,
+      "proceedsUsd": 24.067083,
+      "pnlUsd": -0.9329169999999998,
+      "pnlPct": -3.7316680000000004,
       "costCoverage": 0.9999999999999997,
       "txHash": "0xe38a8aa4a1e20004626c8d59d0fe90cafdc4f6b3276bfa411161d341cb19b108",
       "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xe38a8aa4a1e20004626c8d59d0fe90cafdc4f6b3276bfa411161d341cb19b108"
@@ -500,6 +500,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-24T18:50:03.253Z",
-    "durationSec": 33
+    "durationSec": 35
   }
 }
