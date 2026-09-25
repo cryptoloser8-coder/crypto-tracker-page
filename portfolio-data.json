@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-25 12:45:38",
-  "totalUsd": 50482.33,
+  "timestamp": "2026-09-25 12:50:38",
+  "totalUsd": 50482.2,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 47.82241131,
-      "valueUsd": 14762.778371397,
+      "valueUsd": 14766.604164301798,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -122,7 +122,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 87.04993797281796,
-      "valueUsd": 1895.9476490479751,
+      "valueUsd": 1889.8541533898779,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -165,7 +165,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 96714.5556693868,
-      "valueUsd": 434.73192773389366,
+      "valueUsd": 435.69907329058753,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -195,23 +195,23 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 186.85589370448884
+      "valueUsd": 186.90481481225956
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 119.283355,
-      "valueUsd": 119.283355
+      "balance": 119.80751599999999,
+      "valueUsd": 119.80751599999999
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 67.599432,
-      "valueUsd": 67.599432
+      "balance": 68.181833,
+      "valueUsd": 68.181833
     },
     {
       "symbol": "ETH",
@@ -219,7 +219,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0166565491803498,
-      "valueUsd": 45.17039602571521
+      "valueUsd": 45.182222175633264
     },
     {
       "symbol": "ROADSTER",
@@ -277,7 +277,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 346.9698124676274,
-      "valueUsd": 0.07806820780521616,
+      "valueUsd": 0.07772123799274853,
       "contract": "0x3b401114112479aff47874b155454827a131faad",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x3fa458bdcbea0357e426818088be40726c83d5f4f73d61c639690d4db65c1e53"
     },
@@ -307,7 +307,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 286.85814226704053,
-      "valueUsd": 0.035426980569979505,
+      "valueUsd": 0.035914639411833475,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x286d656e60f80d10e409a38280902e0959e870d801215ee9a7422a0668b2b6f3"
     },
@@ -526,22 +526,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 67.599432,
-    "totalMarginUsed": 53.567828,
+    "accountValue": 68.181833,
+    "totalMarginUsed": 53.626068,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5443,
         "entryPx": 0.095537,
-        "markPx": 0.09841599999999999,
-        "positionValueUsd": 535.678288,
-        "unrealizedPnlUsd": 15.670397,
-        "roePct": 30.134921549999998,
+        "markPx": 0.09852299999999999,
+        "positionValueUsd": 536.260689,
+        "unrealizedPnlUsd": 16.252798,
+        "roePct": 31.25490648,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0701677877,
-        "marginUsedUsd": 53.567828
+        "marginUsedUsd": 53.626068
       }
     ]
   },
@@ -549,6 +549,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-25T11:55:03.230Z",
-    "durationSec": 36
+    "durationSec": 35
   }
 }
