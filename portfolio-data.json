@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-25 23:15:40",
-  "totalUsd": 50763.36,
+  "timestamp": "2026-09-25 23:20:39",
+  "totalUsd": 50786.34,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 47.82241131,
-      "valueUsd": 15144.4012136508,
+      "valueUsd": 15174.5293327761,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -113,20 +113,20 @@
       "name": "FOMO - gotowka w aplikacji (USDC na Solanie)",
       "walletName": "FOMO APP",
       "network": "fomo",
-      "balance": 2907.320281,
-      "valueUsd": 2907.320281
+      "balance": 2657.320281,
+      "valueUsd": 2657.320281
     },
     {
       "symbol": "WTH",
       "name": "what the hook?",
       "walletName": "FOMO APP",
       "network": "robinhood",
-      "balance": 87.04993797281796,
-      "valueUsd": 1751.4447520130973,
+      "balance": 99.36718693034938,
+      "valueUsd": 2003.2424885158434,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
-        "avgPriceUsd": 17.231488441363243,
+        "avgPriceUsd": 17.611447541799166,
         "dateAcquired": "2026-09-19",
         "source": "auto",
         "purchases": [
@@ -155,6 +155,19 @@
             "paidAmount": null,
             "paidSymbol": "USD",
             "priceSource": "fomo-cash"
+          },
+          {
+            "date": "2026-09-25",
+            "receivedAmount": 12.317248957531426,
+            "costUsd": 250,
+            "avgPriceUsd": 20.29674003196441,
+            "source": "fomo",
+            "txHash": "0xcdc9651956a188d121c9a88c42c893124494bcecb0190b311f050a35d831b866",
+            "network": "robinhood",
+            "explorerUrl": "https://robinhoodchain.blockscout.com/tx/0xcdc9651956a188d121c9a88c42c893124494bcecb0190b311f050a35d831b866",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
           }
         ]
       }
@@ -165,7 +178,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 96714.5556693868,
-      "valueUsd": 466.5510165491219,
+      "valueUsd": 457.2664192048608,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -242,6 +255,16 @@
           }
         ]
       }
+    },
+    {
+      "symbol": "FOOMS",
+      "name": "FOMO users. Airdrop is yours.",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1022.5314549252686,
+      "valueUsd": 0.33273173543268236,
+      "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xcb094467efff769321cd8098cedd7e9cf774aecd845de5876defe9c862020235"
     },
     {
       "symbol": "GROK",
@@ -536,6 +559,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-25T20:05:03.417Z",
-    "durationSec": 37
+    "durationSec": 35
   }
 }
