@@ -725,3 +725,244 @@ tr.closed-sale-row td {
     background: rgba(255, 255, 255, 0.015);
     font-size: 12px;
 }
+
+/* =====================================================================
+   WERSJA NA TELEFON (ekrany do 760 px szerokości)
+   Wszystko poniżej działa WYŁĄCZNIE na wąskich ekranach - wygląd na PC
+   się nie zmienia. index.html i app.js nie są ruszane: tabele zamieniają
+   się w karty samym CSS-em, a nazwy kolumn dokleja ::before.
+   UWAGA: jeśli kiedyś zmieni się kolejność kolumn w tabeli (index.html /
+   app.js), trzeba poprawić numery nth-child poniżej.
+   ===================================================================== */
+@media (max-width: 760px) {
+
+    /* --- Ogólne odstępy --- */
+    main { padding: 16px 12px 32px; }
+    .card { padding: 16px; border-radius: 16px; }
+    .card-value { font-size: 26px; }
+    .dashboard-grid { gap: 16px; margin-bottom: 16px; }
+
+    /* --- Nagłówek: przyciski i status zawijają się zamiast wychodzić za ekran --- */
+    .topbar { margin-bottom: 18px; gap: 14px; }
+    .brand-mark { width: 38px; height: 38px; }
+    .welcome h1 { font-size: 20px; }
+    .topbar-right { width: 100%; flex-wrap: wrap; gap: 8px; }
+    .topbar-right .secondary-button { flex: 1 1 0; padding: 10px 12px; }
+    .topbar-status { order: -1; flex-basis: 100%; text-align: left; }
+
+    .alert code { overflow-wrap: anywhere; }
+    .growth { border-radius: 12px; }
+    .pnl-summary-row { flex-wrap: wrap; }
+
+    /* --- Wiersze tytułowe kart (szukajka, przyciski, pasek wykresu) --- */
+    .card-title-row > div { width: 100%; flex-wrap: wrap; }
+    #asset-search { flex: 1 1 100%; min-width: 0; }
+    #add-manual-btn { flex: 1 1 auto; }
+
+    /* --- Wykres wartości portfela --- */
+    .chart-toolbar .timeframe-selector { flex: 1 1 100%; }
+    .chart-toolbar .timeframe-btn { flex: 1 1 0; padding: 8px 0; font-size: 12px; }
+    .chart-container { height: 200px; }
+    /* Pionowe przeciąganie po wykresie przewija stronę, poziome przesuwa wykres */
+    #performanceChart { touch-action: pan-y !important; }
+    .chart-hint { font-size: 0; text-align: left; }
+    .chart-hint::after { content: "Dwa palce = przybliż, przeciągnij w bok = przesuń"; font-size: 12px; }
+
+    /* --- Formularze: 16 px, żeby iPhone nie przybliżał strony przy wpisywaniu --- */
+    .search-input,
+    .add-manual-form input,
+    .add-manual-form select,
+    .auth-card input { font-size: 16px; }
+    .add-manual-form { padding: 12px; }
+    .add-manual-form input,
+    .add-manual-form select { flex: 1 1 100%; }
+    .add-manual-form .refresh-button,
+    .add-manual-form .secondary-button { flex: 1 1 auto; }
+    .auth-card { width: calc(100vw - 32px); max-width: 360px; padding: 24px; }
+
+    /* --- Większe przyciski pod palec --- */
+    .row-action-btn { padding: 8px 12px; font-size: 13px; }
+    .secondary-button { padding: 9px 14px; }
+    .hidden-item-row { flex-wrap: wrap; gap: 8px; }
+
+    /* --- Asset Allocation: legenda jako karty zamiast szerokiej tabeli --- */
+    .allocation-chart-container { width: 170px; height: 170px; }
+    .allocation-legend { flex: 0 0 auto; }
+    #allocation-legend > div > div { min-width: 0 !important; gap: 10px !important; }
+    #allocation-legend .allocation-legend-row.muted-note { display: none !important; }
+    #allocation-legend .allocation-legend-row {
+        grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+        row-gap: 10px !important;
+        column-gap: 8px !important;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+    }
+    #allocation-legend .allocation-legend-row > span:nth-child(1) { grid-column: 1 / 4; grid-row: 1; font-weight: 600; }
+    #allocation-legend .allocation-legend-row > span:nth-child(2) { grid-column: 4; grid-row: 1; text-align: right; }
+    #allocation-legend .allocation-legend-row > span:nth-child(3) { grid-column: 1 / -1; grid-row: 2; font-size: 16px; font-weight: 600; }
+    #allocation-legend .allocation-legend-row > span:nth-child(9) { grid-column: 1 / -1; }
+    #allocation-legend .allocation-legend-row > span:nth-child(4)::before { content: "24h"; }
+    #allocation-legend .allocation-legend-row > span:nth-child(5)::before { content: "7D"; }
+    #allocation-legend .allocation-legend-row > span:nth-child(6)::before { content: "30D"; }
+    #allocation-legend .allocation-legend-row > span:nth-child(7)::before { content: "90D"; }
+    #allocation-legend .allocation-legend-row > span:nth-child(8)::before { content: "Całość"; }
+    #allocation-legend .allocation-legend-row > span:nth-child(9)::before { content: "Trend 24h"; }
+
+    /* --- Tabele -> karty: wspólne zasady --- */
+    table { display: block; overflow: visible; margin-top: 12px; }
+    table > thead,
+    table > tbody { display: block; }
+    table > tbody > tr { display: block; }
+    table > tbody > tr > td {
+        display: block;
+        padding: 0;
+        border: none;
+        background: transparent !important;
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+    table > tbody > tr > td[colspan] { padding: 14px 0; }
+
+    /* Nagłówek tabeli znika; w tabeli aktywów kolumny sortowalne zostają jako "chipy" */
+    table > thead > tr { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    table > thead > tr > th { display: none; }
+    table > thead > tr > th.sortable {
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 11px;
+        border: 1px solid var(--border-color);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        font-size: 10px;
+    }
+    table > thead > tr:has(> th.sortable) { margin-bottom: 12px; }
+    table > thead > tr:has(> th.sortable)::before {
+        content: "Sortuj:";
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-right: 2px;
+    }
+
+    /* Wygląd pojedynczej karty */
+    #assets-table-body > tr.asset-row,
+    #hl-positions-body > tr,
+    #closed-table-body > tr {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 12px;
+        row-gap: 10px;
+        padding: 14px;
+        margin-bottom: 10px;
+        background: rgba(255, 255, 255, 0.025);
+        border: 1px solid var(--border-color);
+        border-radius: 14px;
+    }
+
+    /* Etykiety nad wartościami (nazwy kolumn) */
+    #assets-table-body > tr.asset-row > td::before,
+    #hl-positions-body > tr > td::before,
+    #closed-table-body > tr > td::before,
+    .purchase-history-table > tbody > tr > td::before,
+    #allocation-legend .allocation-legend-row > span::before {
+        display: block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: 3px;
+    }
+
+    /* --- Skład portfela (Assets) --- */
+    table > tbody > tr.group-header-row {
+        margin: 18px 0 10px;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+    }
+    table > tbody > tr.group-header-row:first-child { margin-top: 4px; }
+    table > tbody > tr.group-header-row > td { padding: 0 2px 8px; font-size: 13px; }
+
+    #assets-table-body > tr.asset-row > td:nth-child(1) { grid-column: 1 / 3; grid-row: 1; font-size: 15px; }
+    #assets-table-body > tr.asset-row > td:nth-child(5) { grid-column: 3; grid-row: 1; text-align: right; font-size: 15px; font-weight: 600; }
+    #assets-table-body > tr.asset-row > td:nth-child(2) { grid-column: 1 / -1; grid-row: 2; margin-top: -6px; font-size: 12px; color: var(--text-muted); }
+    #assets-table-body > tr.asset-row > td:nth-child(3) { grid-column: 1; grid-row: 3; }
+    #assets-table-body > tr.asset-row > td:nth-child(4) { grid-column: 2; grid-row: 3; }
+    #assets-table-body > tr.asset-row > td:nth-child(7) { grid-column: 3; grid-row: 3; }
+    #assets-table-body > tr.asset-row > td:nth-child(6) { grid-column: 1 / -1; grid-row: 4; }
+    #assets-table-body > tr.asset-row > td:nth-child(8) {
+        grid-column: 1 / -1;
+        grid-row: 5;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border-color);
+    }
+    #assets-table-body > tr.asset-row > td:nth-child(3)::before { content: "Ilość"; }
+    #assets-table-body > tr.asset-row > td:nth-child(4)::before { content: "Cena"; }
+    #assets-table-body > tr.asset-row > td:nth-child(7)::before { content: "Dni"; }
+    #assets-table-body > tr.asset-row > td:nth-child(6)::before { content: "Zysk / strata"; }
+
+    /* Rozwinięta historia zakupów pod kartą tokena */
+    table > tbody > tr.purchase-detail-row {
+        margin: -4px 0 12px 12px;
+        padding: 12px;
+        background: rgba(212, 175, 55, 0.04);
+        border: 1px solid rgba(212, 175, 55, 0.18);
+        border-radius: 14px;
+    }
+    table > tbody > tr.purchase-detail-row > td { padding: 0; }
+    .purchase-history-table { margin-top: 4px; }
+    .purchase-history-table td { padding: 0; border: none; }
+    .purchase-history-table > tbody > tr {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px 10px;
+        padding: 10px 0;
+        border-top: 1px solid var(--border-color);
+    }
+    .purchase-history-table > tbody > tr > td:nth-child(5) { grid-column: span 2; }
+    .purchase-history-table > tbody > tr > td:nth-child(6),
+    .purchase-history-table > tbody > tr > td:nth-child(7) { grid-column: 1 / -1; }
+    .purchase-history-table > tbody > tr > td:nth-child(1)::before { content: "Data"; }
+    .purchase-history-table > tbody > tr > td:nth-child(2)::before { content: "Ilość"; }
+    .purchase-history-table > tbody > tr > td:nth-child(3)::before { content: "Cena/szt."; }
+    .purchase-history-table > tbody > tr > td:nth-child(4)::before { content: "Koszt"; }
+    .purchase-history-table > tbody > tr > td:nth-child(5)::before { content: "Zysk / strata"; }
+    .purchase-history-table > tbody > tr > td:nth-child(6)::before { content: "Źródło"; }
+    .purchase-history-table > tbody > tr > td:nth-child(7)::before { content: "Tx"; }
+
+    /* --- Hyperliquid: otwarte pozycje --- */
+    #hl-positions-body > tr > td:nth-child(1) { grid-column: span 2; font-size: 15px; }
+    #hl-positions-body > tr > td:nth-child(2) { text-align: right; font-weight: 600; }
+    #hl-positions-body > tr > td:nth-child(7),
+    #hl-positions-body > tr > td:nth-child(9) { grid-column: span 2; }
+    #hl-positions-body > tr > td:nth-child(3)::before { content: "Wielkość"; }
+    #hl-positions-body > tr > td:nth-child(4)::before { content: "Wejście"; }
+    #hl-positions-body > tr > td:nth-child(5)::before { content: "Cena"; }
+    #hl-positions-body > tr > td:nth-child(6)::before { content: "Wartość"; }
+    #hl-positions-body > tr > td:nth-child(7)::before { content: "Zysk / strata"; }
+    #hl-positions-body > tr > td:nth-child(8)::before { content: "Dźwignia"; }
+    #hl-positions-body > tr > td:nth-child(9)::before { content: "Likwidacja"; }
+
+    /* --- Zamknięte pozycje --- */
+    #closed-table-body > tr > td:nth-child(1) { grid-column: 1 / 3; grid-row: 1; font-size: 15px; }
+    #closed-table-body > tr > td:nth-child(8) { grid-column: 3; grid-row: 1; text-align: right; font-weight: 600; }
+    #closed-table-body > tr > td:nth-child(9) { grid-column: 1 / -1; }
+    #closed-table-body > tr > td:nth-child(2)::before { content: "Kupiono"; }
+    #closed-table-body > tr > td:nth-child(3)::before { content: "Sprzedano"; }
+    #closed-table-body > tr > td:nth-child(4)::before { content: "Dni"; }
+    #closed-table-body > tr > td:nth-child(5)::before { content: "Ilość"; }
+    #closed-table-body > tr > td:nth-child(6)::before { content: "Koszt"; }
+    #closed-table-body > tr > td:nth-child(7)::before { content: "Przychód"; }
+    #closed-table-body > tr > td:nth-child(9)::before { content: "Tx"; }
+    /* komunikat "Brak zamkniętych pozycji" / "Oczekiwanie na dane" na całą szerokość */
+    #closed-table-body > tr > td[colspan] { grid-column: 1 / -1; grid-row: auto; text-align: center; }
+    /* pojedyncze sprzedaże pod rozwiniętą pozycją */
+    #closed-table-body > tr.closed-sale-row {
+        margin-left: 14px;
+        background: rgba(255, 255, 255, 0.012);
+        border-style: dashed;
+    }
+}
