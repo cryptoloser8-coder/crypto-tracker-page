@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-26 14:15:40",
-  "totalUsd": 51501.35,
+  "timestamp": "2026-09-26 14:20:39",
+  "totalUsd": 51477.92,
   "assets": [
     {
       "symbol": "WTAO",
@@ -114,7 +114,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 99.36718693034938,
-      "valueUsd": 1992.610199514296,
+      "valueUsd": 1990.3247542148981,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -178,7 +178,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 176592.0903621684,
-      "valueUsd": 1252.5676969388605,
+      "valueUsd": 1235.261672083368,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -234,7 +234,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 185.10644732942035
+      "valueUsd": 185.1498561996958
     },
     {
       "symbol": "MOONCOIN",
@@ -271,8 +271,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 103.180145,
-      "valueUsd": 103.180145
+      "balance": 101.129922,
+      "valueUsd": 101.129922
     },
     {
       "symbol": "ANDY",
@@ -309,8 +309,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 68.999469,
-      "valueUsd": 68.999469
+      "balance": 67.15426799999999,
+      "valueUsd": 67.15426799999999
     },
     {
       "symbol": "ETH",
@@ -318,7 +318,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0166565491803498,
-      "valueUsd": 44.747486242026135
+      "valueUsd": 44.757979868009755
     },
     {
       "symbol": "ROADSTER",
@@ -456,7 +456,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 484.311906199967,
-      "valueUsd": 0.0030855511543999895,
+      "valueUsd": 0.0030763492281821905,
       "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x83eb1c26c40bb39ffc66f4c198fe1ee8e7192b1cd451a835104315ade2a98f75"
     },
@@ -645,36 +645,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 103.180145,
-    "totalMarginUsed": 102.304304,
+    "accountValue": 101.129922,
+    "totalMarginUsed": 102.099282,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5287,
         "entryPx": 0.097178,
-        "markPx": 0.09751800000000001,
-        "positionValueUsd": 515.577666,
-        "unrealizedPnlUsd": 1.79758,
-        "roePct": 3.4987342800000003,
+        "markPx": 0.09738899999999999,
+        "positionValueUsd": 514.895643,
+        "unrealizedPnlUsd": 1.115557,
+        "roePct": 2.17127333,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0735960423,
-        "marginUsedUsd": 51.557766
+        "liquidationPx": 0.073854828,
+        "marginUsedUsd": 51.489564
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 136820,
         "entryPx": 0.003668,
-        "markPx": 0.003709,
-        "positionValueUsd": 507.46538,
-        "unrealizedPnlUsd": 5.546587,
-        "roePct": 11.05076574,
+        "markPx": 0.003699,
+        "positionValueUsd": 506.09718,
+        "unrealizedPnlUsd": 4.178387,
+        "roePct": 8.324826759999999,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0027846074,
-        "marginUsedUsd": 50.746538
+        "liquidationPx": 0.0027895923,
+        "marginUsedUsd": 50.609718
       }
     ]
   },
@@ -682,6 +682,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-26T12:15:02.808Z",
-    "durationSec": 38
+    "durationSec": 36
   }
 }
