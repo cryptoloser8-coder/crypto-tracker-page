@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-27 14:10:43",
-  "totalUsd": 52770.59,
+  "timestamp": "2026-09-27 14:15:46",
+  "totalUsd": 52762.24,
   "assets": [
     {
       "symbol": "WTAO",
@@ -114,7 +114,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 164.15534829131315,
-      "valueUsd": 2938.3807344145052,
+      "valueUsd": 2935.097627448679,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -257,15 +257,15 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 186.62437972968658
+      "valueUsd": 186.50242147510318
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 112.819366,
-      "valueUsd": 112.819366
+      "balance": 109.509402,
+      "valueUsd": 109.509402
     },
     {
       "symbol": "ANDY",
@@ -273,7 +273,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 90963749909.96307,
-      "valueUsd": 97.24024865375051,
+      "valueUsd": 98.69566865230995,
       "contract": "0x01ca78a2b5f1a9152d8a3a625bd7df5765eee1d8",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x501fef55ac34982351aa4bb0b9d9ab8bb8856aa2",
       "costBasis": {
@@ -302,8 +302,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 77.627517,
-      "valueUsd": 77.627517
+      "balance": 74.64854999999999,
+      "valueUsd": 74.64854999999999
     },
     {
       "symbol": "ETH",
@@ -311,7 +311,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0166565491803498,
-      "valueUsd": 45.11443002046924
+      "valueUsd": 45.084947928420014
     },
     {
       "symbol": "ROADSTER",
@@ -319,7 +319,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1351392.2779627326,
-      "valueUsd": 35.67675613821614,
+      "valueUsd": 35.595672601538375,
       "contract": "0x9bd126ba6a853877d8637e53627fa237798ad09e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xda51ee3ff37d8437922c69cf9ec5d7e1f6f076bb9fcfdcd25cfd0dee32e9713a",
       "costBasis": {
@@ -725,36 +725,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 112.819366,
-    "totalMarginUsed": 103.315477,
+    "accountValue": 109.509402,
+    "totalMarginUsed": 102.98448,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5287,
         "entryPx": 0.097178,
-        "markPx": 0.09805900000000001,
-        "positionValueUsd": 518.437933,
-        "unrealizedPnlUsd": 4.657847,
-        "roePct": 9.065837949999999,
+        "markPx": 0.097847,
+        "positionValueUsd": 517.317089,
+        "unrealizedPnlUsd": 3.537003,
+        "roePct": 6.88427422,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0723185532,
-        "marginUsedUsd": 51.843793
+        "liquidationPx": 0.0727326103,
+        "marginUsedUsd": 51.731708
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 136820,
         "entryPx": 0.003668,
-        "markPx": 0.003762,
-        "positionValueUsd": 514.71684,
-        "unrealizedPnlUsd": 12.798047,
-        "roePct": 25.4982423,
+        "markPx": 0.003746,
+        "positionValueUsd": 512.52772,
+        "unrealizedPnlUsd": 10.608927,
+        "roePct": 21.13673994,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0027673374,
-        "marginUsedUsd": 51.471684
+        "liquidationPx": 0.0027755295,
+        "marginUsedUsd": 51.252772
       }
     ]
   },
@@ -762,6 +762,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-27T12:30:03.796Z",
-    "durationSec": 41
+    "durationSec": 43
   }
 }
