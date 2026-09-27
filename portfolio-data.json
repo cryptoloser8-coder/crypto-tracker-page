@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-27 03:50:43",
-  "totalUsd": 51984.97,
+  "timestamp": "2026-09-27 03:55:46",
+  "totalUsd": 51932.17,
   "assets": [
     {
       "symbol": "WTAO",
@@ -201,7 +201,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 176592.0903621684,
-      "valueUsd": 1013.2854144981223,
+      "valueUsd": 961.0141557509205,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -257,7 +257,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 185.80856858038325
+      "valueUsd": 185.80374537257487
     },
     {
       "symbol": "ANDY",
@@ -294,16 +294,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 84.702188,
-      "valueUsd": 84.702188
+      "balance": 84.344598,
+      "valueUsd": 84.344598
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 52.350836,
-      "valueUsd": 52.350836
+      "balance": 52.165824999999984,
+      "valueUsd": 52.165824999999984
     },
     {
       "symbol": "ETH",
@@ -311,7 +311,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0166565491803498,
-      "valueUsd": 44.9172164781739
+      "valueUsd": 44.91605051973127
     },
     {
       "symbol": "ROADSTER",
@@ -349,7 +349,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 5000,
-      "valueUsd": 1.561,
+      "valueUsd": 1.576,
       "contract": "0x0a58a2cfebead61af0554ebb460a85e9bb553387",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xda1b12dda3d868d9864ca9ea5244acb4bec0fcfcce78653852dbf0d54039f498"
     },
@@ -369,7 +369,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 313.8712731064174,
-      "valueUsd": 0.10542936063644559,
+      "valueUsd": 0.10558629627299881,
       "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5942e0a9a92acb67c62f8d0e7644d9916e0f107328972d8822994041f2b282df"
     },
@@ -519,7 +519,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.0007284,
+      "valueUsd": 0.0007276,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
@@ -705,36 +705,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 84.702188,
-    "totalMarginUsed": 100.47498,
+    "accountValue": 84.344598,
+    "totalMarginUsed": 100.439221,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5287,
         "entryPx": 0.097178,
-        "markPx": 0.09618,
-        "positionValueUsd": 508.50366,
-        "unrealizedPnlUsd": -5.276426,
-        "roePct": -10.26981416,
+        "markPx": 0.09619,
+        "positionValueUsd": 508.55653,
+        "unrealizedPnlUsd": -5.223556,
+        "roePct": -10.166910210000001,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0757548607,
-        "marginUsedUsd": 50.850366
+        "liquidationPx": 0.0758324964,
+        "marginUsedUsd": 50.855653
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 136820,
         "entryPx": 0.003668,
-        "markPx": 0.003627,
-        "positionValueUsd": 496.24614,
-        "unrealizedPnlUsd": -5.672653,
-        "roePct": -11.30193386,
+        "markPx": 0.003624,
+        "positionValueUsd": 495.83568,
+        "unrealizedPnlUsd": -6.083113,
+        "roePct": -12.11971555,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0028377315,
-        "marginUsedUsd": 49.624614
+        "liquidationPx": 0.0028373451,
+        "marginUsedUsd": 49.583568
       }
     ]
   },
@@ -742,6 +742,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-27T00:20:03.558Z",
-    "durationSec": 40
+    "durationSec": 43
   }
 }
