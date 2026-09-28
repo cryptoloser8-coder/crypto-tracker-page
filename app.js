@@ -965,6 +965,11 @@ function renderDashboard() {
                     pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}%${privacyMode ? '' : ` (${sign}$${pnl.pnlUsd.toFixed(2)})`}</span>${autoTag}`;
                 }
                 const daysCell = pnl && pnl.daysHeld !== null ? pnl.daysHeld : '<span class="muted-note">—</span>';
+                // Średnia cena wejścia pod aktualną ceną (w tej samej komórce, żeby nie zmieniać
+                // liczby kolumn - blok mobilny w style.css numeruje je przez nth-child).
+                const entryPriceHtml = pnl && pnl.avgPriceUsd
+                    ? `<div class="muted-note entry-price" title="Średnia cena wejścia${pnl.isAuto ? ' (auto)' : ' (wpisana ręcznie)'}">wejście: ${formatUnitPrice(Number(pnl.avgPriceUsd))}</div>`
+                    : '';
 
                 const actionCell = `
                     <button class="row-action-btn" data-action="set-cost-basis" data-key="${escapeHtml(key)}">Cena zakupu</button>
@@ -982,7 +987,7 @@ function renderDashboard() {
                     <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
                     <td>${money(balance.toFixed(4))}</td>
-                    <td>${formatUnitPrice(getUnitPrice(asset))}</td>
+                    <td>${formatUnitPrice(getUnitPrice(asset))}${entryPriceHtml}</td>
                     <td>${money(`$${valueUsd.toFixed(2)}`)}</td>
                     <td>${pnlCell}</td>
                     <td>${daysCell}</td>
