@@ -1,18 +1,18 @@
 {
-  "timestamp": "2026-09-28 08:10:44",
-  "totalUsd": 49396.94,
+  "timestamp": "2026-09-28 08:15:48",
+  "totalUsd": 49456.37,
   "assets": [
     {
       "symbol": "WTAO",
       "name": "Wrapped TAO",
       "walletName": "Main",
       "network": "ethereum",
-      "balance": 47.82241131,
-      "valueUsd": 14627.4409473897,
+      "balance": 72.329469047,
+      "valueUsd": 22123.414697405893,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
-        "avgPriceUsd": 261.3837248601089,
+        "avgPriceUsd": 276.512468064765,
         "dateAcquired": "2026-09-20",
         "source": "auto",
         "purchases": [
@@ -41,31 +41,34 @@
             "paidAmount": 2500,
             "paidSymbol": "USDT",
             "priceSource": "stable"
+          },
+          {
+            "date": "2026-09-28",
+            "receivedAmount": 24.507057736999997,
+            "costUsd": 7500,
+            "avgPriceUsd": 306.0342894070361,
+            "source": "swap",
+            "txHash": "0x9d18d486e2064452ccfe4b762f742fa325bdea0ab063869715631551edcfa4a3",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x9d18d486e2064452ccfe4b762f742fa325bdea0ab063869715631551edcfa4a3",
+            "paidAmount": 7500,
+            "paidSymbol": "USDT",
+            "priceSource": "stable"
           }
         ]
       }
-    },
-    {
-      "symbol": "USDT",
-      "name": "Tether USDt",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 13823.750924,
-      "valueUsd": 13823.750924,
-      "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
-      "dexscreenerUrl": null
     },
     {
       "symbol": "WDOGE",
       "name": "Wrapped DogeCoin",
       "walletName": "Main",
       "network": "ethereum",
-      "balance": 114527.1426619718,
-      "valueUsd": 10651.024267563376,
+      "balance": 146581.3755835377,
+      "valueUsd": 13702.426989549103,
       "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xc3d7aa944105d3fafe07fc1822102449c916a8d0",
       "costBasis": {
-        "avgPriceUsd": 0.10041287796677496,
+        "avgPriceUsd": 0.0989211619980763,
         "dateAcquired": "2026-09-23",
         "source": "auto",
         "purchases": [
@@ -94,6 +97,19 @@
             "paidAmount": 1500,
             "paidSymbol": "USDT",
             "priceSource": "stable"
+          },
+          {
+            "date": "2026-09-28",
+            "receivedAmount": 32054.232921565923,
+            "costUsd": 3000,
+            "avgPriceUsd": 0.09359138330780692,
+            "source": "swap",
+            "txHash": "0x78936cac0fbdb8ad2dc7aaf4cef7b0070d1d9c5cc752196925f08984f515172e",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x78936cac0fbdb8ad2dc7aaf4cef7b0070d1d9c5cc752196925f08984f515172e",
+            "paidAmount": 3000,
+            "paidSymbol": "USDT",
+            "priceSource": "stable"
           }
         ]
       }
@@ -109,12 +125,22 @@
       "dexscreenerUrl": null
     },
     {
+      "symbol": "USDT",
+      "name": "Tether USDt",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 3323.750924,
+      "valueUsd": 3323.750924,
+      "contract": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+      "dexscreenerUrl": null
+    },
+    {
       "symbol": "WTH",
       "name": "what the hook?",
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 164.15534829131315,
-      "valueUsd": 2649.467321421794,
+      "valueUsd": 2669.165963216752,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -183,7 +209,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 176592.0903621684,
-      "valueUsd": 1139.3721670167106,
+      "valueUsd": 1132.6616675829482,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -254,8 +280,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 102.138496,
-      "valueUsd": 102.138496
+      "balance": 104.847947,
+      "valueUsd": 104.847947
     },
     {
       "symbol": "ANDY",
@@ -292,16 +318,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 58.309145,
-      "valueUsd": 58.309145
+      "balance": 60.58093199999999,
+      "valueUsd": 60.58093199999999
     },
     {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main",
       "network": "ethereum",
-      "balance": 0.0166565491803498,
-      "valueUsd": 44.12119999284498
+      "balance": 0.014425479519574983,
+      "valueUsd": 38.21136418981178
     },
     {
       "symbol": "ROADSTER",
@@ -464,16 +490,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x2419d1cd3f7f350b3c97b0d0ac57ab28e19ba6af0481007d6122158d1d95bbd8"
     },
     {
-      "symbol": "JOLLY",
-      "name": "Jollybot",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 134.04558087477858,
-      "valueUsd": 0.0072103117952543394,
-      "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x0642c4ea75731104310d48dfc466b4baacc406f771abbaddb748a3e7d4e86979"
-    },
-    {
       "symbol": "GTA 6",
       "name": "Grand Theft Auto VI",
       "walletName": "Main",
@@ -482,6 +498,16 @@
       "valueUsd": 0.007187,
       "contract": "0xc380178c5a770a11740ed0d6388c855a629afe0f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x002952096ae7bdb983a516472947fe67a7f63c6a"
+    },
+    {
+      "symbol": "JOLLY",
+      "name": "Jollybot",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 134.04558087477858,
+      "valueUsd": 0.007038733451734623,
+      "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x0642c4ea75731104310d48dfc466b4baacc406f771abbaddb748a3e7d4e86979"
     },
     {
       "symbol": "GPM",
@@ -559,7 +585,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000002128,
+      "valueUsd": 0.000002136,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -745,36 +771,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 102.138496,
-    "totalMarginUsed": 102.871487,
+    "accountValue": 104.847947,
+    "totalMarginUsed": 103.142433,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 5651,
         "entryPx": 0.092925,
-        "markPx": 0.092892,
-        "positionValueUsd": 524.932692,
-        "unrealizedPnlUsd": -0.186683,
-        "roePct": -0.35550582999999997,
+        "markPx": 0.093191,
+        "positionValueUsd": 526.622341,
+        "unrealizedPnlUsd": 1.502966,
+        "roePct": 2.8621415800000003,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0724494349,
-        "marginUsedUsd": 52.493269
+        "liquidationPx": 0.0722689709,
+        "marginUsedUsd": 52.662234
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 145686,
         "entryPx": 0.003463,
-        "markPx": 0.003458,
-        "positionValueUsd": 503.782188,
-        "unrealizedPnlUsd": -0.72964,
-        "roePct": -1.44622972,
+        "markPx": 0.0034649999999999998,
+        "positionValueUsd": 504.80199,
+        "unrealizedPnlUsd": 0.290162,
+        "roePct": 0.57513419,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0026650553,
-        "marginUsedUsd": 50.378218
+        "liquidationPx": 0.0026534575,
+        "marginUsedUsd": 50.480199
       }
     ]
   },
@@ -782,6 +808,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-28T04:45:02.917Z",
-    "durationSec": 40
+    "durationSec": 45
   }
 }
