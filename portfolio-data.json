@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-28 04:40:44",
-  "totalUsd": 51482.25,
+  "timestamp": "2026-09-28 04:45:53",
+  "totalUsd": 51483.2,
   "assets": [
     {
       "symbol": "WTAO",
@@ -193,7 +193,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 176592.0903621684,
-      "valueUsd": 1204.5346483603507,
+      "valueUsd": 1205.4176088121615,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -257,7 +257,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06890296869115733,
-      "valueUsd": 182.72240461270633
+      "valueUsd": 182.76167930486025
     },
     {
       "symbol": "USDC",
@@ -303,7 +303,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0166565491803498,
-      "valueUsd": 44.17116964038603
+      "valueUsd": 44.18066387341882
     },
     {
       "symbol": "ROADSTER",
@@ -414,6 +414,16 @@
       "valueUsd": 0.034690996330392694,
       "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf98e7820d93a5513a7f290af2519077a1ce32e6334599ea9f5ee59e4137ed53a"
+    },
+    {
+      "symbol": "YFTE",
+      "name": "YFTether",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.01,
+      "valueUsd": 0.02015,
+      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x2dc9136ace4077d5060131c0eccd1635897c75dd"
     },
     {
       "symbol": "COPCAT",
@@ -586,16 +596,6 @@
       "dexscreenerUrl": null
     },
     {
-      "symbol": "YFTE",
-      "name": "YFTether",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.01,
-      "valueUsd": 0,
-      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
-      "dexscreenerUrl": null
-    },
-    {
       "symbol": "DOG",
       "name": "Bull Dog",
       "walletName": "Main 2",
@@ -742,9 +742,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy",
-    "lastFullRescanAt": "2026-09-28T00:45:02.790Z",
-    "durationSec": 41
+    "mode": "full",
+    "reason": "co 4h",
+    "lastFullRescanAt": "2026-09-28T04:45:02.917Z",
+    "durationSec": 51
   }
 }
