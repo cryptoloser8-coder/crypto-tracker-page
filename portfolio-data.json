@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-30 16:20:49",
-  "totalUsd": 49760.22,
+  "timestamp": "2026-09-30 16:25:51",
+  "totalUsd": 49462.77,
   "assets": [
     {
       "symbol": "WTAO",
@@ -115,14 +115,34 @@
       }
     },
     {
-      "symbol": "USDC",
-      "name": "USDC",
+      "symbol": "NEURAL",
+      "name": "NeuralAI",
       "walletName": "Main 2",
       "network": "ethereum",
-      "balance": 4952.334897,
-      "valueUsd": 4952.334897,
-      "contract": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "dexscreenerUrl": null
+      "balance": 3053.548231772596,
+      "valueUsd": 4641.393312294346,
+      "contract": "0x32b053f2cba79f80ada5078cb6b305da92bde6e1",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x1112956589a2bea1b038732db4ea6b0c416ef130",
+      "costBasis": {
+        "avgPriceUsd": 1.6218295966214855,
+        "dateAcquired": "2026-09-30",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-09-30",
+            "receivedAmount": 3053.548231772596,
+            "costUsd": 4952.334897,
+            "avgPriceUsd": 1.6218295966214855,
+            "source": "swap",
+            "txHash": "0x7167eee6cd42dca882742a639466a21d20863a635826ed9f632f2474f0f86ec5",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x7167eee6cd42dca882742a639466a21d20863a635826ed9f632f2474f0f86ec5",
+            "paidAmount": 4952.334897,
+            "paidSymbol": "USDC",
+            "priceSource": "stable"
+          }
+        ]
+      }
     },
     {
       "symbol": "WTH",
@@ -130,7 +150,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3513.917252914789,
+      "valueUsd": 3529.072780191686,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -299,15 +319,15 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.07069790954129876,
-      "valueUsd": 189.6195701598128
+      "valueUsd": 189.8273513159547
     },
     {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main 2",
       "network": "ethereum",
-      "balance": 0.06890296869115733,
-      "valueUsd": 184.80534135624
+      "balance": 0.06812744629054986,
+      "valueUsd": 182.9255315349946
     },
     {
       "symbol": "ANDY",
@@ -383,7 +403,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000971,
-      "valueUsd": 4.041253449999999,
+      "valueUsd": 4.04384602,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -867,6 +887,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-09-30T13:25:03.820Z",
-    "durationSec": 46
+    "durationSec": 48
   }
 }
