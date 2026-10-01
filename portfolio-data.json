@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-01 21:15:51",
-  "totalUsd": 45918.02,
+  "timestamp": "2026-10-01 21:20:50",
+  "totalUsd": 45895.4,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3377.5175074227177,
+      "valueUsd": 3388.3428840490724,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -242,7 +242,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 1336.6533095407917,
+      "valueUsd": 1306.3297592010533,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -310,12 +310,12 @@
       "name": "PepeCoin",
       "walletName": "FOMO APP",
       "network": "ethereum",
-      "balance": 1821.3855249561345,
-      "valueUsd": 281.2219250532272,
+      "balance": 3485.1249915116023,
+      "valueUsd": 538.1032986893914,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
-        "avgPriceUsd": 0.15647428624802745,
+        "avgPriceUsd": 0.1563788964032585,
         "dateAcquired": "2026-10-01",
         "source": "auto",
         "purchases": [
@@ -331,17 +331,22 @@
             "paidAmount": null,
             "paidSymbol": "USD",
             "priceSource": "fomo-cash"
+          },
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1663.7394665554675,
+            "costUsd": 260,
+            "avgPriceUsd": 0.15627446798403627,
+            "source": "fomo",
+            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
           }
         ]
       }
-    },
-    {
-      "symbol": "USDC",
-      "name": "FOMO - gotowka w aplikacji (USDC na Solanie)",
-      "walletName": "FOMO APP",
-      "network": "fomo",
-      "balance": 261.185551,
-      "valueUsd": 261.185551
     },
     {
       "symbol": "USDC",
@@ -403,7 +408,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000971,
-      "valueUsd": 4.05709046,
+      "valueUsd": 4.05756625,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -414,6 +419,14 @@
       "network": "robinhood",
       "balance": 0.000500304817794784,
       "valueUsd": 1.3514283768754485
+    },
+    {
+      "symbol": "USDC",
+      "name": "FOMO - gotowka w aplikacji (USDC na Solanie)",
+      "walletName": "FOMO APP",
+      "network": "fomo",
+      "balance": 1.185551,
+      "valueUsd": 1.185551
     },
     {
       "symbol": "FOOMS",
@@ -691,7 +704,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 5.695e-7,
+      "valueUsd": 5.692e-7,
       "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa3a3895055dbc54d0aa84790c37c62820dd502eb"
     },
@@ -955,6 +968,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-01T17:35:03.635Z",
-    "durationSec": 49
+    "durationSec": 48
   }
 }
