@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08 12:25:59",
-  "totalUsd": 43390.23,
+  "timestamp": "2026-10-08 12:30:58",
+  "totalUsd": 43374.71,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 4960.187570195799,
+      "valueUsd": 4951.527268894715,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 168.89810796498244
+      "valueUsd": 168.78936613908053
     },
     {
       "symbol": "ETH",
@@ -352,15 +352,15 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 156.06184192323647
+      "valueUsd": 155.96136448243607
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 96.057539,
-      "valueUsd": 96.057539
+      "balance": 92.557514,
+      "valueUsd": 92.557514
     },
     {
       "symbol": "ANDY",
@@ -397,8 +397,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 80.74143799999999,
-      "valueUsd": 80.74143799999999
+      "balance": 77.591416,
+      "valueUsd": 77.591416
     },
     {
       "symbol": "ROBINHOOD",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.883167068669787
+      "valueUsd": 13.874228656306625
     },
     {
       "symbol": "XAUt",
@@ -414,7 +414,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.32594512,
+      "valueUsd": 8.33187804,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -572,7 +572,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.0006845,
+      "valueUsd": 0.0006857,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
@@ -1088,36 +1088,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 96.057539,
-    "totalMarginUsed": 109.066336,
+    "accountValue": 92.557514,
+    "totalMarginUsed": 108.716333,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08705099999999999,
-        "positionValueUsd": 546.157974,
-        "unrealizedPnlUsd": -5.225966,
-        "roePct": -9.47790754,
+        "markPx": 0.08682400000000001,
+        "positionValueUsd": 544.733776,
+        "unrealizedPnlUsd": -6.650164,
+        "roePct": -12.06085908,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0643550608,
-        "marginUsedUsd": 54.615797
+        "liquidationPx": 0.0646859227,
+        "marginUsedUsd": 54.473377
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 159679,
         "entryPx": 0.003463,
-        "markPx": 0.0034100000000000003,
-        "positionValueUsd": 544.50539,
-        "unrealizedPnlUsd": -8.613575,
-        "roePct": -15.57273488,
+        "markPx": 0.0033970000000000003,
+        "positionValueUsd": 542.429563,
+        "unrealizedPnlUsd": -10.689402,
+        "roePct": -19.3256834,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0025182464,
-        "marginUsedUsd": 54.450539
+        "liquidationPx": 0.0025271655,
+        "marginUsedUsd": 54.242956
       }
     ]
   },
@@ -1125,6 +1125,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-08T11:50:03.659Z",
-    "durationSec": 56
+    "durationSec": 55
   }
 }
