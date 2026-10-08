@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08 09:10:57",
-  "totalUsd": 43547.37,
+  "timestamp": "2026-10-08 09:16:00",
+  "totalUsd": 43544.89,
   "assets": [
     {
       "symbol": "WTAO",
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 170.89069698335334
+      "valueUsd": 170.76945674547306
     },
     {
       "symbol": "ETH",
@@ -352,23 +352,23 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 157.90299406016538
+      "valueUsd": 157.7909680874249
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 108.454632,
-      "valueUsd": 108.454632
+      "balance": 107.279797,
+      "valueUsd": 107.279797
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 91.902248,
-      "valueUsd": 91.902248
+      "balance": 90.844896,
+      "valueUsd": 90.844896
     },
     {
       "symbol": "ANDY",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 14.046954849211268
+      "valueUsd": 14.036989086431461
     },
     {
       "symbol": "XAUt",
@@ -414,7 +414,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.334642699999998,
+      "valueUsd": 8.33226146,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -1088,36 +1088,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 108.454632,
-    "totalMarginUsed": 110.302619,
+    "accountValue": 107.279797,
+    "totalMarginUsed": 110.185136,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.087978,
-        "positionValueUsd": 551.973972,
-        "unrealizedPnlUsd": 0.590032,
-        "roePct": 1.07009283,
+        "markPx": 0.087918,
+        "positionValueUsd": 551.597532,
+        "unrealizedPnlUsd": 0.213592,
+        "roePct": 0.38737436000000003,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0633058262,
-        "marginUsedUsd": 55.197397
+        "liquidationPx": 0.0634330807,
+        "marginUsedUsd": 55.159753
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 159679,
         "entryPx": 0.003463,
-        "markPx": 0.003451,
-        "positionValueUsd": 551.052229,
-        "unrealizedPnlUsd": -2.066736,
-        "roePct": -3.7365126300000004,
+        "markPx": 0.003446,
+        "positionValueUsd": 550.253834,
+        "unrealizedPnlUsd": -2.865131,
+        "roePct": -5.17995437,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0024815975,
-        "marginUsedUsd": 55.105222
+        "liquidationPx": 0.002483955,
+        "marginUsedUsd": 55.025383
       }
     ]
   },
@@ -1125,6 +1125,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-08T07:45:03.437Z",
-    "durationSec": 54
+    "durationSec": 56
   }
 }
