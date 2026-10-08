@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08 10:30:57",
-  "totalUsd": 43625.66,
+  "timestamp": "2026-10-08 10:35:57",
+  "totalUsd": 43614.99,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5059.781035158264,
+      "valueUsd": 5057.615959832992,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -301,7 +301,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 542.6339611783565,
+      "valueUsd": 540.5428861834495,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 170.29588807496455
+      "valueUsd": 170.1845282584149
     },
     {
       "symbol": "ETH",
@@ -352,23 +352,23 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 157.35339066345503
+      "valueUsd": 157.2504941994486
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 110.726442,
-      "valueUsd": 110.726442
+      "balance": 107.477377,
+      "valueUsd": 107.477377
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 93.945488,
-      "valueUsd": 93.945488
+      "balance": 91.02132999999999,
+      "valueUsd": 91.02132999999999
     },
     {
       "symbol": "ANDY",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.998062463449275
+      "valueUsd": 13.988908856244771
     },
     {
       "symbol": "XAUt",
@@ -414,7 +414,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.32015346,
+      "valueUsd": 8.31248506,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -1088,36 +1088,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 110.726442,
-    "totalMarginUsed": 110.531189,
+    "accountValue": 107.477377,
+    "totalMarginUsed": 110.206282,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08798600000000001,
-        "positionValueUsd": 552.024164,
-        "unrealizedPnlUsd": 0.640224,
-        "roePct": 1.16112196,
+        "markPx": 0.08779899999999999,
+        "positionValueUsd": 550.850926,
+        "unrealizedPnlUsd": -0.533014,
+        "roePct": -0.96668394,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0629518435,
-        "marginUsedUsd": 55.202416
+        "liquidationPx": 0.0632827054,
+        "marginUsedUsd": 55.085092
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 159679,
         "entryPx": 0.003463,
-        "markPx": 0.003465,
-        "positionValueUsd": 553.287735,
-        "unrealizedPnlUsd": 0.16877,
-        "roePct": 0.30512423,
+        "markPx": 0.0034519999999999998,
+        "positionValueUsd": 551.211908,
+        "unrealizedPnlUsd": -1.907057,
+        "roePct": -3.4478242800000003,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0024813747,
-        "marginUsedUsd": 55.328773
+        "liquidationPx": 0.0024887222,
+        "marginUsedUsd": 55.12119
       }
     ]
   },
