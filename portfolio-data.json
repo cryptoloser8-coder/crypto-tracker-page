@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08 21:50:58",
-  "totalUsd": 42235.24,
+  "timestamp": "2026-10-08 21:56:00",
+  "totalUsd": 42237.47,
   "assets": [
     {
       "symbol": "WTAO",
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 164.75817111000066
+      "valueUsd": 164.63800557831502
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 152.23654051033785
+      "valueUsd": 152.12550756605862
     },
     {
       "symbol": "ANDY",
@@ -389,16 +389,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 70.793207,
-      "valueUsd": 70.793207
+      "balance": 71.962053,
+      "valueUsd": 71.962053
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 69.114451,
-      "valueUsd": 69.114451
+      "balance": 70.413169,
+      "valueUsd": 70.413169
     },
     {
       "symbol": "ROADSTER",
@@ -436,7 +436,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.542870568584824
+      "valueUsd": 13.532993145016333
     },
     {
       "symbol": "XAUt",
@@ -1088,22 +1088,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 69.114451,
-    "totalMarginUsed": 52.719167,
+    "accountValue": 70.413169,
+    "totalMarginUsed": 52.849039,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.084028,
-        "positionValueUsd": 527.191672,
-        "unrealizedPnlUsd": -24.192268,
-        "roePct": -43.87553979,
+        "markPx": 0.084235,
+        "positionValueUsd": 528.49039,
+        "unrealizedPnlUsd": -22.89355,
+        "roePct": -41.52016107,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0677280167,
-        "marginUsedUsd": 52.719167
+        "marginUsedUsd": 52.849039
       }
     ]
   },
@@ -1111,6 +1111,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-08T19:55:03.106Z",
-    "durationSec": 55
+    "durationSec": 57
   }
 }
