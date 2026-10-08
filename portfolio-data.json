@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08 08:20:59",
-  "totalUsd": 43615.69,
+  "timestamp": "2026-10-08 08:25:55",
+  "totalUsd": 43614.15,
   "assets": [
     {
       "symbol": "WTAO",
@@ -359,16 +359,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 106.097663,
-      "valueUsd": 106.097663
+      "balance": 105.285488,
+      "valueUsd": 105.285488
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 89.78234899999998,
-      "valueUsd": 89.78234899999998
+      "balance": 89.05139199999999,
+      "valueUsd": 89.05139199999999
     },
     {
       "symbol": "ANDY",
@@ -1088,36 +1088,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 106.097663,
-    "totalMarginUsed": 110.065549,
+    "accountValue": 105.285488,
+    "totalMarginUsed": 109.984331,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.087931,
-        "positionValueUsd": 551.679094,
-        "unrealizedPnlUsd": 0.295154,
-        "roePct": 0.53529669,
+        "markPx": 0.087827,
+        "positionValueUsd": 551.026598,
+        "unrealizedPnlUsd": -0.357342,
+        "roePct": -0.64808199,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0636343835,
-        "marginUsedUsd": 55.167909
+        "liquidationPx": 0.0636598344,
+        "marginUsedUsd": 55.102659
       },
       {
         "coin": "kBONK",
         "side": "long",
         "size": 159679,
         "entryPx": 0.003463,
-        "markPx": 0.003438,
-        "positionValueUsd": 548.976402,
-        "unrealizedPnlUsd": -4.142563,
-        "roePct": -7.48946115,
+        "markPx": 0.003437,
+        "positionValueUsd": 548.816723,
+        "unrealizedPnlUsd": -4.302242,
+        "roePct": -7.7781495000000005,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0024833537,
-        "marginUsedUsd": 54.89764
+        "liquidationPx": 0.00248744,
+        "marginUsedUsd": 54.881672
       }
     ]
   },
@@ -1125,6 +1125,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-08T07:45:03.437Z",
-    "durationSec": 55
+    "durationSec": 52
   }
 }
