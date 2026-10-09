@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-09 14:15:58",
-  "totalUsd": 45379.74,
+  "timestamp": "2026-10-09 14:20:59",
+  "totalUsd": 45358.77,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6389.137284874641,
+      "valueUsd": 6367.486531621931,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -354,7 +354,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 165.41575271082237
+      "valueUsd": 165.63334116882612
     },
     {
       "symbol": "ETH",
@@ -362,7 +362,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 152.84414587120042
+      "valueUsd": 153.04519759372383
     },
     {
       "symbol": "ANDY",
@@ -399,16 +399,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 74.25811399999999,
-      "valueUsd": 74.25811399999999
+      "balance": 74.371046,
+      "valueUsd": 74.371046
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 72.966464,
-      "valueUsd": 72.966464
+      "balance": 73.091944,
+      "valueUsd": 73.091944
     },
     {
       "symbol": "ROADSTER",
@@ -446,7 +446,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.596922773997239
+      "valueUsd": 13.614808213633463
     },
     {
       "symbol": "USDC",
@@ -462,7 +462,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.44494658,
+      "valueUsd": 8.44678296,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -557,6 +557,16 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
     },
     {
+      "symbol": "USOTF",
+      "name": "United Stated Oil Tokenized Fund",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 6,
+      "valueUsd": 0.0043698,
+      "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
+      "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
+    },
+    {
       "symbol": "HYPERCAT",
       "name": "HYPERCAT",
       "walletName": "FOMO APP",
@@ -632,7 +642,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.0006781,
+      "valueUsd": 0.0006723,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
@@ -1098,22 +1108,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 72.966464,
-    "totalMarginUsed": 53.106273,
+    "accountValue": 73.091944,
+    "totalMarginUsed": 53.118821,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.084645,
-        "positionValueUsd": 531.06273,
-        "unrealizedPnlUsd": -20.32121,
-        "roePct": -36.85491819,
+        "markPx": 0.084665,
+        "positionValueUsd": 531.18821,
+        "unrealizedPnlUsd": -20.19573,
+        "roePct": -36.62734537,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.067731212,
-        "marginUsedUsd": 53.106273
+        "marginUsedUsd": 53.118821
       }
     ]
   },
@@ -1121,6 +1131,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-09T12:00:04.210Z",
-    "durationSec": 55
+    "durationSec": 56
   }
 }
