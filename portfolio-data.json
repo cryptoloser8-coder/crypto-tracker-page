@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-09 13:40:58",
-  "totalUsd": 45523.19,
+  "timestamp": "2026-10-09 13:45:59",
+  "totalUsd": 45513.77,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6356.661154995576,
+      "valueUsd": 6352.331004345035,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -242,7 +242,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 1251.8352629383348,
+      "valueUsd": 1247.440545497793,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -399,16 +399,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 72.346405,
-      "valueUsd": 72.346405
+      "balance": 72.013256,
+      "valueUsd": 72.013256
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 70.842066,
-      "valueUsd": 70.842066
+      "balance": 70.4719,
+      "valueUsd": 70.4719
     },
     {
       "symbol": "ROADSTER",
@@ -462,7 +462,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.44040608,
+      "valueUsd": 8.43788358,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -505,6 +505,16 @@
       "valueUsd": 0.0152525,
       "contract": "0xc2378f126167c55b42ba4f49e012d0d9dcdf52e0",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6c458eebb3782e5a64a286cbdb2be45a194bade994026db3dcd973e7d356df8f"
+    },
+    {
+      "symbol": "GPM",
+      "name": "GOLD PUMP MEME",
+      "walletName": "Main",
+      "network": "base",
+      "balance": 28,
+      "valueUsd": 0.0127148,
+      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
     },
     {
       "symbol": "CASHED",
@@ -714,16 +724,6 @@
       "balance": 0.00009,
       "valueUsd": 0,
       "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "GPM",
-      "name": "GOLD PUMP MEME",
-      "walletName": "Main",
-      "network": "base",
-      "balance": 28,
-      "valueUsd": 0,
-      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
       "dexscreenerUrl": null
     },
     {
@@ -1088,22 +1088,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 70.842066,
-    "totalMarginUsed": 52.893584,
+    "accountValue": 70.4719,
+    "totalMarginUsed": 52.856567,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08430599999999999,
-        "positionValueUsd": 528.935844,
-        "unrealizedPnlUsd": -22.448096,
-        "roePct": -40.712277549999996,
+        "markPx": 0.084247,
+        "positionValueUsd": 528.565678,
+        "unrealizedPnlUsd": -22.818262,
+        "roePct": -41.38361738,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0677307946,
-        "marginUsedUsd": 52.893584
+        "marginUsedUsd": 52.856567
       }
     ]
   },
@@ -1111,6 +1111,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-09T12:00:04.210Z",
-    "durationSec": 55
+    "durationSec": 56
   }
 }
