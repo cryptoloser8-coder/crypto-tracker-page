@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-09 10:21:00",
-  "totalUsd": 44315.6,
+  "timestamp": "2026-10-09 10:25:59",
+  "totalUsd": 45676.77,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6430.2737160547895,
+      "valueUsd": 6421.613414753705,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -225,6 +225,16 @@
           }
         ]
       }
+    },
+    {
+      "symbol": "PVC",
+      "name": "Privacy Coin",
+      "walletName": "Main 2",
+      "network": "ethereum",
+      "balance": 1000000,
+      "valueUsd": 1370,
+      "contract": "0x514b9e5467b9eb811519e316263c9099eae546ca",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x2a77ccf28ca71f5339ee18e88f2b1bb57850bba8"
     },
     {
       "symbol": "CETS",
@@ -344,7 +354,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 166.42517284282445
+      "valueUsd": 166.40051230634026
     },
     {
       "symbol": "ETH",
@@ -352,7 +362,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 153.77685001438303
+      "valueUsd": 153.75406368010783
     },
     {
       "symbol": "ANDY",
@@ -389,16 +399,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 75.59568900000001,
-      "valueUsd": 75.59568900000001
+      "balance": 75.53922299999999,
+      "valueUsd": 75.53922299999999
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 74.452105,
-      "valueUsd": 74.452105
+      "balance": 74.389365,
+      "valueUsd": 74.389365
     },
     {
       "symbol": "ROADSTER",
@@ -436,7 +446,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.67989557045964
+      "valueUsd": 13.677868511944078
     },
     {
       "symbol": "XAUt",
@@ -444,7 +454,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.449400306,
+      "valueUsd": 8.449380125999998,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -724,16 +734,6 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0x379b526f2ff7b3f50c0b4f48ef6ddd224adfbb90",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "PVC",
-      "name": "Privacy Coin",
-      "walletName": "Main 2",
-      "network": "ethereum",
-      "balance": 1000000,
-      "valueUsd": 0,
-      "contract": "0x514b9e5467b9eb811519e316263c9099eae546ca",
       "dexscreenerUrl": null
     },
     {
@@ -1088,22 +1088,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 74.452105,
-    "totalMarginUsed": 53.254339,
+    "accountValue": 74.389365,
+    "totalMarginUsed": 53.248065,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08488100000000001,
-        "positionValueUsd": 532.543394,
-        "unrealizedPnlUsd": -18.840546,
-        "roePct": -34.16955887,
+        "markPx": 0.08487099999999999,
+        "positionValueUsd": 532.480654,
+        "unrealizedPnlUsd": -18.903286,
+        "roePct": -34.28334529,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.067730377,
-        "marginUsedUsd": 53.254339
+        "marginUsedUsd": 53.248065
       }
     ]
   },
@@ -1111,6 +1111,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-09T08:00:03.792Z",
-    "durationSec": 56
+    "durationSec": 55
   }
 }
