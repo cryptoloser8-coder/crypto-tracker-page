@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-10 06:30:59",
-  "totalUsd": 46464.21,
+  "timestamp": "2026-10-10 06:35:57",
+  "totalUsd": 46518.69,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7047.320183757016,
+      "valueUsd": 7090.6216902624365,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -242,7 +242,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 1126.8055517549203,
+      "valueUsd": 1136.0344583800581,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -354,7 +354,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 166.15103599606513
+      "valueUsd": 166.1188732647372
     },
     {
       "symbol": "ETH",
@@ -362,7 +362,23 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 153.5235475839428
+      "valueUsd": 153.4938292220689
+    },
+    {
+      "symbol": "USDC",
+      "name": "Hyperliquid Spot USDC",
+      "walletName": "Hyperliquid",
+      "network": "hyperliquid",
+      "balance": 83.313871,
+      "valueUsd": 83.313871
+    },
+    {
+      "symbol": "HL-PERP",
+      "name": "Hyperliquid Perpetuals (equity)",
+      "walletName": "Hyperliquid",
+      "network": "hyperliquid",
+      "balance": 83.033589,
+      "valueUsd": 83.033589
     },
     {
       "symbol": "ANDY",
@@ -393,22 +409,6 @@
           }
         ]
       }
-    },
-    {
-      "symbol": "USDC",
-      "name": "Hyperliquid Spot USDC",
-      "walletName": "Hyperliquid",
-      "network": "hyperliquid",
-      "balance": 82.359595,
-      "valueUsd": 82.359595
-    },
-    {
-      "symbol": "HL-PERP",
-      "name": "Hyperliquid Perpetuals (equity)",
-      "walletName": "Hyperliquid",
-      "network": "hyperliquid",
-      "balance": 81.973283,
-      "valueUsd": 81.973283
     },
     {
       "symbol": "ROADSTER",
@@ -446,7 +446,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.65736193944924
+      "valueUsd": 13.654718211951103
     },
     {
       "symbol": "USDC",
@@ -462,7 +462,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002018,
-      "valueUsd": 8.447146199999999,
+      "valueUsd": 8.446217919999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -672,7 +672,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00000598,
+      "valueUsd": 0.000005982,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -685,6 +685,16 @@
       "valueUsd": 0.00000152559,
       "contract": "0x318a7d4e0dbea646125016dcb3a112d520c57777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x33ade3367a4f9d3b5c64bc8254db0768b583ef4a"
+    },
+    {
+      "symbol": "DOG",
+      "name": "Bull Dog",
+      "walletName": "Main 2",
+      "network": "ethereum",
+      "balance": 1,
+      "valueUsd": 0.000001071,
+      "contract": "0x16613999219f9b56bededbf3722e44c4c2045300",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xee84e9e47fc1c28f105ba1b5fb3ae0b2f421d49f"
     },
     {
       "symbol": "GUN",
@@ -734,16 +744,6 @@
       "balance": 0.00009,
       "valueUsd": 0,
       "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "DOG",
-      "name": "Bull Dog",
-      "walletName": "Main 2",
-      "network": "ethereum",
-      "balance": 1,
-      "valueUsd": 0,
-      "contract": "0x16613999219f9b56bededbf3722e44c4c2045300",
       "dexscreenerUrl": null
     },
     {
@@ -1118,22 +1118,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 81.973283,
-    "totalMarginUsed": 54.011611,
+    "accountValue": 83.033589,
+    "totalMarginUsed": 54.117641,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08608800000000001,
-        "positionValueUsd": 540.116112,
-        "unrealizedPnlUsd": -11.267828,
-        "roePct": -20.43553898,
+        "markPx": 0.086257,
+        "positionValueUsd": 541.176418,
+        "unrealizedPnlUsd": -10.207522,
+        "roePct": -18.51254862,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0677390242,
-        "marginUsedUsd": 54.011611
+        "marginUsedUsd": 54.117641
       }
     ]
   },
@@ -1141,6 +1141,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-10T04:15:03.305Z",
-    "durationSec": 57
+    "durationSec": 54
   }
 }
