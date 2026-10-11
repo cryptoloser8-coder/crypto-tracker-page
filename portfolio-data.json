@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-11 22:45:37",
-  "totalUsd": 45003.85,
+  "timestamp": "2026-10-11 22:50:36",
+  "totalUsd": 45002.53,
   "assets": [
     {
       "symbol": "WTAO",
@@ -385,20 +385,20 @@
       }
     },
     {
-      "symbol": "HL-PERP",
-      "name": "Hyperliquid Perpetuals (equity)",
-      "walletName": "Hyperliquid",
-      "network": "hyperliquid",
-      "balance": 86.026076,
-      "valueUsd": 86.026076
-    },
-    {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 85.983247,
-      "valueUsd": 85.983247
+      "balance": 85.356474,
+      "valueUsd": 85.356474
+    },
+    {
+      "symbol": "HL-PERP",
+      "name": "Hyperliquid Perpetuals (equity)",
+      "walletName": "Hyperliquid",
+      "network": "hyperliquid",
+      "balance": 85.329662,
+      "valueUsd": 85.329662
     },
     {
       "symbol": "ROBINHOOD",
@@ -562,7 +562,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0029664,
+      "valueUsd": 0.0029676,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
@@ -652,7 +652,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000006078,
+      "valueUsd": 0.000006082,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1159,22 +1159,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 86.026076,
-    "totalMarginUsed": 54.440752,
+    "accountValue": 85.329662,
+    "totalMarginUsed": 54.371111,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08677199999999999,
-        "positionValueUsd": 544.407528,
-        "unrealizedPnlUsd": -6.976412,
-        "roePct": -12.65254842,
+        "markPx": 0.08666099999999999,
+        "positionValueUsd": 543.711114,
+        "unrealizedPnlUsd": -7.672826,
+        "roePct": -13.91557759,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0677790596,
-        "marginUsedUsd": 54.440752
+        "marginUsedUsd": 54.371111
       }
     ]
   },
@@ -1182,6 +1182,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-11T12:55:03.111Z",
-    "durationSec": 34
+    "durationSec": 33
   }
 }
