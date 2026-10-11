@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-10 23:56:02",
-  "totalUsd": 44661.34,
+  "timestamp": "2026-10-11 00:01:03",
+  "totalUsd": 44659.94,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6176.959902998085,
+      "valueUsd": 6174.794827672815,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 167.0058758204397
+      "valueUsd": 166.85601395269353
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 154.31341953188013
+      "valueUsd": 154.17494717481043
     },
     {
       "symbol": "priceless",
@@ -389,16 +389,16 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 80.08681399999998,
-      "valueUsd": 80.08681399999998
+      "balance": 80.59073200000002,
+      "valueUsd": 80.59073200000002
     },
     {
       "symbol": "HL-PERP",
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 79.460208,
-      "valueUsd": 79.460208
+      "balance": 80.020592,
+      "valueUsd": 80.020592
     },
     {
       "symbol": "ROBINHOOD",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.727628470209934
+      "valueUsd": 13.71531005307542
     },
     {
       "symbol": "USDC",
@@ -457,6 +457,16 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6c458eebb3782e5a64a286cbdb2be45a194bade994026db3dcd973e7d356df8f"
     },
     {
+      "symbol": "GPM",
+      "name": "GOLD PUMP MEME",
+      "walletName": "Main",
+      "network": "base",
+      "balance": 28,
+      "valueUsd": 0.015372,
+      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
+    },
+    {
       "symbol": "musebook",
       "name": "musebook",
       "walletName": "FOMO APP",
@@ -465,16 +475,6 @@
       "valueUsd": 0.01515726551332591,
       "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
-    },
-    {
-      "symbol": "GPM",
-      "name": "GOLD PUMP MEME",
-      "walletName": "Main",
-      "network": "base",
-      "balance": 28,
-      "valueUsd": 0.0131712,
-      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
     },
     {
       "symbol": "GIGATENEV",
@@ -1159,22 +1159,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 79.460208,
-    "totalMarginUsed": 53.771317,
+    "accountValue": 80.020592,
+    "totalMarginUsed": 53.827783,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.085705,
-        "positionValueUsd": 537.71317,
-        "unrealizedPnlUsd": -13.67077,
-        "roePct": -24.79355855,
+        "markPx": 0.085795,
+        "positionValueUsd": 538.27783,
+        "unrealizedPnlUsd": -13.10611,
+        "roePct": -23.76948084,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.067757502,
-        "marginUsedUsd": 53.771317
+        "liquidationPx": 0.0677582194,
+        "marginUsedUsd": 53.827783
       }
     ]
   },
@@ -1182,6 +1182,6 @@
     "mode": "incremental",
     "reason": "przyrostowy",
     "lastFullRescanAt": "2026-10-10T20:35:03.500Z",
-    "durationSec": 60
+    "durationSec": 59
   }
 }
