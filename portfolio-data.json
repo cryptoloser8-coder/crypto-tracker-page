@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-12 03:05:47",
-  "totalUsd": 45162.24,
+  "timestamp": "2026-10-12 03:10:36",
+  "totalUsd": 45175.74,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5624.865695053987,
+      "valueUsd": 5630.516541652944,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 1069.6742250278767,
+      "valueUsd": 1077.1452446767978,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -301,7 +301,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 539.497348685996,
+      "valueUsd": 539.8458611851472,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -389,16 +389,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 86.475138,
-      "valueUsd": 86.475138
+      "balance": 86.49396,
+      "valueUsd": 86.49396
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 86.38399900000002,
-      "valueUsd": 86.38399900000002
+      "balance": 86.40093900000001,
+      "valueUsd": 86.40093900000001
     },
     {
       "symbol": "ROBINHOOD",
@@ -562,7 +562,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.002982,
+      "valueUsd": 0.0029808,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
@@ -572,7 +572,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 313.8712731064174,
-      "valueUsd": 0.002494962749922912,
+      "valueUsd": 0.0024877437106414642,
       "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x53d2d71cb332561f4547384ee08a632c2235b6539347ff162fffec11699756e8"
     },
@@ -662,7 +662,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000006118,
+      "valueUsd": 0.000006111,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1159,29 +1159,29 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 86.475138,
-    "totalMarginUsed": 54.489062,
+    "accountValue": 86.49396,
+    "totalMarginUsed": 54.490944,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.086849,
-        "positionValueUsd": 544.890626,
-        "unrealizedPnlUsd": -6.493314,
-        "roePct": -11.77639305,
+        "markPx": 0.086852,
+        "positionValueUsd": 544.909448,
+        "unrealizedPnlUsd": -6.474492,
+        "roePct": -11.74225713,
         "leverage": 10,
         "leverageType": "cross",
         "liquidationPx": 0.0677847701,
-        "marginUsedUsd": 54.489062
+        "marginUsedUsd": 54.490944
       }
     ]
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-11T12:55:03.111Z",
-    "durationSec": 44
+    "durationSec": 33
   }
 }
