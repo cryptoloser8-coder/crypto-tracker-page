@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-13 03:10:38",
-  "totalUsd": 42456.93,
+  "timestamp": "2026-10-13 03:15:52",
+  "totalUsd": 42488.7,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5267.628266384277,
+      "valueUsd": 5274.12349236009,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 950.5773823891938,
+      "valueUsd": 976.9456870324447,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -389,8 +389,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 96.059767,
-      "valueUsd": 96.059767
+      "balance": 94.965345,
+      "valueUsd": 94.965345
     },
     {
       "symbol": "ROBINHOOD",
@@ -454,7 +454,7 @@
       "walletName": "Main",
       "network": "base",
       "balance": 28,
-      "valueUsd": 0.0140588,
+      "valueUsd": 0.014067199999999998,
       "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
       "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
     },
@@ -504,7 +504,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0043722,
+      "valueUsd": 0.004371,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -514,7 +514,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0029192,
+      "valueUsd": 0.002914,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
@@ -1151,43 +1151,43 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 96.059767,
-    "totalMarginUsed": 100.097558,
+    "accountValue": 94.965345,
+    "totalMarginUsed": 99.883536,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.083771,
-        "positionValueUsd": 525.579254,
-        "unrealizedPnlUsd": -25.804686,
-        "roePct": -46.799850570000004,
+        "markPx": 0.083668,
+        "positionValueUsd": 524.933032,
+        "unrealizedPnlUsd": -26.450908,
+        "roePct": -47.97185061,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0760514241,
-        "marginUsedUsd": 52.557925
+        "liquidationPx": 0.0761140887,
+        "marginUsedUsd": 52.493303
       },
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.17182999999999998,
-        "positionValueUsd": 142.6189,
-        "unrealizedPnlUsd": -25.22756,
-        "roePct": -45.090423709999996,
+        "markPx": 0.17129000000000003,
+        "positionValueUsd": 142.1707,
+        "unrealizedPnlUsd": -25.67576,
+        "roePct": -45.89151299,
         "leverage": 3,
         "leverageType": "cross",
-        "liquidationPx": 0.1053080892,
-        "marginUsedUsd": 47.539633
+        "liquidationPx": 0.1061956713,
+        "marginUsedUsd": 47.390233
       }
     ]
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-12T12:55:03.242Z",
-    "durationSec": 35
+    "durationSec": 49
   }
 }
