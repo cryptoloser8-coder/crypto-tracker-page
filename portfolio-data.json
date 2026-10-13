@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-13 00:05:38",
-  "totalUsd": 42063.3,
+  "timestamp": "2026-10-13 00:10:49",
+  "totalUsd": 42089.55,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5224.326759878857,
+      "valueUsd": 5216.965503772936,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 884.4368849090395,
+      "valueUsd": 888.6118664775541,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 162.9014388021251
+      "valueUsd": 161.31156096837455
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 150.52091996599455
+      "valueUsd": 149.05187294020143
     },
     {
       "symbol": "priceless",
@@ -389,8 +389,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 50.142765,
-      "valueUsd": 50.142765
+      "balance": 82.77557,
+      "valueUsd": 82.77557
     },
     {
       "symbol": "ROBINHOOD",
@@ -398,7 +398,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.390250002596144
+      "valueUsd": 13.259564467685887
     },
     {
       "symbol": "USDC",
@@ -634,7 +634,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000005872,
+      "valueUsd": 0.000005805,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1151,43 +1151,43 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 50.142765,
-    "totalMarginUsed": 99.27502,
+    "accountValue": 82.77557,
+    "totalMarginUsed": 98.69308,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08201900000000001,
-        "positionValueUsd": 514.587206,
-        "unrealizedPnlUsd": -36.796734,
-        "roePct": -66.73522990000001,
+        "markPx": 0.0817,
+        "positionValueUsd": 512.5858,
+        "unrealizedPnlUsd": -38.79814,
+        "roePct": -70.36501643000001,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0759312417,
-        "marginUsedUsd": 51.45872
+        "liquidationPx": 0.0760913847,
+        "marginUsedUsd": 51.25858
       },
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.17283,
-        "positionValueUsd": 143.4489,
-        "unrealizedPnlUsd": -24.39756,
-        "roePct": -43.60692504,
+        "markPx": 0.17145000000000002,
+        "positionValueUsd": 142.3035,
+        "unrealizedPnlUsd": -25.54296,
+        "roePct": -45.65415321,
         "leverage": 3,
         "leverageType": "cross",
-        "liquidationPx": 0.1203699528,
-        "marginUsedUsd": 47.8163
+        "liquidationPx": 0.1231188723,
+        "marginUsedUsd": 47.4345
       }
     ]
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-12T12:55:03.242Z",
-    "durationSec": 35
+    "durationSec": 46
   }
 }
