@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-13 22:20:41",
-  "totalUsd": 44343.29,
+  "timestamp": "2026-10-13 22:25:53",
+  "totalUsd": 44369.72,
   "assets": [
     {
       "symbol": "WTAO",
@@ -64,7 +64,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 146581.3755835377,
-      "valueUsd": 12622.122251498433,
+      "valueUsd": 12608.929927695914,
       "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xc3d7aa944105d3fafe07fc1822102449c916a8d0",
       "costBasis": {
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7246.507113681946,
+      "valueUsd": 7285.4784695368235,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 97.900132,
-      "valueUsd": 97.900132
+      "balance": 98.552106,
+      "valueUsd": 98.552106
     },
     {
       "symbol": "ROBINHOOD",
@@ -394,7 +394,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1022.5314549252686,
-      "valueUsd": 0.03536936302586504,
+      "valueUsd": 0.0352262086221755,
       "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x387820294709dc9f4f7584fccb242c77ee78546e068db00f92df038dd1bbd59d"
     },
@@ -554,7 +554,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0018792,
+      "valueUsd": 0.0018772,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -644,7 +644,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000006025,
+      "valueUsd": 0.000006019,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1188,43 +1188,43 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 97.900132,
-    "totalMarginUsed": 99.780471,
+    "accountValue": 98.552106,
+    "totalMarginUsed": 99.923135,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.084443,
-        "positionValueUsd": 529.795382,
-        "unrealizedPnlUsd": -21.588558,
-        "roePct": -39.15340371,
+        "markPx": 0.084494,
+        "positionValueUsd": 530.115356,
+        "unrealizedPnlUsd": -21.268584,
+        "roePct": -38.57309301,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0763880536,
-        "marginUsedUsd": 52.979538
+        "liquidationPx": 0.0763416355,
+        "marginUsedUsd": 53.011535
       },
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.16916,
-        "positionValueUsd": 140.4028,
-        "unrealizedPnlUsd": -27.44366,
-        "roePct": -49.051365159999996,
+        "markPx": 0.16956000000000002,
+        "positionValueUsd": 140.7348,
+        "unrealizedPnlUsd": -27.11166,
+        "roePct": -48.45796569,
         "leverage": 3,
         "leverageType": "cross",
-        "liquidationPx": 0.0997481017,
-        "marginUsedUsd": 46.800933
+        "liquidationPx": 0.0993086183,
+        "marginUsedUsd": 46.9116
       }
     ]
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-13T13:00:03.407Z",
-    "durationSec": 39
+    "durationSec": 50
   }
 }
