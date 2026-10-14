@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-14 01:00:40",
-  "totalUsd": 44274.79,
+  "timestamp": "2026-10-14 01:05:39",
+  "totalUsd": 44252.42,
   "assets": [
     {
       "symbol": "WTAO",
@@ -64,7 +64,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 146581.3755835377,
-      "valueUsd": 12605.998300184241,
+      "valueUsd": 12591.34016262589,
       "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xc3d7aa944105d3fafe07fc1822102449c916a8d0",
       "costBasis": {
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7205.370682501798,
+      "valueUsd": 7201.040531851255,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 736.7743789068346,
+      "valueUsd": 734.7967560585909,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 102.730148,
-      "valueUsd": 102.730148
+      "balance": 101.966288,
+      "valueUsd": 101.966288
     },
     {
       "symbol": "ROBINHOOD",
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.05556125,
+      "valueUsd": 4.054011,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -393,8 +393,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 1.5713509999999928,
-      "valueUsd": 1.5713509999999928
+      "balance": 0.9303570000000008,
+      "valueUsd": 0.9303570000000008
     },
     {
       "symbol": "FOOMS",
@@ -652,7 +652,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000006023,
+      "valueUsd": 0.000006017,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1196,36 +1196,36 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 102.730148,
-    "totalMarginUsed": 101.158797,
+    "accountValue": 101.966288,
+    "totalMarginUsed": 101.035931,
     "positions": [
       {
         "coin": "DOGE",
         "side": "long",
         "size": 6274,
         "entryPx": 0.087883,
-        "markPx": 0.08460699999999999,
-        "positionValueUsd": 530.824318,
-        "unrealizedPnlUsd": -20.559622,
-        "roePct": -37.28730655,
+        "markPx": 0.084517,
+        "positionValueUsd": 530.259658,
+        "unrealizedPnlUsd": -21.124282,
+        "roePct": -38.31138426,
         "leverage": 10,
         "leverageType": "cross",
-        "liquidationPx": 0.0758573147,
-        "marginUsedUsd": 53.082431
+        "liquidationPx": 0.0758851657,
+        "marginUsedUsd": 53.025965
       },
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.17376999999999998,
-        "positionValueUsd": 144.2291,
-        "unrealizedPnlUsd": -23.61736,
-        "roePct": -42.21243629,
+        "markPx": 0.17353,
+        "positionValueUsd": 144.0299,
+        "unrealizedPnlUsd": -23.81656,
+        "roePct": -42.568475979999995,
         "leverage": 3,
         "leverageType": "cross",
-        "liquidationPx": 0.0983713258,
-        "marginUsedUsd": 48.076366
+        "liquidationPx": 0.0991468829,
+        "marginUsedUsd": 48.009966
       }
     ]
   },
