@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-16 15:40:43",
-  "totalUsd": 45574.85,
+  "timestamp": "2026-10-16 15:45:42",
+  "totalUsd": 45578.06,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7413.217913727812,
+      "valueUsd": 7415.3829890530815,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -242,7 +242,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 832.3594832386191,
+      "valueUsd": 832.579219110646,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -377,16 +377,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 52.260285,
-      "valueUsd": 52.260285
+      "balance": 52.758285,
+      "valueUsd": 52.758285
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 14.375450999999998,
-      "valueUsd": 14.375450999999998
+      "balance": 14.707450999999999,
+      "valueUsd": 14.707450999999999
     },
     {
       "symbol": "ROBINHOOD",
@@ -452,7 +452,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1022.5314549252686,
-      "valueUsd": 0.00618529277084295,
+      "valueUsd": 0.005908186746558203,
       "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x89cf4f0378c2ebc412914a044cc0cbdb473a2299c34f3405e42fc4cdfd30d834"
     },
@@ -492,7 +492,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 123.28849113098892,
-      "valueUsd": 0.003275775209350376,
+      "valueUsd": 0.003246185971478938,
       "contract": "0x9dff0da886c7204480fa41ff546673d4cd1cda97",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x73b6eb859769c63e8be9f695bc6c92d70a1111f1a92eff62c2ce3736b4054f8c"
     },
@@ -582,7 +582,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.0007354,
+      "valueUsd": 0.000733,
       "contract": "0x4a5d095b3ddbf2776e9bb42c90e51ed96005ef9f",
       "dexscreenerUrl": "https://dexscreener.com/base/0xc09a110121daa93bc386559b618c1f4f71eb76fed30c5ddc138d4c7fc34d939e"
     },
@@ -622,7 +622,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00000735,
+      "valueUsd": 0.000007347,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1196,22 +1196,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 52.260285,
-    "totalMarginUsed": 45.9239,
+    "accountValue": 52.758285,
+    "totalMarginUsed": 46.0899,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.16599,
-        "positionValueUsd": 137.7717,
-        "unrealizedPnlUsd": -30.07476,
-        "roePct": -53.75405594,
+        "markPx": 0.16659,
+        "positionValueUsd": 138.2697,
+        "unrealizedPnlUsd": -29.57676,
+        "roePct": -52.86395673999999,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1120082154,
-        "marginUsedUsd": 45.9239
+        "marginUsedUsd": 46.0899
       }
     ]
   },
@@ -1219,6 +1219,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-16T13:05:03.687Z",
-    "durationSec": 40
+    "durationSec": 39
   }
 }
