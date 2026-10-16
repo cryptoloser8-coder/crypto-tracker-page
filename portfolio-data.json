@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-16 01:05:42",
-  "totalUsd": 49096.53,
+  "timestamp": "2026-10-16 01:10:41",
+  "totalUsd": 43306.84,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 72.329469047,
-      "valueUsd": 20295.6490145882,
+      "valueUsd": 20472.20524853193,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6438.934017355873,
+      "valueUsd": 6443.264168006415,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -197,16 +197,6 @@
       }
     },
     {
-      "symbol": "AICC",
-      "name": "AI Chain Coin",
-      "walletName": "Main 2",
-      "network": "ethereum",
-      "balance": 17500,
-      "valueUsd": 5955.25,
-      "contract": "0x66a3c2fa3e467aa586e90912f977e648589cabaf",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x8d1247bfb4183d9041c81b6b806a38d1b99dfc90"
-    },
-    {
       "symbol": "FET",
       "name": "Fetch.ai",
       "walletName": "Main",
@@ -242,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 769.5150238388711,
+      "valueUsd": 753.6940410529205,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -354,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 162.41586771523006
+      "valueUsd": 162.51856348943758
     },
     {
       "symbol": "ETH",
@@ -362,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 150.07225230998256
+      "valueUsd": 150.16714319936943
     },
     {
       "symbol": "USDC",
@@ -377,16 +367,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 59.477573,
-      "valueUsd": 59.477573
+      "balance": 59.660173,
+      "valueUsd": 59.660173
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 19.199573,
-      "valueUsd": 19.199573
+      "balance": 19.306365999999997,
+      "valueUsd": 19.306365999999997
     },
     {
       "symbol": "ROBINHOOD",
@@ -394,7 +384,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.350336799279045
+      "valueUsd": 13.3587782354073
     },
     {
       "symbol": "XAUt",
@@ -402,7 +392,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.047332249999999,
+      "valueUsd": 4.0480635,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -622,7 +612,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00000731,
+      "valueUsd": 0.000007316,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -764,6 +754,16 @@
       "balance": 0.00009,
       "valueUsd": 0,
       "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "AICC",
+      "name": "AI Chain Coin",
+      "walletName": "Main 2",
+      "network": "ethereum",
+      "balance": 17500,
+      "valueUsd": 0,
+      "contract": "0x66a3c2fa3e467aa586e90912f977e648589cabaf",
       "dexscreenerUrl": null
     },
     {
@@ -1196,22 +1196,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 59.477573,
-    "totalMarginUsed": 48.317066,
+    "accountValue": 59.660173,
+    "totalMarginUsed": 48.377933,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.17464,
-        "positionValueUsd": 144.9512,
-        "unrealizedPnlUsd": -22.89526,
-        "roePct": -40.92179245,
+        "markPx": 0.17486000000000002,
+        "positionValueUsd": 145.1338,
+        "unrealizedPnlUsd": -22.71266,
+        "roePct": -40.59542275,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1119535822,
-        "marginUsedUsd": 48.317066
+        "marginUsedUsd": 48.377933
       }
     ]
   },
@@ -1219,6 +1219,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-15T13:05:03.600Z",
-    "durationSec": 39
+    "durationSec": 38
   }
 }
