@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-16 23:20:44",
-  "totalUsd": 44153.42,
+  "timestamp": "2026-10-16 23:25:54",
+  "totalUsd": 44152.85,
   "assets": [
     {
       "symbol": "WTAO",
@@ -377,8 +377,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 48.005515,
-      "valueUsd": 48.005515
+      "balance": 47.665215,
+      "valueUsd": 47.665215
     },
     {
       "symbol": "ROBINHOOD",
@@ -393,8 +393,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 11.534447999999998,
-      "valueUsd": 11.534447999999998
+      "balance": 11.307580999999999,
+      "valueUsd": 11.307580999999999
     },
     {
       "symbol": "XAUt",
@@ -642,7 +642,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007283,
+      "valueUsd": 0.000007285,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1196,29 +1196,29 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 48.005515,
-    "totalMarginUsed": 44.510133,
+    "accountValue": 47.665215,
+    "totalMarginUsed": 44.3967,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.16088,
-        "positionValueUsd": 133.5304,
-        "unrealizedPnlUsd": -34.31606,
-        "roePct": -61.33473414,
+        "markPx": 0.16047,
+        "positionValueUsd": 133.1901,
+        "unrealizedPnlUsd": -34.65636,
+        "roePct": -61.94296859,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1120276901,
-        "marginUsedUsd": 44.510133
+        "marginUsedUsd": 44.3967
       }
     ]
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-16T13:05:03.687Z",
-    "durationSec": 41
+    "durationSec": 51
   }
 }
