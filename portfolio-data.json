@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-16 05:20:41",
-  "totalUsd": 44866.99,
+  "timestamp": "2026-10-16 05:25:40",
+  "totalUsd": 44846.09,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6590.489290124841,
+      "valueUsd": 6568.838536872132,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -377,16 +377,16 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 59.311798,
-      "valueUsd": 59.311798
+      "balance": 59.760828,
+      "valueUsd": 59.760828
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 19.086641,
-      "valueUsd": 19.086641
+      "balance": 19.385993999999997,
+      "valueUsd": 19.385993999999997
     },
     {
       "symbol": "ROBINHOOD",
@@ -505,6 +505,16 @@
       "valueUsd": 0.002962,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
+    },
+    {
+      "symbol": "AROS",
+      "name": "ArosAI",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 4,
+      "valueUsd": 0.0028664,
+      "contract": "0xb200000000000000000000b23567ab79b58462d3",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
     {
       "symbol": "AGE",
@@ -632,7 +642,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007339,
+      "valueUsd": 0.000007333,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -685,16 +695,6 @@
       "valueUsd": 5.297e-7,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
-    },
-    {
-      "symbol": "AROS",
-      "name": "ArosAI",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 4,
-      "valueUsd": 2.168e-23,
-      "contract": "0xb200000000000000000000b23567ab79b58462d3",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
     {
       "symbol": "Nautilo",
@@ -1196,22 +1196,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 59.311798,
-    "totalMarginUsed": 48.264223,
+    "accountValue": 59.760828,
+    "totalMarginUsed": 48.4139,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.174449,
-        "positionValueUsd": 144.79267,
-        "unrealizedPnlUsd": -23.05379,
-        "roePct": -41.2051407,
+        "markPx": 0.17499,
+        "positionValueUsd": 145.2417,
+        "unrealizedPnlUsd": -22.60476,
+        "roePct": -40.402567919999996,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1119640569,
-        "marginUsedUsd": 48.264223
+        "marginUsedUsd": 48.4139
       }
     ]
   },
@@ -1219,6 +1219,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-15T13:05:03.600Z",
-    "durationSec": 38
+    "durationSec": 37
   }
 }
