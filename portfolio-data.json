@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-16 21:25:40",
-  "totalUsd": 44001,
+  "timestamp": "2026-10-16 21:30:42",
+  "totalUsd": 44024.04,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6923.910890216571,
+      "valueUsd": 6941.014985286211,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -242,7 +242,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 787.5333653450925,
+      "valueUsd": 794.1254415059052,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -354,7 +354,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 160.95262716949006
+      "valueUsd": 161.0470910828657
     },
     {
       "symbol": "ETH",
@@ -362,7 +362,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 148.72021813093602
+      "valueUsd": 148.80750278139368
     },
     {
       "symbol": "USDC",
@@ -377,8 +377,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 49.353448,
-      "valueUsd": 49.353448
+      "balance": 48.847148,
+      "valueUsd": 48.847148
     },
     {
       "symbol": "ROBINHOOD",
@@ -386,15 +386,15 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.23006065644403
+      "valueUsd": 13.23782544615752
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 12.434180999999995,
-      "valueUsd": 12.434180999999995
+      "balance": 12.096648000000002,
+      "valueUsd": 12.096648000000002
     },
     {
       "symbol": "XAUt",
@@ -402,7 +402,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.06107975,
+      "valueUsd": 4.06106025,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -642,7 +642,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007263,
+      "valueUsd": 0.000007272,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1196,22 +1196,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 49.353448,
-    "totalMarginUsed": 44.958333,
+    "accountValue": 48.847148,
+    "totalMarginUsed": 44.789566,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.1625,
-        "positionValueUsd": 134.875,
-        "unrealizedPnlUsd": -32.97146,
-        "roePct": -58.93146629,
+        "markPx": 0.16188999999999998,
+        "positionValueUsd": 134.3687,
+        "unrealizedPnlUsd": -33.47776,
+        "roePct": -59.836400479999995,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1120228713,
-        "marginUsedUsd": 44.958333
+        "marginUsedUsd": 44.789566
       }
     ]
   },
@@ -1219,6 +1219,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-16T13:05:03.687Z",
-    "durationSec": 38
+    "durationSec": 39
   }
 }
