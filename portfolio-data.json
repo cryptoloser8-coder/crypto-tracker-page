@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-17 19:20:42",
-  "totalUsd": 43566.1,
+  "timestamp": "2026-10-17 19:25:56",
+  "totalUsd": 43587.92,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 8088.721415212354,
+      "valueUsd": 8110.3721684650645,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -202,7 +202,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 11587.349288003074,
-      "valueUsd": 2210.8662441509864,
+      "valueUsd": 2225.92979822539,
       "contract": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x948b54a93f5ad1df6b8bff6dc249d99ca2eca052",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 726.2270570495343,
+      "valueUsd": 712.6034329838546,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -301,7 +301,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 478.507661334543,
+      "valueUsd": 477.46212383708956,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 43.224943,
-      "valueUsd": 43.224943
+      "balance": 43.092143,
+      "valueUsd": 43.092143
     },
     {
       "symbol": "ROBINHOOD",
@@ -383,8 +383,8 @@
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 8.336409000000003,
-      "valueUsd": 8.336409000000003
+      "balance": 8.247875999999998,
+      "valueUsd": 8.247875999999998
     },
     {
       "symbol": "XAUt",
@@ -472,7 +472,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.004241999999999999,
+      "valueUsd": 0.0042444,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -642,7 +642,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007266,
+      "valueUsd": 0.000007267,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1216,29 +1216,29 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 43.224943,
-    "totalMarginUsed": 42.9276,
+    "accountValue": 43.092143,
+    "totalMarginUsed": 42.883333,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.15516000000000002,
-        "positionValueUsd": 128.7828,
-        "unrealizedPnlUsd": -39.06366,
-        "roePct": -69.82034652,
+        "markPx": 0.155,
+        "positionValueUsd": 128.65,
+        "unrealizedPnlUsd": -39.19646,
+        "roePct": -70.05770631,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1120753605,
-        "marginUsedUsd": 42.9276
+        "marginUsedUsd": 42.883333
       }
     ]
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-17T13:10:03.156Z",
-    "durationSec": 40
+    "durationSec": 53
   }
 }
