@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-17 11:15:54",
-  "totalUsd": 43600.31,
+  "timestamp": "2026-10-17 11:20:42",
+  "totalUsd": 43597.17,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7753.134739795354,
+      "valueUsd": 7750.9696644700825,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 162.37021839647977
+      "valueUsd": 162.1857694070242
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 150.03007234211583
+      "valueUsd": 149.85964148660096
     },
     {
       "symbol": "USDC",
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 47.537244,
-      "valueUsd": 47.537244
+      "balance": 47.180344,
+      "valueUsd": 47.180344
     },
     {
       "symbol": "ROBINHOOD",
@@ -376,15 +376,15 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.346584494848775
+      "valueUsd": 13.331423069021612
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 11.215576999999996,
-      "valueUsd": 11.215576999999996
+      "balance": 10.977644000000005,
+      "valueUsd": 10.977644000000005
     },
     {
       "symbol": "XAUt",
@@ -392,7 +392,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.0575795,
+      "valueUsd": 4.05753075,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -425,16 +425,6 @@
       "valueUsd": 0.01068673612698654,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4e36e637a46322aa43536c81e43b403e5f7d731c0931722ebde6b8a6440792bf"
-    },
-    {
-      "symbol": "GTA 6",
-      "name": "Grand Theft Auto VI",
-      "walletName": "Main",
-      "network": "base",
-      "balance": 10,
-      "valueUsd": 0.009195,
-      "contract": "0xc380178c5a770a11740ed0d6388c855a629afe0f",
-      "dexscreenerUrl": "https://dexscreener.com/base/0x002952096ae7bdb983a516472947fe67a7f63c6a"
     },
     {
       "symbol": "CASHED",
@@ -744,6 +734,16 @@
       "balance": 0.01,
       "valueUsd": 0,
       "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "GTA 6",
+      "name": "Grand Theft Auto VI",
+      "walletName": "Main",
+      "network": "base",
+      "balance": 10,
+      "valueUsd": 0,
+      "contract": "0xc380178c5a770a11740ed0d6388c855a629afe0f",
       "dexscreenerUrl": null
     },
     {
@@ -1206,29 +1206,29 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 47.537244,
-    "totalMarginUsed": 44.360733,
+    "accountValue": 47.180344,
+    "totalMarginUsed": 44.241766,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.16034,
-        "positionValueUsd": 133.0822,
-        "unrealizedPnlUsd": -34.76426,
-        "roePct": -62.13582342,
+        "markPx": 0.15991,
+        "positionValueUsd": 132.7253,
+        "unrealizedPnlUsd": -35.12116,
+        "roePct": -62.77372785000001,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1120567084,
-        "marginUsedUsd": 44.360733
+        "marginUsedUsd": 44.241766
       }
     ]
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-16T13:05:03.687Z",
-    "durationSec": 52
+    "durationSec": 40
   }
 }
