@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-18 06:55:56",
-  "totalUsd": 42898.95,
+  "timestamp": "2026-10-18 07:00:42",
+  "totalUsd": 42908.02,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7703.338007314121,
+      "valueUsd": 7709.8332332899345,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 644.0458409114024,
+      "valueUsd": 646.6826713757274,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 160.54490706399181
+      "valueUsd": 160.49280472084084
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 148.34348477720076
+      "valueUsd": 148.29534221516363
     },
     {
       "symbol": "USDC",
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 40.468357,
-      "valueUsd": 40.468357
+      "balance": 40.491684,
+      "valueUsd": 40.491684
     },
     {
       "symbol": "ROBINHOOD",
@@ -376,15 +376,15 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.196546685150395
+      "valueUsd": 13.192263951949002
     },
     {
       "symbol": "USDC",
       "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 6.492823000000001,
-      "valueUsd": 6.492823000000001
+      "balance": 6.507849999999998,
+      "valueUsd": 6.507849999999998
     },
     {
       "symbol": "XAUt",
@@ -602,7 +602,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.0000753,
+      "valueUsd": 0.00007526,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
@@ -612,7 +612,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007252,
+      "valueUsd": 0.000007248,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1216,29 +1216,29 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 40.468357,
-    "totalMarginUsed": 42.0146,
+    "accountValue": 40.491684,
+    "totalMarginUsed": 42.0229,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.15186,
-        "positionValueUsd": 126.0438,
-        "unrealizedPnlUsd": -41.80266,
-        "roePct": -74.71589213,
+        "markPx": 0.15189,
+        "positionValueUsd": 126.0687,
+        "unrealizedPnlUsd": -41.77776,
+        "roePct": -74.67138717,
         "leverage": 3,
         "leverageType": "cross",
-        "liquidationPx": 0.112100786,
-        "marginUsedUsd": 42.0146
+        "liquidationPx": 0.1121030602,
+        "marginUsedUsd": 42.0229
       }
     ]
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-17T13:10:03.156Z",
-    "durationSec": 53
+    "durationSec": 39
   }
 }
