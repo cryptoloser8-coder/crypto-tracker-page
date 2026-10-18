@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-18 19:30:42",
-  "totalUsd": 41540.37,
+  "timestamp": "2026-10-18 19:35:42",
+  "totalUsd": 41459.21,
   "assets": [
     {
       "symbol": "WTAO",
@@ -64,7 +64,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 146581.3755835377,
-      "valueUsd": 11506.63798330771,
+      "valueUsd": 11467.061011900154,
       "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xc3d7aa944105d3fafe07fc1822102449c916a8d0",
       "costBasis": {
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7395.897311125643,
+      "valueUsd": 7374.679572937987,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -202,7 +202,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 11587.349288003074,
-      "valueUsd": 2154.0882326397714,
+      "valueUsd": 2128.5960642061646,
       "contract": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x948b54a93f5ad1df6b8bff6dc249d99ca2eca052",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 157.3697692699313
+      "valueUsd": 156.25538951810304
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 145.40965764040476
+      "valueUsd": 144.3799708146155
     },
     {
       "symbol": "USDC",
@@ -363,12 +363,12 @@
       "valueUsd": 132.902425
     },
     {
-      "symbol": "HL-PERP",
-      "name": "Hyperliquid Perpetuals (equity)",
+      "symbol": "USDC",
+      "name": "Hyperliquid Spot USDC",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 26.662454,
-      "valueUsd": 26.662454
+      "balance": 34.029886,
+      "valueUsd": 34.029886
     },
     {
       "symbol": "ROBINHOOD",
@@ -376,7 +376,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.935555197488917
+      "valueUsd": 12.843954880238577
     },
     {
       "symbol": "XAUt",
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.048941,
+      "valueUsd": 4.04875575,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -444,9 +444,9 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 286.85814226704053,
-      "valueUsd": 0.008975791271535699,
+      "valueUsd": 0.006741166343275452,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x2419d1cd3f7f350b3c97b0d0ac57ab28e19ba6af0481007d6122158d1d95bbd8"
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x44a25a1787cf431fd3a06fe94eb778d3b249128c5e69f66d3316407a8a816a2a"
     },
     {
       "symbol": "CASHED",
@@ -1208,29 +1208,14 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 26.662454,
-    "totalMarginUsed": 37.419166,
-    "positions": [
-      {
-        "coin": "USELESS",
-        "side": "long",
-        "size": 830,
-        "entryPx": 0.202224,
-        "markPx": 0.13524999999999998,
-        "positionValueUsd": 112.2575,
-        "unrealizedPnlUsd": -55.58896,
-        "roePct": -99.35680502000001,
-        "leverage": 3,
-        "leverageType": "cross",
-        "liquidationPx": 0.1121291277,
-        "marginUsedUsd": 37.419166
-      }
-    ]
+    "accountValue": 0,
+    "totalMarginUsed": 0,
+    "positions": []
   },
   "scan": {
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-18T13:10:03.432Z",
-    "durationSec": 40
+    "durationSec": 39
   }
 }
