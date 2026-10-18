@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-18 17:10:44",
-  "totalUsd": 42078.12,
+  "timestamp": "2026-10-18 17:15:42",
+  "totalUsd": 42095.67,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7655.70635015816,
+      "valueUsd": 7673.026952760327,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 655.032634512757,
+      "valueUsd": 655.252370384784,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 157.88781574920412
+      "valueUsd": 158.02368852151108
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 145.88833255708246
+      "valueUsd": 146.01387899078105
     },
     {
       "symbol": "USDC",
@@ -367,8 +367,8 @@
       "name": "Hyperliquid Perpetuals (equity)",
       "walletName": "Hyperliquid",
       "network": "hyperliquid",
-      "balance": 30.549689,
-      "valueUsd": 30.549689
+      "balance": 30.284089,
+      "valueUsd": 30.284089
     },
     {
       "symbol": "ROBINHOOD",
@@ -376,7 +376,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.978137828565943
+      "valueUsd": 12.989306363375178
     },
     {
       "symbol": "XAUt",
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.047654,
+      "valueUsd": 4.0476149999999995,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -484,7 +484,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 123.28849113098892,
-      "valueUsd": 0.0032055007694057115,
+      "valueUsd": 0.0031981034599378524,
       "contract": "0x9dff0da886c7204480fa41ff546673d4cd1cda97",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xe34d4cf482f846140faaf83282b4f7427851a25375cce79d64eabb315e350bca"
     },
@@ -544,7 +544,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0017764,
+      "valueUsd": 0.0017776,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -1208,22 +1208,22 @@
     }
   ],
   "hyperliquid": {
-    "accountValue": 30.549689,
-    "totalMarginUsed": 38.713966,
+    "accountValue": 30.284089,
+    "totalMarginUsed": 38.625433,
     "positions": [
       {
         "coin": "USELESS",
         "side": "long",
         "size": 830,
         "entryPx": 0.202224,
-        "markPx": 0.13993,
-        "positionValueUsd": 116.1419,
-        "unrealizedPnlUsd": -51.70456,
-        "roePct": -92.41403125,
+        "markPx": 0.13961,
+        "positionValueUsd": 115.8763,
+        "unrealizedPnlUsd": -51.97016,
+        "roePct": -92.88875083,
         "leverage": 3,
         "leverageType": "cross",
         "liquidationPx": 0.1121250289,
-        "marginUsedUsd": 38.713966
+        "marginUsedUsd": 38.625433
       }
     ]
   },
@@ -1231,6 +1231,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-18T13:10:03.432Z",
-    "durationSec": 41
+    "durationSec": 39
   }
 }
