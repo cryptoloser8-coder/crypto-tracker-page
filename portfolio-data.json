@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-19 12:50:43",
-  "totalUsd": 42335.24,
+  "timestamp": "2026-10-19 12:55:55",
+  "totalUsd": 42315.23,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7214.030983802882,
+      "valueUsd": 7194.545305875442,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -301,7 +301,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 466.3097238642524,
+      "valueUsd": 465.9612113651013,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 161.50432334280484
+      "valueUsd": 161.4171442010734
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 149.2299853629488
+      "valueUsd": 149.14943184106616
     },
     {
       "symbol": "USDC",
@@ -376,7 +376,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.27540924108811
+      "valueUsd": 13.26824324850155
     },
     {
       "symbol": "XAUt",
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.05702375,
+      "valueUsd": 4.057169999999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -494,7 +494,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.002926,
+      "valueUsd": 0.002924,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -619,26 +619,6 @@
       "dexscreenerUrl": null
     },
     {
-      "symbol": "YRISE",
-      "name": "yRise Finance",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.00009,
-      "valueUsd": 0.0001764,
-      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x386c98653e536fba33d1263adbcaf8e5d6f635fb"
-    },
-    {
-      "symbol": "YRISE",
-      "name": "yRise Finance",
-      "walletName": "Main 2",
-      "network": "ethereum",
-      "balance": 0.00009,
-      "valueUsd": 0.0001764,
-      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x386c98653e536fba33d1263adbcaf8e5d6f635fb"
-    },
-    {
       "symbol": "HEIR",
       "name": "Heirloom",
       "walletName": "FOMO APP",
@@ -739,6 +719,16 @@
       "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
     {
+      "symbol": "YRISE",
+      "name": "yRise Finance",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.00009,
+      "valueUsd": 0,
+      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
+      "dexscreenerUrl": null
+    },
+    {
       "symbol": "YFTE",
       "name": "YFTether",
       "walletName": "Main",
@@ -786,6 +776,16 @@
       "balance": 1000000,
       "valueUsd": 0,
       "contract": "0x514b9e5467b9eb811519e316263c9099eae546ca",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "YRISE",
+      "name": "yRise Finance",
+      "walletName": "Main 2",
+      "network": "ethereum",
+      "balance": 0.00009,
+      "valueUsd": 0,
+      "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
       "dexscreenerUrl": null
     },
     {
@@ -1213,9 +1213,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-18T13:10:03.432Z",
-    "durationSec": 41
+    "durationSec": 52
   }
 }
