@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-19 14:15:42",
-  "totalUsd": 42618.47,
+  "timestamp": "2026-10-19 14:20:54",
+  "totalUsd": 42650.57,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7434.868666980521,
+      "valueUsd": 7463.014646209043,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -232,7 +232,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 546.7028496034013,
+      "valueUsd": 550.6580952998889,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.041882,
+      "valueUsd": 4.0422135,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -439,16 +439,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x2419d1cd3f7f350b3c97b0d0ac57ab28e19ba6af0481007d6122158d1d95bbd8"
     },
     {
-      "symbol": "CASHED",
-      "name": "Cashed Money",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 209.21042108429953,
-      "valueUsd": 0.005073352711294264,
-      "contract": "0x26a5d93b8745787ad20192d336ea7df648a90e12",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf1e04e40f2b3bf941331fb1a7f44ed41bed6147e1b8833a82bd45f0699ee8b2e"
-    },
-    {
       "symbol": "COPCAT",
       "name": "Copper Cat",
       "walletName": "FOMO APP",
@@ -457,6 +447,16 @@
       "valueUsd": 0.004908568483383505,
       "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
+    },
+    {
+      "symbol": "CASHED",
+      "name": "Cashed Money",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 209.21042108429953,
+      "valueUsd": 0.004753260767035285,
+      "contract": "0x26a5d93b8745787ad20192d336ea7df648a90e12",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf1e04e40f2b3bf941331fb1a7f44ed41bed6147e1b8833a82bd45f0699ee8b2e"
     },
     {
       "symbol": "USOTF",
@@ -527,16 +527,6 @@
       "valueUsd": 0.00213565407813,
       "contract": "0xd30389d0cadee2c8ed3b3ef84d4f82fa73a73a38",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xe26b8c20a9a619b814776570d0e5f3d39169a333"
-    },
-    {
-      "symbol": "WAFFLE",
-      "name": "WAFFLE",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 561.1684300000001,
-      "valueUsd": 0.0018916987775300003,
-      "contract": "0xb6a6e5c1aff980841c7a6c2c164be5031735909a",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xccfa430eb4cb6fd7371563ae6c2fe21e8e7fa807"
     },
     {
       "symbol": "MAGA",
@@ -846,6 +836,16 @@
       "balance": 1022.5314549252686,
       "valueUsd": 0,
       "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "WAFFLE",
+      "name": "WAFFLE",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 561.1684300000001,
+      "valueUsd": 0,
+      "contract": "0xb6a6e5c1aff980841c7a6c2c164be5031735909a",
       "dexscreenerUrl": null
     },
     {
@@ -1213,9 +1213,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-19T13:15:03.596Z",
-    "durationSec": 40
+    "durationSec": 52
   }
 }
