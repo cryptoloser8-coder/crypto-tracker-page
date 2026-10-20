@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-20 19:50:56",
-  "totalUsd": 49664.95,
+  "timestamp": "2026-10-20 19:55:42",
+  "totalUsd": 49608.15,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7222.691285103965,
+      "valueUsd": 7165.533296516811,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -364,7 +364,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 162.20183639127592
+      "valueUsd": 162.38814004042513
     },
     {
       "symbol": "ETH",
@@ -372,7 +372,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 149.87448737911382
+      "valueUsd": 150.04663194007762
     },
     {
       "symbol": "USDC",
@@ -396,7 +396,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.332743750640512
+      "valueUsd": 13.348057626667932
     },
     {
       "symbol": "XAUt",
@@ -417,16 +417,6 @@
       "valueUsd": 0.10856551843601686,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4e36e637a46322aa43536c81e43b403e5f7d731c0931722ebde6b8a6440792bf"
-    },
-    {
-      "symbol": "COLLECT",
-      "name": "GoCollect",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 313.8712731064174,
-      "valueUsd": 0.02600423497686668,
-      "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5af8655165b23984479735ee9d348685e3ef3b1d94601dc73f6eef678de5013f"
     },
     {
       "symbol": "YFTE",
@@ -477,6 +467,16 @@
       "valueUsd": 0.00842597541729164,
       "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
+    },
+    {
+      "symbol": "COLLECT",
+      "name": "GoCollect",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 313.8712731064174,
+      "valueUsd": 0.007809117274887665,
+      "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5af8655165b23984479735ee9d348685e3ef3b1d94601dc73f6eef678de5013f"
     },
     {
       "symbol": "COPCAT",
@@ -1213,9 +1213,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-20T13:15:03.671Z",
-    "durationSec": 53
+    "durationSec": 39
   }
 }
