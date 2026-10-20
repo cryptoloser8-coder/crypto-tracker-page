@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-20 09:35:53",
+  "timestamp": "2026-10-20 09:40:42",
   "totalUsd": 40879.33,
   "assets": [
     {
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.017204749999999,
+      "valueUsd": 4.017032175,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -439,16 +439,6 @@
       "dexscreenerUrl": "https://dexscreener.com/base/0x002952096ae7bdb983a516472947fe67a7f63c6a"
     },
     {
-      "symbol": "musebook",
-      "name": "musebook",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 677.8741285029477,
-      "valueUsd": 0.008975053461379027,
-      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
-    },
-    {
       "symbol": "SI",
       "name": "Super Inu",
       "walletName": "FOMO APP",
@@ -457,6 +447,16 @@
       "valueUsd": 0.008898339573123597,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x2419d1cd3f7f350b3c97b0d0ac57ab28e19ba6af0481007d6122158d1d95bbd8"
+    },
+    {
+      "symbol": "musebook",
+      "name": "musebook",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 677.8741285029477,
+      "valueUsd": 0.008697125068692819,
+      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
     },
     {
       "symbol": "FOOMS",
@@ -484,7 +484,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0041886,
+      "valueUsd": 0.0041802,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -604,7 +604,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.00065,
+      "valueUsd": 0.000647,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
@@ -1213,9 +1213,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-19T13:15:03.596Z",
-    "durationSec": 51
+    "durationSec": 39
   }
 }
