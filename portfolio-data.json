@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-20 11:50:55",
-  "totalUsd": 40970.14,
+  "timestamp": "2026-10-20 11:55:42",
+  "totalUsd": 40959,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6395.632510850453,
+      "valueUsd": 6384.807134224098,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -344,7 +344,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06662514019675762,
-      "valueUsd": 158.9697592392856
+      "valueUsd": 158.81367166658578
     },
     {
       "symbol": "ETH",
@@ -352,7 +352,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 146.88804827890675
+      "valueUsd": 146.74382337082247
     },
     {
       "symbol": "USDC",
@@ -376,7 +376,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.067071934534585
+      "valueUsd": 13.054241773941051
     },
     {
       "symbol": "XAUt",
@@ -384,7 +384,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.01741925,
+      "valueUsd": 4.0167952499999995,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -524,7 +524,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.002874,
+      "valueUsd": 0.002876,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -557,6 +557,16 @@
       "valueUsd": 0.0022281000000000002,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
+    },
+    {
+      "symbol": "GIGATENEV",
+      "name": "Giga Tenev",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 35,
+      "valueUsd": 0.00222145,
+      "contract": "0xe00b0d79a6346ae1386f26d96cbe76860201d827",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x65ae28ff79d257bbf39395855be6a005ad4a5ae9d5dc273e52524a117aca9051"
     },
     {
       "symbol": "MAGA",
@@ -856,16 +866,6 @@
       "balance": 613.16511,
       "valueUsd": 0,
       "contract": "0xd30389d0cadee2c8ed3b3ef84d4f82fa73a73a38",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "GIGATENEV",
-      "name": "Giga Tenev",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 35,
-      "valueUsd": 0,
-      "contract": "0xe00b0d79a6346ae1386f26d96cbe76860201d827",
       "dexscreenerUrl": null
     },
     {
@@ -1213,9 +1213,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-19T13:15:03.596Z",
-    "durationSec": 51
+    "durationSec": 40
   }
 }
