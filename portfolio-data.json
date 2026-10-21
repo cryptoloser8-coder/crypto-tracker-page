@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-21 13:10:46",
-  "totalUsd": 48380.96,
+  "timestamp": "2026-10-21 13:15:59",
+  "totalUsd": 48382.52,
   "assets": [
     {
       "symbol": "WTAO",
@@ -384,7 +384,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06582242842764036,
-      "valueUsd": 162.56145593180315
+      "valueUsd": 163.3354005232919
     },
     {
       "symbol": "ETH",
@@ -392,7 +392,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 152.03856399930072
+      "valueUsd": 152.7624097819956
     },
     {
       "symbol": "USDC",
@@ -416,7 +416,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.525258697902478
+      "valueUsd": 13.589651580936934
     },
     {
       "symbol": "XAUt",
@@ -424,7 +424,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.033146,
+      "valueUsd": 4.0318005,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -499,16 +499,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5af8655165b23984479735ee9d348685e3ef3b1d94601dc73f6eef678de5013f"
     },
     {
-      "symbol": "USOTF",
-      "name": "United Stated Oil Tokenized Fund",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 6,
-      "valueUsd": 0.004377,
-      "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
-      "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
-    },
-    {
       "symbol": "CASHED",
       "name": "Cashed Money",
       "walletName": "FOMO APP",
@@ -517,6 +507,16 @@
       "valueUsd": 0.004368313592240174,
       "contract": "0x26a5d93b8745787ad20192d336ea7df648a90e12",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf1e04e40f2b3bf941331fb1a7f44ed41bed6147e1b8833a82bd45f0699ee8b2e"
+    },
+    {
+      "symbol": "USOTF",
+      "name": "United Stated Oil Tokenized Fund",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 6,
+      "valueUsd": 0.0043608,
+      "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
+      "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
     {
       "symbol": "Nautilo",
@@ -554,7 +554,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 3,
-      "valueUsd": 0.0023247,
+      "valueUsd": 0.0023238,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
@@ -574,7 +574,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0018612,
+      "valueUsd": 0.0018604,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -664,7 +664,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.0000776,
+      "valueUsd": 0.00007754,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
@@ -1270,9 +1270,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-20T20:35:03.406Z",
-    "durationSec": 44
+    "durationSec": 55
   }
 }
