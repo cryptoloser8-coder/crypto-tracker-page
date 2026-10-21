@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-21 15:20:49",
-  "totalUsd": 42894.95,
+  "timestamp": "2026-10-21 15:26:00",
+  "totalUsd": 42885.3,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7017.009129203222,
+      "valueUsd": 7008.3488279021385,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -374,7 +374,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06582242842764036,
-      "valueUsd": 165.07579418587014
+      "valueUsd": 164.58770698718334
     },
     {
       "symbol": "ETH",
@@ -382,7 +382,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 154.39014466991938
+      "valueUsd": 153.93365222298954
     },
     {
       "symbol": "USDC",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.734453892085254
+      "valueUsd": 13.69384460010067
     },
     {
       "symbol": "XAUt",
@@ -414,7 +414,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.000975,
-      "valueUsd": 4.0267812,
+      "valueUsd": 4.02806625,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -437,16 +437,6 @@
       "valueUsd": 0.018500000000000003,
       "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x2dc9136ace4077d5060131c0eccd1635897c75dd"
-    },
-    {
-      "symbol": "GPM",
-      "name": "GOLD PUMP MEME",
-      "walletName": "Main",
-      "network": "base",
-      "balance": 28,
-      "valueUsd": 0.012516000000000001,
-      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xdbd8f80e8cca8a8223611d462a28b4b50d61873e"
     },
     {
       "symbol": "GTA 6",
@@ -494,7 +484,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0043890000000000005,
+      "valueUsd": 0.0043968,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -564,7 +554,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0018712,
+      "valueUsd": 0.0018744,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -654,7 +644,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00007746,
+      "valueUsd": 0.00007802,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
@@ -664,7 +654,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007563,
+      "valueUsd": 0.00000762,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -786,6 +776,16 @@
       "balance": 0.00009,
       "valueUsd": 0,
       "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "GPM",
+      "name": "GOLD PUMP MEME",
+      "walletName": "Main",
+      "network": "base",
+      "balance": 28,
+      "valueUsd": 0,
+      "contract": "0x4d15e62900b9f518352a94daf6c46b11775e3697",
       "dexscreenerUrl": null
     },
     {
@@ -1270,9 +1270,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-20T20:35:03.406Z",
-    "durationSec": 46
+    "durationSec": 57
   }
 }
