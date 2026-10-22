@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-22 01:30:43",
-  "totalUsd": 42602.15,
+  "timestamp": "2026-10-22 01:35:56",
+  "totalUsd": 42607.88,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6915.250588915487,
+      "valueUsd": 6921.7458148913,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -374,7 +374,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06582242842764036,
-      "valueUsd": 163.02865024787383
+      "valueUsd": 162.6974371215711
     },
     {
       "symbol": "ETH",
@@ -382,7 +382,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 152.47551599703516
+      "valueUsd": 152.1657428850011
     },
     {
       "symbol": "USDC",
@@ -406,7 +406,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.56412968334503
+      "valueUsd": 13.536572454654456
     },
     {
       "symbol": "XAUt",
@@ -414,19 +414,9 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 8.0237625,
+      "valueUsd": 8.028618,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
-    },
-    {
-      "symbol": "GROK",
-      "name": "The Elon'son",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1664.8599668151644,
-      "valueUsd": 0.09847646703711697,
-      "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4e36e637a46322aa43536c81e43b403e5f7d731c0931722ebde6b8a6440792bf"
     },
     {
       "symbol": "YFTE",
@@ -474,7 +464,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 209.21042108429953,
-      "valueUsd": 0.0044289846143546205,
+      "valueUsd": 0.004368313592240174,
       "contract": "0x26a5d93b8745787ad20192d336ea7df648a90e12",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf1e04e40f2b3bf941331fb1a7f44ed41bed6147e1b8833a82bd45f0699ee8b2e"
     },
@@ -594,7 +584,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 1,
-      "valueUsd": 0.0006723,
+      "valueUsd": 0.0006721,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
     },
@@ -836,6 +826,16 @@
       "balance": 5000,
       "valueUsd": 0,
       "contract": "0x0a58a2cfebead61af0554ebb460a85e9bb553387",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "GROK",
+      "name": "The Elon'son",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1664.8599668151644,
+      "valueUsd": 0,
+      "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
       "dexscreenerUrl": null
     },
     {
@@ -1270,9 +1270,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-21T20:40:02.990Z",
-    "durationSec": 40
+    "durationSec": 53
   }
 }
