@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-22 18:25:54",
-  "totalUsd": 42949.55,
+  "timestamp": "2026-10-22 18:30:43",
+  "totalUsd": 42970.08,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6515.144668805411,
+      "valueUsd": 6525.537030366712,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -202,7 +202,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 21673.369184664978,
-      "valueUsd": 3034.271685853097,
+      "valueUsd": 3032.1043489346303,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
@@ -321,7 +321,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 437.4941212059373,
+      "valueUsd": 449.7993300394544,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -430,7 +430,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.882601999999999,
+      "valueUsd": 7.882621499999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -670,7 +670,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.000074,
+      "valueUsd": 0.00007436,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
@@ -733,16 +733,6 @@
       "valueUsd": 9.063e-7,
       "contract": "0x379b526f2ff7b3f50c0b4f48ef6ddd224adfbb90",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xe174819c46e5aa3855fd20b1a42705206bee8bac"
-    },
-    {
-      "symbol": "GUY",
-      "name": "Bad Guy",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 7.424e-7,
-      "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa3a3895055dbc54d0aa84790c37c62820dd502eb"
     },
     {
       "symbol": "CAT",
@@ -822,6 +812,16 @@
       "balance": 9.999,
       "valueUsd": 0,
       "contract": "0xf859ceac1baa842c4a2ef6a75ad23ecd5a05795f",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "GUY",
+      "name": "Bad Guy",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 0,
+      "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
       "dexscreenerUrl": null
     },
     {
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-21T20:40:02.990Z",
-    "durationSec": 51
+    "durationSec": 40
   }
 }
