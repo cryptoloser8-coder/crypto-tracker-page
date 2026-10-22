@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-22 16:45:42",
-  "totalUsd": 43155.05,
+  "timestamp": "2026-10-22 16:50:53",
+  "totalUsd": 43148.76,
   "assets": [
     {
       "symbol": "WTAO",
@@ -206,7 +206,7 @@
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
-        "avgPriceUsd": 0.16542282142929185,
+        "avgPriceUsd": 0.15765349619319036,
         "dateAcquired": "2026-10-20",
         "source": "auto",
         "purchases": [
@@ -234,6 +234,19 @@
             "explorerUrl": "https://etherscan.io/tx/0xd0c2aabeefeea0043d9e4dbf86d74f02f1e5d914237c6ff17e910dc80292a828",
             "paidAmount": 5587.349288003072,
             "paidSymbol": "FET",
+            "priceSource": "historical"
+          },
+          {
+            "date": "2026-10-22",
+            "receivedAmount": 8241.966089652844,
+            "costUsd": 1195.0218305171593,
+            "avgPriceUsd": 0.14499232555899708,
+            "source": "swap",
+            "txHash": "0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157",
+            "paidAmount": 15000,
+            "paidSymbol": "WDOGE",
             "priceSource": "historical"
           }
         ]
@@ -265,7 +278,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 481.2957613277523,
+      "valueUsd": 475.0225363430314,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -417,7 +430,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.892586,
+      "valueUsd": 7.8809445,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -607,7 +620,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 421.98712345999996,
-      "valueUsd": 0.0014697811510111798,
+      "valueUsd": 0.0014140788507144599,
       "contract": "0x809625453eb4e91866d2c455c91f90a516273bfc",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x04c92b0a1b51857727819230f94a209c9c57a44f"
     },
@@ -657,7 +670,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00007464,
+      "valueUsd": 0.00007446,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
@@ -667,7 +680,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000007328,
+      "valueUsd": 0.000007252,
       "contract": "0xb0711574537f61298d43be9cebc05d8c5e6101e9",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
@@ -1111,6 +1124,23 @@
       "explorerUrl": "https://etherscan.io/tx/0xd0c2aabeefeea0043d9e4dbf86d74f02f1e5d914237c6ff17e910dc80292a828"
     },
     {
+      "symbol": "WDOGE",
+      "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
+      "network": "ethereum",
+      "walletName": "Main",
+      "buyDate": "2026-09-23",
+      "sellDate": "2026-10-22",
+      "daysHeld": 29,
+      "amountSold": 15000,
+      "costUsd": 1483.8174299711445,
+      "proceedsUsd": 1195.0218305171593,
+      "pnlUsd": -288.79559945398523,
+      "pnlPct": -19.46301435882185,
+      "costCoverage": 1,
+      "txHash": "0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157",
+      "explorerUrl": "https://etherscan.io/tx/0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157"
+    },
+    {
       "symbol": "FET",
       "contract": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
       "network": "ethereum",
@@ -1270,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-21T20:40:02.990Z",
-    "durationSec": 39
+    "durationSec": 51
   }
 }
