@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-22 06:05:42",
-  "totalUsd": 44132.32,
+  "timestamp": "2026-10-22 06:10:42",
+  "totalUsd": 44098.84,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 72.329469047,
-      "valueUsd": 19249.04159747811,
+      "valueUsd": 19221.55639924025,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6625.130495329177,
+      "valueUsd": 6629.460645979719,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -277,12 +277,55 @@
       }
     },
     {
+      "symbol": "PEPECOIN",
+      "name": "PepeCoin",
+      "walletName": "FOMO APP",
+      "network": "ethereum",
+      "balance": 3485.1249915116023,
+      "valueUsd": 504.29758627172885,
+      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
+      "costBasis": {
+        "avgPriceUsd": 0.1563788964032585,
+        "dateAcquired": "2026-10-01",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1821.3855249561348,
+            "costUsd": 285,
+            "avgPriceUsd": 0.15647428624802745,
+            "source": "fomo",
+            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          },
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1663.7394665554675,
+            "costUsd": 260,
+            "avgPriceUsd": 0.15627446798403627,
+            "source": "fomo",
+            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          }
+        ]
+      }
+    },
+    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 508.68854374271456,
+      "valueUsd": 498.3609577574414,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -346,49 +389,6 @@
       }
     },
     {
-      "symbol": "PEPECOIN",
-      "name": "PepeCoin",
-      "walletName": "FOMO APP",
-      "network": "ethereum",
-      "balance": 3485.1249915116023,
-      "valueUsd": 504.29758627172885,
-      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
-      "costBasis": {
-        "avgPriceUsd": 0.1563788964032585,
-        "dateAcquired": "2026-10-01",
-        "source": "auto",
-        "purchases": [
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1821.3855249561348,
-            "costUsd": 285,
-            "avgPriceUsd": 0.15647428624802745,
-            "source": "fomo",
-            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          },
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1663.7394665554675,
-            "costUsd": 260,
-            "avgPriceUsd": 0.15627446798403627,
-            "source": "fomo",
-            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          }
-        ]
-      }
-    },
-    {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main",
@@ -434,7 +434,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.9824225,
+      "valueUsd": 7.990904999999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -579,16 +579,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
     },
     {
-      "symbol": "MAGA",
-      "name": "Maga Trump",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 4,
-      "valueUsd": 0.0018272,
-      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
-    },
-    {
       "symbol": "HERD",
       "name": "HERD",
       "walletName": "FOMO APP",
@@ -677,6 +667,16 @@
       "valueUsd": 0.0001364790951671507,
       "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x80ab0f2536975d51e9455b3baf57fb5022726bf2105a9ee8008a3b49623b34c1"
+    },
+    {
+      "symbol": "BOA",
+      "name": "Base Of America",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 2,
+      "valueUsd": 0.00007612,
+      "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
     },
     {
       "symbol": "DOG",
@@ -769,14 +769,14 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
     },
     {
-      "symbol": "BOA",
-      "name": "Base Of America",
+      "symbol": "MAGA",
+      "name": "Maga Trump",
       "walletName": "FOMO APP",
       "network": "base",
-      "balance": 2,
-      "valueUsd": 1.09e-23,
-      "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
+      "balance": 4,
+      "valueUsd": 2.1668e-23,
+      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
     {
       "symbol": "YRISE",
@@ -1273,6 +1273,6 @@
     "mode": "cached",
     "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-21T20:40:02.990Z",
-    "durationSec": 39
+    "durationSec": 40
   }
 }
