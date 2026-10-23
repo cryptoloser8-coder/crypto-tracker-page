@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23 07:25:41",
-  "totalUsd": 39588.33,
+  "timestamp": "2026-10-23 07:30:54",
+  "totalUsd": 39591.19,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5824.052624978916,
+      "valueUsd": 5795.906645750394,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -253,55 +253,12 @@
       }
     },
     {
-      "symbol": "PEPECOIN",
-      "name": "PepeCoin",
-      "walletName": "FOMO APP",
-      "network": "ethereum",
-      "balance": 3485.1249915116023,
-      "valueUsd": 481.2957613277523,
-      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
-      "costBasis": {
-        "avgPriceUsd": 0.1563788964032585,
-        "dateAcquired": "2026-10-01",
-        "source": "auto",
-        "purchases": [
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1821.3855249561348,
-            "costUsd": 285,
-            "avgPriceUsd": 0.15647428624802745,
-            "source": "fomo",
-            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          },
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1663.7394665554675,
-            "costUsd": 260,
-            "avgPriceUsd": 0.15627446798403627,
-            "source": "fomo",
-            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          }
-        ]
-      }
-    },
-    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 453.0953681198607,
+      "valueUsd": 484.0781260756805,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -365,12 +322,55 @@
       }
     },
     {
+      "symbol": "PEPECOIN",
+      "name": "PepeCoin",
+      "walletName": "FOMO APP",
+      "network": "ethereum",
+      "balance": 3485.1249915116023,
+      "valueUsd": 481.2957613277523,
+      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
+      "costBasis": {
+        "avgPriceUsd": 0.1563788964032585,
+        "dateAcquired": "2026-10-01",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1821.3855249561348,
+            "costUsd": 285,
+            "avgPriceUsd": 0.15647428624802745,
+            "source": "fomo",
+            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          },
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1663.7394665554675,
+            "costUsd": 260,
+            "avgPriceUsd": 0.15627446798403627,
+            "source": "fomo",
+            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          }
+        ]
+      }
+    },
+    {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0635695471852217,
-      "valueUsd": 152.64918838179415
+      "valueUsd": 152.6618312964897
     },
     {
       "symbol": "ETH",
@@ -378,7 +378,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 147.82757796484876
+      "valueUsd": 147.83982153769492
     },
     {
       "symbol": "USDC",
@@ -402,7 +402,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.150651927152662
+      "valueUsd": 13.151741107987936
     },
     {
       "symbol": "XAUt",
@@ -410,7 +410,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.836933,
+      "valueUsd": 7.8394094999999995,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -485,16 +485,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xe57ec328e7c1a2bd4e8dca218c8781c5ffd4a89d0ab44ecc847430a96fd25f71"
     },
     {
-      "symbol": "USOTF",
-      "name": "United Stated Oil Tokenized Fund",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 6,
-      "valueUsd": 0.0042258,
-      "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
-      "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
-    },
-    {
       "symbol": "FOOMS",
       "name": "FOMO users. Airdrop is yours.",
       "walletName": "FOMO APP",
@@ -560,7 +550,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 3,
-      "valueUsd": 0.0022500000000000003,
+      "valueUsd": 0.0022479,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
@@ -570,7 +560,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0018024,
+      "valueUsd": 0.0017996,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -665,16 +655,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d182c29116399b1b65db74df4025788ca0c4246"
     },
     {
-      "symbol": "PICKLE",
-      "name": "Salty Pickle",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 0.000001677,
-      "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xac896d83db3575b59ef18e7f5ff591f00d4e0cff"
-    },
-    {
       "symbol": "XERO",
       "name": "Super Xero",
       "walletName": "FOMO APP",
@@ -723,6 +703,16 @@
       "valueUsd": 5.664e-7,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
+    },
+    {
+      "symbol": "USOTF",
+      "name": "United Stated Oil Tokenized Fund",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 6,
+      "valueUsd": 3.2046e-23,
+      "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
+      "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
     {
       "symbol": "PVC",
@@ -842,6 +832,16 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0x41b5cb9acf172009a361acba82bdcaf12d554371",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "PICKLE",
+      "name": "Salty Pickle",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 0,
+      "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
       "dexscreenerUrl": null
     },
     {
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-22T20:45:03.423Z",
-    "durationSec": 39
+    "durationSec": 51
   }
 }
