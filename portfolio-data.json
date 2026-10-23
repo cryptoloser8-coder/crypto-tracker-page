@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23 07:30:54",
-  "totalUsd": 39591.19,
+  "timestamp": "2026-10-23 07:35:43",
+  "totalUsd": 39584.7,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5795.906645750394,
+      "valueUsd": 5789.411419774581,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -410,7 +410,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.8394094999999995,
+      "valueUsd": 7.843172999999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -530,7 +530,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.0029,
+      "valueUsd": 0.002904,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -550,7 +550,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 3,
-      "valueUsd": 0.0022479,
+      "valueUsd": 0.0022524,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
@@ -560,7 +560,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0017996,
+      "valueUsd": 0.0018036,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -633,6 +633,16 @@
       "valueUsd": 0.00007514,
       "contract": "0x9286f0fc8ad73585f9e61996d757799f33d02076",
       "dexscreenerUrl": "https://dexscreener.com/base/0xde7d8c943495f159bbc9324a61574e88046d7dd4aa88c4a91931700d1f908f8d"
+    },
+    {
+      "symbol": "YFTE",
+      "name": "YFTether",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.01,
+      "valueUsd": 0.000029849999999999997,
+      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
+      "dexscreenerUrl": "https://dexscreener.com/pulsechain/0x28905eb057ffd1fc12651920bef84fd52e524ab3"
     },
     {
       "symbol": "GUN",
@@ -710,7 +720,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 3.2046e-23,
+      "valueUsd": 3.2088e-23,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -732,16 +742,6 @@
       "balance": 0.00009,
       "valueUsd": 0,
       "contract": "0x6051c1354ccc51b4d561e43b02735deae64768b8",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "YFTE",
-      "name": "YFTether",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.01,
-      "valueUsd": 0,
-      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
       "dexscreenerUrl": null
     },
     {
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-22T20:45:03.423Z",
-    "durationSec": 51
+    "durationSec": 40
   }
 }
