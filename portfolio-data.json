@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23 21:15:44",
-  "totalUsd": 39573.67,
+  "timestamp": "2026-10-23 21:20:56",
+  "totalUsd": 39599.69,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5808.89709770202,
+      "valueUsd": 5804.566947051478,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -202,7 +202,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 21673.369184664978,
-      "valueUsd": 3071.116413467027,
+      "valueUsd": 3101.4591303255584,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
@@ -410,7 +410,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.794774,
+      "valueUsd": 7.7947545,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -535,12 +535,22 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xe57ec328e7c1a2bd4e8dca218c8781c5ffd4a89d0ab44ecc847430a96fd25f71"
     },
     {
+      "symbol": "musebook",
+      "name": "musebook",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 677.8741285029477,
+      "valueUsd": 0.0018865236996237031,
+      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x68a9a40885adf746ff992911ca8973722acfb90306a29d44b333a182f333ba64"
+    },
+    {
       "symbol": "MAGA",
       "name": "Maga Trump",
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0017992,
+      "valueUsd": 0.0017988,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -660,7 +670,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0000178,
+      "valueUsd": 0.00001779,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -892,16 +902,6 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "musebook",
-      "name": "musebook",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 677.8741285029477,
-      "valueUsd": 0,
-      "contract": "0xe4b967105dc54b7d39f0335c5be5a1a245272ce6",
       "dexscreenerUrl": null
     },
     {
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-23T20:45:03.617Z",
-    "durationSec": 41
+    "durationSec": 52
   }
 }
