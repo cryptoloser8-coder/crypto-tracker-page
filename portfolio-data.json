@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23 09:35:54",
-  "totalUsd": 39671.69,
+  "timestamp": "2026-10-23 09:40:42",
+  "totalUsd": 39665.51,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5780.751118473498,
+      "valueUsd": 5785.081269124039,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -253,12 +253,55 @@
       }
     },
     {
+      "symbol": "PEPECOIN",
+      "name": "PepeCoin",
+      "walletName": "FOMO APP",
+      "network": "ethereum",
+      "balance": 3485.1249915116023,
+      "valueUsd": 481.6442738269034,
+      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
+      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
+      "costBasis": {
+        "avgPriceUsd": 0.1563788964032585,
+        "dateAcquired": "2026-10-01",
+        "source": "auto",
+        "purchases": [
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1821.3855249561348,
+            "costUsd": 285,
+            "avgPriceUsd": 0.15647428624802745,
+            "source": "fomo",
+            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          },
+          {
+            "date": "2026-10-01",
+            "receivedAmount": 1663.7394665554675,
+            "costUsd": 260,
+            "avgPriceUsd": 0.15627446798403627,
+            "source": "fomo",
+            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
+            "paidAmount": null,
+            "paidSymbol": "USD",
+            "priceSource": "fomo-cash"
+          }
+        ]
+      }
+    },
+    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 484.0781260756805,
+      "valueUsd": 473.7505400904072,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -322,55 +365,12 @@
       }
     },
     {
-      "symbol": "PEPECOIN",
-      "name": "PepeCoin",
-      "walletName": "FOMO APP",
-      "network": "ethereum",
-      "balance": 3485.1249915116023,
-      "valueUsd": 481.6442738269034,
-      "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
-      "costBasis": {
-        "avgPriceUsd": 0.1563788964032585,
-        "dateAcquired": "2026-10-01",
-        "source": "auto",
-        "purchases": [
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1821.3855249561348,
-            "costUsd": 285,
-            "avgPriceUsd": 0.15647428624802745,
-            "source": "fomo",
-            "txHash": "0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x57babacf00d9381f6c271453beb1b53c72ddfa8070a3a4cc130aefd46b65c303",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          },
-          {
-            "date": "2026-10-01",
-            "receivedAmount": 1663.7394665554675,
-            "costUsd": 260,
-            "avgPriceUsd": 0.15627446798403627,
-            "source": "fomo",
-            "txHash": "0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "network": "ethereum",
-            "explorerUrl": "https://etherscan.io/tx/0x574086b6e2dd9af82b31e47a55229a0e8db76293e57b5717ad3c1e1073e9bd59",
-            "paidAmount": null,
-            "paidSymbol": "USD",
-            "priceSource": "fomo-cash"
-          }
-        ]
-      }
-    },
-    {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0635695471852217,
-      "valueUsd": 152.21398206178745
+      "valueUsd": 152.12766285885797
     },
     {
       "symbol": "ETH",
@@ -378,7 +378,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 147.40611816618494
+      "valueUsd": 147.3225254603462
     },
     {
       "symbol": "USDC",
@@ -402,7 +402,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.113159118369488
+      "valueUsd": 13.105722761816347
     },
     {
       "symbol": "XAUt",
@@ -410,7 +410,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.8593969999999995,
+      "valueUsd": 7.8539955,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -670,7 +670,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000008887,
+      "valueUsd": 0.000008884,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-22T20:45:03.423Z",
-    "durationSec": 51
+    "durationSec": 39
   }
 }
