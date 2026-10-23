@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23 15:40:52",
-  "totalUsd": 39781.76,
+  "timestamp": "2026-10-23 15:45:42",
+  "totalUsd": 39774.85,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6010.249102952221,
+      "valueUsd": 6003.753876976408,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -370,7 +370,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.0635695471852217,
-      "valueUsd": 152.66221862466608
+      "valueUsd": 152.4661663214586
     },
     {
       "symbol": "ETH",
@@ -378,7 +378,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 147.84019663163937
+      "valueUsd": 147.65033687906012
     },
     {
       "symbol": "USDC",
@@ -402,7 +402,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 13.151774476118373
+      "valueUsd": 13.134884667359287
     },
     {
       "symbol": "XAUt",
@@ -410,7 +410,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.7992395,
+      "valueUsd": 7.797699,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -473,16 +473,6 @@
       "valueUsd": 0.0042174,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
-    },
-    {
-      "symbol": "FOOMS",
-      "name": "FOMO users. Airdrop is yours.",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1022.5314549252686,
-      "valueUsd": 0.003906070157814526,
-      "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x89cf4f0378c2ebc412914a044cc0cbdb473a2299c34f3405e42fc4cdfd30d834"
     },
     {
       "symbol": "Nautilo",
@@ -842,6 +832,16 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "FOOMS",
+      "name": "FOMO users. Airdrop is yours.",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1022.5314549252686,
+      "valueUsd": 0,
+      "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
       "dexscreenerUrl": null
     },
     {
@@ -1300,9 +1300,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-22T20:45:03.423Z",
-    "durationSec": 50
+    "durationSec": 39
   }
 }
