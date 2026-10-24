@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-24 15:50:42",
-  "totalUsd": 36888.53,
+  "timestamp": "2026-10-24 15:55:53",
+  "totalUsd": 36897.19,
   "assets": [
     {
       "symbol": "WTAO",
@@ -202,11 +202,11 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 40088.99632291637,
-      "valueUsd": 4866.804153602047,
+      "valueUsd": 4874.82195286663,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
-        "avgPriceUsd": 0.1502745619579046,
+        "avgPriceUsd": 0.14316588707706873,
         "dateAcquired": "2026-10-20",
         "source": "auto",
         "purchases": [
@@ -258,6 +258,19 @@
             "txHash": "0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1",
             "network": "ethereum",
             "explorerUrl": "https://etherscan.io/tx/0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1",
+            "paidAmount": 15000,
+            "paidSymbol": "WDOGE",
+            "priceSource": "historical"
+          },
+          {
+            "date": "2026-10-24",
+            "receivedAmount": 9468.84556590599,
+            "costUsd": 1137.9469785049334,
+            "avgPriceUsd": 0.1201780059231596,
+            "source": "swap",
+            "txHash": "0x1d7e6b9865337945f32fef95782ca33235874b85dae5fed2ce76e18e3ca9382c",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0x1d7e6b9865337945f32fef95782ca33235874b85dae5fed2ce76e18e3ca9382c",
             "paidAmount": 15000,
             "paidSymbol": "WDOGE",
             "priceSource": "historical"
@@ -383,7 +396,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.062148361215113176,
-      "valueUsd": 142.4232292113886
+      "valueUsd": 142.7329170001945
     },
     {
       "symbol": "ETH",
@@ -391,7 +404,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 141.07862783196933
+      "valueUsd": 141.38539189386412
     },
     {
       "symbol": "USDC",
@@ -415,7 +428,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.550269405210022
+      "valueUsd": 12.577558950620128
     },
     {
       "symbol": "XAUt",
@@ -423,7 +436,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.7674935,
+      "valueUsd": 7.767649499999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -623,7 +636,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00004626,
+      "valueUsd": 0.00004616,
       "contract": "0x4a5d095b3ddbf2776e9bb42c90e51ed96005ef9f",
       "dexscreenerUrl": "https://dexscreener.com/base/0xe06b9f356b3beb3c89ec982f2642d845c296258c14d6d299d919cc43bbb774b6"
     },
@@ -1137,6 +1150,23 @@
       "explorerUrl": "https://etherscan.io/tx/0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1"
     },
     {
+      "symbol": "WDOGE",
+      "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
+      "network": "ethereum",
+      "walletName": "Main",
+      "buyDate": "2026-09-23",
+      "sellDate": "2026-10-24",
+      "daysHeld": 31,
+      "amountSold": 15000,
+      "costUsd": 1483.8174299711447,
+      "proceedsUsd": 1137.9469785049334,
+      "pnlUsd": -345.8704514662113,
+      "pnlPct": -23.309501861892628,
+      "costCoverage": 1,
+      "txHash": "0x1d7e6b9865337945f32fef95782ca33235874b85dae5fed2ce76e18e3ca9382c",
+      "explorerUrl": "https://etherscan.io/tx/0x1d7e6b9865337945f32fef95782ca33235874b85dae5fed2ce76e18e3ca9382c"
+    },
+    {
       "symbol": "FET",
       "contract": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
       "network": "ethereum",
@@ -1330,9 +1360,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-23T20:45:03.617Z",
-    "durationSec": 40
+    "durationSec": 51
   }
 }
