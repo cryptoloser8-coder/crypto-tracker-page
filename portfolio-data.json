@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-24 20:46:11",
-  "totalUsd": 37388.73,
+  "timestamp": "2026-10-24 20:50:44",
+  "totalUsd": 37384.62,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5636.340594277924,
+      "valueUsd": 5632.226951159909,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -436,7 +436,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.787247,
+      "valueUsd": 7.7874615,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -541,6 +541,16 @@
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
     {
+      "symbol": "GIGATENEV",
+      "name": "Giga Tenev",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 35,
+      "valueUsd": 0.00216405,
+      "contract": "0xe00b0d79a6346ae1386f26d96cbe76860201d827",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x65ae28ff79d257bbf39395855be6a005ad4a5ae9d5dc273e52524a117aca9051"
+    },
+    {
       "symbol": "7ELEVEN",
       "name": "7Eleven",
       "walletName": "FOMO APP",
@@ -581,6 +591,16 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d3f965e9b3a2eb4af7606928f861f2ed554f0cb"
     },
     {
+      "symbol": "dih",
+      "name": "dih-necked turtle",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 421.98712345999996,
+      "valueUsd": 0.0013908695589241599,
+      "contract": "0x809625453eb4e91866d2c455c91f90a516273bfc",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x04c92b0a1b51857727819230f94a209c9c57a44f"
+    },
+    {
       "symbol": "JOLLY",
       "name": "Jollybot",
       "walletName": "FOMO APP",
@@ -589,16 +609,6 @@
       "valueUsd": 0.0013887122178627062,
       "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x1fa16039ab696aa65dba64aa1c1e0354a80f2266546bbf8239f3b4531b94506f"
-    },
-    {
-      "symbol": "dih",
-      "name": "dih-necked turtle",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 421.98712345999996,
-      "valueUsd": 0.00138242981645496,
-      "contract": "0x809625453eb4e91866d2c455c91f90a516273bfc",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x04c92b0a1b51857727819230f94a209c9c57a44f"
     },
     {
       "symbol": "HYPERCAT",
@@ -918,16 +928,6 @@
       "balance": 8500,
       "valueUsd": 0,
       "contract": "0xcee7db0585d7465783209c5da616027e5cc76b87",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "GIGATENEV",
-      "name": "Giga Tenev",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 35,
-      "valueUsd": 0,
-      "contract": "0xe00b0d79a6346ae1386f26d96cbe76860201d827",
       "dexscreenerUrl": null
     },
     {
@@ -1360,9 +1360,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "full",
-    "reason": "co 24h",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-24T20:45:03.678Z",
-    "durationSec": 67
+    "durationSec": 41
   }
 }
