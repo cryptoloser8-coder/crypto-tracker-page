@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-24 08:10:40",
-  "totalUsd": 38398.23,
+  "timestamp": "2026-10-24 08:15:54",
+  "totalUsd": 38411.36,
   "assets": [
     {
       "symbol": "WTAO",
@@ -120,7 +120,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5453.824744357581,
+      "valueUsd": 5451.6596690323095,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -202,11 +202,11 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 30620.15075701038,
-      "valueUsd": 4014.3017642440605,
+      "valueUsd": 4029.6118396225656,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
-        "avgPriceUsd": 0.15765349619319036,
+        "avgPriceUsd": 0.1502745619579046,
         "dateAcquired": "2026-10-20",
         "source": "auto",
         "purchases": [
@@ -245,6 +245,19 @@
             "txHash": "0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157",
             "network": "ethereum",
             "explorerUrl": "https://etherscan.io/tx/0x650aa85fbbe90459b8ca4353ccdd6642dd257ffe4fca4a93e6515177f953a157",
+            "paidAmount": 15000,
+            "paidSymbol": "WDOGE",
+            "priceSource": "historical"
+          },
+          {
+            "date": "2026-10-24",
+            "receivedAmount": 8946.7815723454,
+            "costUsd": 1184.5473158465456,
+            "avgPriceUsd": 0.13239926629124313,
+            "source": "swap",
+            "txHash": "0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1",
+            "network": "ethereum",
+            "explorerUrl": "https://etherscan.io/tx/0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1",
             "paidAmount": 15000,
             "paidSymbol": "WDOGE",
             "priceSource": "historical"
@@ -370,7 +383,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06326048949636794,
-      "valueUsd": 149.9987283116672
+      "valueUsd": 149.98871695053253
     },
     {
       "symbol": "ETH",
@@ -378,7 +391,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 145.97050442639053
+      "valueUsd": 145.96076192089552
     },
     {
       "symbol": "USDC",
@@ -402,7 +415,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.985447788360663
+      "valueUsd": 12.984581100964256
     },
     {
       "symbol": "XAUt",
@@ -620,7 +633,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.00023092,
+      "valueUsd": 0.00023128,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0x4350ec4a27306761d7c0fda3838708e0a608f140c949fa6e6053da2e24b260ad"
     },
@@ -650,7 +663,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00004194,
+      "valueUsd": 0.00004252,
       "contract": "0x4a5d095b3ddbf2776e9bb42c90e51ed96005ef9f",
       "dexscreenerUrl": "https://dexscreener.com/base/0xe06b9f356b3beb3c89ec982f2642d845c296258c14d6d299d919cc43bbb774b6"
     },
@@ -660,7 +673,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00001763,
+      "valueUsd": 0.00001757,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -1107,6 +1120,23 @@
   ],
   "closedPositions": [
     {
+      "symbol": "WDOGE",
+      "contract": "0x35a532d376ffd9a705d0bb319532837337a398e7",
+      "network": "ethereum",
+      "walletName": "Main",
+      "buyDate": "2026-09-23",
+      "sellDate": "2026-10-24",
+      "daysHeld": 31,
+      "amountSold": 15000,
+      "costUsd": 1483.8174299711445,
+      "proceedsUsd": 1184.5473158465456,
+      "pnlUsd": -299.2701141245989,
+      "pnlPct": -20.168931034218858,
+      "costCoverage": 1,
+      "txHash": "0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1",
+      "explorerUrl": "https://etherscan.io/tx/0xed45251823875bb26664479d915a4c0ff4109cc4c352882e02c7f8c1a9d4f2d1"
+    },
+    {
       "symbol": "FET",
       "contract": "0xaea46a60368a7bd060eec7df8cba43b7ef41ad85",
       "network": "ethereum",
@@ -1300,9 +1330,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-23T20:45:03.617Z",
-    "durationSec": 38
+    "durationSec": 51
   }
 }
