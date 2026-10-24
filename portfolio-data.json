@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-24 16:25:52",
-  "totalUsd": 36903.46,
+  "timestamp": "2026-10-24 16:30:44",
+  "totalUsd": 36911.37,
   "assets": [
     {
       "symbol": "WTAO",
@@ -327,7 +327,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 366.519434541187,
+      "valueUsd": 374.42992593416227,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -436,7 +436,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.77621,
+      "valueUsd": 7.7761320000000005,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -496,7 +496,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 313.8712731064174,
-      "valueUsd": 0.00586625409435894,
+      "valueUsd": 0.005844283105241492,
       "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xfdff5b597bbf65bbd9e9e96da67b659f951d48d870c34a92d5398dcb49bba540"
     },
@@ -566,7 +566,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 451.16541,
-      "valueUsd": 0.00155697182991,
+      "valueUsd": 0.0015520090104000001,
       "contract": "0xba1bb4d7e360c066cb1c7fab49790cc9c1717128",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x4d3f965e9b3a2eb4af7606928f861f2ed554f0cb"
     },
@@ -626,7 +626,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0002324,
+      "valueUsd": 0.00023228,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0x4350ec4a27306761d7c0fda3838708e0a608f140c949fa6e6053da2e24b260ad"
     },
@@ -656,7 +656,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00001711,
+      "valueUsd": 0.00001704,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -719,6 +719,16 @@
       "valueUsd": 6.973e-7,
       "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa3a3895055dbc54d0aa84790c37c62820dd502eb"
+    },
+    {
+      "symbol": "FDOG",
+      "name": "Fancy Dog",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 5.477e-7,
+      "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
     },
     {
       "symbol": "USOTF",
@@ -908,16 +918,6 @@
       "balance": 8500,
       "valueUsd": 0,
       "contract": "0xcee7db0585d7465783209c5da616027e5cc76b87",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "FDOG",
-      "name": "Fancy Dog",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 0,
-      "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": null
     },
     {
@@ -1360,9 +1360,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-23T20:45:03.617Z",
-    "durationSec": 50
+    "durationSec": 40
   }
 }
