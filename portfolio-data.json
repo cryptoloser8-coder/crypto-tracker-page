@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-28 11:40:45",
-  "totalUsd": 39094.91,
+  "timestamp": "2026-10-28 11:45:57",
+  "totalUsd": 39084.15,
   "assets": [
     {
       "symbol": "WTAO",
@@ -215,7 +215,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5622.700619728716,
+      "valueUsd": 5611.875243102362,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -409,7 +409,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06177376697196696,
-      "valueUsd": 145.93322733418904
+      "valueUsd": 145.9614800422426
     },
     {
       "symbol": "ETH",
@@ -417,7 +417,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 145.43206854811947
+      "valueUsd": 145.46022423171104
     },
     {
       "symbol": "USDC",
@@ -441,7 +441,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.937548858284726
+      "valueUsd": 12.940053570868
     },
     {
       "symbol": "XAUt",
@@ -499,7 +499,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0041627999999999995,
+      "valueUsd": 0.0041532,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -549,19 +549,9 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.002854,
+      "valueUsd": 0.002856,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
-    },
-    {
-      "symbol": "AROS",
-      "name": "ArosAI",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 4,
-      "valueUsd": 0.0027672,
-      "contract": "0xb200000000000000000000b23567ab79b58462d3",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
     },
     {
       "symbol": "SXC",
@@ -622,6 +612,16 @@
       "valueUsd": 0.0010506492628965145,
       "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5c658f8f8a2baaec4bce8a54fa201c019d74aeb5952581eb2871092f79e2efd3"
+    },
+    {
+      "symbol": "AROS",
+      "name": "ArosAI",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 4,
+      "valueUsd": 0.000672,
+      "contract": "0xb200000000000000000000b23567ab79b58462d3",
+      "dexscreenerUrl": "https://dexscreener.com/base/0x4350ec4a27306761d7c0fda3838708e0a608f140c949fa6e6053da2e24b260ad"
     },
     {
       "symbol": "USDT",
@@ -1390,9 +1390,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-27T20:50:03.124Z",
-    "durationSec": 42
+    "durationSec": 55
   }
 }
