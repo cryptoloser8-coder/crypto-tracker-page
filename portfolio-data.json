@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-28 12:10:42",
-  "totalUsd": 39068.54,
+  "timestamp": "2026-10-28 12:15:55",
+  "totalUsd": 39061.03,
   "assets": [
     {
       "symbol": "WTAO",
@@ -215,7 +215,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5594.554640500194,
+      "valueUsd": 5588.05941452438,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -409,7 +409,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.06177376697196696,
-      "valueUsd": 145.4158311069731
+      "valueUsd": 144.9238948876754
     },
     {
       "symbol": "ETH",
@@ -417,7 +417,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 144.91644914493386
+      "valueUsd": 144.4262023157976
     },
     {
       "symbol": "USDC",
@@ -441,7 +441,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.005476484985355231,
-      "valueUsd": 12.891679668032602
+      "valueUsd": 12.84806760662215
     },
     {
       "symbol": "XAUt",
@@ -449,7 +449,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.8859521,
+      "valueUsd": 7.891780649999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -744,6 +744,16 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf3904a4c204d201ca05e17e4814045c8a328f53c"
     },
     {
+      "symbol": "DOG",
+      "name": "Pepes Dog",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 5.856e-7,
+      "contract": "0x41b5cb9acf172009a361acba82bdcaf12d554371",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x78ca85dd5c2c1e73f098b33ea5672965c31ecf25"
+    },
+    {
       "symbol": "FDOG",
       "name": "Fancy Dog",
       "walletName": "FOMO APP",
@@ -871,16 +881,6 @@
       "balance": 1105.284504252084,
       "valueUsd": 0,
       "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "DOG",
-      "name": "Pepes Dog",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 0,
-      "contract": "0x41b5cb9acf172009a361acba82bdcaf12d554371",
       "dexscreenerUrl": null
     },
     {
@@ -1390,9 +1390,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-10-27T20:50:03.124Z",
-    "durationSec": 39
+    "durationSec": 52
   }
 }
