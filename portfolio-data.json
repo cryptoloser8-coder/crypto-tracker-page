@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-28 12:15:55",
-  "totalUsd": 39061.03,
+  "timestamp": "2026-10-28 12:20:43",
+  "totalUsd": 39046.54,
   "assets": [
     {
       "symbol": "WTAO",
@@ -215,7 +215,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5588.05941452438,
+      "valueUsd": 5572.903887247484,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -297,7 +297,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 532.6397537936675,
+      "valueUsd": 533.2989614097487,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -449,7 +449,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.891780649999999,
+      "valueUsd": 7.901412284999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -522,16 +522,6 @@
       "valueUsd": 0.003511143661348576,
       "contract": "0x243f2e2cdbc45161277e168a229c0d41f81b0b8f",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x77c019fd8ae1d9dfb6da8a0fc4512bd05d9a756791f3553b108d2228838bc5bd"
-    },
-    {
-      "symbol": "FOOMS",
-      "name": "FOMO users. Airdrop is yours.",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1022.5314549252686,
-      "valueUsd": 0.0032751682501256352,
-      "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x89cf4f0378c2ebc412914a044cc0cbdb473a2299c34f3405e42fc4cdfd30d834"
     },
     {
       "symbol": "HYPERCAT",
@@ -609,7 +599,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 134.04558087477858,
-      "valueUsd": 0.0010501130805730154,
+      "valueUsd": 0.0010474321689555198,
       "contract": "0xf553178f864abed95acd723720986c7301e44fc7",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5c658f8f8a2baaec4bce8a54fa201c019d74aeb5952581eb2871092f79e2efd3"
     },
@@ -709,7 +699,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000001078,
+      "valueUsd": 0.000001075,
       "contract": "0xb5e10a3ae1755ff9aed06e53f7ba80e2589c9f6a",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x53eb678ce00c15323ac44e8c7f839ea0777a0782"
     },
@@ -891,6 +881,16 @@
       "balance": 106.44977571362492,
       "valueUsd": 0,
       "contract": "0xa6b2bc6e9de767c7734eb9e15cda1ae371a079e7",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "FOOMS",
+      "name": "FOMO users. Airdrop is yours.",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1022.5314549252686,
+      "valueUsd": 0,
+      "contract": "0xb331fc2efa1b0ca45db3bc18644311b3355d4f00",
       "dexscreenerUrl": null
     },
     {
@@ -1390,9 +1390,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-10-27T20:50:03.124Z",
-    "durationSec": 52
+    "durationSec": 40
   }
 }
