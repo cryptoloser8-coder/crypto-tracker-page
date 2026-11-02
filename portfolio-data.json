@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-02 17:41:01",
-  "totalUsd": 32818.3,
+  "timestamp": "2026-11-02 17:45:55",
+  "totalUsd": 32714.59,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 6399.962661500996,
+      "valueUsd": 6296.255553420516,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -427,7 +427,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.6967436,
+      "valueUsd": 7.691775,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -487,7 +487,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.003987,
+      "valueUsd": 0.0039576,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -572,6 +572,16 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5c658f8f8a2baaec4bce8a54fa201c019d74aeb5952581eb2871092f79e2efd3"
     },
     {
+      "symbol": "AGE",
+      "name": "Agemica",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 106.44977571362492,
+      "valueUsd": 0.0009349483800927677,
+      "contract": "0xa6b2bc6e9de767c7734eb9e15cda1ae371a079e7",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa643f71b8c12592854aaf41dea821cd006b864f80739b11a51f11a6544f990b4"
+    },
+    {
       "symbol": "PEPE",
       "name": "Pepe Army",
       "walletName": "FOMO APP",
@@ -627,7 +637,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003719,
+      "valueUsd": 0.00000372,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -859,16 +869,6 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "AGE",
-      "name": "Agemica",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 106.44977571362492,
-      "valueUsd": 0,
-      "contract": "0xa6b2bc6e9de767c7734eb9e15cda1ae371a079e7",
       "dexscreenerUrl": null
     },
     {
@@ -1439,9 +1439,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-01T21:10:02.868Z",
-    "durationSec": 57
+    "durationSec": 52
   }
 }
