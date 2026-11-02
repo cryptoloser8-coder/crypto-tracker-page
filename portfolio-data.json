@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-02 04:35:41",
+  "timestamp": "2026-11-02 04:40:53",
   "totalUsd": 37280.66,
   "assets": [
     {
@@ -635,7 +635,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001534,
+      "valueUsd": 0.0001533,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -655,7 +655,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003808,
+      "valueUsd": 0.0000038,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -1460,9 +1460,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-01T21:10:02.868Z",
-    "durationSec": 39
+    "durationSec": 50
   }
 }
