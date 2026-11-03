@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-03 15:45:54",
-  "totalUsd": 37402.38,
+  "timestamp": "2026-11-03 15:50:44",
+  "totalUsd": 37417.21,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5711.468708064826,
+      "valueUsd": 5728.789310666994,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -346,7 +346,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 377.2864922705145,
+      "valueUsd": 374.8693976782165,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -447,7 +447,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.663266,
+      "valueUsd": 7.664884499999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -460,16 +460,6 @@
       "valueUsd": 0.9570487460582577,
       "contract": "0x062570121e9519c77cb71c7936b6c1f76c7b1119",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xdfad37e05c4a203cd9aca0f856407a0634f5b467"
-    },
-    {
-      "symbol": "COPCAT",
-      "name": "Copper Cat",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1105.284504252084,
-      "valueUsd": 0.07861888678745074,
-      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
     },
     {
       "symbol": "CASHED",
@@ -627,7 +617,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001935,
+      "valueUsd": 0.000194,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -869,6 +859,16 @@
       "balance": 1664.8599668151644,
       "valueUsd": 0,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "COPCAT",
+      "name": "Copper Cat",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1105.284504252084,
+      "valueUsd": 0,
+      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
       "dexscreenerUrl": null
     },
     {
@@ -1439,9 +1439,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-02T21:10:03.355Z",
-    "durationSec": 51
+    "durationSec": 41
   }
 }
