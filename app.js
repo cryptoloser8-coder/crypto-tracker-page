@@ -24,7 +24,7 @@ const OVERRIDES_BRANCH = 'main'; // zmień, jeśli Pages serwuje z innej gałęz
 // Dane ostatnio wczytane z plików — trzymane w pamięci, żeby renderDashboard()
 // mogło przeliczać widok bez ponownego pobierania portfolio-data.json za każdym razem
 let currentPortfolioData = null;
-let currentOverrides = { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
+let currentOverrides = { hidden: [], manual: [], staked: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
 
 // Historia wartości portfela (dopisywana przez backend co 5 min - patrz
 // src/storage/appendHistory.js). Surowa suma z backendu (assets), BEZ ręcznych
@@ -553,15 +553,61 @@ function base64ToUtf8(b64) {
 
 // Unikalny klucz identyfikujący konkretny wiersz w tabeli (token + portfel + sieć)
 function assetKey(asset) {
+    // Pozycja w stakingu ma osobny klucz, żeby nie zlać się z tym samym tokenem
+    // leżącym normalnie w portfelu (np. po odebraniu części nagród)
+    if (asset.isStaked) return `${asset.symbol}::${asset.walletName}::${asset.network}::staking`;
     return `${asset.symbol}::${asset.walletName}::${asset.network}`;
+}
+
+// --- POZYCJE W STAKINGU ---
+// Tokeny zablokowane w kontrakcie stakingu nie leżą na portfelu, więc Alchemy ich nie widzi.
+// Ilość i łączny koszt wpisuje się ręcznie (overrides.json -> staked), a cenę jednostkową
+// liczy backend z Dexscreenera (asset z polami staked: true, stakedId, unitPriceUsd).
+// Ilość bierzemy zawsze z overrides - po edycji wartość przelicza się od razu,
+// bez czekania na następny run backendu.
+function buildStakedAssets(realAssets) {
+    const fromBackend = new Map();
+    realAssets.forEach(a => { if (a.staked && a.stakedId) fromBackend.set(a.stakedId, a); });
+
+    return (currentOverrides.staked || []).map(s => {
+        const b = fromBackend.get(s.id);
+        let unit = null;
+        if (b) {
+            if (b.unitPriceUsd !== undefined && b.unitPriceUsd !== null && isFinite(Number(b.unitPriceUsd))) {
+                unit = Number(b.unitPriceUsd);
+            } else if (Number(b.balance) > 0) {
+                unit = (Number(b.valueUsd) || 0) / Number(b.balance);
+            }
+        }
+        const hasPrice = unit !== null && unit > 0;
+        const balance = Number(s.balance) || 0;
+        return {
+            symbol: s.symbol,
+            name: b ? b.name : s.symbol,
+            walletName: s.walletName,
+            network: s.network,
+            contract: s.contract,
+            dexscreenerUrl: b ? b.dexscreenerUrl : null,
+            balance,
+            valueUsd: hasPrice ? unit * balance : 0,
+            unitPriceUsd: hasPrice ? unit : null,
+            awaitingPrice: !hasPrice,
+            isStaked: true,
+            stakedId: s.id,
+            stakedCostUsd: Number(s.costUsd) || 0,
+            dateAcquired: s.dateAcquired || null
+        };
+    });
 }
 
 // Łączy surowe dane z backendu z nadpisaniami użytkownika (ukryte + ręcznie dodane)
 function getVisibleAssets() {
     const hiddenSet = new Set(currentOverrides.hidden || []);
-    const real = (currentPortfolioData?.assets || []).filter(a => !hiddenSet.has(assetKey(a)));
+    const allReal = currentPortfolioData?.assets || [];
+    const real = allReal.filter(a => !a.staked && !hiddenSet.has(assetKey(a)));
+    const staked = buildStakedAssets(allReal);
     const manual = (currentOverrides.manual || []).map(m => ({ ...m, isManual: true }));
-    return [...real, ...manual];
+    return [...real, ...staked, ...manual];
 }
 
 // --- CENA ZAKUPU / ZYSK-STRATA ---
@@ -570,6 +616,24 @@ function getVisibleAssets() {
 // per pozycja (klucz = assetKey, tak samo jak przy "Ukryj"). Trzymane w overrides.json
 // pod costBasis: { [assetKey]: { avgPriceUsd, dateAcquired } }.
 function computePnl(asset) {
+    // Staking: łączny koszt wpisany ręcznie. Nagrody zwiększają ilość bez kosztu, więc
+    // średnia cena wejścia (koszt / ilość) spada razem z dopisywanymi nagrodami.
+    if (asset.isStaked) {
+        const costUsd = Number(asset.stakedCostUsd) || 0;
+        if (!(costUsd > 0) || asset.awaitingPrice) return null;
+        const bal = Number(asset.balance) || 0;
+        const pnlUsdS = (Number(asset.valueUsd) || 0) - costUsd;
+        const daysHeldS = asset.dateAcquired
+            ? Math.max(0, Math.floor((Date.now() - new Date(asset.dateAcquired + 'T00:00:00Z').getTime()) / 86400000))
+            : null;
+        return {
+            pnlUsd: pnlUsdS,
+            pnlPct: (pnlUsdS / costUsd) * 100,
+            daysHeld: daysHeldS,
+            avgPriceUsd: bal > 0 ? costUsd / bal : null,
+            isAuto: false
+        };
+    }
     const manual = currentOverrides.costBasis[assetKey(asset)];
     const cb = manual || asset.costBasis; // ręcznie wpisana cena zawsze wygrywa z auto-wykrytą
     if (!cb || !cb.avgPriceUsd) return null;
@@ -621,7 +685,10 @@ function renderPurchaseDetailRow(asset, key) {
     const pairOverrideBtn = `<button class="row-action-btn" data-action="set-pair-override" data-contract="${escapeHtml(asset.contract)}" data-key="${escapeHtml(key)}">Ustaw parę ręcznie</button>`;
 
     let bodyHtml;
-    if (purchases.length === 0) {
+    if (asset.isStaked) {
+        const costTxt = asset.stakedCostUsd > 0 ? money(`$${asset.stakedCostUsd.toFixed(2)}`) : 'nie wpisano';
+        bodyHtml = `<div class="muted-note" style="margin-top: 10px;">Pozycja w stakingu: ilość i koszt wpisane ręcznie (koszt łącznie: ${costTxt}${asset.dateAcquired ? `, od ${escapeHtml(asset.dateAcquired)}` : ''}). Gdy dojdą nagrody, popraw ilość przyciskiem "Edytuj". Kontrakt: ${escapeHtml(asset.contract || '—')}</div>`;
+    } else if (purchases.length === 0) {
         bodyHtml = `<div class="muted-note" style="margin-top: 10px;">Brak automatycznie wykrytej historii zakupów dla tej pozycji.</div>`;
     } else {
         const rows = purchases.map(p => {
@@ -690,6 +757,7 @@ function renderPurchaseDetailRow(asset, key) {
 // --- CENA JEDNOSTKOWA ---
 // Liczona z tego, co już mamy: wartość USD / ilość (backend nie zapisuje ceny osobno).
 function getUnitPrice(asset) {
+    if (asset.isStaked) return asset.unitPriceUsd;
     const balance = Number(asset.balance) || 0;
     const valueUsd = Number(asset.valueUsd) || 0;
     return balance > 0 ? valueUsd / balance : null;
@@ -971,7 +1039,10 @@ function renderDashboard() {
                     ? `<div class="muted-note entry-price" title="Średnia cena wejścia${pnl.isAuto ? ' (auto)' : ' (wpisana ręcznie)'}">wejście: ${formatUnitPrice(Number(pnl.avgPriceUsd))}</div>`
                     : '';
 
-                const actionCell = `
+                const actionCell = asset.isStaked ? `
+                    <button class="row-action-btn" data-action="edit-staked" data-id="${escapeHtml(asset.stakedId)}">Edytuj</button>
+                    <button class="row-action-btn" data-action="remove-staked" data-id="${escapeHtml(asset.stakedId)}">Usuń</button>
+                ` : `
                     <button class="row-action-btn" data-action="set-cost-basis" data-key="${escapeHtml(key)}">Cena zakupu</button>
                     ${asset.isManual
                         ? `<button class="row-action-btn" data-action="remove-manual" data-id="${escapeHtml(asset.id)}">Usuń</button>`
@@ -984,10 +1055,10 @@ function renderDashboard() {
                 if (expandable) row.dataset.key = key;
 
                 row.innerHTML = `
-                    <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}</td>
+                    <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}${asset.isStaked ? ' <span class="manual-badge" title="Tokeny w stakingu - ilość wpisana ręcznie, cena na żywo">staking</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
                     <td>${money(balance.toFixed(4))}</td>
-                    <td>${formatUnitPrice(getUnitPrice(asset))}${entryPriceHtml}</td>
+                    <td>${asset.isStaked && asset.awaitingPrice ? '<span class="muted-note" title="Backend wyceni tę pozycję przy najbliższym runie (do 5 min)">czeka na wycenę</span>' : formatUnitPrice(getUnitPrice(asset))}${entryPriceHtml}</td>
                     <td>${money(`$${valueUsd.toFixed(2)}`)}</td>
                     <td>${pnlCell}</td>
                     <td>${daysCell}</td>
@@ -1504,6 +1575,8 @@ document.getElementById('assets-table-body').addEventListener('click', (e) => {
     if (btn) {
         if (btn.dataset.action === 'hide') hideAsset(btn.dataset.key);
         if (btn.dataset.action === 'remove-manual') removeManualAsset(btn.dataset.id);
+        if (btn.dataset.action === 'edit-staked') openStakedForm(btn.dataset.id);
+        if (btn.dataset.action === 'remove-staked') removeStakedAsset(btn.dataset.id);
         if (btn.dataset.action === 'set-cost-basis') openCostBasisForm(btn.dataset.key);
         if (btn.dataset.action === 'set-pair-override') openPairOverrideForm(btn.dataset.contract, btn.dataset.key);
         return;
@@ -1698,6 +1771,114 @@ document.getElementById('manual-submit-btn').addEventListener('click', async () 
     document.getElementById('manual-balance').value = '';
     document.getElementById('manual-value').value = '';
     document.getElementById('add-manual-form').style.display = 'none';
+});
+
+// --- FORMULARZ "+ Staking" (dodawanie i edycja pozycji w stakingu) ---
+// Zapis w overrides.json -> staked: [{ id, symbol, walletName, network, contract,
+// balance, costUsd, dateAcquired, updatedAt }]. Opcjonalny link do pary trafia do
+// priceOverrides (klucz = adres kontraktu, jak w "Ustaw parę ręcznie").
+let editingStakedId = null;
+
+function openStakedForm(id) {
+    const entry = id ? (currentOverrides.staked || []).find(s => s.id === id) : null;
+    editingStakedId = entry ? entry.id : null;
+
+    document.getElementById('staked-form-title').innerText = entry ? `Edycja: ${entry.symbol} (staking)` : 'Nowa pozycja w stakingu';
+    document.getElementById('staked-symbol').value = entry ? entry.symbol : '';
+    document.getElementById('staked-wallet').value = entry ? entry.walletName : '';
+    document.getElementById('staked-network').value = entry ? entry.network : 'robinhood';
+    document.getElementById('staked-contract').value = entry ? entry.contract : '';
+    document.getElementById('staked-balance').value = entry ? entry.balance : '';
+    document.getElementById('staked-cost').value = entry && entry.costUsd ? entry.costUsd : '';
+    document.getElementById('staked-date').value = entry && entry.dateAcquired ? entry.dateAcquired : '';
+    const contract = entry ? entry.contract : '';
+    document.getElementById('staked-pair').value = contract && currentOverrides.priceOverrides ? (currentOverrides.priceOverrides[contract] || '') : '';
+    document.getElementById('staked-form-error').innerText = '';
+
+    // Przy edycji symbol/portfel/sieć/kontrakt zostają zablokowane - zmienia się ilość i koszt
+    ['staked-symbol', 'staked-wallet', 'staked-network', 'staked-contract'].forEach(fid => {
+        document.getElementById(fid).disabled = !!entry;
+    });
+
+    const form = document.getElementById('staked-form');
+    form.style.display = 'flex';
+    if (entry) {
+        form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('staked-balance').focus();
+    }
+}
+
+function closeStakedForm() {
+    document.getElementById('staked-form').style.display = 'none';
+    document.getElementById('staked-form-error').innerText = '';
+    editingStakedId = null;
+}
+
+async function removeStakedAsset(id) {
+    const entry = (currentOverrides.staked || []).find(s => s.id === id);
+    if (!entry) return;
+    if (!confirm(`Usunąć pozycję w stakingu ${entry.symbol} (${entry.walletName})?`)) return;
+    currentOverrides.staked = currentOverrides.staked.filter(s => s.id !== id);
+    renderDashboard();
+    scheduleSave();
+}
+
+document.getElementById('add-staked-btn').addEventListener('click', () => {
+    const form = document.getElementById('staked-form');
+    if (form.style.display !== 'none' && !editingStakedId) closeStakedForm();
+    else openStakedForm(null);
+});
+
+document.getElementById('staked-cancel-btn').addEventListener('click', closeStakedForm);
+
+document.getElementById('staked-save-btn').addEventListener('click', () => {
+    const errorEl = document.getElementById('staked-form-error');
+    const symbol = document.getElementById('staked-symbol').value.trim();
+    const walletName = document.getElementById('staked-wallet').value.trim();
+    const network = document.getElementById('staked-network').value;
+    const contract = document.getElementById('staked-contract').value.trim().toLowerCase();
+    const balanceRaw = document.getElementById('staked-balance').value.trim();
+    const costRaw = document.getElementById('staked-cost').value.trim();
+    const date = document.getElementById('staked-date').value;
+    const pairUrl = document.getElementById('staked-pair').value.trim();
+
+    if (!symbol || !walletName) { errorEl.innerText = 'Podaj symbol i portfel.'; return; }
+    if (!/^0x[0-9a-f]{40}$/.test(contract)) { errorEl.innerText = 'Adres kontraktu musi mieć postać 0x + 40 znaków.'; return; }
+    const balance = Number(balanceRaw);
+    if (!balanceRaw || !isFinite(balance) || balance <= 0) { errorEl.innerText = 'Podaj ilość tokenów (> 0).'; return; }
+    const costUsd = costRaw === '' ? 0 : Number(costRaw);
+    if (!isFinite(costUsd) || costUsd < 0) { errorEl.innerText = 'Koszt musi być liczbą >= 0 (puste = brak ceny zakupu).'; return; }
+    if (pairUrl && !/^https:\/\/dexscreener\.com\/[a-z0-9-]+\/0x[0-9a-fA-F]+\/?$/.test(pairUrl)) {
+        errorEl.innerText = 'Link do pary musi wyglądać tak: https://dexscreener.com/siec/0xadrespary';
+        return;
+    }
+
+    if (editingStakedId) {
+        const entry = currentOverrides.staked.find(s => s.id === editingStakedId);
+        if (!entry) { closeStakedForm(); return; }
+        entry.balance = balance;
+        entry.costUsd = costUsd;
+        entry.dateAcquired = date || entry.dateAcquired || null;
+        entry.updatedAt = new Date().toISOString();
+    } else {
+        const dup = currentOverrides.staked.find(s => s.contract === contract && s.walletName === walletName && s.network === network);
+        if (dup) { errorEl.innerText = 'Ta pozycja już istnieje - użyj "Edytuj" w jej wierszu.'; return; }
+        currentOverrides.staked.push({
+            id: `staked-${Date.now()}`,
+            symbol, walletName, network, contract,
+            balance, costUsd,
+            dateAcquired: date || new Date().toISOString().substring(0, 10),
+            updatedAt: new Date().toISOString()
+        });
+    }
+
+    if (pairUrl) {
+        currentOverrides.priceOverrides[contract] = pairUrl.replace(/\/$/, '');
+    }
+
+    closeStakedForm();
+    renderDashboard();
+    scheduleSave();
 });
 
 // --- FORMULARZ "+ Dodaj transakcję" (ledgery) ---
@@ -1904,10 +2085,11 @@ async function loadPortfolioData() {
         // Jeśli zmiana z tej strony czeka na zapis albo właśnie się zapisuje, NIE nadpisujemy
         // lokalnego stanu wersją z repo - inaczej odświeżenie mogłoby cofnąć świeżą zmianę.
         if (!saveQueued && !saveInFlight) {
-            currentOverrides = overridesData || { hidden: [], manual: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
+            currentOverrides = overridesData || { hidden: [], manual: [], staked: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
+        if (!Array.isArray(currentOverrides.staked)) currentOverrides.staked = [];
         if (!currentOverrides.ledgers || typeof currentOverrides.ledgers !== 'object') currentOverrides.ledgers = {};
         if (!currentOverrides.costBasis || typeof currentOverrides.costBasis !== 'object') currentOverrides.costBasis = {};
         if (!currentOverrides.priceOverrides || typeof currentOverrides.priceOverrides !== 'object') currentOverrides.priceOverrides = {};
