@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-03 18:00:57",
-  "totalUsd": 42030.37,
+  "timestamp": "2026-11-03 18:05:44",
+  "totalUsd": 41801.21,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5720.129009365911,
+      "valueUsd": 5711.468708064826,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -423,16 +423,6 @@
       }
     },
     {
-      "symbol": "RYFT",
-      "name": "RYFT",
-      "walletName": "Main 2",
-      "network": "robinhood",
-      "balance": 6043046,
-      "valueUsd": 220.51074853999998,
-      "contract": "0x4adbad8728ed907c179d8dd8e183b421924ff921",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xac6f861aa68663242ece68d9549aa7729dcbe0a8"
-    },
-    {
       "symbol": "ETH",
       "name": "Native ethereum",
       "walletName": "Main 2",
@@ -553,6 +543,16 @@
       "valueUsd": 0.002772,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
+    },
+    {
+      "symbol": "RYFT",
+      "name": "RYFT",
+      "walletName": "Main 2",
+      "network": "robinhood",
+      "balance": 6043046,
+      "valueUsd": 0.0024969866072,
+      "contract": "0x4adbad8728ed907c179d8dd8e183b421924ff921",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xac6f861aa68663242ece68d9549aa7729dcbe0a8"
     },
     {
       "symbol": "SXC",
@@ -680,7 +680,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001941,
+      "valueUsd": 0.0001942,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -770,7 +770,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 6.255e-7,
+      "valueUsd": 6.259e-7,
       "contract": "0x278a9d28412ab39946b4d1de835257f9ed2e8d2b",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf3904a4c204d201ca05e17e4814045c8a328f53c"
     },
@@ -1462,9 +1462,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-02T21:10:03.355Z",
-    "durationSec": 54
+    "durationSec": 41
   }
 }
