@@ -113,6 +113,7 @@
                 <div style="display: flex; gap: 8px; align-items: center;">
                     <input type="text" id="asset-search" class="search-input" placeholder="Szukaj (symbol / portfel / sieć)...">
                     <button id="add-manual-btn" class="secondary-button">+ Dodaj pozycję ręcznie</button>
+                    <button id="add-staked-btn" class="secondary-button">+ Staking</button>
                 </div>
             </div>
 
@@ -125,6 +126,30 @@
                 <button id="manual-submit-btn" class="refresh-button">Dodaj</button>
                 <button id="manual-cancel-btn" class="secondary-button">Anuluj</button>
                 <div id="manual-form-error" class="auth-error"></div>
+            </div>
+
+            <!-- Formularz "+ Staking" - tokeny zablokowane w stakingu (niewidoczne na portfelu).
+                 Ilość i łączny koszt wpisane ręcznie (overrides.json -> staked), cenę jednostkową
+                 liczy backend z Dexscreenera. Ten sam formularz służy do edycji (przycisk "Edytuj"). -->
+            <div id="staked-form" class="add-manual-form" style="display: none;">
+                <span id="staked-form-title" style="align-self: center; font-weight: 600;">Nowa pozycja w stakingu</span>
+                <input type="text" id="staked-symbol" placeholder="Symbol">
+                <input type="text" id="staked-wallet" placeholder="Portfel (np. Main 2)">
+                <select id="staked-network">
+                    <option value="ethereum">ethereum</option>
+                    <option value="base">base</option>
+                    <option value="arbitrum">arbitrum</option>
+                    <option value="robinhood">robinhood</option>
+                    <option value="bsc">bsc</option>
+                </select>
+                <input type="text" id="staked-contract" placeholder="Adres kontraktu tokena (0x...)">
+                <input type="number" id="staked-balance" placeholder="Ilość tokenów (z nagrodami)" step="any">
+                <input type="number" id="staked-cost" placeholder="Wydane łącznie (USD)" step="any">
+                <input type="date" id="staked-date" title="Data zakupu / rozpoczęcia stakingu">
+                <input type="text" id="staked-pair" placeholder="Link do pary Dexscreener (opcjonalnie)" style="flex: 1 1 320px;">
+                <button id="staked-save-btn" class="refresh-button">Zapisz</button>
+                <button id="staked-cancel-btn" class="secondary-button">Anuluj</button>
+                <div id="staked-form-error" class="auth-error"></div>
             </div>
 
             <!-- Formularz "Cena zakupu" - wspólny dla wszystkich pozycji, otwierany przyciskiem
