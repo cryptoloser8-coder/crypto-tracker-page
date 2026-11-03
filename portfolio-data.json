@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-03 09:40:54",
-  "totalUsd": 36756.23,
+  "timestamp": "2026-11-03 09:45:42",
+  "totalUsd": 36771.82,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5492.796100212458,
+      "valueUsd": 5501.456401513542,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -267,7 +267,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 1.3654720846324153,
-      "valueUsd": 3086.1425627990075
+      "valueUsd": 3091.713835624284
     },
     {
       "symbol": "PVC",
@@ -295,7 +295,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.26469078698322585,
-      "valueUsd": 598.2352278623117
+      "valueUsd": 599.3151947142285
     },
     {
       "symbol": "PEPECOIN",
@@ -415,7 +415,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 139.13719315663485
+      "valueUsd": 139.38837120413106
     },
     {
       "symbol": "USDC",
@@ -439,7 +439,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 27.608366744389194
+      "valueUsd": 27.658206873373313
     },
     {
       "symbol": "XAUt",
@@ -447,7 +447,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 7.609719,
+      "valueUsd": 7.6103625,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -470,16 +470,6 @@
       "valueUsd": 0.07861888678745074,
       "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
-    },
-    {
-      "symbol": "YFTE",
-      "name": "YFTether",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.01,
-      "valueUsd": 0.0184,
-      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
-      "dexscreenerUrl": "https://dexscreener.com/ethereum/0x07f30eea759728c447791d888dd6a9ec593ab3cf"
     },
     {
       "symbol": "CASHED",
@@ -660,6 +650,16 @@
       "valueUsd": 0.00008625595049421413,
       "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x80ab0f2536975d51e9455b3baf57fb5022726bf2105a9ee8008a3b49623b34c1"
+    },
+    {
+      "symbol": "YFTE",
+      "name": "YFTether",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.01,
+      "valueUsd": 0.000032840000000000004,
+      "contract": "0x94f31ac896c9823d81cf9c2c93feceed4923218f",
+      "dexscreenerUrl": "https://dexscreener.com/pulsechain/0x28905eb057ffd1fc12651920bef84fd52e524ab3"
     },
     {
       "symbol": "DOG",
@@ -1439,9 +1439,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-02T21:10:03.355Z",
-    "durationSec": 50
+    "durationSec": 39
   }
 }
