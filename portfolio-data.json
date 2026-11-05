@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-05 17:15:46",
-  "totalUsd": 38190.96,
+  "timestamp": "2026-11-05 17:20:57",
+  "totalUsd": 37777.76,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5943.13176786882,
+      "valueUsd": 5951.792069169904,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -267,8 +267,8 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 133587.93,
-      "valueUsd": 5006.8756164,
-      "unitPriceUsd": 0.03748,
+      "valueUsd": 4580.7301197,
+      "unitPriceUsd": 0.03429,
       "contract": "0xb0007d59fe4050a1636c2fa19038973d16481337",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x41e8c3ce4c5da156c67a7706b8970fe2341f344a205392c3e9e8da679b62f5ad",
       "staked": true,
@@ -280,7 +280,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.8654337381633692,
-      "valueUsd": 1948.9432533454474
+      "valueUsd": 1952.9307907873426
     },
     {
       "symbol": "ETH",
@@ -288,7 +288,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.26469078698322585,
-      "valueUsd": 596.0795156986056
+      "valueUsd": 597.2990942487327
     },
     {
       "symbol": "PEPECOIN",
@@ -296,7 +296,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 425.53376146356663,
+      "valueUsd": 424.4882239661132,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -339,7 +339,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 334.4379972252318,
+      "valueUsd": 334.2182613532047,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -408,7 +408,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 138.63581890493208
+      "valueUsd": 138.91946775808483
     },
     {
       "symbol": "USDC",
@@ -432,7 +432,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 27.508881309163975
+      "valueUsd": 27.565164473908077
     },
     {
       "symbol": "XAUt",
@@ -440,7 +440,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.00195,
-      "valueUsd": 8.0060565,
+      "valueUsd": 8.00436,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -449,8 +449,8 @@
       "name": "VaultedMetrics",
       "walletName": "Main",
       "network": "ethereum",
-      "balance": 6215.950347754918,
-      "valueUsd": 0.9989032208842153,
+      "balance": 6216.060979701299,
+      "valueUsd": 0.9989209994379988,
       "contract": "0x062570121e9519c77cb71c7936b6c1f76c7b1119",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xdfad37e05c4a203cd9aca0f856407a0634f5b467"
     },
@@ -500,7 +500,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0039636,
+      "valueUsd": 0.0039654,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -640,7 +640,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003724,
+      "valueUsd": 0.000003723,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -1462,9 +1462,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-04T21:15:03.694Z",
-    "durationSec": 43
+    "durationSec": 54
   }
 }
