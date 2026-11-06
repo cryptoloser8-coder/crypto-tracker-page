@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-06 13:10:48",
-  "totalUsd": 38739.71,
+  "timestamp": "2026-11-06 13:15:55",
+  "totalUsd": 38727.89,
   "assets": [
     {
       "symbol": "WTAO",
@@ -64,7 +64,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 7229.186511079778,
+      "valueUsd": 7214.030983802882,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -280,7 +280,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.8654337381633692,
-      "valueUsd": 1933.21788960615
+      "valueUsd": 1935.6150849807564
     },
     {
       "symbol": "ETH",
@@ -288,7 +288,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.26469078698322585,
-      "valueUsd": 591.269951753727
+      "valueUsd": 592.0031280817075
     },
     {
       "symbol": "PEPECOIN",
@@ -408,7 +408,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 137.51721338584724
+      "valueUsd": 137.68773509973664
     },
     {
       "symbol": "USDC",
@@ -432,7 +432,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 27.286921452762204
+      "valueUsd": 27.32075730864037
     },
     {
       "symbol": "XAUt",
@@ -440,7 +440,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.97354404,
+      "valueUsd": 11.96689304,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -510,7 +510,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 6,
-      "valueUsd": 0.0039120000000000005,
+      "valueUsd": 0.0039299999999999995,
       "contract": "0xb200000000000000000000f15e2f103d2aec6ccc",
       "dexscreenerUrl": "https://dexscreener.com/base/0x1927db781a2f6aad3716579e5b18bf426e4b2d4af6622d5ab40ffe6f8bc65f59"
     },
@@ -630,9 +630,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001999,
+      "valueUsd": 0.0002,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
+    },
+    {
+      "symbol": "HEIR",
+      "name": "Heirloom",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 484.311906199967,
+      "valueUsd": 0.00007729618022951473,
+      "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x80ab0f2536975d51e9455b3baf57fb5022726bf2105a9ee8008a3b49623b34c1"
     },
     {
       "symbol": "DOG",
@@ -650,7 +660,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003692,
+      "valueUsd": 0.000003691,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -832,16 +842,6 @@
       "balance": 5000,
       "valueUsd": 0,
       "contract": "0x0a58a2cfebead61af0554ebb460a85e9bb553387",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "HEIR",
-      "name": "Heirloom",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 484.311906199967,
-      "valueUsd": 0,
-      "contract": "0x0d0ab8fd1f3ac5c6a6bd83814685be5a2b63e506",
       "dexscreenerUrl": null
     },
     {
@@ -1462,9 +1462,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-05T21:20:03.150Z",
-    "durationSec": 45
+    "durationSec": 52
   }
 }
