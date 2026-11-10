@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 23:15:41",
-  "totalUsd": 36705.38,
+  "timestamp": "2026-11-10 23:20:55",
+  "totalUsd": 36707.14,
   "assets": [
     {
       "symbol": "WTAO",
@@ -539,7 +539,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.11466615507630191,
-      "valueUsd": 234.25158089003034
+      "valueUsd": 235.05318204083565
     },
     {
       "symbol": "CETS",
@@ -616,7 +616,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 162.50722851830312
+      "valueUsd": 163.06332287164543
     },
     {
       "symbol": "USDC",
@@ -632,7 +632,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 92.7816506900746
+      "valueUsd": 93.09914642557486
     },
     {
       "symbol": "USDC",
@@ -648,7 +648,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 24.954842742540958
+      "valueUsd": 25.0402373878389
     },
     {
       "symbol": "XAUt",
@@ -656,7 +656,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.9014472,
+      "valueUsd": 11.90150632,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -726,7 +726,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.002466,
+      "valueUsd": 0.002468,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -749,16 +749,6 @@
       "valueUsd": 0.0016391729840300002,
       "contract": "0xb6a6e5c1aff980841c7a6c2c164be5031735909a",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xccfa430eb4cb6fd7371563ae6c2fe21e8e7fa807"
-    },
-    {
-      "symbol": "MAGA",
-      "name": "Maga Trump",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 4,
-      "valueUsd": 0.0015296,
-      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
     {
       "symbol": "HERD",
@@ -826,7 +816,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001911,
+      "valueUsd": 0.0001916,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -886,7 +876,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003374,
+      "valueUsd": 0.000003383,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -919,6 +909,16 @@
       "valueUsd": 5.008e-7,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
+    },
+    {
+      "symbol": "MAGA",
+      "name": "Maga Trump",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 4,
+      "valueUsd": 1.82e-23,
+      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
     {
       "symbol": "SXC",
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-10T21:40:03.740Z",
-    "durationSec": 39
+    "durationSec": 52
   }
 }
