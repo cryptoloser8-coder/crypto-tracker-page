@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 03:40:54",
-  "totalUsd": 36593.35,
+  "timestamp": "2026-11-10 03:45:41",
+  "totalUsd": 36586.85,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5126.8983702416635,
+      "valueUsd": 5120.403144265851,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -440,7 +440,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 12.126694399999998,
+      "valueUsd": 12.120279879999998,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -523,16 +523,6 @@
       "valueUsd": 0.0026519354442275716,
       "contract": "0x9dff0da886c7204480fa41ff546673d4cd1cda97",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5567c8f326e3eb333ec583538f259c85c7ddc806baf5b90de194586913661db3"
-    },
-    {
-      "symbol": "CLAUDE",
-      "name": "Claude AI",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 2,
-      "valueUsd": 0.002556,
-      "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
     {
       "symbol": "FOOMS",
@@ -640,7 +630,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001982,
+      "valueUsd": 0.0001978,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -743,6 +733,16 @@
       "valueUsd": 5.238e-7,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
+    },
+    {
+      "symbol": "CLAUDE",
+      "name": "Claude AI",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 2,
+      "valueUsd": 9.378e-24,
+      "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
     {
       "symbol": "PVC",
@@ -1462,9 +1462,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-09T21:35:03.442Z",
-    "durationSec": 52
+    "durationSec": 39
   }
 }
