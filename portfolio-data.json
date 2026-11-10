@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 14:40:42",
-  "totalUsd": 36976.91,
+  "timestamp": "2026-11-10 14:45:54",
+  "totalUsd": 37019.96,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 72.329469047,
-      "valueUsd": 15784.46003012681,
+      "valueUsd": 15827.857711555012,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -224,7 +224,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 4609.445367501901,
+      "valueUsd": 4607.280292176631,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -534,6 +534,14 @@
       }
     },
     {
+      "symbol": "ETH",
+      "name": "Native ethereum",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.11466615507630191,
+      "valueUsd": 238.54626203063648
+    },
+    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
@@ -605,18 +613,10 @@
     {
       "symbol": "ETH",
       "name": "Native ethereum",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.11466615507630191,
-      "valueUsd": 237.7163469165557
-    },
-    {
-      "symbol": "ETH",
-      "name": "Native ethereum",
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 164.91083886874654
+      "valueUsd": 165.48657545324383
     },
     {
       "symbol": "USDC",
@@ -632,7 +632,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 94.153964635511
+      "valueUsd": 94.48267487910677
     },
     {
       "symbol": "USDC",
@@ -648,7 +648,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 25.32394459023448
+      "valueUsd": 25.412355524678787
     },
     {
       "symbol": "XAUt",
@@ -656,7 +656,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.93931356,
+      "valueUsd": 11.93074116,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-09T21:35:03.442Z",
-    "durationSec": 40
+    "durationSec": 51
   }
 }
