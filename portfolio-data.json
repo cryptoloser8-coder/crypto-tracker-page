@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 21:10:43",
-  "totalUsd": 36718.04,
+  "timestamp": "2026-11-10 21:15:59",
+  "totalUsd": 36721.52,
   "assets": [
     {
       "symbol": "WTAO",
@@ -224,7 +224,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 4576.969237622837,
+      "valueUsd": 4579.134312948107,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -547,7 +547,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 222.59243836344274,
+      "valueUsd": 223.91085359560526,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -656,7 +656,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.89550564,
+      "valueUsd": 11.895594319999999,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -826,7 +826,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001926,
+      "valueUsd": 0.0001928,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -889,16 +889,6 @@
       "valueUsd": 0.000002311,
       "contract": "0x53fdca91fd33b9131b5ceade42a3edbd9b38edff",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x05afaaf9f2341bbbded9d327d5bae7a19ce42207"
-    },
-    {
-      "symbol": "PICKLE",
-      "name": "Salty Pickle",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 0.000001486,
-      "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xac896d83db3575b59ef18e7f5ff591f00d4e0cff"
     },
     {
       "symbol": "XERO",
@@ -1108,6 +1098,16 @@
       "balance": 1,
       "valueUsd": 0,
       "contract": "0x41b5cb9acf172009a361acba82bdcaf12d554371",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "PICKLE",
+      "name": "Salty Pickle",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 0,
+      "contract": "0x60fa6d6636cc006dd04bdf4b8f4b9a293b5ec7d8",
       "dexscreenerUrl": null
     },
     {
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-09T21:35:03.442Z",
-    "durationSec": 41
+    "durationSec": 56
   }
 }
