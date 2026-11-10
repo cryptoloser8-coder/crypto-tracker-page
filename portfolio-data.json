@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 02:35:57",
-  "totalUsd": 36610.86,
+  "timestamp": "2026-11-10 02:40:42",
+  "totalUsd": 36609.69,
   "assets": [
     {
       "symbol": "WTAO",
@@ -185,7 +185,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 5133.393596217476,
+      "valueUsd": 5137.723746868019,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -280,7 +280,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.8654337381633692,
-      "valueUsd": 1834.3006901136814
+      "valueUsd": 1831.35275456031
     },
     {
       "symbol": "ETH",
@@ -288,7 +288,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.26469078698322585,
-      "valueUsd": 561.0163688099849
+      "valueUsd": 560.1147499486106
     },
     {
       "symbol": "PEPECOIN",
@@ -296,7 +296,7 @@
       "walletName": "FOMO APP",
       "network": "ethereum",
       "balance": 3485.1249915116023,
-      "valueUsd": 355.13423663503227,
+      "valueUsd": 353.74018663842764,
       "contract": "0xa9e8acf069c58aec8825542845fd754e41a9489a",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "costBasis": {
@@ -416,7 +416,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.06156162566164207,
-      "valueUsd": 130.48085307526296
+      "valueUsd": 130.27115509723353
     },
     {
       "symbol": "USDC",
@@ -432,7 +432,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 25.890728158985013
+      "valueUsd": 25.849118733412688
     },
     {
       "symbol": "XAUt",
@@ -440,7 +440,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 12.13479384,
+      "valueUsd": 12.12923656,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -513,6 +513,16 @@
       "valueUsd": 0.003532152690920447,
       "contract": "0x3b401114112479aff47874b155454827a131faad",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x7a2704a90f617d16427ab7f4939a9b4657210000073948eb1cf2d2546baba256"
+    },
+    {
+      "symbol": "HYPERCAT",
+      "name": "HYPERCAT",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 123.28849113098892,
+      "valueUsd": 0.0026519354442275716,
+      "contract": "0x9dff0da886c7204480fa41ff546673d4cd1cda97",
+      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5567c8f326e3eb333ec583538f259c85c7ddc806baf5b90de194586913661db3"
     },
     {
       "symbol": "CLAUDE",
@@ -902,16 +912,6 @@
       "balance": 1664.8599668151644,
       "valueUsd": 0,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
-      "dexscreenerUrl": null
-    },
-    {
-      "symbol": "HYPERCAT",
-      "name": "HYPERCAT",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 123.28849113098892,
-      "valueUsd": 0,
-      "contract": "0x9dff0da886c7204480fa41ff546673d4cd1cda97",
       "dexscreenerUrl": null
     },
     {
@@ -1462,9 +1462,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-09T21:35:03.442Z",
-    "durationSec": 54
+    "durationSec": 39
   }
 }
