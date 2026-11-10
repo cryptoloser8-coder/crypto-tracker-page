@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-10 14:45:54",
-  "totalUsd": 37019.96,
+  "timestamp": "2026-11-10 14:50:42",
+  "totalUsd": 36970.04,
   "assets": [
     {
       "symbol": "WTAO",
@@ -8,7 +8,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 72.329469047,
-      "valueUsd": 15827.857711555012,
+      "valueUsd": 15777.950377912579,
       "contract": "0x77e06c9eccf2e797fd462a92b6d7642ef85b0a44",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "costBasis": {
@@ -656,7 +656,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.93074116,
+      "valueUsd": 11.918701372,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -736,7 +736,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.002488,
+      "valueUsd": 0.002512,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -756,7 +756,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 3,
-      "valueUsd": 0.0019668,
+      "valueUsd": 0.0019464,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
@@ -769,6 +769,16 @@
       "valueUsd": 0.0016616197212300002,
       "contract": "0xb6a6e5c1aff980841c7a6c2c164be5031735909a",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xccfa430eb4cb6fd7371563ae6c2fe21e8e7fa807"
+    },
+    {
+      "symbol": "MAGA",
+      "name": "Maga Trump",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 4,
+      "valueUsd": 0.001554,
+      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
     {
       "symbol": "HERD",
@@ -806,7 +816,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.000623,
+      "valueUsd": 0.0006166,
       "contract": "0x4a5d095b3ddbf2776e9bb42c90e51ed96005ef9f",
       "dexscreenerUrl": "https://dexscreener.com/base/0xc09a110121daa93bc386559b618c1f4f71eb76fed30c5ddc138d4c7fc34d939e"
     },
@@ -826,7 +836,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001946,
+      "valueUsd": 0.0001942,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -899,16 +909,6 @@
       "valueUsd": 5.238e-7,
       "contract": "0xdf206d229cb4e725c3e0a0473dc7c1b2940bebb6",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa56ead1fa4bc01acb581f983ab81b23a055f5d4a5e38ce44ff5c8c527ee4b24f"
-    },
-    {
-      "symbol": "MAGA",
-      "name": "Maga Trump",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 4,
-      "valueUsd": 1.8616e-23,
-      "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
     {
       "symbol": "PVC",
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-09T21:35:03.442Z",
-    "durationSec": 51
+    "durationSec": 39
   }
 }
