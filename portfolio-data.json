@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-11 18:45:41",
-  "totalUsd": 43936.21,
+  "timestamp": "2026-11-11 18:50:56",
+  "totalUsd": 43896.3,
   "assets": [
     {
       "symbol": "WTAO",
@@ -64,7 +64,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 75428.40372454093,
-      "valueUsd": 7319.572297429451,
+      "valueUsd": 7288.64665190239,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
@@ -379,7 +379,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 7973.036597412838,
-      "valueUsd": 773.7034714129418,
+      "valueUsd": 770.4345264080025,
       "contract": "0x4ec1b60b96193a64acae44778e51f7bff2007831",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x36095c32623186aa74257fc6729e2aa80ee17cee",
       "costBasis": {
@@ -564,12 +564,20 @@
       }
     },
     {
+      "symbol": "ETH",
+      "name": "Native ethereum",
+      "walletName": "Main",
+      "network": "ethereum",
+      "balance": 0.11466615507630191,
+      "valueUsd": 239.1052551047866
+    },
+    {
       "symbol": "CETS",
       "name": "Cets On Gold",
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 219735.87202709055,
-      "valueUsd": 243.24761033398923,
+      "valueUsd": 237.754213533312,
       "contract": "0xb0c2ab5af4028461ace3f6e1c33a4ee1404e7777",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0xdc3d0c31fbedc644aba7fb6bb6aeb7e26cc4781c",
       "costBasis": {
@@ -635,18 +643,10 @@
     {
       "symbol": "ETH",
       "name": "Native ethereum",
-      "walletName": "Main",
-      "network": "ethereum",
-      "balance": 0.11466615507630191,
-      "valueUsd": 239.20485961386137
-    },
-    {
-      "symbol": "ETH",
-      "name": "Native ethereum",
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 165.94346401532775
+      "valueUsd": 165.87436543056614
     },
     {
       "symbol": "USDC",
@@ -662,7 +662,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 94.74353019833207
+      "valueUsd": 94.70407914859734
     },
     {
       "symbol": "USDC",
@@ -678,7 +678,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 25.48251598659563
+      "valueUsd": 25.47190510896157
     },
     {
       "symbol": "XAUt",
@@ -686,7 +686,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.78648836,
+      "valueUsd": 11.78338456,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -766,7 +766,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00252,
+      "valueUsd": 0.002518,
       "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
       "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
@@ -866,7 +866,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001949,
+      "valueUsd": 0.0001948,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -966,7 +966,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 5.82e-7,
+      "valueUsd": 5.91e-7,
       "contract": "0x41b5cb9acf172009a361acba82bdcaf12d554371",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x78ca85dd5c2c1e73f098b33ea5672965c31ecf25"
     },
@@ -976,7 +976,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 5.696e-7,
+      "valueUsd": 5.691e-7,
       "contract": "0x278a9d28412ab39946b4d1de835257f9ed2e8d2b",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xf3904a4c204d201ca05e17e4814045c8a328f53c"
     },
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-10T21:40:03.740Z",
-    "durationSec": 38
+    "durationSec": 53
   }
 }
