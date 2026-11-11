@@ -27,9 +27,9 @@ let currentPortfolioData = null;
 let currentOverrides = { hidden: [], manual: [], staked: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
 
 // Historia wartości portfela (dopisywana przez backend co 5 min - patrz
-// src/storage/appendHistory.js). Surowa suma z backendu (assets), BEZ ręcznych
-// nadpisań z overrides.json (ukryte/dodane pozycje, ledgery) - może się więc
-// nieznacznie różnić od aktualnie wyświetlanej sumy portfela na dashboardzie.
+// src/storage/appendHistory.js). Od 27.09 liczona jak dashboard (bez ukrytych, z ręcznymi,
+// stakingiem i ledgerami). Pola punktu: t, v, w (sumy per portfel), o, a od 11.11 także
+// x (indeks wyniku całego portfela) i i (indeksy per portfel) - patrz getWalletSeries().
 let currentPortfolioHistory = [];
 
 // Ostatnio pobrana treść plików danych + ich ETag (GitHub API) - przy odpowiedzi
@@ -39,6 +39,21 @@ let lastDataSource = null; // 'api' albo 'pages' - pokazywane w "Ostatnie sprawd
 // Suma faktycznie wyświetlona na dashboardzie (assets widoczne + ledgery) -
 // ustawiana w renderDashboard(), używana do liczenia % wzrostu względem historii.
 let lastComputedTotal = 0;
+
+// --- OCHRONA NADPISAŃ (overrides.json) ---
+// overridesLoaded: czy nadpisania zostały choć raz poprawnie wczytane z repo. Dopóki nie,
+// zapis jest ZABLOKOWANY - inaczej chwilowy błąd sieci podstawiał puste nadpisania, a
+// pierwsze kliknięcie zapisywało pusty plik (znikały ukryte pozycje, staking, ręczne pary).
+// overridesEpoch: rośnie przy każdej zmianie zrobionej na tej stronie. Odświeżenie, które
+// wystartowało PRZED zmianą, nie może jej potem nadpisać starszą wersją z repo.
+// lastLocalSaveMs + PAGES_STALE_GUARD_MS: GitHub Pages publikuje z opóźnieniem, więc przez
+// chwilę po zapisie oddaje STARĄ wersję overrides.json - wtedy jej nie wczytujemy
+// (dotyczy trybu "zapasowo przez Pages", np. na telefonie).
+let overridesLoaded = false;
+let overridesEpoch = 0;
+let lastLocalSaveMs = 0;
+const PAGES_STALE_GUARD_MS = 10 * 60 * 1000;
+const repoFileSource = {}; // ścieżka pliku -> 'api' | 'pages' (skąd przyszła ostatnia wersja)
 
 // --- TRYB PRYWATNY (ukrycie kwot, procenty zostają) ---
 // Pamiętany w przeglądarce. Ukrywa wszystko, co zdradza wielkość portfela: sumy,
@@ -291,7 +306,11 @@ function updateAllocationChart(groups) {
                     <span>${walletSparkline(series)}</span>
                 </div>`;
         }).join('');
-        legendEl.innerHTML = `<div style="overflow-x: auto;"><div style="min-width: 860px; display: flex; flex-direction: column; gap: 6px;">${header}${rows}</div></div>`;
+        const hasIndex = (currentPortfolioHistory || []).some(p => p.i);
+        const note = hasIndex
+            ? '<div class="muted-note" style="margin-top: 8px; font-size: 11px;">Procenty = wynik z samych zmian cen, bez wpłat, wypłat i przelewów między portfelami. Kreska oznacza, że wynik liczony w ten sposób nie obejmuje jeszcze całego okresu.</div>'
+            : '<div class="muted-note" style="margin-top: 8px; font-size: 11px;">Uwaga: procenty to zmiana wartości portfela, więc przelew między portfelami wygląda jak zysk albo strata.</div>';
+        legendEl.innerHTML = `<div style="overflow-x: auto;"><div style="min-width: 860px; display: flex; flex-direction: column; gap: 6px;">${header}${rows}</div></div>${note}`;
     }
 }
 
@@ -300,10 +319,20 @@ function updateAllocationChart(groups) {
 // przez backend od momentu wgrania nowego appendHistory.js - starsze punkty go nie maja,
 // wiec kolumny zapelnia sie same, gdy zbierze sie 24h / 7 dni danych). Zmiana liczona
 // z surowych sum backendu (bez ukrytych/recznych pozycji), zeby porownywac to samo z tym samym.
+// Pole "i" punktu historii (od 11.11) to INDEKS WYNIKU portfela liczony przez backend
+// (appendHistory.js) z samych zmian cen: przy każdym runie bierze skład portfela z
+// poprzedniego runu i sprawdza, o ile zmieniła się jego wartość po nowych cenach. Przelew,
+// wpłata czy wypłata zmieniają ilości, a nie ceny, więc na indeks nie wpływają. Wcześniej
+// procenty były zwykłą zmianą wartości portfela i przelew między portfelami wyglądał w
+// jednym jak zysk, a w drugim jak strata.
 function getWalletSeries(walletName) {
     return (currentPortfolioHistory || [])
         .filter(p => p.w && typeof p.w[walletName] === 'number')
-        .map(p => ({ ms: parseHistoryTimestamp(p.t), v: p.w[walletName] }))
+        .map(p => ({
+            ms: parseHistoryTimestamp(p.t),
+            v: p.w[walletName],
+            idx: (p.i && typeof p.i[walletName] === 'number' && p.i[walletName] > 0) ? p.i[walletName] : null
+        }))
         .filter(pt => !isNaN(pt.ms))
         .sort((a, b) => a.ms - b.ms);
 }
@@ -319,17 +348,63 @@ function walletChange(series, lookbackMs) {
         if (pt.ms <= target) ref = pt;
         else break;
     }
-    if (!ref || ref.v <= 0) return null;
-    const usd = latest.v - ref.v;
-    return { usd, pct: (usd / ref.v) * 100 };
+    // Zmiana wartości portfela w USD (z przelewami) - tylko do podpowiedzi
+    const usd = ref && ref.v > 0 ? latest.v - ref.v : null;
+
+    // Wynik bez przelewów: z indeksu, jeśli najnowszy punkt go ma
+    if (latest.idx !== null) {
+        const indexed = series.filter(pt => pt.idx !== null);
+        const firstIdx = indexed[0];
+        let refIdx = null;
+        if (lookbackMs === Infinity) {
+            refIdx = firstIdx;
+        } else {
+            for (const pt of indexed) {
+                if (pt.ms <= target) refIdx = pt;
+                else break;
+            }
+        }
+        if (!refIdx || refIdx === latest) {
+            // indeks jest liczony krócej niż ten okres - nie pokazujemy mylącej liczby
+            return { pending: true, sinceMs: firstIdx.ms };
+        }
+        return {
+            pct: (latest.idx / refIdx.idx - 1) * 100,
+            usd,
+            flowAdjusted: true,
+            sinceMs: refIdx.ms,
+            partial: lookbackMs === Infinity && series[0].idx === null
+        };
+    }
+
+    // Stara historia bez indeksu: zwykła zmiana wartości (z przelewami)
+    if (usd === null) return null;
+    return { usd, pct: (usd / ref.v) * 100, flowAdjusted: false };
+}
+
+function formatShortDate(ms) {
+    return new Date(ms).toLocaleString('pl-PL', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
 }
 
 function formatWalletChange(change) {
     if (!change) return '<span class="muted-note" title="Za mało historii dla tego portfela">—</span>';
-    const sign = change.usd >= 0 ? '+' : '';
-    const cls = change.usd >= 0 ? 'pnl-pos' : 'pnl-neg';
-    const title = privacyMode ? '' : ` title="${sign}$${change.usd.toFixed(2)}"`;
-    return `<span class="${cls}"${title}>${sign}${change.pct.toFixed(1)}%</span>`;
+    if (change.pending) {
+        return `<span class="muted-note" title="Wynik bez przelewów jest liczony od ${escapeHtml(formatShortDate(change.sinceMs))} - ta kolumna zapełni się, gdy zbierze się historia z całego okresu">—</span>`;
+    }
+    const sign = change.pct >= 0 ? '+' : '';
+    const cls = change.pct >= 0 ? 'pnl-pos' : 'pnl-neg';
+    const usdText = (privacyMode || change.usd === null || change.usd === undefined)
+        ? ''
+        : `zmiana wartości portfela (z przelewami): ${change.usd >= 0 ? '+' : '−'}$${Math.abs(change.usd).toFixed(2)}`;
+    let tip;
+    if (change.flowAdjusted) {
+        tip = 'Wynik z samych zmian cen (bez wpłat, wypłat i przelewów)'
+            + (change.partial ? `, liczony od ${formatShortDate(change.sinceMs)}` : '')
+            + (usdText ? `; ${usdText}` : '');
+    } else {
+        tip = 'Zmiana wartości portfela - zawiera przelewy' + (usdText ? `; ${usdText}` : '');
+    }
+    return `<span class="${cls}" title="${escapeHtml(tip)}">${sign}${change.pct.toFixed(1)}%</span>`;
 }
 
 // Mini-wykres ostatnich 24h (1 punkt na godzine) jako inline SVG
@@ -365,7 +440,7 @@ function formatNow() {
 // portfolio-history.json to tablica punktów {t: "YYYY-MM-DD HH:MM:SS" (UTC), v: totalUsd},
 // dopisywana przez backend przy każdym runie na Orange Pi (co 5 min).
 
-const HISTORY_CHART_MAX_POINTS = 150; // downsampling, żeby wykres nie rysował tysięcy punktów (zoom i tak pozwala dojrzeć szczegóły)
+const HISTORY_CHART_MAX_POINTS = 300; // downsampling, żeby wykres nie rysował tysięcy punktów (zoom i tak pozwala dojrzeć szczegóły)
 const GROWTH_LOOKBACK_MS = 24 * 60 * 60 * 1000; // "wzrost w stosunku do..." liczony względem ~24h wstecz
 
 // Aktualnie wybrany zakres czasu na wykresie Performance (dni wstecz; 0 = całość) -
@@ -519,7 +594,16 @@ function updatePortfolioGrowth(history, currentTotal) {
         return;
     }
 
-    const pct = ((currentTotal - refValue) / refValue) * 100;
+    // Jeśli najnowszy punkt i punkt odniesienia mają indeks całego portfela (pole "x"),
+    // liczymy z niego - wpłata albo wypłata z zewnątrz nie udaje wtedy zysku ani straty.
+    const latestPoint = history[history.length - 1];
+    const useIndex = latestPoint && latestPoint.x > 0 && reference.x > 0 && reference !== latestPoint;
+    const pct = useIndex
+        ? (latestPoint.x / reference.x - 1) * 100
+        : ((currentTotal - refValue) / refValue) * 100;
+    el.title = useIndex
+        ? 'Wynik z samych zmian cen (bez wpłat i wypłat)'
+        : 'Zmiana wartości portfela (zawiera wpłaty i wypłaty)';
     const arrow = pct >= 0 ? '↑' : '↓';
     const sign = pct >= 0 ? '+' : '';
     const oldestMs = parseHistoryTimestamp(history[0].t);
@@ -537,10 +621,15 @@ function setFetchStatus(text, isError = false) {
 }
 
 // --- POMOCNICZE: bezpieczne wstawianie tekstu do innerHTML ---
+// Zamienia też cudzysłowy: wynik trafia również do ATRYBUTÓW (data-key="..."), a symbol
+// tokena ustala jego twórca - spamowy token z cudzysłowem w nazwie mógłby wstrzyknąć kod.
 function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = String(str ?? '');
-    return div.innerHTML;
+    return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
 }
 
 // --- KODOWANIE UTF-8 <-> BASE64 (wymagane przez GitHub Contents API) ---
@@ -557,6 +646,21 @@ function assetKey(asset) {
     // leżącym normalnie w portfelu (np. po odebraniu części nagród)
     if (asset.isStaked) return `${asset.symbol}::${asset.walletName}::${asset.network}::staking`;
     return `${asset.symbol}::${asset.walletName}::${asset.network}`;
+}
+
+// --- UKRYWANIE PO ADRESIE KONTRAKTU ---
+// Nowe ukrycia zapisują klucz z kontraktem (symbol::portfel::sieć::0xkontrakt), więc chowają
+// JEDEN konkretny token. Stare wpisy bez kontraktu (symbol::portfel::sieć) działają jak
+// dotąd, czyli chowają wszystkie tokeny o tym symbolu w tym portfelu i sieci - przez to
+// ukrycie fałszywego RYFT chowało też prawdziwy. Ta sama logika jest w appendHistory.js.
+function hideKey(asset) {
+    const base = assetKey(asset);
+    return asset.contract ? `${base}::${String(asset.contract).toLowerCase()}` : base;
+}
+
+function isHiddenAsset(asset, hiddenSet) {
+    if (hiddenSet.has(assetKey(asset))) return true;
+    return !!asset.contract && hiddenSet.has(hideKey(asset));
 }
 
 // --- POZYCJE W STAKINGU ---
@@ -588,6 +692,7 @@ function buildStakedAssets(realAssets) {
             network: s.network,
             contract: s.contract,
             dexscreenerUrl: b ? b.dexscreenerUrl : null,
+            market: b ? (b.market || null) : null,
             balance,
             valueUsd: hasPrice ? unit * balance : 0,
             unitPriceUsd: hasPrice ? unit : null,
@@ -604,7 +709,7 @@ function buildStakedAssets(realAssets) {
 function getVisibleAssets() {
     const hiddenSet = new Set(currentOverrides.hidden || []);
     const allReal = currentPortfolioData?.assets || [];
-    const real = allReal.filter(a => !a.staked && !hiddenSet.has(assetKey(a)));
+    const real = allReal.filter(a => !a.staked && !isHiddenAsset(a, hiddenSet));
     const staked = buildStakedAssets(allReal);
     const manual = (currentOverrides.manual || []).map(m => ({ ...m, isManual: true }));
     return [...real, ...staked, ...manual];
@@ -647,6 +752,12 @@ function computePnl(asset) {
         ? Math.max(0, Math.floor((Date.now() - new Date(cb.dateAcquired + 'T00:00:00Z').getTime()) / 86400000))
         : null;
 
+    // Token z kontraktem, saldem > 0 i wartością $0 = backend nie dostał ceny (chwilowy brak
+    // pary w Dexscreenerze), a nie strata 100%. Nie pokazujemy wyniku i nie wliczamy go do sumy.
+    if (asset.contract && balance > 0 && valueUsd <= 0) {
+        return { noPrice: true, pnlUsd: null, pnlPct: null, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'auto' };
+    }
+
     return { pnlUsd, pnlPct, daysHeld, avgPriceUsd: cb.avgPriceUsd, isAuto: !manual && cb.source === 'auto' };
 }
 
@@ -666,6 +777,85 @@ function toggleAssetExpand(key) {
     if (expandedAssetKeys.has(key)) expandedAssetKeys.delete(key);
     else expandedAssetKeys.add(key);
     renderDashboard();
+}
+
+// --- PANEL POZYCJI: DANE RYNKOWE ---
+// Backend (dexscreener.js) dopisuje do pozycji pole "market" z pary, z której bierze cenę:
+// { liquidityUsd, volume24hUsd, change1h, change6h, change24h, buys24h, sells24h, fdvUsd,
+//   marketCapUsd, pairCreatedAt, quoteSymbol, dexId }. Do tego dwie liczby o samej pozycji:
+// udział w portfelu i wielkość pozycji względem płynności puli (czy da się wyjść bez
+// dużego poślizgu). Style są inline, żeby nie trzeba było zmieniać style.css.
+function formatCompactUsd(v) {
+    if (v === null || v === undefined || !isFinite(v)) return '—';
+    const abs = Math.abs(v);
+    if (abs >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (abs >= 1e6) return `$${(v / 1e6).toFixed(2)}M`;
+    if (abs >= 1e3) return `$${(v / 1e3).toFixed(1)}k`;
+    return `$${v.toFixed(0)}`;
+}
+
+function formatPctChange(v) {
+    if (v === null || v === undefined || !isFinite(v)) return '<span class="muted-note">—</span>';
+    return `<span class="${v >= 0 ? 'pnl-pos' : 'pnl-neg'}">${v >= 0 ? '+' : ''}${v.toFixed(1)}%</span>`;
+}
+
+function formatPairAge(createdMs) {
+    if (!createdMs) return '—';
+    const days = Math.floor((Date.now() - createdMs) / 86400000);
+    if (days < 0) return '—';
+    if (days < 1) return 'poniżej 1 dnia';
+    if (days < 60) return `${days} dni`;
+    if (days < 730) return `${Math.floor(days / 30)} mies.`;
+    return `${(days / 365).toFixed(1)} lat`;
+}
+
+function marketTile(label, valueHtml, title) {
+    return `<div style="flex: 1 1 120px; min-width: 110px; padding: 8px 10px; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; background: rgba(255,255,255,0.02);"${title ? ` title="${escapeHtml(title)}"` : ''}>
+        <div class="muted-note" style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em;">${escapeHtml(label)}</div>
+        <div style="margin-top: 3px; font-size: 13px;">${valueHtml}</div>
+    </div>`;
+}
+
+function renderMarketPanel(asset) {
+    const m = asset.market;
+    const valueUsd = Number(asset.valueUsd) || 0;
+    const tiles = [];
+
+    // O pozycji - zawsze (nie wymaga danych z Dexscreenera)
+    if (lastComputedTotal > 0 && valueUsd > 0) {
+        tiles.push(marketTile('Udział w portfelu', `${((valueUsd / lastComputedTotal) * 100).toFixed(1)}%`));
+    }
+
+    if (m) {
+        const liq = Number(m.liquidityUsd);
+        if (liq > 0 && valueUsd > 0) {
+            const share = (valueUsd / liq) * 100;
+            const color = share >= 10 ? '#f85149' : share >= 2 ? '#d4af37' : 'inherit';
+            tiles.push(marketTile('Pozycja / płynność puli',
+                `<span style="color: ${color};">${share >= 0.1 ? share.toFixed(1) : share.toFixed(2)}%</span>`,
+                'Wartość tej pozycji względem płynności puli, z której brana jest cena. Im wyższy procent, tym większy poślizg przy sprzedaży całości naraz (płynność to obie strony puli łącznie).'));
+        }
+        tiles.push(marketTile('Zmiana 1h / 6h / 24h',
+            `${formatPctChange(m.change1h)} · ${formatPctChange(m.change6h)} · ${formatPctChange(m.change24h)}`));
+        const cap = m.marketCapUsd > 0 ? m.marketCapUsd : (m.fdvUsd > 0 ? m.fdvUsd : null);
+        tiles.push(marketTile(m.marketCapUsd > 0 ? 'Kapitalizacja' : 'FDV', formatCompactUsd(cap),
+            m.marketCapUsd > 0 && m.fdvUsd > 0 ? `FDV: ${formatCompactUsd(m.fdvUsd)}` : ''));
+        tiles.push(marketTile('Płynność puli', formatCompactUsd(liq > 0 ? liq : null),
+            `${m.dexId || ''}${m.quoteSymbol ? ` · para z ${m.quoteSymbol}` : ''}`.trim()));
+        const vol = Number(m.volume24hUsd);
+        const volNote = vol > 0 && liq > 0 ? ` <span class="muted-note">(${(vol / liq).toFixed(2)}× płynności)</span>` : '';
+        tiles.push(marketTile('Wolumen 24h', `${formatCompactUsd(vol >= 0 && m.volume24hUsd !== null ? vol : null)}${volNote}`));
+        if (m.buys24h !== null && m.sells24h !== null && m.buys24h !== undefined && m.sells24h !== undefined) {
+            tiles.push(marketTile('Kupna / sprzedaże 24h',
+                `<span class="pnl-pos">${Number(m.buys24h)}</span> / <span class="pnl-neg">${Number(m.sells24h)}</span>`,
+                'Liczba transakcji kupna i sprzedaży w tej puli w ostatnich 24h'));
+        }
+        tiles.push(marketTile('Wiek pary', escapeHtml(formatPairAge(Number(m.pairCreatedAt) || 0))));
+    }
+
+    if (tiles.length === 0) return '';
+    const missing = m ? '' : '<div class="muted-note" style="margin-top: 6px; font-size: 11px;">Brak danych rynkowych z Dexscreenera dla tej pozycji (pojawią się po najbliższym runie backendu, jeśli token ma parę).</div>';
+    return `<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;">${tiles.join('')}</div>${missing}`;
 }
 
 // Buduje wiersz szczegółów (link Dexscreener + przycisk ręcznej pary + tabela
@@ -748,6 +938,7 @@ function renderPurchaseDetailRow(asset, key) {
         <tr class="purchase-detail-row">
             <td colspan="8">
                 <div class="purchase-detail-header">${dexLinkHtml}${pairOverrideBtn}</div>
+                ${renderMarketPanel(asset)}
                 ${bodyHtml}
             </td>
         </tr>
@@ -1031,7 +1222,10 @@ function renderDashboard() {
                     const sign = pnl.pnlUsd >= 0 ? '+' : '';
                     const autoTag = pnl.isAuto ? ' <span class="muted-note">(auto)</span>' : '';
                     pnlCell = `<span class="${cls}">${sign}${pnl.pnlPct.toFixed(1)}%${privacyMode ? '' : ` (${sign}$${pnl.pnlUsd.toFixed(2)})`}</span>${autoTag}`;
+                } else if (pnl && pnl.noPrice) {
+                    pnlCell = '<span class="muted-note" title="Backend nie dostał ceny tego tokena w ostatnim runie - wynik nie jest liczony i nie wchodzi do podsumowania">brak ceny</span>';
                 }
+                const noPriceNow = !asset.isStaked && !!asset.contract && balance > 0 && valueUsd <= 0;
                 const daysCell = pnl && pnl.daysHeld !== null ? pnl.daysHeld : '<span class="muted-note">—</span>';
                 // Średnia cena wejścia pod aktualną ceną (w tej samej komórce, żeby nie zmieniać
                 // liczby kolumn - blok mobilny w style.css numeruje je przez nth-child).
@@ -1046,7 +1240,7 @@ function renderDashboard() {
                     <button class="row-action-btn" data-action="set-cost-basis" data-key="${escapeHtml(key)}">Cena zakupu</button>
                     ${asset.isManual
                         ? `<button class="row-action-btn" data-action="remove-manual" data-id="${escapeHtml(asset.id)}">Usuń</button>`
-                        : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(key)}">Ukryj</button>`}
+                        : `<button class="row-action-btn" data-action="hide" data-key="${escapeHtml(hideKey(asset))}">Ukryj</button>`}
                 `;
 
                 const chevron = expandable ? `<span class="expand-chevron">${isExpanded ? '▾' : '▸'}</span> ` : '';
@@ -1058,7 +1252,7 @@ function renderDashboard() {
                     <td>${chevron}<strong>${escapeHtml(asset.symbol)}</strong>${asset.isManual ? ' <span class="manual-badge">ręcznie</span>' : ''}${asset.isStaked ? ' <span class="manual-badge" title="Tokeny w stakingu - ilość wpisana ręcznie, cena na żywo">staking</span>' : ''}</td>
                     <td>${escapeHtml(asset.network)}</td>
                     <td>${money(balance.toFixed(4))}</td>
-                    <td>${asset.isStaked && asset.awaitingPrice ? '<span class="muted-note" title="Backend wyceni tę pozycję przy najbliższym runie (do 5 min)">czeka na wycenę</span>' : formatUnitPrice(getUnitPrice(asset))}${entryPriceHtml}</td>
+                    <td>${asset.isStaked && asset.awaitingPrice ? '<span class="muted-note" title="Backend wyceni tę pozycję przy najbliższym runie (do 5 min)">czeka na wycenę</span>' : (noPriceNow ? '<span class="muted-note">brak ceny</span>' : formatUnitPrice(getUnitPrice(asset)))}${entryPriceHtml}</td>
                     <td>${money(`$${valueUsd.toFixed(2)}`)}</td>
                     <td>${pnlCell}</td>
                     <td>${daysCell}</td>
@@ -1095,10 +1289,12 @@ function renderPnlSummary(allVisible) {
     const el = document.getElementById('pnl-summary');
     if (!el) return;
 
-    let openPnl = 0, withBasis = 0, withoutBasis = 0;
+    let openPnl = 0, withBasis = 0, withoutBasis = 0, withoutPrice = 0;
     allVisible.forEach(a => {
         const pnl = computePnl(a);
-        if (pnl && pnl.pnlPct !== null) {
+        if (pnl && pnl.noPrice) {
+            withoutPrice++;
+        } else if (pnl && pnl.pnlPct !== null) {
             openPnl += pnl.pnlUsd;
             withBasis++;
         } else if (a.contract && !FRONT_STABLES.has(String(a.symbol || '').toUpperCase())) {
@@ -1124,6 +1320,7 @@ function renderPnlSummary(allVisible) {
         <div class="pnl-summary-row"><span class="label"><strong>Łącznie</strong></span><span><strong>${formatSignedPnl(totalPnl, pct(totalPnl), 2)}</strong></span></div>
         <span class="muted-note">Procenty względem wartości całego portfela.</span>
         ${coverage}
+        ${withoutPrice > 0 ? `<span class="muted-note" title="Pozycje z ceną zakupu, dla których backend nie dostał aktualnej ceny - nie są wliczone">brak ceny: ${withoutPrice}</span>` : ''}
     `;
 }
 
@@ -1227,7 +1424,7 @@ function renderAlerts() {
 
 // --- PEŁNY RESCAN ---
 // Backend normalnie przegląda tylko nowe bloki (cache), a pełny rescan od bloku 0 robi
-// sam co 4h. Przycisk zapisuje w overrides.json rescanRequestedAt; backend czyta to przy
+// sam co 24h. Przycisk zapisuje w overrides.json rescanRequestedAt; backend czyta to przy
 // najbliższym runie i jeśli prośba jest nowsza niż ostatni pełny rescan, robi go od razu.
 // Stan rescanu backend zapisuje w portfolio-data.json pod scan:
 //   { mode: 'full'|'incremental', lastFullRescanAt, reason }
@@ -1360,11 +1557,17 @@ function renderClosedPositions() {
     const totalCost = withPnl.reduce((sum, g) => sum + g.costUsd, 0);
     const wins = withPnl.filter(g => g.pnlUsd >= 0).length;
     const losses = withPnl.length - wins;
+    // Kwoty obok liczby sztuk: "2 na plusie, 6 na minusie" nic nie mówi, gdy jedna pozycja
+    // odpowiada za większość wyniku
+    const winsUsd = withPnl.filter(g => g.pnlUsd >= 0).reduce((s, g) => s + g.pnlUsd, 0);
+    const lossesUsd = withPnl.filter(g => g.pnlUsd < 0).reduce((s, g) => s + g.pnlUsd, 0);
+    const worst = withPnl.filter(g => g.pnlUsd < 0).sort((a, b) => a.pnlUsd - b.pnlUsd)[0];
+    const worstShare = worst && lossesUsd < 0 ? (worst.pnlUsd / lossesUsd) * 100 : null;
 
     if (summaryEl) {
         summaryEl.innerHTML = `
             <span>Zrealizowany wynik: ${formatSignedPnl(totalPnl, totalCost > 0 ? (totalPnl / totalCost) * 100 : null)}</span>
-            <span class="muted-note">Na plusie: <span class="pnl-pos">${wins}</span> · na minusie: <span class="pnl-neg">${losses}</span></span>
+            <span class="muted-note">Na plusie: <span class="pnl-pos">${wins}${privacyMode ? '' : ` (+${formatUsd(winsUsd)})`}</span> · na minusie: <span class="pnl-neg">${losses}${privacyMode ? '' : ` (−${formatUsd(Math.abs(lossesUsd))})`}</span>${worstShare !== null && losses > 1 ? ` · największa strata: ${escapeHtml(worst.symbol || '?')}, ${worstShare.toFixed(0)}% sumy strat` : ''}</span>
         `;
     }
 
@@ -1436,11 +1639,15 @@ function renderHiddenPanel() {
     }
 
     hidden.forEach(key => {
-        const [symbol, walletName, network] = key.split('::');
+        const [symbol, walletName, network, contract] = key.split('::');
+        // Wpis z kontraktem chowa jeden token; stary wpis (bez kontraktu) - wszystkie o tym symbolu
+        const scope = contract
+            ? ` <span class="muted-note" title="${escapeHtml(contract)}">${escapeHtml(contract.slice(0, 6))}…${escapeHtml(contract.slice(-4))}</span>`
+            : ' <span class="muted-note" title="Stary wpis bez adresu kontraktu: ukrywa wszystkie tokeny o tym symbolu w tym portfelu i sieci">wszystkie o tym symbolu</span>';
         const div = document.createElement('div');
         div.className = 'hidden-item-row';
         div.innerHTML = `
-            <span>${escapeHtml(symbol)} — ${escapeHtml(walletName)} (${escapeHtml(network)})</span>
+            <span>${escapeHtml(symbol)} — ${escapeHtml(walletName)} (${escapeHtml(network)})${scope}</span>
             <button class="row-action-btn" data-action="restore" data-key="${escapeHtml(key)}">Przywróć</button>
         `;
         listEl.appendChild(div);
@@ -1457,6 +1664,13 @@ let saveQueued = false;
 let saveInFlight = false;
 
 function scheduleSave() {
+    // Kazda zmiana zrobiona na tej stronie przechodzi przez scheduleSave() - podbijamy
+    // licznik, zeby trwajace wlasnie odswiezenie nie nadpisalo jej starsza wersja z repo.
+    overridesEpoch++;
+    if (!overridesLoaded) {
+        setFetchStatus('Nie zapisano: nadpisania (overrides.json) nie zostały jeszcze wczytane z repo. Zapis jest zablokowany, żeby nie nadpisać ich pustym plikiem - poczekaj na udane odświeżenie i powtórz zmianę.', true);
+        return;
+    }
     saveQueued = true;
     processSaveQueue();
 }
@@ -1526,6 +1740,7 @@ async function saveOverridesOnce(retriesLeft = 2) {
             return false;
         }
 
+        lastLocalSaveMs = Date.now();
         setFetchStatus(`Zapisano zmiany: ${formatNow()} ✓`);
         return true;
     } catch (e) {
@@ -2037,16 +2252,19 @@ async function fetchRepoJson(path) {
 
             if (res.status === 304 && cached) {
                 lastDataSource = 'api';
+                repoFileSource[path] = 'api';
                 return JSON.parse(cached.text); // świeża kopia - edycje na stronie nie psują cache
             }
             if (res.status === 404) {
                 lastDataSource = 'api';
+                repoFileSource[path] = 'api';
                 return null;
             }
             if (res.ok) {
                 const text = await res.text();
                 repoFileCache[path] = { etag: res.headers.get('ETag'), text };
                 lastDataSource = 'api';
+                repoFileSource[path] = 'api';
                 return JSON.parse(text);
             }
             console.warn(`GitHub API (${path}): HTTP ${res.status} - wracam do GitHub Pages.`);
@@ -2058,6 +2276,7 @@ async function fetchRepoJson(path) {
     // Zapasowo: GitHub Pages (parametr ?t= omija cache przeglądarki)
     const res = await fetch(`${path}?t=${Date.now()}`, { cache: 'no-store' });
     lastDataSource = 'pages';
+    repoFileSource[path] = 'pages';
     if (res.status === 404) return null;
     if (!res.ok) throw new Error(`Brak pliku ${path} (HTTP ${res.status})`);
     return res.json();
@@ -2070,11 +2289,20 @@ async function loadPortfolioData() {
     if (isRefreshing) return;
     isRefreshing = true;
 
+    // Stan licznika zmian w chwili startu - jeśli w trakcie pobierania coś zmienisz na
+    // stronie, pobrana (starsza) wersja nadpisań zostanie pominięta
+    const epochAtStart = overridesEpoch;
+    let overridesWarning = '';
+
     try {
-        // Wszystkie trzy pliki równolegle (przez GitHub API, zapasowo przez Pages)
-        const [portfolioData, overridesData, historyData] = await Promise.all([
+        // Wszystkie trzy pliki równolegle (przez GitHub API, zapasowo przez Pages).
+        // Nadpisania: rozróżniamy "pliku nie ma" (ok, data = null) od "nie udało się pobrać".
+        const [portfolioData, overridesResult, historyData] = await Promise.all([
             fetchRepoJson('portfolio-data.json'),
-            fetchRepoJson(OVERRIDES_PATH).catch(() => null),
+            fetchRepoJson(OVERRIDES_PATH).then(
+                data => ({ ok: true, data, source: repoFileSource[OVERRIDES_PATH] }),
+                error => ({ ok: false, error })
+            ),
             fetchRepoJson('portfolio-history.json').catch(() => null)
         ]);
         if (!portfolioData) throw new Error('Brak pliku portfolio-data.json');
@@ -2084,8 +2312,20 @@ async function loadPortfolioData() {
         // — brak tego pliku to normalny stan, nie błąd.
         // Jeśli zmiana z tej strony czeka na zapis albo właśnie się zapisuje, NIE nadpisujemy
         // lokalnego stanu wersją z repo - inaczej odświeżenie mogłoby cofnąć świeżą zmianę.
-        if (!saveQueued && !saveInFlight) {
-            currentOverrides = overridesData || { hidden: [], manual: [], staked: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
+        // Błąd pobrania NIE zeruje nadpisań - zostaje ostatni dobry stan (wcześniej podstawiany
+        // był pusty zestaw, a pierwsza akcja zapisywała go do repo).
+        if (!overridesResult.ok) {
+            console.warn('Nie udało się pobrać overrides.json - zostawiam poprzedni stan:', overridesResult.error);
+            overridesWarning = overridesLoaded
+                ? ' Uwaga: nie udało się odświeżyć nadpisań (pokazuję poprzednie).'
+                : ' Uwaga: nie udało się wczytać nadpisań (ukryte pozycje, staking) - zapis zmian jest zablokowany do udanego odświeżenia.';
+        } else {
+            const changedLocally = overridesEpoch !== epochAtStart || saveQueued || saveInFlight;
+            const stalePages = overridesResult.source === 'pages' && (Date.now() - lastLocalSaveMs) < PAGES_STALE_GUARD_MS;
+            if (!changedLocally && !stalePages) {
+                currentOverrides = overridesResult.data || { hidden: [], manual: [], staked: [], ledgers: {}, costBasis: {}, priceOverrides: {} };
+            }
+            overridesLoaded = true;
         }
         if (!Array.isArray(currentOverrides.hidden)) currentOverrides.hidden = [];
         if (!Array.isArray(currentOverrides.manual)) currentOverrides.manual = [];
@@ -2113,7 +2353,7 @@ async function loadPortfolioData() {
         // Sukces — pokazujemy kiedy strona faktycznie sprawdziła plik
         // (to jest INNA informacja niż "Ostatnia aktualizacja danych" powyżej —
         // ta pokazuje kiedy backend wygenerował dane, ta poniżej kiedy strona to sprawdziła)
-        setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓${lastDataSource === 'pages' ? ' (zapasowo przez Pages)' : ''}`);
+        setFetchStatus(`Ostatnie sprawdzenie: ${formatNow()} ✓${repoFileSource['portfolio-data.json'] === 'pages' ? ' (zapasowo przez Pages)' : ''}${overridesWarning}`, !!overridesWarning);
 
     } catch (error) {
         console.log("Błąd podczas ładowania danych:", error);
