@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-11 05:15:55",
-  "totalUsd": 44785.55,
+  "timestamp": "2026-11-11 05:20:41",
+  "totalUsd": 44794.62,
   "assets": [
     {
       "symbol": "WTAO",
@@ -234,7 +234,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 4401.598136275888,
+      "valueUsd": 4410.258437576972,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "costBasis": {
@@ -638,7 +638,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.11466615507630191,
-      "valueUsd": 236.35407233936394
+      "valueUsd": 236.53793133759865
     },
     {
       "symbol": "ETH",
@@ -646,7 +646,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 163.96578882819077
+      "valueUsd": 164.09333723630718
     },
     {
       "symbol": "USDC",
@@ -662,7 +662,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 93.61439908173867
+      "valueUsd": 93.68722139220345
     },
     {
       "symbol": "USDC",
@@ -678,7 +678,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 25.178821352573426
+      "valueUsd": 25.19840786878952
     },
     {
       "symbol": "XAUt",
@@ -686,7 +686,7 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.946555759999999,
+      "valueUsd": 11.95308852,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59"
     },
@@ -749,16 +749,6 @@
       "valueUsd": 0.00352868299279577,
       "contract": "0x3b401114112479aff47874b155454827a131faad",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x7a2704a90f617d16427ab7f4939a9b4657210000073948eb1cf2d2546baba256"
-    },
-    {
-      "symbol": "CLAUDE",
-      "name": "Claude AI",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 2,
-      "valueUsd": 0.002488,
-      "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
-      "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
     {
       "symbol": "AROS",
@@ -836,7 +826,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001927,
+      "valueUsd": 0.000193,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
     },
@@ -896,9 +886,19 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 2,
-      "valueUsd": 0.00002954,
+      "valueUsd": 0.00002938,
       "contract": "0x4a5d095b3ddbf2776e9bb42c90e51ed96005ef9f",
       "dexscreenerUrl": "https://dexscreener.com/base/0xe06b9f356b3beb3c89ec982f2642d845c296258c14d6d299d919cc43bbb774b6"
+    },
+    {
+      "symbol": "CLAUDE",
+      "name": "Claude AI",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 2,
+      "valueUsd": 0.00001488,
+      "contract": "0xa8def24b9e5cf402e14d6f94e2e460499377d3aa",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xa12c331db3e109b1656e214123b663d8160a6d00"
     },
     {
       "symbol": "DOG",
@@ -916,7 +916,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.00000341,
+      "valueUsd": 0.000003403,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-10T21:40:03.740Z",
-    "durationSec": 52
+    "durationSec": 39
   }
 }
