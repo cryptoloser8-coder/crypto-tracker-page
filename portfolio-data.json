@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-11 02:00:54",
+  "timestamp": "2026-11-11 02:05:41",
   "totalUsd": 37581.35,
   "assets": [
     {
@@ -736,19 +736,9 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.002404,
+      "valueUsd": 0.0024036,
       "contract": "0xb200000000000000000000b23567ab79b58462d3",
       "dexscreenerUrl": "https://dexscreener.com/base/0xb184fe29b5bdd89d1f6e2ec9e659628d056d2c00deecc4207afd1e24c5a1b324"
-    },
-    {
-      "symbol": "SXC",
-      "name": "SpaceX Cat's",
-      "walletName": "FOMO APP",
-      "network": "base",
-      "balance": 3,
-      "valueUsd": 0.0019148999999999998,
-      "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
-      "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
     {
       "symbol": "WAFFLE",
@@ -766,7 +756,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.001544,
+      "valueUsd": 0.0015376,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -836,9 +826,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.0001925,
+      "valueUsd": 0.000192,
       "contract": "0x905b061ad7aa6985dfc6b2dadb86225f1ad43f0e",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x6235bf5c542e81a4167c2cc5988e13ca756fdd05"
+    },
+    {
+      "symbol": "SXC",
+      "name": "SpaceX Cat's",
+      "walletName": "FOMO APP",
+      "network": "base",
+      "balance": 3,
+      "valueUsd": 0.00016878,
+      "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
+      "dexscreenerUrl": "https://dexscreener.com/base/0xf3edd9e82e3e16d17104d2b7953a2c8e1d66a5da4eec1070c5996bfc0c91f58c"
     },
     {
       "symbol": "GTA 6",
@@ -1678,9 +1678,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-10T21:40:03.740Z",
-    "durationSec": 51
+    "durationSec": 38
   }
 }
