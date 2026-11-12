@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-12 09:00:41",
-  "totalUsd": 34559.93,
+  "timestamp": "2026-11-12 09:05:50",
+  "totalUsd": 34559.87,
   "assets": [
     {
       "symbol": "WTAO",
@@ -271,12 +271,12 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
         "liquidityUsd": 496178.21,
-        "volume24hUsd": 236181.01,
+        "volume24hUsd": 235514.29,
         "change1h": null,
-        "change6h": -0.48,
-        "change24h": -9.89,
-        "buys24h": 542,
-        "sells24h": 552,
+        "change6h": -0.47,
+        "change24h": -9.78,
+        "buys24h": 541,
+        "sells24h": 549,
         "fdvUsd": 3675134,
         "marketCapUsd": 3675134,
         "pairCreatedAt": 1785803051000,
@@ -773,12 +773,12 @@
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
         "liquidityUsd": 1763452.08,
-        "volume24hUsd": 788784.69,
+        "volume24hUsd": 788579.04,
         "change1h": null,
         "change6h": -0.46,
         "change24h": -2.14,
-        "buys24h": 1475,
-        "sells24h": 1315,
+        "buys24h": 1472,
+        "sells24h": 1313,
         "fdvUsd": 58498397,
         "marketCapUsd": 108422506,
         "pairCreatedAt": 1775019681000,
@@ -795,16 +795,6 @@
       "valueUsd": 0.8315746447170914,
       "contract": "0x062570121e9519c77cb71c7936b6c1f76c7b1119",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xdfad37e05c4a203cd9aca0f856407a0634f5b467"
-    },
-    {
-      "symbol": "COPCAT",
-      "name": "Copper Cat",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1105.284504252084,
-      "valueUsd": 0.058248493374084824,
-      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0x5ad82699888229818d775bdf72e9234d630418d957cbc089ef571a61165d0a27"
     },
     {
       "symbol": "YFTE",
@@ -1254,6 +1244,16 @@
       "balance": 1664.8599668151644,
       "valueUsd": 0,
       "contract": "0x1f0c96aa281767335bd98b2c8a6ad8348d6ce741",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "COPCAT",
+      "name": "Copper Cat",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1105.284504252084,
+      "valueUsd": 0,
+      "contract": "0x3c836dc04dcc81d0753a417bc69bfc4deca2aa5d",
       "dexscreenerUrl": null
     },
     {
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-11T21:40:03.798Z",
-    "durationSec": 38
+    "durationSec": 47
   }
 }
