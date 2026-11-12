@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-12 07:30:50",
+  "timestamp": "2026-11-12 07:35:41",
   "totalUsd": 34560.01,
   "assets": [
     {
@@ -272,8 +272,8 @@
       "market": {
         "liquidityUsd": 496178.21,
         "volume24hUsd": 246696.62,
-        "change1h": -0.17,
-        "change6h": -1.42,
+        "change1h": 0.06,
+        "change6h": -1.58,
         "change24h": -10.38,
         "buys24h": 570,
         "sells24h": 588,
@@ -586,7 +586,7 @@
       "market": {
         "liquidityUsd": 1341206.76,
         "volume24hUsd": 67684.48,
-        "change1h": -0.04,
+        "change1h": null,
         "change6h": 0.21,
         "change24h": -5.54,
         "buys24h": 81,
@@ -773,12 +773,12 @@
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
         "liquidityUsd": 1763452.08,
-        "volume24hUsd": 816066.06,
-        "change1h": -0.37,
-        "change6h": -0.78,
-        "change24h": -2.28,
-        "buys24h": 1506,
-        "sells24h": 1413,
+        "volume24hUsd": 816002.75,
+        "change1h": -0.36,
+        "change6h": -0.72,
+        "change24h": -2.29,
+        "buys24h": 1504,
+        "sells24h": 1412,
         "fdvUsd": 58498397,
         "marketCapUsd": 108422506,
         "pairCreatedAt": 1775019681000,
@@ -791,8 +791,8 @@
       "name": "VaultedMetrics",
       "walletName": "Main",
       "network": "ethereum",
-      "balance": 6224.360529908334,
-      "valueUsd": 0.8315745667957534,
+      "balance": 6224.361113151882,
+      "valueUsd": 0.8315746447170914,
       "contract": "0x062570121e9519c77cb71c7936b6c1f76c7b1119",
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xdfad37e05c4a203cd9aca0f856407a0634f5b467"
     },
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-11T21:40:03.798Z",
-    "durationSec": 47
+    "durationSec": 38
   }
 }
