@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-12 05:15:43",
-  "totalUsd": 34592.9,
+  "timestamp": "2026-11-12 05:20:49",
+  "totalUsd": 34589.12,
   "assets": [
     {
       "symbol": "WTAO",
@@ -266,19 +266,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3858.1642296328737,
+      "valueUsd": 3855.999154307602,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
-        "liquidityUsd": 497252.92,
-        "volume24hUsd": 255644.19,
-        "change1h": 0.04,
-        "change6h": -3.7,
-        "change24h": -12.65,
-        "buys24h": 558,
+        "liquidityUsd": 496907.08,
+        "volume24hUsd": 255035.68,
+        "change1h": 0.2,
+        "change6h": -1.09,
+        "change24h": -12.71,
+        "buys24h": 557,
         "sells24h": 571,
-        "fdvUsd": 3685174,
-        "marketCapUsd": 3685174,
+        "fdvUsd": 3682073,
+        "marketCapUsd": 3682073,
         "pairCreatedAt": 1785803051000,
         "quoteSymbol": "WETH",
         "dexId": "uniswap"
@@ -586,7 +586,7 @@
       "market": {
         "liquidityUsd": 1343480.15,
         "volume24hUsd": 65786.09,
-        "change1h": 0.12,
+        "change1h": 0.07,
         "change6h": 0.15,
         "change24h": -5.88,
         "buys24h": 69,
@@ -644,7 +644,7 @@
         "liquidityUsd": 1181.75,
         "volume24hUsd": 26.74,
         "change1h": null,
-        "change6h": 6.39,
+        "change6h": 3.16,
         "change24h": -26.63,
         "buys24h": 19,
         "sells24h": 15,
@@ -720,7 +720,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.11466615507630191,
-      "valueUsd": 234.5954866706061
+      "valueUsd": 233.86391660121927
     },
     {
       "symbol": "ETH",
@@ -728,7 +728,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 162.74580609827268
+      "valueUsd": 162.238294370961
     },
     {
       "symbol": "USDC",
@@ -744,7 +744,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 92.91786384126206
+      "valueUsd": 92.62810580259583
     },
     {
       "symbol": "USDC",
@@ -760,7 +760,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 24.99147905739489
+      "valueUsd": 24.91354482972678
     },
     {
       "symbol": "XAUt",
@@ -768,19 +768,19 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.74850376,
+      "valueUsd": 11.74176408,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
-        "liquidityUsd": 1768738.41,
-        "volume24hUsd": 820215.12,
-        "change1h": -0.09,
-        "change6h": -0.21,
-        "change24h": -1.71,
-        "buys24h": 1521,
-        "sells24h": 1477,
-        "fdvUsd": 58702586,
-        "marketCapUsd": 108837786,
+        "liquidityUsd": 1767945.67,
+        "volume24hUsd": 824936.97,
+        "change1h": -0.15,
+        "change6h": -0.23,
+        "change24h": -1.77,
+        "buys24h": 1526,
+        "sells24h": 1492,
+        "fdvUsd": 58668951,
+        "marketCapUsd": 108775426,
         "pairCreatedAt": 1775019681000,
         "quoteSymbol": "USDT",
         "dexId": "pancakeswap"
@@ -1012,7 +1012,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003377,
+      "valueUsd": 0.000003375,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-11T21:40:03.798Z",
-    "durationSec": 40
+    "durationSec": 46
   }
 }
