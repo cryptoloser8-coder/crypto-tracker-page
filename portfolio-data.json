@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-13 02:35:42",
-  "totalUsd": 33092.5,
+  "timestamp": "2026-11-13 02:40:49",
+  "totalUsd": 33088.9,
   "assets": [
     {
       "symbol": "WTAO",
@@ -266,19 +266,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3465.008201316918,
+      "valueUsd": 3461.9554451082854,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
-        "liquidityUsd": 452815.42,
-        "volume24hUsd": 292207.05,
-        "change1h": -1.11,
-        "change6h": -7.43,
-        "change24h": -10.45,
-        "buys24h": 725,
-        "sells24h": 706,
-        "fdvUsd": 3308121,
-        "marketCapUsd": 3308121,
+        "liquidityUsd": 452718.53,
+        "volume24hUsd": 291966.45,
+        "change1h": -1.15,
+        "change6h": -7.51,
+        "change24h": -10.55,
+        "buys24h": 724,
+        "sells24h": 705,
+        "fdvUsd": 3307023,
+        "marketCapUsd": 3307023,
         "pairCreatedAt": 1785803051000,
         "quoteSymbol": "WETH",
         "dexId": "uniswap"
@@ -637,7 +637,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.11466615507630191,
-      "valueUsd": 229.0823379345375
+      "valueUsd": 228.82892573181886
     },
     {
       "symbol": "CETS",
@@ -728,7 +728,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 158.92117226611816
+      "valueUsd": 158.74537274929074
     },
     {
       "symbol": "USDC",
@@ -744,7 +744,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 90.73423272855474
+      "valueUsd": 90.63386199729261
     },
     {
       "symbol": "USDC",
@@ -760,7 +760,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 24.404162808761257
+      "valueUsd": 24.377166783189704
     },
     {
       "symbol": "XAUt",
@@ -768,19 +768,19 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.54802784,
+      "valueUsd": 11.55059956,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
-        "liquidityUsd": 1758373.66,
-        "volume24hUsd": 1010508.1,
-        "change1h": -0.01,
-        "change6h": 0.6,
-        "change24h": -1.87,
-        "buys24h": 1861,
-        "sells24h": 1675,
-        "fdvUsd": 57827424,
-        "marketCapUsd": 106980692,
+        "liquidityUsd": 1758677.3,
+        "volume24hUsd": 1003481.87,
+        "change1h": 0.01,
+        "change6h": 0.64,
+        "change24h": -1.75,
+        "buys24h": 1868,
+        "sells24h": 1665,
+        "fdvUsd": 57840247,
+        "marketCapUsd": 107004414,
         "pairCreatedAt": 1775019681000,
         "quoteSymbol": "USDT",
         "dexId": "pancakeswap"
@@ -1017,16 +1017,6 @@
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x78ca85dd5c2c1e73f098b33ea5672965c31ecf25"
     },
     {
-      "symbol": "GUY",
-      "name": "Bad Guy",
-      "walletName": "FOMO APP",
-      "network": "robinhood",
-      "balance": 1,
-      "valueUsd": 6.168e-7,
-      "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
-      "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa3a3895055dbc54d0aa84790c37c62820dd502eb"
-    },
-    {
       "symbol": "CAT",
       "name": "Trump Cat",
       "walletName": "FOMO APP",
@@ -1184,6 +1174,16 @@
       "balance": 9.999,
       "valueUsd": 0,
       "contract": "0xf859ceac1baa842c4a2ef6a75ad23ecd5a05795f",
+      "dexscreenerUrl": null
+    },
+    {
+      "symbol": "GUY",
+      "name": "Bad Guy",
+      "walletName": "FOMO APP",
+      "network": "robinhood",
+      "balance": 1,
+      "valueUsd": 0,
+      "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
       "dexscreenerUrl": null
     },
     {
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-12T21:45:03.844Z",
-    "durationSec": 40
+    "durationSec": 47
   }
 }
