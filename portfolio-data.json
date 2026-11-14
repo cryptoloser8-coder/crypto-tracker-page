@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-14 12:45:51",
-  "totalUsd": 31918.93,
+  "timestamp": "2026-11-14 12:50:43",
+  "totalUsd": 31909.33,
   "assets": [
     {
       "symbol": "WTAO",
@@ -15,7 +15,7 @@
         "liquidityUsd": 2135798.3,
         "volume24hUsd": 665930.51,
         "change1h": null,
-        "change6h": -1.51,
+        "change6h": -1.3,
         "change24h": -2.2,
         "buys24h": 92,
         "sells24h": 47,
@@ -266,19 +266,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3461.9554451082854,
+      "valueUsd": 3453.2951438072014,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
-        "liquidityUsd": 449159.24,
-        "volume24hUsd": 273024.24,
-        "change1h": 0.02,
-        "change6h": 0.87,
-        "change24h": -1.52,
-        "buys24h": 754,
+        "liquidityUsd": 448041.9,
+        "volume24hUsd": 272328.25,
+        "change1h": -0.45,
+        "change6h": 0.68,
+        "change24h": -2.84,
+        "buys24h": 752,
         "sells24h": 756,
-        "fdvUsd": 3306934,
-        "marketCapUsd": 3306934,
+        "fdvUsd": 3297294,
+        "marketCapUsd": 3297294,
         "pairCreatedAt": 1785803051000,
         "quoteSymbol": "WETH",
         "dexId": "uniswap"
@@ -585,11 +585,11 @@
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "market": {
         "liquidityUsd": 1222910.93,
-        "volume24hUsd": 108755.55,
-        "change1h": 1.3,
+        "volume24hUsd": 107991.3,
+        "change1h": 0.24,
         "change6h": 2.85,
-        "change24h": 8.77,
-        "buys24h": 205,
+        "change24h": 8.62,
+        "buys24h": 201,
         "sells24h": 169,
         "fdvUsd": 9057244,
         "marketCapUsd": 8519609,
@@ -720,7 +720,7 @@
       "walletName": "Main",
       "network": "ethereum",
       "balance": 0.11466615507630191,
-      "valueUsd": 218.5411797779203
+      "valueUsd": 218.11337353993846
     },
     {
       "symbol": "ETH",
@@ -728,7 +728,7 @@
       "walletName": "Main 2",
       "network": "ethereum",
       "balance": 0.07954729268208255,
-      "valueUsd": 151.60846004920833
+      "valueUsd": 151.31167824815014
     },
     {
       "symbol": "USDC",
@@ -744,7 +744,7 @@
       "walletName": "Main 2",
       "network": "robinhood",
       "balance": 0.04541662048060123,
-      "valueUsd": 86.5591230014822
+      "valueUsd": 86.38967881338044
     },
     {
       "symbol": "USDC",
@@ -760,7 +760,7 @@
       "walletName": "Main",
       "network": "robinhood",
       "balance": 0.012215396186223613,
-      "valueUsd": 23.281212247987348
+      "valueUsd": 23.23563800958711
     },
     {
       "symbol": "XAUt",
@@ -768,19 +768,19 @@
       "walletName": "FOMO APP",
       "network": "bsc",
       "balance": 0.002956,
-      "valueUsd": 11.42910796,
+      "valueUsd": 11.4290784,
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
-        "liquidityUsd": 1750568.51,
-        "volume24hUsd": 1458887.57,
+        "liquidityUsd": 1750567.47,
+        "volume24hUsd": 1451780.72,
         "change1h": -0.01,
         "change6h": 0.08,
-        "change24h": -0.4,
-        "buys24h": 6429,
-        "sells24h": 6050,
-        "fdvUsd": 57267518,
-        "marketCapUsd": 105878899,
+        "change24h": -0.34,
+        "buys24h": 6424,
+        "sells24h": 6044,
+        "fdvUsd": 57267477,
+        "marketCapUsd": 105878822,
         "pairCreatedAt": 1775019681000,
         "quoteSymbol": "USDT",
         "dexId": "pancakeswap"
@@ -1012,7 +1012,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 0.000003147,
+      "valueUsd": 0.000003146,
       "contract": "0xd2ae7ecce63a0444d487b708402e8f2436090800",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x18d37e50a43f69328c2111f2e2228db71a73400e"
     },
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "incremental",
-    "reason": "przyrostowy, przeskanowano 20, z cache 0",
+    "mode": "cached",
+    "reason": "przyrostowy, przeskanowano 0, z cache 20",
     "lastFullRescanAt": "2026-11-13T21:50:02.801Z",
-    "durationSec": 48
+    "durationSec": 40
   }
 }
