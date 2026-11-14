@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-14 00:35:42",
-  "totalUsd": 32609.31,
+  "timestamp": "2026-11-14 00:40:51",
+  "totalUsd": 32587.65,
   "assets": [
     {
       "symbol": "WTAO",
@@ -266,19 +266,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3546.393382793853,
+      "valueUsd": 3524.742629541144,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
-        "liquidityUsd": 459323.72,
-        "volume24hUsd": 324709.31,
-        "change1h": 0.78,
-        "change6h": -0.18,
-        "change24h": -4.33,
-        "buys24h": 837,
-        "sells24h": 817,
-        "fdvUsd": 3387688,
-        "marketCapUsd": 3387688,
+        "liquidityUsd": 456609.47,
+        "volume24hUsd": 323857.32,
+        "change1h": 0.28,
+        "change6h": -0.84,
+        "change24h": -4.68,
+        "buys24h": 833,
+        "sells24h": 815,
+        "fdvUsd": 3365448,
+        "marketCapUsd": 3365448,
         "pairCreatedAt": 1785803051000,
         "quoteSymbol": "WETH",
         "dexId": "uniswap"
@@ -587,7 +587,7 @@
         "liquidityUsd": 1201271.82,
         "volume24hUsd": 125828.94,
         "change1h": 0.51,
-        "change6h": 0.14,
+        "change6h": 0.06,
         "change24h": 7.64,
         "buys24h": 232,
         "sells24h": 143,
@@ -643,7 +643,7 @@
       "market": {
         "liquidityUsd": 1174.67,
         "volume24hUsd": 9.07,
-        "change1h": 4.08,
+        "change1h": null,
         "change6h": 11.85,
         "change24h": -5.41,
         "buys24h": 6,
@@ -773,12 +773,12 @@
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
         "liquidityUsd": 1737111.66,
-        "volume24hUsd": 1101273.05,
+        "volume24hUsd": 1095697.81,
         "change1h": 0.01,
         "change6h": -0.01,
-        "change24h": -0.18,
-        "buys24h": 1418,
-        "sells24h": 1539,
+        "change24h": -0.22,
+        "buys24h": 1415,
+        "sells24h": 1520,
         "fdvUsd": 57406996,
         "marketCapUsd": 106136771,
         "pairCreatedAt": 1775019681000,
@@ -892,7 +892,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 3,
-      "valueUsd": 0.0018078,
+      "valueUsd": 0.0018045000000000001,
       "contract": "0x6ab0beb71a0c420035e861ee6834db4ccd2ff71f",
       "dexscreenerUrl": "https://dexscreener.com/base/0x7d5e6f1d02d3eb03a18f804d6ee16921641cb8aab59c42024efe15defb62fd66"
     },
@@ -902,7 +902,7 @@
       "walletName": "FOMO APP",
       "network": "base",
       "balance": 4,
-      "valueUsd": 0.0014464,
+      "valueUsd": 0.0014436,
       "contract": "0x51b92122fe58883601fba4e99fc6f7f98ce0d1e0",
       "dexscreenerUrl": "https://dexscreener.com/base/0xd0ae4a297e7a14b1b26075d26615660936700c020cb3934d50ec979b792eea72"
     },
@@ -1032,7 +1032,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 1,
-      "valueUsd": 5.878e-7,
+      "valueUsd": 5.812e-7,
       "contract": "0x061ee80b757235729cb1d21bd19cc82db027dc89",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0xa3a3895055dbc54d0aa84790c37c62820dd502eb"
     },
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-13T21:50:02.801Z",
-    "durationSec": 39
+    "durationSec": 49
   }
 }
