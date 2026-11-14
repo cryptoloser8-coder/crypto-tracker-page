@@ -1280,9 +1280,11 @@ function renderDashboard() {
 // --- PODSUMOWANIE ZYSKU/STRATY (karta Total Wealth) ---
 // Niezrealizowany = suma kolumny Zysk/Strata po widocznych pozycjach, które mają cenę
 // zakupu (auto albo ręczną). Zrealizowany = suma zamkniętych pozycji.
-// Procenty są liczone względem CAŁEGO portfela (ta sama suma co Total Wealth), a nie
-// kosztu pojedynczych pozycji - dzięki temu wiersze się sumują: niezrealizowany %
-// + zrealizowany % = łącznie %. Procent od kosztu konkretnej pozycji jest w tabelach.
+// Procenty są liczone względem KAPITAŁU WYJŚCIOWEGO = obecny portfel (Total Wealth)
+// minus łączny wynik, czyli ile portfel byłby wart bez tych zysków/strat. Wcześniej
+// mianownikiem był obecny portfel, co przy stratach zawyżało procent (np. -16.5k przy
+// portfelu 30.8k dawało -53.7% zamiast ok. -35%). Wspólny mianownik zostaje, więc
+// wiersze dalej się sumują. Procent od kosztu konkretnej pozycji jest w tabelach.
 const FRONT_STABLES = new Set(['USDC', 'USDT', 'USDT0', 'USDG', 'DAI', 'USDE', 'FDUSD', 'TUSD', 'BUSD', 'PYUSD', 'USDS']);
 
 function renderPnlSummary(allVisible) {
@@ -1308,7 +1310,8 @@ function renderPnlSummary(allVisible) {
 
     const totalPnl = openPnl + realizedPnl;
     const portfolio = lastComputedTotal;
-    const pct = v => portfolio > 0 ? (v / portfolio) * 100 : null;
+    const startCapital = portfolio - totalPnl;
+    const pct = v => startCapital > 0 ? (v / startCapital) * 100 : null;
 
     const coverage = withoutBasis > 0
         ? `<span class="muted-note" title="Tokeny z kontraktem, dla których nie ma ceny zakupu - nie są wliczone">bez ceny zakupu: ${withoutBasis}</span>`
@@ -1318,7 +1321,7 @@ function renderPnlSummary(allVisible) {
         <div class="pnl-summary-row"><span class="label">Niezrealizowany (${withBasis} poz.)</span><span>${formatSignedPnl(openPnl, pct(openPnl), 2)}</span></div>
         <div class="pnl-summary-row"><span class="label">Zrealizowany (${closedGroups.length} poz.)</span><span>${formatSignedPnl(realizedPnl, pct(realizedPnl), 2)}</span></div>
         <div class="pnl-summary-row"><span class="label"><strong>Łącznie</strong></span><span><strong>${formatSignedPnl(totalPnl, pct(totalPnl), 2)}</strong></span></div>
-        <span class="muted-note">Procenty względem wartości całego portfela.</span>
+        <span class="muted-note" title="Kapitał wyjściowy = obecna wartość portfela minus łączny wynik">Procenty względem kapitału wyjściowego (~$${Math.round(startCapital).toLocaleString('en-US')}).</span>
         ${coverage}
         ${withoutPrice > 0 ? `<span class="muted-note" title="Pozycje z ceną zakupu, dla których backend nie dostał aktualnej ceny - nie są wliczone">brak ceny: ${withoutPrice}</span>` : ''}
     `;
