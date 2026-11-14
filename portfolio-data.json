@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-14 12:40:43",
-  "totalUsd": 31923.26,
+  "timestamp": "2026-11-14 12:45:51",
+  "totalUsd": 31918.93,
   "assets": [
     {
       "symbol": "WTAO",
@@ -13,11 +13,11 @@
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0x433a00819c771b33fa7223a5b3499b24fbcd1bbc",
       "market": {
         "liquidityUsd": 2135798.3,
-        "volume24hUsd": 666425.47,
+        "volume24hUsd": 665930.51,
         "change1h": null,
-        "change6h": -1.5,
-        "change24h": -1.29,
-        "buys24h": 93,
+        "change6h": -1.51,
+        "change24h": -2.2,
+        "buys24h": 92,
         "sells24h": 47,
         "fdvUsd": 24624621,
         "marketCapUsd": 24624621,
@@ -266,19 +266,19 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 216.50753252709728,
-      "valueUsd": 3466.2855957588276,
+      "valueUsd": 3461.9554451082854,
       "contract": "0xb8fa8010833463aac5595b55b9045479239eff79",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x79723a75c401d5c3ad66b0d0837739e502f08799ebf6a503e6e4d0827b3eb7e5",
       "market": {
-        "liquidityUsd": 449444.28,
-        "volume24hUsd": 274142.98,
-        "change1h": 0.09,
-        "change6h": 0.92,
-        "change24h": -1.37,
-        "buys24h": 758,
-        "sells24h": 759,
-        "fdvUsd": 3309464,
-        "marketCapUsd": 3309464,
+        "liquidityUsd": 449159.24,
+        "volume24hUsd": 273024.24,
+        "change1h": 0.02,
+        "change6h": 0.87,
+        "change24h": -1.52,
+        "buys24h": 754,
+        "sells24h": 756,
+        "fdvUsd": 3306934,
+        "marketCapUsd": 3306934,
         "pairCreatedAt": 1785803051000,
         "quoteSymbol": "WETH",
         "dexId": "uniswap"
@@ -585,11 +585,11 @@
       "dexscreenerUrl": "https://dexscreener.com/ethereum/0xddd23787a6b80a794d952f5fb036d0b31a8e6aff",
       "market": {
         "liquidityUsd": 1222910.93,
-        "volume24hUsd": 108970.44,
+        "volume24hUsd": 108755.55,
         "change1h": 1.3,
         "change6h": 2.85,
-        "change24h": 8.9,
-        "buys24h": 206,
+        "change24h": 8.77,
+        "buys24h": 205,
         "sells24h": 169,
         "fdvUsd": 9057244,
         "marketCapUsd": 8519609,
@@ -772,15 +772,15 @@
       "contract": "0x21caef8a43163eea865baee23b9c2e327696a3bf",
       "dexscreenerUrl": "https://dexscreener.com/bsc/0x83a0a8a723262651ae9c54bbba929f167443bc59",
       "market": {
-        "liquidityUsd": 1750569.24,
-        "volume24hUsd": 1460989.27,
+        "liquidityUsd": 1750568.51,
+        "volume24hUsd": 1458887.57,
         "change1h": -0.01,
-        "change6h": 0.09,
-        "change24h": -0.43,
-        "buys24h": 6433,
-        "sells24h": 6054,
-        "fdvUsd": 57267547,
-        "marketCapUsd": 105878952,
+        "change6h": 0.08,
+        "change24h": -0.4,
+        "buys24h": 6429,
+        "sells24h": 6050,
+        "fdvUsd": 57267518,
+        "marketCapUsd": 105878899,
         "pairCreatedAt": 1775019681000,
         "quoteSymbol": "USDT",
         "dexId": "pancakeswap"
@@ -802,7 +802,7 @@
       "walletName": "FOMO APP",
       "network": "robinhood",
       "balance": 313.8712731064174,
-      "valueUsd": 0.02142171438951299,
+      "valueUsd": 0.02112353668006189,
       "contract": "0xd3384371c56fb9daf009d2289b8df4e8323fdc05",
       "dexscreenerUrl": "https://dexscreener.com/robinhood/0x53d2d71cb332561f4547384ee08a632c2235b6539347ff162fffec11699756e8"
     },
@@ -1804,9 +1804,9 @@
     "positions": []
   },
   "scan": {
-    "mode": "cached",
-    "reason": "przyrostowy, przeskanowano 0, z cache 20",
+    "mode": "incremental",
+    "reason": "przyrostowy, przeskanowano 20, z cache 0",
     "lastFullRescanAt": "2026-11-13T21:50:02.801Z",
-    "durationSec": 40
+    "durationSec": 48
   }
 }
